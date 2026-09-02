@@ -126,6 +126,13 @@ body {
   align-items: center;
 }
 
+#accuracy{
+  color:rgb(243, 56, 56)
+}
+
+#time{
+  color:rgb(239, 239, 71)
+}
 /* ================= TYPING AREA ================= */
 
 .typing-box {
@@ -134,7 +141,7 @@ body {
   max-height: 380px;
   overflow-y: auto;
   padding-right: 10px;
-
+  scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

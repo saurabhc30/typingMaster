@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+
+      <div class="logo">
+        <img src="assets/images/logo-large.svg" class="desktop-logo">
+        <img src="assets/images/logo-small.svg" class="mobile-logo">
+      </div>
+
+      <div class="best">
+        <img src="assets/images/icon-personal-best.svg"> Personal best: <strong>92 WPM</strong>
+      </div>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+
+      <div class="stat-group">
+        <div class="stat">WPM: <span id="wpm">0</span></div>
+        <div class="stat">Accuracy: <span id="accuracy">100%</span></div>
+        <div class="stat">Time: <span id="time">0:60</span></div>
+      </div>
+
+      <div class="buttons">
+
+        <!-- Desktop Difficulty -->
+        <div class="difficulty-desktop">
+          <span class="label">Difficulty:</span>
+          <button class="btn diff-btn active" data-diff="easy">Easy</button>
+          <button class="btn diff-btn" data-diff="medium">Medium</button>
+          <button class="btn diff-btn" data-diff="hard">Hard</button>
+          <span>|</span>
+        </div>
+
+        <!-- Mode Section -->
+        <div class="mode">
+          <span class="label">Mode:</span>
+          <!-- Timed Dropdown -->
+          <div class="dropdown">
+            <select id="timeSelect" class="time-select">
+              <option value="60">Timed (60s)</option>
+              <option value="180">Timed (3m)</option>
+              <option value="300">Timed (5m)</option>
+            </select>
+          </div>
+
+          <!-- Passage Dropdown (Mobile) -->
+          <div class="controls-row">
+            
+            <div class="custom-dropdown" id="modeDropdown">
+              <button class="dropdown-btn">Timed <span class="arrow">▼</span></button>
+              <ul class="dropdown-list">
+                <li data-value="60" class="selected"><span class="radio"></span> Timed</li>
+                <li data-value="passage"><span class="radio"></span> Passage</li>
+              </ul>
+            </div>
+            <div class="custom-dropdown" id="timeDropdown">
+              <button class="dropdown-btn">Timed (60s) <span class="arrow">▼</span></button>
+              <ul class="dropdown-list">
+                <li data-value="60" class="selected"><span class="radio"></span> Time (1 Min)</li>
+                <li data-value="180"><span class="radio"></span> Time(3 Min)</li>
+                <li data-value="300"><span class="radio"></span> Time(5 Min)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Desktop Passage Button -->
+          <button class="btn passageBtn mode-desktop" id="passageBtn" data-mode="passage">
+            Passage
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+
+      <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+      <button class="restart-btn-main" id="restartMainBtn">
+        Restart Test ↻
+      </button>
+    </div>
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+
+      <div class="result-icon">
+        <img src="assets/images/icon-completed.svg">
+      </div>
+
+      <h1>Baseline Established!</h1>
+
+      <p class="result-sub">
+        You've set the bar. Now the real challenge begins—time to beat it.
+      </p>
+
+      <div class="result-stats">
+
+        <div class="result-card">
+          <span>WPM</span>
+          <h2 id="resWpm">0</h2>
+        </div>
+
+        <div class="result-card">
+          <span>Accuracy</span>
+          <h2 id="resAcc">0%</h2>
+        </div>
+
+        <div class="result-card">
+          <span>Characters</span>
+          <h2 id="resChar">0</h2>
+        </div>
+
+      </div>
+
+      <button class="retry-btn" id="retryBtn">
+        Beat This Score ↻
+      </button>
+
+    </div>
+
+
+  </div>
+  <script src="passages.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

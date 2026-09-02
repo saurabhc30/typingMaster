@@ -1,0 +1,703 @@
+/* ================= FONT ================= */
+
+@font-face {
+  font-family: "Sora";
+  src: url("assets/fonts/Sora/static/Sora-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("assets/fonts/Sora/static/Sora-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("assets/fonts/Sora/static/Sora-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+/* ================= RESET ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Sora", Arial, sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mobile-logo{
+  display: none;
+}
+
+.best {
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* ================= STATS BAR ================= */
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.stat-group {
+  display: flex;
+  gap: 25px;
+}
+
+.stat {
+  color: #aaa;
+  font-size: 15px;
+}
+
+.stat span {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 14px;
+  background: transparent;
+  font-weight: 700;
+  border: 1px solid #333;
+  color: #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  border-color: #2196f3;
+}
+
+.btn.active {
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
+.mode{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* ================= TYPING AREA ================= */
+
+.typing-box {
+  text-align: center;
+  position: relative;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 10px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.typing-box::-webkit-scrollbar {
+  display: none;
+}
+
+.text-area {
+  font-size: 28px;
+  line-height: 1.7;
+  color: #888;
+  user-select: none;
+  text-align: left;
+}
+
+.correct {
+  color: #4caf50;
+}
+
+.incorrect {
+  color: #f44336;
+  text-decoration: underline;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.current-word {
+  background: rgba(0, 123, 255, 0.15);
+  border-radius: 5px;
+}
+
+.space {
+  display: inline-block;
+}
+
+.correct {
+  color: #4caf50;
+}
+
+.incorrect {
+  color: #ff4d4d;
+}
+
+.active {
+  position: relative;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #00bfff;
+  animation: blink 1.5s infinite;
+  box-shadow: 0 0 6px #00bfff;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.typing-active {
+  cursor: none;
+}
+
+.hide-during-typing {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+
+/* ================= START OVERLAY ================= */
+
+.start-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(15, 15, 15, 0.9);
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.start-overlay button {
+  background: #2196f3;
+  border: none;
+  padding: 12px 28px;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.start-overlay p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.word-error {
+  text-decoration: underline;
+  text-decoration-color: #ff4d4d;
+  text-decoration-thickness: 2px;
+}
+
+.controls-row{
+  display: none;
+}
+/* ================= RESULT SCREEN ================= */
+
+.result-screen {
+  display: none;
+  padding: 60px 0;
+  text-align: center;
+}
+
+/* Icon */
+.result-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 25px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Title */
+.result-screen h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Subtitle */
+.result-sub {
+  color: #aaa;
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+  font-size: 16px;
+}
+
+/* Stats Cards */
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.result-card {
+  background: #151515;
+  padding: 25px 30px;
+  border-radius: 12px;
+  min-width: 150px;
+  border: 1px solid #222;
+  transition: 0.3s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+  border-color: #333;
+}
+
+.result-card span {
+  color: #888;
+  font-size: 14px;
+}
+
+.result-card h2 {
+  margin-top: 8px;
+  font-size: 30px;
+}
+
+/* Retry Button */
+.retry-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.retry-btn:hover {
+  transform: scale(1.05);
+}
+
+.time-select {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.time-select.active-mode {
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
+.time-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.dropdown {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.time-select {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.time-select:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+/* ================= MOBILE UI MATCH SCREENSHOT ================= */
+
+.difficulty-mobile,
+.mode-mobile {
+  display: none;
+}
+
+.mode-desktop {
+  display: inline-block;
+}
+
+/* Restart under paragraph */
+.restart-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.restart-btn-main {
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  padding: 12px 28px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.restart-btn-main:hover {
+  background: #2a2a2a;
+}
+
+/* ================= MOBILE UI OPTIMIZATION ================= */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  /* 1. HEADER: Space between logo and best score */
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .desktop-logo { display: none; }
+  .mobile-logo { display: block; width: 30px; }
+
+  /* 2. STATS: Horizontal row centered */
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 20px;
+  }
+
+  .stat-group {
+    width: 100%;
+    justify-content: space-around; /* WPM | Accuracy | Time */
+    gap: 10px;
+  }
+
+  /* 3. CONTROLS: Stacked rows for buttons and dropdowns */
+  .buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Difficulty row: Easy Medium Hard */
+  .difficulty-desktop {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .difficulty-desktop .label { display: none; } /* Hide "Difficulty:" text to save space */
+  
+  .diff-btn {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 13px;
+  }
+
+  /* Dropdowns row: [1 min] [Passage] */
+  .mode {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .mode .label { display: none; }
+
+  .dropdown, .mode-mobile {
+    flex: 1;
+  }
+
+  .time-select {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+  }
+
+  .mode-desktop { display: none !important; } /* Hide desktop passage button */
+  .mode-mobile { display: block !important; }  /* Show mobile passage dropdown */
+
+  /* 4. TYPING AREA */
+  .text-area {
+    font-size: 22px; /* Large clean text for thumbs */
+    line-height: 1.6;
+  }
+
+  .typing-box {
+    max-height: 350px;
+  }
+
+  .result-screen {
+    padding: 40px 15px;
+    display: flex; /* Changed from 'none' to 'flex' for styling, but JS will control visibility */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 2. Vertical Stack for Cards */
+  .result-stats {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    max-width: 400px; /* Optional: keeps cards from getting too wide */
+  }
+
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left like the image */
+    padding: 15px 20px;
+    width: 100%;
+    background: #111; /* Darker background to match screenshot */
+    border: 1px solid #222;
+  }
+
+  .result-card span {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 5px;
+  }
+
+  .result-card h2 {
+    font-size: 28px;
+    margin-top: 0;
+  }
+
+  /* 3. Specific colors for stats as per image */
+  #resAcc {
+    color: #f44336; /* Red for accuracy if low */
+  }
+
+  #resChar {
+    display: flex;
+    gap: 5px;
+  }
+
+  /* 4. Full width button for better reach */
+  .retry-btn {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 18px;
+    font-size: 18px;
+  }
+
+  /* 5. Icon sizing */
+  .result-icon img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mode {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .dropdown, .mode-mobile {
+    flex: 1;
+    max-width: 50%; /* Prevents options from expanding the box */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .time-select {
+    width: 100% !important;
+    display: block;
+    padding: 10px;
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 6px;
+    font-weight: 700;
+    appearance: none; /* Removes native OS width overrides */
+    
+    text-align: center;
+    text-align-last: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+    /* Removes OS-specific styling that causes size bloating */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  /* Force options to stay within the select box width */
+  .time-select option {
+    width: 100%;
+    max-width: 100%;
+    background: #1c1c1c;
+  }
+
+  /* Result Screen: Vertical cards as per screenshot */
+  .result-stats {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Left-aligned labels like the image */
+    padding: 16px 20px;
+    background: #0f0f0f;
+    border: 1px solid #222;
+    width: 100%;
+  }
+
+  .controls-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .custom-dropdown {
+    flex: 1;
+    position: relative;
+  }
+
+  /* The Button */
+  .dropdown-btn {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    padding: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* The Menu List */
+  .dropdown-list {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-top: 5px;
+    z-index: 100;
+    list-style: none;
+    padding: 5px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+
+  .difficulty-desktop span{
+    display: none;
+  }
+  .dropdown-list.show { display: block; }
+
+  .dropdown-list li {
+    padding: 12px 15px;
+    color: #ccc;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Radio Indicator */
+  .radio {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .dropdown-list li.selected { color: #fff; }
+
+  .dropdown-list li.selected .radio {
+    border-color: #2196f3;
+  }
+
+  .dropdown-list li.selected .radio::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #2196f3;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

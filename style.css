@@ -51,12 +51,27 @@ body {
 
 .logo {
   display: flex;
-  gap: 10px;
+  gap: 9px;
   align-items: center;
 }
 
-.mobile-logo{
-  display: none;
+.site-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.site-name {
+  font: 700 20px/1 Sora, Arial, sans-serif;
+  letter-spacing: -0.4px;
+  color: #f0f0f0;
+  white-space: nowrap;
+}
+
+.desktop-logo,
+.mobile-logo {
+  display: none !important;
 }
 
 .best {
@@ -64,6 +79,10 @@ body {
   font-size: 14px;
 }
 
+.best-icon {
+  width: 15px;
+  height: 15px;
+}
 /* ================= STATS BAR ================= */
 
 .stats {
@@ -120,19 +139,12 @@ body {
   color: #2196f3;
 }
 
-.mode{
+.mode {
   display: flex;
   gap: 5px;
   align-items: center;
 }
 
-#accuracy{
-  color:rgb(243, 56, 56)
-}
-
-#time{
-  color:rgb(239, 239, 71)
-}
 /* ================= TYPING AREA ================= */
 
 .typing-box {
@@ -141,7 +153,7 @@ body {
   max-height: 380px;
   overflow-y: auto;
   padding-right: 10px;
-  scroll-behavior: smooth;
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -206,12 +218,27 @@ body {
 }
 
 @keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
+
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
 }
 
 .typing-active {
-  cursor: none;
+  /* Focus state only; do not hide the mouse pointer. */
+}
+
+/* Hide the real mouse pointer only until the user moves the mouse. */
+body.typing-cursor-hidden,
+body.typing-cursor-hidden * {
+  cursor: none !important;
 }
 
 .hide-during-typing {
@@ -259,9 +286,10 @@ body {
   text-decoration-thickness: 2px;
 }
 
-.controls-row{
+.controls-row {
   display: none;
 }
+
 /* ================= RESULT SCREEN ================= */
 
 .result-screen {
@@ -420,6 +448,33 @@ body {
 
 /* ================= MOBILE UI OPTIMIZATION ================= */
 
+/* Mobile: show only logo-small */
+@media (max-width: 768px) {
+  .site-logo {
+    content: url("logo-small.svg");
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .site-name,
+  .logo-text,
+  .brand-name {
+    display: none !important;
+  }
+
+  .best-icon {
+    content: url("icon-personal-best.svg");
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+  }
+
+  .best-line {
+    display: none !important;
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 15px;
@@ -430,8 +485,19 @@ body {
     margin-bottom: 20px;
   }
 
-  .desktop-logo { display: none; }
-  .mobile-logo { display: block; width: 30px; }
+  .desktop-logo,
+  .mobile-logo {
+    display: none !important;
+  }
+
+  .site-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .site-name {
+    font-size: 18px;
+  }
 
   /* 2. STATS: Horizontal row centered */
   .stats {
@@ -443,7 +509,8 @@ body {
 
   .stat-group {
     width: 100%;
-    justify-content: space-around; /* WPM | Accuracy | Time */
+    justify-content: space-around;
+    /* WPM | Accuracy | Time */
     gap: 10px;
   }
 
@@ -462,8 +529,12 @@ body {
     gap: 8px;
   }
 
-  .difficulty-desktop .label { display: none; } /* Hide "Difficulty:" text to save space */
-  
+  .difficulty-desktop .label {
+    display: none;
+  }
+
+  /* Hide "Difficulty:" text to save space */
+
   .diff-btn {
     flex: 1;
     padding: 10px 0;
@@ -478,9 +549,12 @@ body {
     gap: 10px;
   }
 
-  .mode .label { display: none; }
+  .mode .label {
+    display: none;
+  }
 
-  .dropdown, .mode-mobile {
+  .dropdown,
+  .mode-mobile {
     flex: 1;
   }
 
@@ -490,12 +564,21 @@ body {
     text-align: center;
   }
 
-  .mode-desktop { display: none !important; } /* Hide desktop passage button */
-  .mode-mobile { display: block !important; }  /* Show mobile passage dropdown */
+  .mode-desktop {
+    display: none !important;
+  }
+
+  /* Hide desktop passage button */
+  .mode-mobile {
+    display: block !important;
+  }
+
+  /* Show mobile passage dropdown */
 
   /* 4. TYPING AREA */
   .text-area {
-    font-size: 22px; /* Large clean text for thumbs */
+    font-size: 22px;
+    /* Large clean text for thumbs */
     line-height: 1.6;
   }
 
@@ -505,7 +588,8 @@ body {
 
   .result-screen {
     padding: 40px 15px;
-    display: flex; /* Changed from 'none' to 'flex' for styling, but JS will control visibility */
+    display: flex;
+    /* Changed from 'none' to 'flex' for styling, but JS will control visibility */
     flex-direction: column;
     align-items: center;
   }
@@ -515,16 +599,19 @@ body {
     flex-direction: column;
     width: 100%;
     gap: 15px;
-    max-width: 400px; /* Optional: keeps cards from getting too wide */
+    max-width: 400px;
+    /* Optional: keeps cards from getting too wide */
   }
 
   .result-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align text to the left like the image */
+    align-items: flex-start;
+    /* Align text to the left like the image */
     padding: 15px 20px;
     width: 100%;
-    background: #111; /* Darker background to match screenshot */
+    background: #111;
+    /* Darker background to match screenshot */
     border: 1px solid #222;
   }
 
@@ -541,7 +628,8 @@ body {
 
   /* 3. Specific colors for stats as per image */
   #resAcc {
-    color: #f44336; /* Red for accuracy if low */
+    color: #f44336;
+    /* Red for accuracy if low */
   }
 
   #resChar {
@@ -571,9 +659,11 @@ body {
     width: 100%;
   }
 
-  .dropdown, .mode-mobile {
+  .dropdown,
+  .mode-mobile {
     flex: 1;
-    max-width: 50%; /* Prevents options from expanding the box */
+    max-width: 50%;
+    /* Prevents options from expanding the box */
     position: relative;
     overflow: hidden;
   }
@@ -587,13 +677,14 @@ body {
     border: 1px solid #333;
     border-radius: 6px;
     font-weight: 700;
-    appearance: none; /* Removes native OS width overrides */
-    
+    appearance: none;
+    /* Removes native OS width overrides */
+
     text-align: center;
     text-align-last: center;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 
     /* Removes OS-specific styling that causes size bloating */
     -webkit-appearance: none;
@@ -616,7 +707,8 @@ body {
   .result-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Left-aligned labels like the image */
+    align-items: flex-start;
+    /* Left-aligned labels like the image */
     padding: 16px 20px;
     background: #0f0f0f;
     border: 1px solid #222;
@@ -651,7 +743,8 @@ body {
 
   /* The Menu List */
   .dropdown-list {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: absolute;
     top: 100%;
     left: 0;
@@ -663,13 +756,16 @@ body {
     z-index: 100;
     list-style: none;
     padding: 5px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   }
 
-  .difficulty-desktop span{
+  .difficulty-desktop span {
     display: none;
   }
-  .dropdown-list.show { display: block; }
+
+  .dropdown-list.show {
+    display: block;
+  }
 
   .dropdown-list li {
     padding: 12px 15px;
@@ -690,7 +786,9 @@ body {
     position: relative;
   }
 
-  .dropdown-list li.selected { color: #fff; }
+  .dropdown-list li.selected {
+    color: #fff;
+  }
 
   .dropdown-list li.selected .radio {
     border-color: #2196f3;
@@ -707,4 +805,1576 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+}
+
+/* ================= TYPING TEST FIXES ================= */
+/* The .typing-box is the actual scrolling container. */
+.typing-box {
+  scroll-behavior: auto;
+}
+
+/* Difficulty and Mode stay visible while typing. */
+.hide-during-typing {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+/* Local typing history panel */
+.local-history {
+  display: none;
+  margin: 25px auto 0;
+  max-width: 700px;
+  text-align: left;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.local-history.show {
+  display: block;
+}
+
+.local-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #222;
+}
+
+.local-history-header span {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.local-history-clear {
+  background: transparent;
+  border: 0;
+  color: #888;
+  cursor: pointer;
+  font: inherit;
+}
+
+.local-history-clear:hover {
+  color: #fff;
+}
+
+.local-history-list {
+  list-style: none;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.local-history-list li {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 11px 18px;
+  border-bottom: 1px solid #202020;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.local-history-list li:last-child {
+  border-bottom: 0;
+}
+
+.local-history-list strong {
+  color: #fff;
+}
+
+.history-toggle {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #aaa;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.history-toggle:hover {
+  border-color: #2196f3;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .local-history-list li {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+/* ================= PHASE 2-4 FEATURES ================= */
+.feature-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.feature-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #aaa;
+  font-size: 13px;
+  cursor: pointer;
+  background: #111;
+}
+
+.feature-toggle:hover {
+  border-color: #2196f3;
+  color: #fff;
+}
+
+.feature-toggle input {
+  accent-color: #2196f3;
+  cursor: pointer;
+}
+
+.advanced-result {
+  min-width: 150px;
+}
+
+.result-graph-wrap {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  padding: 18px;
+  border: 1px solid #222;
+  border-radius: 12px;
+  background: #111;
+  text-align: left;
+}
+
+.result-graph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.result-graph-title {
+  color: #ddd;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.result-graph-subtitle {
+  color: #666;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.top-speed-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #888;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.top-speed-indicator strong {
+  color: #fff;
+}
+
+.top-speed-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2196f3;
+  box-shadow: 0 0 8px rgba(33, 150, 243, .65);
+}
+
+#wpmGraph {
+  width: 100%;
+  height: 210px;
+  display: block;
+}
+
+@media (max-width:600px) {
+  .feature-controls {
+    width: 100%;
+  }
+
+  .feature-toggle {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .live-extra {
+    display: none;
+  }
+
+  .result-graph-wrap {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .result-graph-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .top-speed-indicator {
+    font-size: 11px;
+  }
+
+  #wpmGraph {
+    height: 190px;
+  }
+}
+
+
+/* Feature settings note - keeps the existing design intact */
+.feature-note {
+  margin-top: 8px;
+  color: #777;
+  font-size: 11px;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .feature-note {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* ================= PHASE 5-8 LOCAL FEATURES ================= */
+.utility-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap
+}
+
+.utility-btn {
+  background: transparent;
+  border: 1px solid #292929;
+  color: #888;
+  border-radius: 8px;
+  padding: 7px 11px;
+  font: 600 12px Sora, Arial, sans-serif;
+  cursor: pointer
+}
+
+.utility-btn:hover {
+  border-color: #2196f3;
+  color: #fff
+}
+
+.app-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .72);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px
+}
+
+.app-modal.show {
+  display: flex
+}
+
+.modal-card {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #141414;
+  border: 1px solid #292929;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .5)
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px
+}
+
+.modal-head h2 {
+  font-size: 20px
+}
+
+.modal-close {
+  background: none;
+  border: 0;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer
+}
+
+.modal-close:hover {
+  color: #fff
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px
+}
+
+.settings-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #aaa;
+  font-size: 12px
+}
+
+.settings-grid select,
+.settings-grid input {
+  background: #0f0f0f;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px
+}
+
+.settings-grid input {
+  padding: 7px
+}
+
+.settings-hint {
+  color: #666;
+  font-size: 11px;
+  margin-top: 16px
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px
+}
+
+.dashboard-grid>div {
+  background: #101010;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left
+}
+
+.dashboard-grid span {
+  display: block;
+  color: #777;
+  font-size: 11px
+}
+
+.dashboard-grid strong {
+  display: block;
+  color: #fff;
+  font-size: 22px;
+  margin-top: 6px
+}
+
+.dashboard-chart {
+  margin-top: 18px;
+  padding: 12px;
+  background: #101010;
+  border: 1px solid #222;
+  border-radius: 10px
+}
+
+.dashboard-chart canvas {
+  width: 100%;
+  height: 190px;
+  display: block
+}
+
+.shortcut-list {
+  display: grid;
+  gap: 10px
+}
+
+.shortcut-list>div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #aaa;
+  padding: 10px 0;
+  border-bottom: 1px solid #222
+}
+
+.shortcut-list span {
+  margin-left: auto;
+  color: #777
+}
+
+.shortcut-list kbd,
+.command-hint kbd {
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 3px 7px;
+  color: #fff;
+  font: 600 11px Sora, Arial, sans-serif
+}
+
+.command-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: #181818;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 8px 13px;
+  color: #777;
+  font-size: 11px;
+  z-index: 500;
+  opacity: .85
+}
+
+body.theme-midnight {
+  background: #080d16
+}
+
+body.theme-midnight .result-card,
+body.theme-midnight .local-history,
+body.theme-midnight .result-graph-wrap {
+  background: #0d1420
+}
+
+body.theme-light {
+  background: #f3f3f3;
+  color: #171717
+}
+
+body.theme-light .best,
+body.theme-light .stat,
+body.theme-light .feature-toggle,
+body.theme-light .result-sub {
+  color: #666
+}
+
+body.theme-light .stat span,
+body.theme-light .result-card h2,
+body.theme-light .result-graph-title,
+body.theme-light .top-speed-indicator strong {
+  color: #111
+}
+
+body.theme-light .result-card,
+body.theme-light .local-history,
+body.theme-light .result-graph-wrap,
+body.theme-light .modal-card {
+  background: #fff;
+  border-color: #ddd
+}
+
+body.theme-light .utility-btn,
+body.theme-light .feature-toggle {
+  background: #fff;
+  color: #555;
+  border-color: #ccc
+}
+
+body.theme-light .text-area {
+  color: #777
+}
+
+@media(max-width:600px) {
+  .utility-actions {
+    justify-content: center
+  }
+
+  .utility-btn {
+    flex: 1
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .command-hint {
+    bottom: 8px
+  }
+
+  .modal-card {
+    padding: 17px
+  }
+
+  .shortcut-list span {
+    margin-left: 4px
+  }
+}
+
+/* ================= THEME + CARET FIXES ================= */
+/* Caret styles must only affect the typing characters, never buttons/dropdowns. */
+body.caret-block .text-area .active::after {
+  width: 100%;
+  left: 0;
+  opacity: .25;
+}
+
+body.caret-block .text-area .active {
+  color: inherit;
+}
+
+body.caret-underline .text-area .active::after {
+  top: auto;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  left: 0;
+}
+
+/* Midnight Blue: clearly different from the default dark theme. */
+body.theme-midnight {
+  background: #07111f;
+  color: #e8f1ff;
+}
+
+body.theme-midnight .stats {
+  border-bottom-color: #17283d;
+}
+
+body.theme-midnight .btn,
+body.theme-midnight .utility-btn,
+body.theme-midnight .feature-toggle {
+  border-color: #203852;
+  color: #a9bdd6;
+}
+
+body.theme-midnight .btn.active {
+  border-color: #42a5ff;
+  color: #42a5ff;
+  background: rgba(66, 165, 255, .08);
+}
+
+body.theme-midnight .btn:hover,
+body.theme-midnight .utility-btn:hover,
+body.theme-midnight .feature-toggle:hover {
+  border-color: #42a5ff;
+  color: #e8f1ff;
+}
+
+body.theme-midnight .typing-box {
+  scrollbar-color: #203852 transparent;
+}
+
+body.theme-midnight .current-word {
+  background: rgba(66, 165, 255, .14);
+}
+
+body.theme-midnight .start-overlay {
+  background: rgba(7, 17, 31, .92);
+}
+
+body.theme-midnight .result-card,
+body.theme-midnight .local-history,
+body.theme-midnight .result-graph-wrap,
+body.theme-midnight .modal-card {
+  background: #0c1a2b;
+  border-color: #203852;
+}
+
+body.theme-midnight .dashboard-grid>div,
+body.theme-midnight .dashboard-chart {
+  background: #0a1727;
+  border-color: #1b3048;
+}
+
+body.theme-midnight .settings-grid select,
+body.theme-midnight .settings-grid input {
+  background: #081525;
+  color: #e8f1ff;
+  border-color: #29445f;
+}
+
+body.theme-midnight .shortcut-list>div {
+  border-bottom-color: #203852;
+}
+
+body.theme-midnight .shortcut-list kbd,
+body.theme-midnight .command-hint {
+  background: #102238;
+  border-color: #29445f;
+  color: #a9bdd6;
+}
+
+body.theme-midnight .command-hint {
+  background: #102238;
+}
+
+/* Light: full readable light surface, not just the body background. */
+body.theme-light {
+  background: #f5f7fa;
+  color: #1b2430;
+}
+
+body.theme-light .container {
+  color: #1b2430;
+}
+
+body.theme-light .best,
+body.theme-light .stat,
+body.theme-light .feature-toggle,
+body.theme-light .result-sub,
+body.theme-light .top-speed-indicator {
+  color: #5f6b7a;
+}
+
+body.theme-light .stat span {
+  color: #18212b;
+}
+
+body.theme-light .stats {
+  border-bottom-color: #dce2e8;
+}
+
+body.theme-light .btn,
+body.theme-light .utility-btn,
+body.theme-light .feature-toggle {
+  background: #fff;
+  border-color: #cfd7df;
+  color: #4d5966;
+}
+
+body.theme-light .btn:hover,
+body.theme-light .utility-btn:hover,
+body.theme-light .feature-toggle:hover {
+  border-color: #2196f3;
+  color: #1769aa;
+}
+
+body.theme-light .btn.active {
+  background: rgba(33, 150, 243, .09);
+  border-color: #2196f3;
+  color: #1976d2;
+}
+
+body.theme-light .text-area {
+  color: #8b96a3;
+}
+
+body.theme-light .correct {
+  color: #2e8b57;
+}
+
+body.theme-light .incorrect {
+  color: #d9363e;
+}
+
+body.theme-light .current-word {
+  background: rgba(33, 150, 243, .10);
+}
+
+body.theme-light .start-overlay {
+  background: rgba(245, 247, 250, .94);
+}
+
+body.theme-light .result-screen h1,
+body.theme-light .result-card h2,
+body.theme-light .result-card span,
+body.theme-light .result-graph-title,
+body.theme-light .top-speed-indicator strong {
+  color: #18212b;
+}
+
+body.theme-light .result-card,
+body.theme-light .local-history,
+body.theme-light .result-graph-wrap,
+body.theme-light .modal-card {
+  background: #fff;
+  border-color: #d9e0e7;
+  box-shadow: 0 8px 30px rgba(20, 35, 50, .07);
+}
+
+body.theme-light .result-graph-subtitle,
+body.theme-light .local-history-header span,
+body.theme-light .feature-note {
+  color: #74808d;
+}
+
+body.theme-light .local-history-list li {
+  border-bottom-color: #e5e9ee;
+}
+
+body.theme-light .local-history-list strong {
+  color: #18212b;
+}
+
+body.theme-light .dashboard-grid>div,
+body.theme-light .dashboard-chart {
+  background: #f8fafc;
+  border-color: #dfe5eb;
+}
+
+body.theme-light .dashboard-grid strong {
+  color: #18212b;
+}
+
+body.theme-light .settings-grid label {
+  color: #5f6b7a;
+}
+
+body.theme-light .settings-grid select,
+body.theme-light .settings-grid input {
+  background: #fff;
+  color: #18212b;
+  border-color: #cfd7df;
+}
+
+body.theme-light .shortcut-list>div {
+  color: #5f6b7a;
+  border-bottom-color: #e2e7ec;
+}
+
+body.theme-light .shortcut-list span {
+  color: #687582;
+}
+
+body.theme-light .shortcut-list kbd,
+body.theme-light .command-hint {
+  background: #eef2f6;
+  border-color: #cfd7df;
+  color: #394653;
+}
+
+body.theme-light .app-modal {
+  background: rgba(27, 36, 48, .32);
+}
+
+body.theme-light .modal-close {
+  color: #687582;
+}
+
+body.theme-light .modal-close:hover {
+  color: #18212b;
+}
+
+body.theme-light .restart-btn-main {
+  color: #1976d2;
+}
+
+/* ================= CLEAN MINIMAL CONTROL BAR ================= */
+.control-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 4px 0 12px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #171717;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.control-btn,
+.length-btn,
+.icon-toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #777;
+  font: 600 12px "Sora", Arial, sans-serif;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, opacity .18s ease;
+}
+
+.control-btn {
+  padding: 8px 11px;
+}
+
+.control-btn:hover,
+.length-btn:hover,
+.icon-toggle:hover {
+  color: #ddd;
+  background: rgba(255, 255, 255, .035);
+}
+
+.control-btn.is-active,
+.length-btn.is-active {
+  color: #e8bd25;
+  background: rgba(232, 189, 37, .09);
+}
+
+.difficulty-group .control-btn.is-active {
+  color: #e8bd25;
+}
+
+.mode-group .control-btn span {
+  margin-left: 3px;
+}
+
+.length-group {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.length-btn {
+  min-width: 34px;
+  padding: 8px 7px;
+}
+
+.custom-length-trigger {
+  min-width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.feature-group {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.icon-toggle {
+  min-width: 30px;
+  height: 30px;
+  font-size: 14px;
+}
+
+.icon-toggle.is-on {
+  color: #e8bd25;
+  background: rgba(232, 189, 37, .09);
+}
+
+.icon-toggle[aria-pressed="false"] {
+  opacity: .58;
+}
+
+.minimal-tools {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.minimal-tools .utility-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+/* Keep old compatibility controls completely invisible. */
+#timeSelect,
+#passageBtn,
+#punctuationToggle,
+#numbersToggle,
+#soundToggle {
+  display: none !important;
+}
+
+/* Shorter passage viewport: approximately 4–5 lines. */
+.typing-box {
+  height: 250px;
+  max-height: 250px;
+  padding-right: 4px;
+}
+
+/* Custom length dialog */
+.custom-modal-card {
+  max-width: 620px;
+}
+
+.custom-modal-sub {
+  color: #777;
+  font-size: 12px;
+  margin: -8px 0 18px;
+}
+
+.custom-test-options {
+  display: grid;
+  gap: 10px;
+}
+
+.custom-option {
+  border: 1px solid #252525;
+  background: #101010;
+  border-radius: 10px;
+  padding: 13px;
+}
+
+.custom-option>label {
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.custom-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-input-row input {
+  flex: 1;
+  min-width: 0;
+  background: #0b0b0b;
+  color: #fff;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  padding: 10px 11px;
+  font: 600 14px Sora, Arial, sans-serif;
+  outline: none;
+}
+
+.custom-input-row input:focus {
+  border-color: #e8bd25;
+}
+
+.custom-input-row span {
+  color: #666;
+  font-size: 11px;
+  min-width: 48px;
+}
+
+.custom-input-row button {
+  border: 1px solid #333;
+  background: transparent;
+  color: #aaa;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font: 600 11px Sora, Arial, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.custom-input-row button:hover {
+  color: #e8bd25;
+  border-color: #e8bd25;
+}
+
+/* Explicitly separate caret state from control state. */
+.text-area .active::after {
+  pointer-events: none;
+}
+
+/* Midnight Blue */
+body.theme-midnight .control-group {
+  background: #0c1727;
+  border-color: #1b314a;
+}
+
+body.theme-midnight .control-btn,
+body.theme-midnight .length-btn,
+body.theme-midnight .icon-toggle {
+  color: #7892ad;
+}
+
+body.theme-midnight .control-btn:hover,
+body.theme-midnight .length-btn:hover,
+body.theme-midnight .icon-toggle:hover {
+  color: #dcecff;
+  background: rgba(80, 160, 255, .07);
+}
+
+body.theme-midnight .control-btn.is-active,
+body.theme-midnight .length-btn.is-active,
+body.theme-midnight .icon-toggle.is-on {
+  color: #54a9ff;
+  background: rgba(84, 169, 255, .11);
+}
+
+body.theme-midnight .custom-option {
+  background: #0a1422;
+  border-color: #1c344d;
+}
+
+body.theme-midnight .custom-input-row input {
+  background: #07111d;
+  color: #e8f1ff;
+  border-color: #28435e;
+}
+
+body.theme-midnight .custom-input-row input:focus,
+body.theme-midnight .custom-input-row button:hover {
+  border-color: #54a9ff;
+}
+
+/* Light */
+body.theme-light .control-group {
+  background: #fff;
+  border-color: #d9e0e7;
+  box-shadow: 0 2px 10px rgba(20, 35, 50, .04);
+}
+
+body.theme-light .control-btn,
+body.theme-light .length-btn,
+body.theme-light .icon-toggle {
+  color: #697582;
+}
+
+body.theme-light .control-btn:hover,
+body.theme-light .length-btn:hover,
+body.theme-light .icon-toggle:hover {
+  color: #18212b;
+  background: #f2f5f8;
+}
+
+body.theme-light .control-btn.is-active,
+body.theme-light .length-btn.is-active,
+body.theme-light .icon-toggle.is-on {
+  color: #c08f00;
+  background: rgba(232, 189, 37, .13);
+}
+
+body.theme-light .custom-option {
+  background: #f8fafc;
+  border-color: #dfe5eb;
+}
+
+body.theme-light .custom-input-row input {
+  background: #fff;
+  color: #18212b;
+  border-color: #cfd7df;
+}
+
+body.theme-light .custom-input-row button {
+  border-color: #cfd7df;
+  color: #5f6b7a;
+}
+
+body.theme-light .custom-input-row input:focus,
+body.theme-light .custom-input-row button:hover {
+  border-color: #c08f00;
+  color: #a67a00;
+}
+
+body.theme-light .minimal-tools .utility-btn {
+  background: #fff;
+  border-color: #d4dbe2;
+  color: #687582;
+}
+
+body.theme-light .minimal-tools .utility-btn:hover {
+  color: #1769aa;
+  border-color: #2196f3;
+}
+
+@media (max-width: 760px) {
+  .control-bar {
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .difficulty-group {
+    order: 1;
+  }
+
+  .mode-group {
+    order: 2;
+  }
+
+  .length-group {
+    order: 3;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .length-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature-group {
+    order: 4;
+  }
+
+  .minimal-tools {
+    justify-content: center;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .control-bar {
+    gap: 7px;
+  }
+
+  .control-group {
+    border-radius: 9px;
+  }
+
+  .control-btn {
+    padding: 8px 9px;
+  }
+
+  .mode-group .control-btn span {
+    display: none;
+  }
+
+  .length-btn {
+    min-width: 31px;
+    padding: 8px 6px;
+  }
+
+  .feature-group {
+    margin-left: 0;
+  }
+
+  .typing-box {
+    height: 155px;
+    max-height: 155px;
+  }
+
+  .text-area {
+    line-height: 1.6;
+  }
+
+  .custom-input-row {
+    flex-wrap: wrap;
+  }
+
+  .custom-input-row input {
+    flex: 1 1 120px;
+  }
+
+  .custom-input-row button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ================= FINAL CLEAN TYPING VIEW ================= */
+/* The live mode indicator replaces the old top stats row. */
+.minimal-status {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0 10px;
+  color: #e8bd25;
+  font: 600 13px "Sora", Arial, sans-serif;
+  letter-spacing: .2px;
+}
+
+.live-status-item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 42px;
+  justify-content: center;
+}
+
+/* Exactly about three visible lines. Scrolling is controlled only by JS. */
+.typing-box {
+  height: 145px !important;
+  max-height: 145px !important;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+  scrollbar-width: none;
+}
+
+.typing-box::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Focus prompt: click it or press any key before typing. */
+.focus-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  background: transparent;
+  color: #d9d5cb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  font: 600 16px "Sora", Arial, sans-serif;
+  cursor: pointer;
+  transition: opacity .18s ease;
+}
+
+.focus-overlay:hover {
+  color: #fff;
+}
+
+.focus-cursor {
+  font-size: 19px;
+  color: #ddd8cc;
+}
+
+.focus-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-area.blur {
+  filter: blur(3px);
+  opacity: .28;
+  transition: filter .18s ease, opacity .18s ease;
+}
+
+.text-area:not(.blur) {
+  filter: none;
+  opacity: 1;
+}
+
+/* While typing, leave only the selected timer/word counter and passage. */
+.typing-active .minimal-status {
+  opacity: 1;
+}
+
+.typing-active .typing-box {
+  margin-top: 0;
+}
+
+/* The control buttons are hidden during active typing and return on mouse movement. */
+.hide-during-typing {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+}
+
+body:not(.typing-active) .hide-during-typing {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Remove visual remnants of the old live-stat row if any older CSS targets remain. */
+.stats {
+  display: none !important;
+}
+
+/* Keep caret state independent from mode/difficulty active state. */
+.text-area .active,
+.text-area .active::after {
+  /* caret only */
+}
+
+.control-btn.is-active,
+.length-btn.is-active,
+.icon-toggle.is-on {
+  /* control selection only */
+}
+
+body.theme-midnight .minimal-status {
+  color: #54a9ff;
+}
+
+body.theme-light .minimal-status {
+  color: #a67a00;
+}
+
+body.theme-light .focus-overlay {
+  color: #34404c;
+}
+
+body.theme-light .focus-overlay:hover {
+  color: #18212b;
+}
+
+body.theme-light .focus-cursor {
+  color: #536170;
+}
+
+@media (max-width: 600px) {
+  .typing-box {
+    height: 132px !important;
+    max-height: 132px !important;
+  }
+
+  .focus-overlay {
+    font-size: 13px;
+    gap: 9px;
+  }
+
+  .focus-cursor {
+    font-size: 16px;
+  }
+}
+
+/* During a test the controls stay out of the way; moving the mouse reveals them briefly. */
+body.typing-active .hide-during-typing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.typing-active.typing-controls-visible .hide-during-typing {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep restart/history and command hint out of the focused typing view. */
+body.typing-active .restart-wrapper {
+  display: none !important;
+}
+
+body.typing-active .command-hint {
+  display: none !important;
+}
+
+/* ================= FINAL CLEAN TYPING LAYOUT ================= */
+/* Keep the passage comfortably inset on both sides while retaining the same
+   left alignment as the main content container. */
+.typing-box {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 136px !important;
+  max-height: 136px !important;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+.text-area {
+  width: 100%;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* The restart/history controls are real controls and should remain available
+   before and after a test. During typing the clean focus view still hides them. */
+body:not(.typing-active) .restart-wrapper {
+  display: block !important;
+}
+
+/* Do not let caret styles share any selector/state with control buttons. */
+.control-btn.is-active,
+.length-btn.is-active,
+.icon-toggle.is-on {
+  /* mode/length/feature selection only */
+}
+
+.text-area .active {
+  /* caret position only */
+}
+
+@media (max-width: 600px) {
+  .typing-box {
+    width: 100%;
+    padding: 0 14px;
+    height: 132px !important;
+    max-height: 132px !important;
+  }
+}
+
+
+/* ================= FINAL USER REQUEST FIXES ================= */
+/* During typing, keep the interface completely clean: only the selected
+   time/word indicator and the passage remain visible. */
+body.typing-active .control-bar,
+body.typing-active .minimal-tools {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* The selected mode determines which length group exists in the shared
+   length position. The HTML hidden attribute must always win. */
+.length-group[hidden] {
+  display: none !important;
+}
+
+/* Exactly three complete lines; never expose a partial fourth line. */
+.typing-box {
+  --typing-font-size: 28px;
+  height: calc(var(--typing-font-size) * 1.6 * 3) !important;
+  max-height: calc(var(--typing-font-size) * 1.6 * 3) !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  padding-left: 28px !important;
+  padding-right: 28px !important;
+}
+
+.text-area,
+.text-area:focus,
+.typing-box:focus,
+.typing-box:focus-within {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Custom mode is not a mode. It is only a length choice inside Time or Words. */
+.custom-option[hidden] {
+  display: none !important;
+}
+
+/* Restart + History are available before and after every test. */
+body:not(.typing-active) .restart-wrapper,
+body.typing-active .restart-wrapper {
+  /* The wrapper itself is controlled by JS; during typing the clean view hides it. */
+}
+
+body.typing-active .restart-wrapper {
+  display: none !important;
+}
+
+body:not(.typing-active) .restart-wrapper {
+  display: block !important;
+}
+
+@media (max-width: 600px) {
+  .typing-box {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    height: calc(var(--typing-font-size, 28px) * 1.6 * 3) !important;
+    max-height: calc(var(--typing-font-size, 28px) * 1.6 * 3) !important;
+  }
+}
+
+/* ================= FOOTER + CONTROL REVEAL FIX ================= */
+.site-footer {
+  width: min(100%, 1200px);
+  margin: 18px auto 0;
+  padding: 10px 28px;
+  box-sizing: border-box;
+}
+
+.footer-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.footer-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 9px;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  color: #777;
+  font: 600 12px Sora, Arial, sans-serif;
+}
+
+.footer-theme select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #aaa;
+  font: 600 12px Sora, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.footer-theme select option {
+  background: #141414;
+  color: #fff;
+}
+
+.site-footer .utility-btn {
+  height: 32px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Never collapse the top controls: mouse movement can reveal them again. */
+body.typing-active .control-bar,
+body.typing-active .minimal-tools {
+  height: auto !important;
+  max-height: 200px !important;
+  margin: initial !important;
+  overflow: visible !important;
+}
+
+body.typing-active.typing-controls-visible .control-bar,
+body.typing-active.typing-controls-visible .minimal-tools,
+body.typing-active.typing-controls-visible .site-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Result screen replaces the test controls; restart/history stay out of it. */
+body.result-visible .restart-wrapper {
+  display: none !important;
+}
+
+body.theme-midnight .site-footer {
+  border-top-color: #1b314a;
+}
+
+body.theme-midnight .footer-theme {
+  border-color: #1b314a;
+  background: #0c1727;
+  color: #7892ad;
+}
+
+body.theme-midnight .footer-theme select {
+  color: #9fc7ed;
+}
+
+body.theme-midnight .site-footer .utility-btn {
+  border-color: #1b314a;
+  color: #7892ad;
+}
+
+body.theme-light .footer-theme {
+  border-color: #d4dbe2;
+  background: #fff;
+  color: #687582;
+}
+
+body.theme-light .footer-theme select {
+  color: #4f5d6a;
+}
+
+body.theme-light .site-footer .utility-btn {
+  background: #fff;
+  border-color: #d4dbe2;
+  color: #687582;
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 10px 14px;
+  }
+
+  .footer-label {
+    display: none;
+  }
+
+  .footer-theme,
+  .site-footer .utility-btn {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+
+/* TypingMeter brand */
+body.theme-midnight .site-name {
+  color: #e8f1ff;
+}
+
+body.theme-light .site-name {
+  color: #171717;
 }

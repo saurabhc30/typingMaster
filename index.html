@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="lX9mcpQ0s9Lps51OWkrMIE5mLBasewKU-46R5cLPQU4" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
-  <link rel="icon" type="image/x-icon" href="type.ico">
-  <title>Typing Speed Test</title>
+  <link rel="icon" type="image/x-icon" href="icon.ico">
+  <title>TypingMeter</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,131 +21,262 @@
     <!-- Header -->
     <div class="header">
 
-      <div class="logo">
-        <img src="assets/images/logo-large.svg" class="desktop-logo">
-        <img src="assets/images/logo-small.svg" class="mobile-logo">
+      <div class="logo" aria-label="TypingMeter">
+        <img src="assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <span class="site-name">TypingMeter</span>
       </div>
 
       <div class="best">
-        <img src="assets/images/icon-personal-best.svg"> Personal best: <strong id="personalBest">35 WPM</strong>
+        <img src="assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal best:</span> <strong id="personalBest">35 WPM</strong>
       </div>
 
     </div>
 
-    <!-- Stats -->
-    <div class="stats">
+    <div class="control-bar hide-during-typing">
 
-      <div class="stat-group">
-        <div class="stat">WPM: <span id="wpm">0</span></div>
-        <div class="stat">Accuracy: <span id="accuracy">100%</span></div>
-        <div class="stat">Time: <span id="time">0:60</span></div>
+      <div class="control-group difficulty-group" aria-label="Difficulty">
+        <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Easy</button>
+        <button class="control-btn diff-btn" data-diff="medium" type="button">Medium</button>
+        <button class="control-btn diff-btn" data-diff="hard" type="button">Hard</button>
       </div>
 
-      <div class="buttons">
+      <div class="control-group mode-group" aria-label="Mode">
+        <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷ <span>Time</span></button>
+        <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Words</span></button>
+        <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Passage</span></button>
+      </div>
 
-        <!-- Desktop Difficulty -->
-        <div class="difficulty-desktop">
-          <span class="label">Difficulty:</span>
-          <button class="btn diff-btn active" data-diff="easy">Easy</button>
-          <button class="btn diff-btn" data-diff="medium">Medium</button>
-          <button class="btn diff-btn" data-diff="hard">Hard</button>
-          <span>|</span>
-        </div>
+      <div class="control-group length-group" id="timedLengths" aria-label="Time length">
+        <button class="length-btn" data-time="15" type="button">15</button>
+        <button class="length-btn is-active" data-time="30" type="button">30</button>
+        <button class="length-btn" data-time="60" type="button">60</button>
+        <button class="length-btn" data-time="120" type="button">120</button>
+        <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">Custom</button>
+      </div>
 
-        <!-- Mode Section -->
-        <div class="mode">
-          <span class="label">Mode:</span>
-          <!-- Timed Dropdown -->
-          <div class="dropdown">
-            <select id="timeSelect" class="time-select">
-              <option value="60">Timed (60s)</option>
-              <option value="180">Timed (3m)</option>
-              <option value="300">Timed (5m)</option>
-            </select>
-          </div>
+      <div class="control-group length-group" id="wordLengths" aria-label="Word length" hidden>
+        <button class="length-btn" data-words="10" type="button">10</button>
+        <button class="length-btn is-active" data-words="25" type="button">25</button>
+        <button class="length-btn" data-words="50" type="button">50</button>
+        <button class="length-btn" data-words="100" type="button">100</button>
+        <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Custom</button>
+      </div>
 
-          <!-- Passage Dropdown (Mobile) -->
-          <div class="controls-row">
-            
-            <div class="custom-dropdown" id="modeDropdown">
-              <button class="dropdown-btn">Timed <span class="arrow">▼</span></button>
-              <ul class="dropdown-list">
-                <li data-value="60" class="selected"><span class="radio"></span> Timed</li>
-                <li data-value="passage"><span class="radio"></span> Passage</li>
-              </ul>
-            </div>
-            <div class="custom-dropdown" id="timeDropdown">
-              <button class="dropdown-btn">Timed (60s) <span class="arrow">▼</span></button>
-              <ul class="dropdown-list">
-                <li data-value="60" class="selected"><span class="radio"></span> Time (1 Min)</li>
-                <li data-value="180"><span class="radio"></span> Time(3 Min)</li>
-                <li data-value="300"><span class="radio"></span> Time(5 Min)</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Desktop Passage Button -->
-          <button class="btn passageBtn mode-desktop" id="passageBtn" data-mode="passage">
-            Passage
-          </button>
-
-        </div>
-
+      <div class="control-group feature-group" aria-label="Typing options">
+        <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+          title="Punctuation">@</button>
+        <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false" title="Numbers">#</button>
+        <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true" title="Sound">♪</button>
       </div>
 
     </div>
 
-    <!-- Typing Area -->
-    <div class="typing-box">
+    <input type="checkbox" id="punctuationToggle" hidden>
+    <input type="checkbox" id="numbersToggle" hidden>
+    <input type="checkbox" id="soundToggle" checked hidden>
+    <select id="timeSelect" hidden aria-hidden="true">
+      <option value="15">15</option>
+      <option value="30" selected>30</option>
+      <option value="60">60</option>
+      <option value="120">120</option>
+    </select>
+    <button id="passageBtn" hidden type="button">Passage</button>
 
-      <div class="text-area blur" id="text" tabindex="0"></div>
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+      <span id="liveTime" class="live-status-item">0:30</span>
+      <span id="liveWords" class="live-status-item" hidden>25 words</span>
     </div>
 
-    <div class="restart-wrapper">
-      <button class="restart-btn-main" id="restartMainBtn">
-        Restart Test ↻
-      </button>
+  </div>
+
+  <!-- Typing Area -->
+  <div class="typing-box">
+    <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
+      <span class="focus-cursor">➤</span>
+      <span>Click here or press any key to focus</span>
+    </button>
+    <div class="text-area blur" id="text" tabindex="0"></div>
+  </div>
+
+  <footer class="site-footer hide-during-typing" aria-label="Typing test tools">
+    <div class="footer-tools">
+      <label class="footer-theme" title="Theme">
+        <span class="footer-label">Theme</span>
+        <select id="footerThemeSelect" aria-label="Theme">
+          <option value="dark">Dark</option>
+          <option value="midnight">Midnight Blue</option>
+          <option value="light">Light</option>
+        </select>
+      </label>
+      <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
+      <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
+      <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
+        <span>Shortcuts</span></button>
+    </div>
+  </footer>
+
+  <div class="restart-wrapper">
+    <button class="restart-btn-main" id="restartMainBtn">
+      Restart Test ↻
+    </button>
+    <button class="history-toggle" id="historyToggle" type="button">History</button>
+
+    <div class="local-history" id="localHistory">
+      <div class="local-history-header">
+        <span>Recent tests</span>
+        <button class="local-history-clear" id="clearHistory" type="button">Clear</button>
+      </div>
+      <ul class="local-history-list" id="historyList"></ul>
+    </div>
+  </div>
+
+
+  <!-- Result Screen -->
+  <div class="result-screen" id="resultScreen">
+
+    <div class="result-icon">
+      <img src="assets/images/icon-completed.svg">
     </div>
 
+    <h1>Baseline Established!</h1>
 
-    <!-- Result Screen -->
-    <div class="result-screen" id="resultScreen">
+    <p class="result-sub">
+      You've set the bar. Now the real challenge begins—time to beat it.
+    </p>
 
-      <div class="result-icon">
-        <img src="assets/images/icon-completed.svg">
+    <div class="result-graph-wrap">
+      <div class="result-graph-header">
+        <div>
+          <div class="result-graph-title">WPM Progress</div>
+          <div class="result-graph-subtitle">Your speed during the test</div>
+        </div>
+        <div class="top-speed-indicator">
+          <span class="top-speed-dot"></span>
+          <span>Top speed: <strong id="topSpeed">0 WPM</strong></span>
+        </div>
+      </div>
+      <canvas id="wpmGraph" width="760" height="210" aria-label="WPM progress graph"></canvas>
+    </div>
+
+    <div class="result-stats">
+
+      <div class="result-card">
+        <span>WPM</span>
+        <h2 id="resWpm">0</h2>
       </div>
 
-      <h1>Baseline Established!</h1>
-
-      <p class="result-sub">
-        You've set the bar. Now the real challenge begins—time to beat it.
-      </p>
-
-      <div class="result-stats">
-
-        <div class="result-card">
-          <span>WPM</span>
-          <h2 id="resWpm">0</h2>
-        </div>
-
-        <div class="result-card">
-          <span>Accuracy</span>
-          <h2 id="resAcc">0%</h2>
-        </div>
-
-        <div class="result-card">
-          <span>Characters</span>
-          <h2 id="resChar">0</h2>
-        </div>
-
+      <div class="result-card">
+        <span>Accuracy</span>
+        <h2 id="resAcc">0%</h2>
       </div>
 
-      <button class="retry-btn" id="retryBtn">
-        Beat This Score ↻
-      </button>
+      <div class="result-card">
+        <span>Characters</span>
+        <h2 id="resChar">0</h2>
+      </div>
+
+      <div class="result-card advanced-result">
+        <span>Raw WPM</span>
+        <h2 id="resRawWpm">0</h2>
+      </div>
+
+      <div class="result-card advanced-result">
+        <span>Errors</span>
+        <h2 id="resErrors">0</h2>
+      </div>
+
+      <div class="result-card advanced-result">
+        <span>Consistency</span>
+        <h2 id="resConsistency">0%</h2>
+      </div>
 
     </div>
 
+    <button class="retry-btn" id="retryBtn">
+      Beat This Score ↻
+    </button>
+
+  </div>
+
+
+
+
+  <!-- Settings / Statistics / Shortcuts panels -->
+  <div class="app-modal" id="customModal" aria-hidden="true">
+    <div class="modal-card custom-modal-card">
+      <div class="modal-head">
+        <h2>Custom Test</h2><button class="modal-close" data-close="customModal" type="button">×</button>
+      </div>
+      <p class="custom-modal-sub" id="customModalSub">Choose your own test length.</p>
+      <div class="custom-test-options">
+        <div class="custom-option time-custom-option">
+          <label for="customTimeInput">Time</label>
+          <div class="custom-input-row"><input id="customTimeInput" type="number" min="5" max="3600" value="45"
+              inputmode="numeric"><span>seconds</span><button id="applyCustomTime" type="button">Use Time</button></div>
+        </div>
+        <div class="custom-option words-custom-option">
+          <label for="customWordsInput">Words</label>
+          <div class="custom-input-row"><input id="customWordsInput" type="number" min="1" max="1000" value="25"
+              inputmode="numeric"><span>words</span><button id="applyCustomWords" type="button">Use Words</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-modal" id="settingsModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>Settings</h2><button class="modal-close" data-close="settingsModal">×</button>
+      </div>
+      <div class="settings-grid">
+        <label>Theme<select id="themeSelect">
+            <option value="dark">Dark</option>
+            <option value="midnight">Midnight Blue</option>
+            <option value="light">Light</option>
+          </select></label>
+        <label>Caret<select id="caretSelect">
+            <option value="line">Line</option>
+            <option value="block">Block</option>
+            <option value="underline">Underline</option>
+          </select></label>
+        <label>Font Size<input id="fontSizeRange" type="range" min="20" max="36" value="28"></label>
+      </div>
+      <p class="settings-hint">Settings are saved automatically on this device.</p>
+    </div>
+  </div>
+
+  <div class="app-modal" id="statsModal" aria-hidden="true">
+    <div class="modal-card stats-dashboard">
+      <div class="modal-head">
+        <h2>Statistics</h2><button class="modal-close" data-close="statsModal">×</button>
+      </div>
+      <div class="dashboard-grid">
+        <div><span>Tests</span><strong id="dashTests">0</strong></div>
+        <div><span>Best WPM</span><strong id="dashBest">0</strong></div>
+        <div><span>Average WPM</span><strong id="dashAvg">0</strong></div>
+        <div><span>Average Accuracy</span><strong id="dashAcc">0%</strong></div>
+        <div><span>Total Characters</span><strong id="dashChars">0</strong></div>
+        <div><span>Total Errors</span><strong id="dashErrors">0</strong></div>
+      </div>
+      <div class="dashboard-chart"><canvas id="statsGraph" width="760" height="190"></canvas></div>
+    </div>
+  </div>
+
+  <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>Keyboard Shortcuts</h2><button class="modal-close" data-close="shortcutsModal">×</button>
+      </div>
+      <div class="shortcut-list">
+        <div><kbd>Tab</kbd><span>Keep focus on the typing area</span></div>
+        <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Restart test</span></div>
+        <div><kbd>Esc</kbd><span>Close an open panel</span></div>
+        <div><kbd>/</kbd><span>Open shortcuts</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="command-hint" id="commandHint">Press <kbd>/</kbd> for shortcuts</div>
 
   </div>
   <script src="passages.js"></script>

@@ -313,6 +313,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (liveTimeEl) liveTimeEl.innerText = value;
   }
 
+  function getTypedWordCount() {
+    if (!currentText || charIndex <= 0) return 0;
+
+    // Count the word currently being typed too.
+    const typedText = currentText.slice(0, charIndex).trim();
+    return typedText ? typedText.split(/\s+/).length : 0;
+  }
+
   function updateLiveModeDisplay() {
     if (liveTimeEl) {
       liveTimeEl.hidden = mode !== "timed";
@@ -320,18 +328,32 @@ document.addEventListener("DOMContentLoaded", function () {
         liveTimeEl.innerText = `${Math.floor(selectedTime / 60)}:${String(selectedTime % 60).padStart(2, "0")}`;
       }
     }
+
+    // Word counter is available in ALL modes.
     if (liveWordsEl) {
-      liveWordsEl.hidden = mode !== "words";
-      if (mode === "words") liveWordsEl.innerText = `${wordLimit} ${wordLimit === 1 ? "word" : "words"}`;
+      liveWordsEl.hidden = false;
+      const typedWords = getTypedWordCount();
+
+      if (mode === "words") {
+        liveWordsEl.innerText = `${typedWords} / ${wordLimit} ${wordLimit === 1 ? "word" : "words"}`;
+      } else {
+        liveWordsEl.innerText = `${typedWords} ${typedWords === 1 ? "word" : "words"}`;
+      }
     }
   }
 
   function updateLiveWordsDisplay() {
-    if (!liveWordsEl || mode !== "words") return;
-    const typedText = currentText.slice(0, charIndex);
-    const typedWords = typedText.trim() ? typedText.trim().split(/\s+/).length : 0;
-    const remaining = Math.max(0, wordLimit - typedWords);
-    liveWordsEl.innerText = `${remaining} ${remaining === 1 ? "word" : "words"}`;
+    if (!liveWordsEl) return;
+
+    const typedWords = getTypedWordCount();
+
+    // Words mode shows progress toward the selected limit.
+    if (mode === "words") {
+      liveWordsEl.innerText = `${typedWords} / ${wordLimit} ${wordLimit === 1 ? "word" : "words"}`;
+    } else {
+      // Timed + Passage modes show total words typed.
+      liveWordsEl.innerText = `${typedWords} ${typedWords === 1 ? "word" : "words"}`;
+    }
   }
 
   function updateLiveStats() {
@@ -502,8 +524,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const title = document.querySelector(".result-screen h1");
     const sub = document.querySelector(".result-sub");
-    if (title) title.innerText = isNewBest ? "New Personal Best!" : "Test Complete!";
-    if (sub) sub.innerText = isNewBest ? "Excellent work — you have set a new personal best." : "Keep practicing and try to beat your best score.";
+    if (title) title.innerText = "";
+    if (sub) sub.innerText = "";
 
     saveHistory({
       wpm, rawWpm, accuracy, errors, consistency, characters: totalTyped,
@@ -683,12 +705,76 @@ document.addEventListener("DOMContentLoaded", function () {
   const EXTRA_SETTINGS_KEY = "typing_test_ui_settings_v1";
 
   function openModal(id) {
-    const el = document.getElementById(id); if (el) { el.classList.add("show"); el.setAttribute("aria-hidden", "false"); }
+    const el = document.getElementById(id);
+    if (!el) return;
+    document.querySelectorAll(".app-modal.show").forEach(m => {
+      if (m !== el) {
+        m.classList.remove("show");
+        m.setAttribute("aria-hidden", "true");
+      }
+    });
+    el.classList.add("show");
+    el.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
   }
+
   function closeModal(id) {
-    const el = document.getElementById(id); if (el) { el.classList.remove("show"); el.setAttribute("aria-hidden", "true"); }
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("show");
+    el.setAttribute("aria-hidden", "true");
+    if (!document.querySelector(".app-modal.show")) document.body.classList.remove("modal-open");
   }
-  function closeAllModals() { document.querySelectorAll(".app-modal.show").forEach(m => closeModal(m.id)); }
+
+  function closeAllModals() {
+    document.querySelectorAll(".app-modal.show").forEach(m => {
+      m.classList.remove("show");
+      m.setAttribute("aria-hidden", "true");
+    });
+    document.body.classList.remove("modal-open");
+    closeInfoPanels();
+  }
+
+  /* ================= FOOTER INFORMATION PANELS ================= */
+  const infoPanels = document.querySelectorAll(".info-panel");
+  const infoOpenButtons = document.querySelectorAll("[data-info-open]");
+  const infoCloseButtons = document.querySelectorAll("[data-info-close]");
+
+  function closeInfoPanels() {
+    infoPanels.forEach(panel => {
+      panel.classList.remove("show");
+      panel.setAttribute("aria-hidden", "true");
+    });
+    document.body.classList.remove("info-panel-open");
+  }
+
+  function openInfoPanel(id) {
+    const panel = document.getElementById(id);
+    if (!panel) return;
+    closeAllModals();
+    infoPanels.forEach(item => {
+      item.classList.remove("show");
+      item.setAttribute("aria-hidden", "true");
+    });
+    panel.classList.add("show");
+    panel.setAttribute("aria-hidden", "false");
+    document.body.classList.add("info-panel-open");
+    panel.querySelector("[data-info-close]")?.focus();
+  }
+
+  infoOpenButtons.forEach(button => {
+    button.addEventListener("click", () => openInfoPanel(button.dataset.infoOpen));
+  });
+
+  infoCloseButtons.forEach(button => {
+    button.addEventListener("click", closeInfoPanels);
+  });
+
+  infoPanels.forEach(panel => {
+    panel.addEventListener("click", e => {
+      if (e.target === panel) closeInfoPanels();
+    });
+  });
 
   function applyUISettings() {
     const theme = themeSelect?.value || footerThemeSelect?.value || "dark";
@@ -884,4 +970,26 @@ document.addEventListener("DOMContentLoaded", function () {
   renderPersonalBest();
   renderHistory();
   resetTest();
+});
+
+
+/* Keep the result screen clean: no "Test Complete!" message. */
+document.addEventListener("DOMContentLoaded", () => {
+  const hideCompletionMessage = () => {
+    document.querySelectorAll("h1,h2,h3,h4,h5,h6,p,div,span").forEach(el => {
+      const text = el.textContent.trim();
+      if (text === "Test Complete!" || text === "Keep practicing and try to beat your best score.") {
+        const parent = el.parentElement;
+        if (parent && parent.textContent.includes("Test Complete!")) {
+          parent.style.display = "none";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    });
+  };
+
+  hideCompletionMessage();
+  const observer = new MutationObserver(hideCompletionMessage);
+  observer.observe(document.body, { childList: true, subtree: true });
 });

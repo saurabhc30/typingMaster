@@ -9,7 +9,10 @@
     crossorigin="anonymous"></script>
 
   <link rel="icon" type="image/x-icon" href="icon.ico">
-  <title>TypingMeter</title>
+  <title>TypingMeter – Free Online Typing Speed Test</title>
+  <meta name="description"
+    content="TypingMeter is a free online typing speed test for practicing typing speed, accuracy, WPM, and consistency.">
+  <meta name="robots" content="index,follow">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,13 +24,14 @@
     <!-- Header -->
     <div class="header">
 
-      <div class="logo" aria-label="TypingMeter">
+      <a href="index.html" class="logo" aria-label="TypingMeter Home">
         <img src="assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
         <span class="site-name">TypingMeter</span>
-      </div>
+      </a>
 
       <div class="best">
-        <img src="assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal best:</span> <strong id="personalBest">35 WPM</strong>
+        <img src="assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal best:</span>
+        <strong id="personalBest">35 WPM</strong>
       </div>
 
     </div>
@@ -98,23 +102,6 @@
     <div class="text-area blur" id="text" tabindex="0"></div>
   </div>
 
-  <footer class="site-footer hide-during-typing" aria-label="Typing test tools">
-    <div class="footer-tools">
-      <label class="footer-theme" title="Theme">
-        <span class="footer-label">Theme</span>
-        <select id="footerThemeSelect" aria-label="Theme">
-          <option value="dark">Dark</option>
-          <option value="midnight">Midnight Blue</option>
-          <option value="light">Light</option>
-        </select>
-      </label>
-      <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
-      <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
-      <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
-        <span>Shortcuts</span></button>
-    </div>
-  </footer>
-
   <div class="restart-wrapper">
     <button class="restart-btn-main" id="restartMainBtn">
       Restart Test ↻
@@ -133,17 +120,6 @@
 
   <!-- Result Screen -->
   <div class="result-screen" id="resultScreen">
-
-    <div class="result-icon">
-      <img src="assets/images/icon-completed.svg">
-    </div>
-
-    <h1>Baseline Established!</h1>
-
-    <p class="result-sub">
-      You've set the bar. Now the real challenge begins—time to beat it.
-    </p>
-
     <div class="result-graph-wrap">
       <div class="result-graph-header">
         <div>
@@ -200,6 +176,144 @@
 
 
 
+
+  <!-- Footer: information links on the left, controls/settings on the right -->
+
+  <!-- One-page information sections. These stay in index.html. -->
+  <section class="info-panel" id="aboutPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">ABOUT</span>
+          <h2>About TypingMeter</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <p>TypingMeter is a free online typing practice tool designed to make speed and accuracy testing simple and
+        distraction-free.</p>
+      <h3>What TypingMeter provides</h3>
+      <ul>
+        <li>Timed typing tests with different lengths.</li>
+        <li>Word-count and passage practice.</li>
+        <li>WPM, accuracy, errors, and consistency results.</li>
+        <li>Local test history and personal-best tracking on your device.</li>
+      </ul>
+      <p>Our goal is to help students, professionals, writers, developers, and everyday users practice typing and
+        measure their progress.</p>
+    </div>
+  </section>
+
+  <section class="info-panel" id="wpmPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">TYPING GUIDE</span>
+          <h2>What Is WPM?</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <p>WPM means <strong>words per minute</strong>. It is a common way to describe typing speed.</p>
+      <h3>How WPM is calculated</h3>
+      <p>A common typing-test convention treats five typed characters, including spaces, as one word.</p>
+      <p><strong>WPM = typed characters ÷ 5 ÷ minutes</strong></p>
+      <h3>Why accuracy matters</h3>
+      <p>Speed alone does not tell the whole story. A useful typing result also considers mistakes and accuracy.</p>
+      <h3>How to improve your WPM</h3>
+      <ol>
+        <li>Practice regularly.</li>
+        <li>Focus on accuracy before maximum speed.</li>
+        <li>Learn consistent finger positioning.</li>
+        <li>Keep a steady typing rhythm.</li>
+        <li>Track progress over multiple tests.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="info-panel" id="tipsPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">PRACTICE</span>
+          <h2>Typing Tips</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <h3>1. Prioritize accuracy</h3>
+      <p>Typing fewer errors at a steady pace is generally more useful than typing very quickly with frequent
+        corrections.</p>
+      <h3>2. Practice touch typing</h3>
+      <p>Learn where keys are located and use consistent finger positions to reduce unnecessary hand movement.</p>
+      <h3>3. Keep a steady rhythm</h3>
+      <p>A consistent pace can help you avoid repeated pauses and sudden bursts of speed.</p>
+      <h3>4. Review your mistakes</h3>
+      <p>Notice which letters, combinations, or words cause repeated errors and give those areas extra practice.</p>
+      <h3>5. Practice consistently</h3>
+      <p>Short, regular sessions are easier to maintain than occasional long sessions. Use different passages so your
+        practice remains varied.</p>
+    </div>
+  </section>
+
+  <section class="info-panel" id="contactPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">CONTACT</span>
+          <h2>Contact TypingMeter</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <p>For questions, feedback, bug reports, accessibility issues, or suggestions about TypingMeter, contact us using
+        the email address below.</p>
+      <p class="contact-email"><a href="mailto:sourabhc.0102@gmail.com">sourabhc.0102@gmail.com</a></p>
+      <p>Please do not send passwords, payment information, bank details, or other sensitive information by email.</p>
+    </div>
+  </section>
+
+  <section class="info-panel" id="termsPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">TERMS</span>
+          <h2>Terms of Use</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <p><strong>Last updated: September 3, 2026</strong></p>
+      <h3>Using TypingMeter</h3>
+      <p>You may use TypingMeter for lawful personal, educational, and professional typing practice. Do not misuse the
+        website, interfere with its operation, attempt unauthorized access, or use automated activity that harms the
+        service.</p>
+      <h3>Typing results</h3>
+      <p>WPM, accuracy, errors, and related results are provided for practice and informational purposes. Results can
+        vary with the text, device, keyboard, browser, and other conditions.</p>
+      <h3>Third-party services</h3>
+      <p>The website may use third-party services such as hosting, advertising, analytics, or external links. Those
+        services may have their own terms and policies.</p>
+      <h3>Availability</h3>
+      <p>TypingMeter may be updated, changed, temporarily unavailable, or discontinued as needed for maintenance,
+        security, or improvements.</p>
+    </div>
+  </section>
+
+  <section class="info-panel" id="privacyPanel" aria-hidden="true">
+    <div class="info-panel-card">
+      <div class="info-panel-head">
+        <div><span class="info-kicker">PRIVACY</span>
+          <h2>Privacy Policy</h2>
+        </div><button type="button" class="info-close" data-info-close>×</button>
+      </div>
+      <p><strong>Last updated: September 3, 2026</strong></p>
+      <p>TypingMeter is designed to minimize the information it collects. Typing preferences, test history, and
+        personal-best information may be stored locally in your browser to provide site features.</p>
+      <h3>Information and financial data</h3>
+      <p>TypingMeter does not request bank account numbers, payment-card details, UPI IDs, or other financial
+        information for the typing-test features.</p>
+      <h3>Cookies and advertising</h3>
+      <p>TypingMeter may use cookies or similar technologies through advertising and measurement services. Third-party
+        advertising vendors, including Google, may use cookies to serve or measure ads according to their own policies
+        and applicable settings.</p>
+      <p>For information about Google's advertising controls, visit <a href="https://adssettings.google.com/"
+          target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</p>
+      <h3>Local storage</h3>
+      <p>Some settings, test history, and personal-best data can be stored in your browser's local storage. Clearing
+        site data can remove locally stored information.</p>
+      <h3>Security</h3>
+      <p>Reasonable measures are used to protect the website and its services, but no internet system can guarantee
+        complete security.</p>
+      <h3>Changes to this policy</h3>
+      <p>This policy may be updated when site features, services, or legal requirements change.</p>
+    </div>
+  </section>
 
   <!-- Settings / Statistics / Shortcuts panels -->
   <div class="app-modal" id="customModal" aria-hidden="true">
@@ -281,6 +395,34 @@
   </div>
   <script src="passages.js"></script>
   <script src="script.js"></script>
+
+  <footer class="site-footer" aria-label="TypingMeter footer">
+    <div class="footer-info-links" aria-label="Information pages">
+      <button type="button" class="info-footer-link" data-info-open="aboutPanel">About</button>
+      <button type="button" class="info-footer-link" data-info-open="wpmPanel">WPM Guide</button>
+      <button type="button" class="info-footer-link" data-info-open="tipsPanel">Typing Tips</button>
+      <button type="button" class="info-footer-link" data-info-open="contactPanel">Contact</button>
+      <button type="button" class="info-footer-link" data-info-open="termsPanel">Terms</button>
+      <button type="button" class="info-footer-link" data-info-open="privacyPanel">Privacy</button>
+    </div>
+
+    <div class="footer-settings-area" aria-label="Site controls">
+      <label class="footer-theme" title="Theme">
+        <span class="footer-label">Theme</span>
+        <select id="footerThemeSelect" aria-label="Theme">
+          <option value="dark">Dark</option>
+          <option value="midnight">Midnight Blue</option>
+          <option value="light">Light</option>
+        </select>
+      </label>
+      <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
+      <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
+      <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
+        <span>Shortcuts</span></button>
+    </div>
+
+    <div class="footer-copy">© 2026 TypingMeter. Free online typing practice.</div>
+  </footer>
 </body>
 
 </html>

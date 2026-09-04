@@ -53,6 +53,9 @@ body {
   display: flex;
   gap: 9px;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .site-logo {
@@ -83,6 +86,7 @@ body {
   width: 15px;
   height: 15px;
 }
+
 /* ================= STATS BAR ================= */
 
 .stats {
@@ -898,6 +902,10 @@ body.typing-cursor-hidden * {
 .history-toggle:hover {
   border-color: #2196f3;
   color: #fff;
+}
+
+body.result-visible #minimalStatus {
+  display: none !important;
 }
 
 @media (max-width: 600px) {
@@ -2377,4 +2385,442 @@ body.theme-midnight .site-name {
 
 body.theme-light .site-name {
   color: #171717;
+}
+
+/* =========================================================
+   FINAL FOOTER LAYOUT
+   Information links stay on the left; settings/tools stay on
+   the right. Footer is after the test/result area, never directly
+   between the passage and Restart/History.
+   ========================================================= */
+.site-footer {
+  width: min(100%, 1200px);
+  margin: 34px auto 0;
+  padding: 18px 28px 24px;
+  border-top: 1px solid #252525;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "info settings"
+    "copy copy";
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.footer-info-links {
+  grid-area: info;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.info-footer-link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 2px 0;
+  color: #777;
+  font: 500 12px Sora, Arial, sans-serif;
+  cursor: pointer;
+  transition: color .18s ease;
+}
+
+.info-footer-link:hover,
+.info-footer-link:focus-visible {
+  color: #c9c9c9;
+  outline: none;
+}
+
+.footer-settings-area {
+  grid-area: settings;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  grid-area: copy;
+  margin: 2px 0 0;
+  color: #555;
+  font: 500 10px Sora, Arial, sans-serif;
+}
+
+/* Result state: restart/history disappear, footer remains at the bottom. */
+body.result-visible .restart-wrapper {
+  display: none !important;
+}
+
+/* Keep the footer hidden in the clean typing view, but reveal it with
+   the existing mouse-movement control reveal behavior. */
+body.typing-active .site-footer {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.typing-active.typing-controls-visible .site-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body:not(.typing-active) .site-footer {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding-left: 14px;
+    padding-right: 14px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "info"
+      "settings"
+      "copy";
+  }
+
+  .footer-info-links {
+    justify-content: center;
+  }
+
+  .footer-settings-area {
+    justify-content: center;
+  }
+
+  .footer-copy {
+    text-align: center;
+  }
+}
+
+/* One-page information modal panels */
+.info-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, .72);
+  backdrop-filter: blur(5px);
+}
+
+.info-panel.show {
+  display: flex;
+}
+
+.info-panel-card {
+  width: min(760px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 28px 30px;
+  border: 1px solid #2b2b2b;
+  border-radius: 14px;
+  background: #121212;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .48);
+}
+
+.info-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.info-kicker {
+  color: #777;
+  font: 700 10px Sora, Arial, sans-serif;
+  letter-spacing: .14em;
+}
+
+.info-panel-card h2 {
+  margin: 5px 0 0;
+  color: #eee;
+  font: 700 27px/1.2 Sora, Arial, sans-serif;
+}
+
+.info-panel-card h3 {
+  margin: 24px 0 7px;
+  color: #ddd;
+  font: 650 15px/1.35 Sora, Arial, sans-serif;
+}
+
+.info-panel-card p,
+.info-panel-card li {
+  color: #999;
+  font: 400 13px/1.8 Sora, Arial, sans-serif;
+}
+
+.info-panel-card ul,
+.info-panel-card ol {
+  padding-left: 22px;
+}
+
+.info-panel-card a {
+  color: #54a9ff;
+}
+
+.info-close {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid #2b2b2b;
+  border-radius: 8px;
+  background: transparent;
+  color: #999;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.info-close:hover {
+  color: #fff;
+  border-color: #444;
+}
+
+body.info-panel-open {
+  overflow: hidden;
+}
+
+body.theme-midnight .info-panel-card {
+  background: #0b1624;
+  border-color: #203852;
+}
+
+body.theme-light .info-panel-card {
+  background: #fff;
+  border-color: #d7dde4;
+}
+
+body.theme-light .info-panel-card h2,
+body.theme-light .info-panel-card h3 {
+  color: #18212b;
+}
+
+body.theme-light .info-panel-card p,
+body.theme-light .info-panel-card li {
+  color: #596674;
+}
+
+@media (max-width: 600px) {
+  .info-panel {
+    padding: 14px;
+  }
+
+  .info-panel-card {
+    max-height: calc(100vh - 28px);
+    padding: 22px 18px;
+  }
+
+  .info-panel-card h2 {
+    font-size: 23px;
+  }
+}
+
+
+/* Settings button lives on the RIGHT side of the footer.
+   Settings itself opens as a CENTER modal, exactly like Statistics. */
+#settingsModal {
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 28px !important;
+}
+
+#settingsModal .modal-card {
+  width: min(760px, 94vw);
+  height: auto;
+  max-height: min(760px, calc(100vh - 56px));
+  border-radius: 14px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  #settingsModal {
+    padding: 14px !important;
+  }
+
+  #settingsModal .modal-card {
+    width: min(420px, 94vw);
+    max-height: calc(100vh - 28px);
+    border-radius: 12px;
+  }
+}
+
+
+/* FINAL LAYOUT FIX: footer is at the bottom of the document, never directly
+   underneath the restart/history controls. */
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body>main {
+  flex: 1 0 auto;
+}
+
+body>.site-footer {
+  flex: 0 0 auto;
+  position: static !important;
+  inset: auto !important;
+  width: 100%;
+  margin-top: auto !important;
+  clear: both;
+}
+
+/* Result screen remains above the footer. */
+body.result-visible>main {
+  flex: 1 0 auto;
+}
+
+/* The footer should not be visually attached to Restart/History. */
+.restart-wrapper {
+  margin-bottom: 90px !important;
+}
+
+/* The old completion heading/subtitle are intentionally removed. */
+.result-complete-message,
+.result-title,
+.result-subtitle {
+  display: none !important;
+}
+
+
+/* FINAL POSITION FIX
+   Keep the header, controls, timer and typing area anchored at the same
+   top position before and after typing starts. The footer stays at the
+   bottom because the container fills the available page height.
+*/
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body>.container {
+  width: 100%;
+  flex: 1 0 auto;
+  margin: 0 auto !important;
+}
+
+/* Do not let focus mode change the vertical position of the top UI. */
+body.typing-active>.container {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Result screen keeps its full result panel; only the requested text
+   heading/subtitle are removed. */
+.result-screen {
+  display: none;
+}
+
+body.result-visible .result-screen {
+  display: block !important;
+}
+
+body.result-visible>.container {
+  flex: 1 0 auto;
+}
+
+/* =========================================================
+   FINAL STABLE PAGE FLOW
+   - The top container never vertically centers/grows when typing starts.
+   - Typing area remains in the same position before/after focus.
+   - Restart/History stay immediately below the typing area.
+   - Footer stays at the bottom of the page, after restart/result content.
+   ========================================================= */
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* IMPORTANT: do not use margin:auto or flex-grow on the top container. */
+body>.container {
+  width: 100%;
+  max-width: 1200px;
+  flex: 0 0 auto !important;
+  margin: 0 auto !important;
+}
+
+/* These elements must remain normal-flow blocks. */
+body>.typing-box,
+body>.restart-wrapper,
+body>.result-screen {
+  flex: 0 0 auto;
+}
+
+/* Footer is the final normal-flow element and only consumes leftover
+   viewport space when the page content is shorter than the viewport. */
+body>.site-footer {
+  flex: 0 0 auto !important;
+  position: static !important;
+  inset: auto !important;
+  width: 100%;
+  max-width: none;
+  margin-top: auto !important;
+  clear: both;
+}
+
+/* Never let focus mode alter the vertical position of the top UI. */
+body.typing-active>.container {
+  flex: 0 0 auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Result panel is still fully displayed by JS when the test ends. */
+.result-screen {
+  display: none;
+}
+
+body.result-visible .result-screen {
+  display: block !important;
+}
+
+/* Restart/history disappear only on the result screen. */
+body.result-visible .restart-wrapper {
+  display: none !important;
+}
+
+/* No automatic removal of the result graph/stat cards. */
+.result-graph-wrap,
+.result-stats,
+.retry-btn,
+.result-icon {
+  visibility: visible;
+}
+
+@media (max-width: 600px) {
+  body>.container {
+    width: 100%;
+  }
+}
+
+.footer-copy {
+  width: 100%;
+  text-align: center;
+  margin: 10px auto 0;
 }

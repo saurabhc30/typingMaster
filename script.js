@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const SETTINGS_KEY = "typing_test_settings_v2";
   const DEFAULT_PB = 35;
 
-  const keySound = new Audio("typing.mp3");
+  const keySound = new Audio("/typing.mp3");
   keySound.volume = 0.4;
   keySound.preload = "auto";
 
@@ -315,8 +315,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getTypedWordCount() {
     if (!currentText || charIndex <= 0) return 0;
-
-    // Count the word currently being typed too.
     const typedText = currentText.slice(0, charIndex).trim();
     return typedText ? typedText.split(/\s+/).length : 0;
   }
@@ -329,11 +327,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Word counter is available in ALL modes.
     if (liveWordsEl) {
       liveWordsEl.hidden = false;
       const typedWords = getTypedWordCount();
-
       if (mode === "words") {
         liveWordsEl.innerText = `${typedWords} / ${wordLimit} ${wordLimit === 1 ? "word" : "words"}`;
       } else {
@@ -344,14 +340,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateLiveWordsDisplay() {
     if (!liveWordsEl) return;
-
     const typedWords = getTypedWordCount();
-
-    // Words mode shows progress toward the selected limit.
     if (mode === "words") {
       liveWordsEl.innerText = `${typedWords} / ${wordLimit} ${wordLimit === 1 ? "word" : "words"}`;
     } else {
-      // Timed + Passage modes show total words typed.
       liveWordsEl.innerText = `${typedWords} ${typedWords === 1 ? "word" : "words"}`;
     }
   }
@@ -521,11 +513,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const topSpeed = Math.max(wpm, ...graphSamples.map(Number));
     if (topSpeedEl) topSpeedEl.innerText = `${topSpeed} WPM`;
     drawGraph(graphSamples);
-
-    const title = document.querySelector(".result-screen h1");
-    const sub = document.querySelector(".result-sub");
-    if (title) title.innerText = "";
-    if (sub) sub.innerText = "";
 
     saveHistory({
       wpm, rawWpm, accuracy, errors, consistency, characters: totalTyped,
@@ -850,7 +837,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   window.addEventListener("resize", () => { if (document.getElementById("statsModal")?.classList.contains("show")) drawStatsGraph() });
   if (commandHint) setTimeout(() => commandHint.remove(), 5000);
+
+  function applySEOPageConfig() {
+    const cfg = window.TypingMeterSEOConfig || {};
+    if (cfg.difficulty) difficulty = ["easy", "medium", "hard"].includes(cfg.difficulty) ? cfg.difficulty : difficulty;
+    if (cfg.mode) mode = ["timed", "words", "passage"].includes(cfg.mode) ? cfg.mode : mode;
+    if (Number.isFinite(Number(cfg.time)) && Number(cfg.time) >= 5) selectedTime = Number(cfg.time);
+    if (Number.isFinite(Number(cfg.words)) && Number(cfg.words) >= 1) wordLimit = Number(cfg.words);
+    if (typeof cfg.punctuation === "boolean" && punctuationToggle) punctuationToggle.checked = cfg.punctuation;
+    if (typeof cfg.numbers === "boolean" && numbersToggle) numbersToggle.checked = cfg.numbers;
+  }
+
   loadUISettings();
+  applySEOPageConfig();
 
   textBox.addEventListener("focus", () => {
     if (finished) return;

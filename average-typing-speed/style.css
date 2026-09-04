@@ -2,19 +2,19 @@
 
 @font-face {
   font-family: "Sora";
-  src: url("assets/fonts/Sora/static/Sora-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Sora/static/Sora-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Sora";
-  src: url("assets/fonts/Sora/static/Sora-SemiBold.ttf") format("truetype");
+  src: url("../assets/fonts/Sora/static/Sora-SemiBold.ttf") format("truetype");
   font-weight: 600;
 }
 
 @font-face {
   font-family: "Sora";
-  src: url("assets/fonts/Sora/static/Sora-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Sora/static/Sora-Bold.ttf") format("truetype");
   font-weight: 700;
 }
 
@@ -452,7 +452,7 @@ body.typing-cursor-hidden * {
 /* Mobile: show only logo-small */
 @media (max-width: 768px) {
   .site-logo {
-    content: url("logo-small.svg");
+    content: url("../assets/images/logo-small.svg");
     width: 36px;
     height: 36px;
     object-fit: contain;
@@ -465,7 +465,7 @@ body.typing-cursor-hidden * {
   }
 
   .best-icon {
-    content: url("icon-personal-best.svg");
+    content: url("../assets/images/icon-personal-best.svg");
     width: 15px;
     height: 15px;
     object-fit: contain;
@@ -2751,7 +2751,7 @@ body {
 }
 
 /* IMPORTANT: do not use margin:auto or flex-grow on the top container. */
-body>.container {
+body > .container {
   width: 100%;
   max-width: 1200px;
   flex: 0 0 auto !important;
@@ -2759,15 +2759,15 @@ body>.container {
 }
 
 /* These elements must remain normal-flow blocks. */
-body>.typing-box,
-body>.restart-wrapper,
-body>.result-screen {
+body > .typing-box,
+body > .restart-wrapper,
+body > .result-screen {
   flex: 0 0 auto;
 }
 
 /* Footer is the final normal-flow element and only consumes leftover
    viewport space when the page content is shorter than the viewport. */
-body>.site-footer {
+body > .site-footer {
   flex: 0 0 auto !important;
   position: static !important;
   inset: auto !important;
@@ -2778,7 +2778,7 @@ body>.site-footer {
 }
 
 /* Never let focus mode alter the vertical position of the top UI. */
-body.typing-active>.container {
+body.typing-active > .container {
   flex: 0 0 auto !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -2807,7 +2807,7 @@ body.result-visible .restart-wrapper {
 }
 
 @media (max-width: 600px) {
-  body>.container {
+  body > .container {
     width: 100%;
   }
 }
@@ -2819,13 +2819,11 @@ body.result-visible .restart-wrapper {
   margin: 18px auto 14px;
   text-align: center;
 }
-
 .seo-hero h1 {
   margin: 0 0 8px;
   font-size: clamp(24px, 4vw, 34px);
   line-height: 1.2;
 }
-
 .seo-hero p {
   max-width: 760px;
   margin: 0 auto 14px;
@@ -2833,17 +2831,13 @@ body.result-visible .restart-wrapper {
   line-height: 1.65;
   font-size: 14px;
 }
-
-.seo-quick-links,
-.seo-link-grid {
+.seo-quick-links, .seo-link-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
 }
-
-.seo-quick-links a,
-.seo-link-grid a {
+.seo-quick-links a, .seo-link-grid a {
   color: #8fbfff;
   text-decoration: none;
   font-size: 13px;
@@ -2851,12 +2845,7 @@ body.result-visible .restart-wrapper {
   border: 1px solid #252525;
   border-radius: 7px;
 }
-
-.seo-quick-links a:hover,
-.seo-link-grid a:hover {
-  border-color: #2196f3;
-}
-
+.seo-quick-links a:hover, .seo-link-grid a:hover { border-color: #2196f3; }
 .seo-content {
   width: min(100% - 40px, 980px);
   margin: 54px auto 10px;
@@ -2865,211 +2854,157 @@ body.result-visible .restart-wrapper {
   color: #aaa;
   line-height: 1.7;
 }
-
-.seo-content h2 {
-  color: #eee;
-  font-size: 22px;
-  margin: 0 0 10px;
-}
-
-.seo-content h2:not(:first-child) {
-  margin-top: 30px;
-}
-
-.seo-content h3 {
-  color: #ddd;
-  font-size: 16px;
-  margin: 0 0 7px;
-}
-
-.seo-content p {
-  margin: 0 0 12px;
-  font-size: 14px;
-}
-
-.seo-content-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.seo-content-grid article {
-  min-width: 0;
-}
-
-.seo-faq details {
-  border-top: 1px solid #242424;
-  padding: 12px 0;
-}
-
-.seo-faq details:last-child {
-  border-bottom: 1px solid #242424;
-}
-
-.seo-faq summary {
-  cursor: pointer;
-  color: #ddd;
-  font-weight: 600;
-}
-
-.seo-faq p {
-  margin-top: 8px;
-}
-
+.seo-content h2 { color: #eee; font-size: 22px; margin: 0 0 10px; }
+.seo-content h2:not(:first-child) { margin-top: 30px; }
+.seo-content h3 { color: #ddd; font-size: 16px; margin: 0 0 7px; }
+.seo-content p { margin: 0 0 12px; font-size: 14px; }
+.seo-content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.seo-content-grid article { min-width: 0; }
+.seo-faq details { border-top: 1px solid #242424; padding: 12px 0; }
+.seo-faq details:last-child { border-bottom: 1px solid #242424; }
+.seo-faq summary { cursor: pointer; color: #ddd; font-weight: 600; }
+.seo-faq p { margin-top: 8px; }
 @media (max-width: 700px) {
-  .seo-content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .seo-content {
-    width: min(100% - 28px, 980px);
-  }
+  .seo-content-grid { grid-template-columns: 1fr; }
+  .seo-content { width: min(100% - 28px, 980px); }
 }
 
 
-.seo-landing {
-  width: min(100% - 32px, 980px);
-  margin: 18px auto 0;
+.seo-landing { width:min(100% - 32px, 980px); margin:18px auto 0; }
+.seo-landing .landing-header { text-align:center; margin-bottom:18px; }
+.seo-landing h1 { font-size:clamp(25px,4vw,36px); margin:0 0 9px; color:#eee; }
+.seo-landing .landing-lead { max-width:760px; margin:0 auto; color:#999; line-height:1.7; font-size:14px; }
+.seo-landing .landing-links { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:15px 0 22px; }
+.seo-landing .landing-links a { color:#8fbfff; text-decoration:none; font-size:13px; padding:6px 9px; border:1px solid #252525; border-radius:7px; }
+.seo-landing .landing-links a:hover { border-color:#2196f3; }
+.landing-info { margin:28px 0 45px; border-top:1px solid #202020; padding-top:25px; }
+.landing-info h2 { color:#eee; font-size:21px; margin:0 0 9px; }
+.landing-info h3 { color:#ddd; font-size:16px; margin:22px 0 6px; }
+.landing-info p, .landing-info li { color:#aaa; font-size:14px; line-height:1.75; }
+.landing-info ul, .landing-info ol { padding-left:22px; }
+.tool-extra, .article-extra { margin:28px 0 0; padding-top:24px; border-top:1px solid #202020; }
+.calc-box { display:grid; grid-template-columns:1fr 1fr auto; gap:10px; align-items:end; }
+.calc-box label { display:flex; flex-direction:column; gap:6px; color:#aaa; font-size:13px; }
+.calc-box input { background:#151515; color:#eee; border:1px solid #292929; border-radius:7px; padding:10px; }
+.calc-box button { border:1px solid #2196f3; background:transparent; color:#8fc2ff; padding:10px 14px; border-radius:7px; cursor:pointer; }
+.calc-box p { grid-column:1/-1; color:#aaa; }
+.wpm-table { width:100%; border-collapse:collapse; margin:12px 0; }
+.wpm-table th,.wpm-table td { border:1px solid #292929; padding:10px; text-align:left; color:#aaa; }
+.wpm-table th { color:#ddd; }
+@media(max-width:650px){ .calc-box{grid-template-columns:1fr;} .calc-box p{grid-column:auto;} }
+
+
+/* =========================================================
+   TYPINGMETER SPACING FIX
+   Preserve the clean typing view without causing the SEO content
+   below it to jump upward when Restart/History are hidden.
+   ========================================================= */
+
+/* Keep a stable vertical slot for Restart + History during typing.
+   The controls become invisible, but their space remains reserved. */
+body.typing-active .restart-wrapper {
+  display: block !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 78px !important;
+  min-height: 78px !important;
+  margin-top: 30px !important;
+  margin-bottom: 90px !important;
+  overflow: hidden !important;
 }
 
-.seo-landing .landing-header {
-  text-align: center;
-  margin-bottom: 18px;
+/* Restore normal controls outside an active test. */
+body:not(.typing-active):not(.result-visible) .restart-wrapper {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
 }
 
-.seo-landing h1 {
-  font-size: clamp(25px, 4vw, 36px);
-  margin: 0 0 9px;
-  color: #eee;
+/* Result screen controls remain hidden without affecting the result panel. */
+body.result-visible .restart-wrapper {
+  display: none !important;
 }
 
-.seo-landing .landing-lead {
-  max-width: 760px;
-  margin: 0 auto;
-  color: #999;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.seo-landing .landing-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 15px 0 22px;
-}
-
-.seo-landing .landing-links a {
-  color: #8fbfff;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 6px 9px;
-  border: 1px solid #252525;
-  border-radius: 7px;
-}
-
-.seo-landing .landing-links a:hover {
-  border-color: #2196f3;
-}
-
+/* ---------------------------------------------------------
+   SEO content: create clear breathing room from the test and
+   between headings, paragraphs, related links and FAQ.
+   --------------------------------------------------------- */
 .landing-info {
-  margin: 28px 0 45px;
+  margin: 72px 0 64px !important;
+  padding: 36px 0 34px !important;
   border-top: 1px solid #202020;
-  padding-top: 25px;
 }
 
 .landing-info h2 {
-  color: #eee;
-  font-size: 21px;
-  margin: 0 0 9px;
+  margin: 0 0 16px !important;
+  line-height: 1.3;
+}
+
+.landing-info h2:not(:first-child) {
+  margin-top: 42px !important;
 }
 
 .landing-info h3 {
-  color: #ddd;
-  font-size: 16px;
-  margin: 22px 0 6px;
+  margin: 30px 0 10px !important;
+  line-height: 1.4;
 }
 
 .landing-info p,
 .landing-info li {
-  color: #aaa;
-  font-size: 14px;
-  line-height: 1.75;
+  margin-top: 0;
+  margin-bottom: 20px !important;
+  line-height: 1.8 !important;
 }
 
-.landing-info ul,
-.landing-info ol {
-  padding-left: 22px;
+.landing-info .seo-link-grid {
+  margin: 18px 0 8px !important;
+  gap: 10px !important;
 }
 
-.tool-extra,
-.article-extra {
-  margin: 28px 0 0;
-  padding-top: 24px;
-  border-top: 1px solid #202020;
+.landing-info .seo-link-grid a {
+  line-height: 1.4;
 }
 
-.calc-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 10px;
-  align-items: end;
+.landing-info .seo-faq {
+  margin-top: 14px;
 }
 
-.calc-box label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  color: #aaa;
-  font-size: 13px;
+.landing-info .seo-faq details {
+  padding: 17px 0 !important;
 }
 
-.calc-box input {
-  background: #151515;
-  color: #eee;
-  border: 1px solid #292929;
-  border-radius: 7px;
-  padding: 10px;
+.landing-info .seo-faq summary {
+  line-height: 1.5;
 }
 
-.calc-box button {
-  border: 1px solid #2196f3;
-  background: transparent;
-  color: #8fc2ff;
-  padding: 10px 14px;
-  border-radius: 7px;
-  cursor: pointer;
+.landing-info .seo-faq p {
+  margin: 12px 0 2px !important;
+  padding-left: 20px;
 }
 
-.calc-box p {
-  grid-column: 1/-1;
-  color: #aaa;
-}
-
-.wpm-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0;
-}
-
-.wpm-table th,
-.wpm-table td {
-  border: 1px solid #292929;
-  padding: 10px;
-  text-align: left;
-  color: #aaa;
-}
-
-.wpm-table th {
-  color: #ddd;
-}
-
-@media(max-width:650px) {
-  .calc-box {
-    grid-template-columns: 1fr;
+/* On small screens retain generous but compact spacing. */
+@media (max-width: 600px) {
+  body.typing-active .restart-wrapper {
+    height: 68px !important;
+    min-height: 68px !important;
+    margin-top: 24px !important;
+    margin-bottom: 64px !important;
   }
 
-  .calc-box p {
-    grid-column: auto;
+  .landing-info {
+    margin: 58px 0 48px !important;
+    padding: 30px 0 26px !important;
+  }
+
+  .landing-info h2:not(:first-child) {
+    margin-top: 34px !important;
+  }
+
+  .landing-info h3 {
+    margin-top: 26px !important;
   }
 }

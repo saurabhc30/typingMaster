@@ -9,6 +9,7 @@ const MAX_PLAYERS = 10;
 function json(payload) { return JSON.stringify(payload); }
 function safeName(name) { return String(name || "Player").replace(/\s+/g, " ").trim().slice(0, 20) || "Player"; }
 function safeCount(value) { const n = Number(value); return Number.isFinite(n) ? Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, Math.floor(n))) : MIN_PLAYERS; }
+function randomRoomCode() { const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let out = ""; for (let i = 0; i < 6; i++) out += chars[Math.floor(Math.random() * chars.length)]; return out; }
 function send(ws, payload) { try { if (ws.readyState === WebSocket.OPEN) { ws.send(json(payload)); return true; } } catch (_) { } return false; }
 
 export default {
@@ -85,6 +86,7 @@ export class Matchmaker extends DurableObject {
     if (!hostPeerId) return false;
 
     const matchId = crypto.randomUUID();
+    const roomCode = randomRoomCode();
     const peerIds = group.map(socket => String((socket.deserializeAttachment() || {}).peerId || "").trim());
 
     // Reserve every socket before sending any notification.
@@ -111,6 +113,7 @@ export class Matchmaker extends DurableObject {
         playerCount,
         name: d.name,
         matchId,
+        roomCode,
         peerIds
       });
       if (!ok) {

@@ -1,88 +1,146 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Speed Rush Multiplayer – Typing Speed Competition | TypingMeter</title>
-<meta name="description" content="Play Speed Rush multiplayer on TypingMeter. Compete head-to-head for 30, 60, or 120 seconds, chase the highest WPM, and dominate the live leaderboard.">
-<link rel="canonical" href="https://typingmeter.vercel.app/games/speed-rush/">
-<link rel="stylesheet" href="/games/games.css?v=20260906">
-<link rel="stylesheet" href="/games/speed-rush/rush.css?v=20260906-5">
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-<script src="/games/typing-race/matchmaking-config.js?v=20260906-2"></script>
-<script src="/passages.js?v=20260906"></script>
-<script type="application/ld+json">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Speed Rush Multiplayer – Typing Speed Competition | TypingMeter</title>
+  <meta name="description"
+    content="Play Speed Rush multiplayer on TypingMeter. Compete head-to-head for 30, 60, or 120 seconds, chase the highest WPM, and dominate the live leaderboard.">
+  <link rel="canonical" href="https://typingmeter.vercel.app/games/speed-rush/">
+  <link rel="stylesheet" href="/games/games.css?v=20260906">
+  <link rel="stylesheet" href="/games/speed-rush/rush.css?v=20260906-5">
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="/games/typing-race/matchmaking-config.js?v=20260906-3"></script>
+  <script src="/passages.js?v=20260906"></script>
+  <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"VideoGame","name":"Speed Rush Multiplayer","url":"https://typingmeter.vercel.app/games/speed-rush/","applicationCategory":"Game","genre":"Multiplayer Typing Game","operatingSystem":"Web Browser","description":"A multiplayer typing speed competition where players compete for the highest WPM during a timed round.","publisher":{"@type":"Organization","name":"TypingMeter"}}
 </script>
 </head>
+
 <body class="games-page speed-rush-page">
-<div class="game-page-container">
-<header class="game-page-header">
-  <a class="logo" href="/" aria-label="TypingMeter Home">
-    <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
-    <span class="site-name">TypingMeter</span>
-  </a>
-  <nav class="game-breadcrumbs" aria-label="Games navigation">
-    <a href="/games/">Games</a>
-    <span aria-hidden="true">›</span>
-    <strong>Speed Rush</strong>
-  </nav>
-</header>
-<main class="rush-page">
-<section class="rush-hero"><span class="game-kicker">⚡ MULTIPLAYER SPEED BATTLE</span><h1>Speed Rush</h1><p>Compete with 2–10 players. Everyone types the same word sequence, and the highest score wins.</p></section>
+  <div class="game-page-container">
+    <header class="game-page-header">
+      <a class="logo" href="/" aria-label="TypingMeter Home">
+        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <span class="site-name">TypingMeter</span>
+      </a>
+      <nav class="game-breadcrumbs" aria-label="Games navigation">
+        <a href="/games/">Games</a>
+        <span aria-hidden="true">›</span>
+        <strong>Speed Rush</strong>
+      </nav>
+    </header>
+    <main class="rush-page">
+      <section class="rush-hero"><span class="game-kicker">⚡ MULTIPLAYER SPEED BATTLE</span>
+        <h1>Speed Rush</h1>
+        <p>Compete with 2–10 players. Everyone types the same word sequence, and the highest score wins.</p>
+      </section>
 
-<section class="rush-card">
-<div id="lobby" class="rush-panel">
-  <h2>Enter the Speed Rush</h2>
-  <label class="field-label" for="playerName">Your name</label>
-  <input id="playerName" class="rush-input" maxlength="20" autocomplete="nickname" placeholder="Player name">
-  <div class="mode-title">PLAYERS</div>
-  <div class="options player-options" id="playerOptions"><button class="option-btn active" data-players="2" type="button">2</button><button class="option-btn" data-players="3" type="button">3</button><button class="option-btn" data-players="4" type="button">4</button><button class="option-btn" data-players="5" type="button">5</button><button class="option-btn" data-players="6" type="button">6</button><button class="option-btn" data-players="7" type="button">7</button><button class="option-btn" data-players="8" type="button">8</button><button class="option-btn" data-players="9" type="button">9</button><button class="option-btn" data-players="10" type="button">10</button></div>
-  <div class="mode-title">LEVEL</div>
-  <div class="options" id="difficultyOptions"><button class="option-btn active" data-difficulty="easy" type="button">Easy</button><button class="option-btn" data-difficulty="medium" type="button">Medium</button><button class="option-btn" data-difficulty="hard" type="button">Hard</button></div>
-  <div class="mode-title">ROUND</div>
-  <div class="options" id="timeOptions"><button class="option-btn active" data-time="30" type="button">30s</button><button class="option-btn" data-time="60" type="button">60s</button><button class="option-btn" data-time="120" type="button">120s</button></div>
-  <div class="rush-actions"><button id="createBtn" class="primary-btn" type="button">Create Private Room</button><button id="quickBtn" class="secondary-btn" type="button">Quick Match</button></div>
-  <div class="join-row"><input id="roomInput" class="rush-input" maxlength="6" inputmode="text" autocomplete="off" placeholder="ROOM CODE"><button id="joinBtn" class="secondary-btn" type="button">Join Room</button></div>
-  <p id="lobbyStatus" class="rush-status">Create a room, join a room, or use Quick Match.</p>
-</div>
+      <section class="rush-card">
+        <div id="lobby" class="rush-panel">
+          <h2>Enter the Speed Rush</h2>
+          <label class="field-label" for="playerName">Your name</label>
+          <input id="playerName" class="rush-input" maxlength="20" autocomplete="nickname" placeholder="Player name">
+          <div class="mode-title">PLAYERS</div>
+          <div class="options player-options" id="playerOptions"><button class="option-btn active" data-players="2"
+              type="button">2</button><button class="option-btn" data-players="3" type="button">3</button><button
+              class="option-btn" data-players="4" type="button">4</button><button class="option-btn" data-players="5"
+              type="button">5</button><button class="option-btn" data-players="6" type="button">6</button><button
+              class="option-btn" data-players="7" type="button">7</button><button class="option-btn" data-players="8"
+              type="button">8</button><button class="option-btn" data-players="9" type="button">9</button><button
+              class="option-btn" data-players="10" type="button">10</button></div>
+          <div class="mode-title">LEVEL</div>
+          <div class="options" id="difficultyOptions"><button class="option-btn active" data-difficulty="easy"
+              type="button">Easy</button><button class="option-btn" data-difficulty="medium"
+              type="button">Medium</button><button class="option-btn" data-difficulty="hard" type="button">Hard</button>
+          </div>
+          <div class="mode-title">ROUND</div>
+          <div class="options" id="timeOptions"><button class="option-btn active" data-time="30"
+              type="button">30s</button><button class="option-btn" data-time="60" type="button">60s</button><button
+              class="option-btn" data-time="120" type="button">120s</button></div>
+          <div class="rush-actions"><button id="createBtn" class="primary-btn" type="button">Create Private
+              Room</button><button id="quickBtn" class="secondary-btn" type="button">Quick Match</button></div>
+          <div class="join-row"><input id="roomInput" class="rush-input" maxlength="6" inputmode="text"
+              autocomplete="off" placeholder="ROOM CODE"><button id="joinBtn" class="secondary-btn" type="button">Join
+              Room</button></div>
+          <p id="lobbyStatus" class="rush-status">Create a room, join a room, or use Quick Match.</p>
+        </div>
 
-<div id="waiting" class="rush-panel" hidden>
-  <div class="room-badge">ROOM <strong id="roomCode">------</strong><button id="copyBtn" class="copy-btn" type="button">Copy</button></div>
-  <h2>Waiting for players</h2><p id="waitingStatus">Share the room code with your opponents.</p>
-  <button id="cancelBtn" class="secondary-btn" type="button">Cancel</button>
-</div>
+        <div id="waiting" class="rush-panel" hidden>
+          <div class="room-badge">ROOM <strong id="roomCode">------</strong><button id="copyBtn" class="copy-btn"
+              type="button">Copy</button></div>
+          <h2>Waiting for players</h2>
+          <p id="waitingStatus">Share the room code with your opponents.</p>
+          <button id="cancelBtn" class="secondary-btn" type="button">Cancel</button>
+        </div>
 
-<div id="ready" class="rush-panel" hidden>
-  <div class="room-badge">ROOM <strong id="readyRoomCode">------</strong></div>
-  <h2>Players</h2>
-  <div id="readyPlayers" class="players-grid"></div>
-  <div class="mode-title">LEVEL</div>
-  
-  <div class="mode-title">ROUND</div><strong id="readyDuration" class="duration-value">60 seconds</strong>
-  <button id="readyBtn" class="primary-btn" type="button">I'm Ready</button>
-  <p id="readyStatus" class="rush-status">Both players must be ready.</p>
-</div>
+        <div id="ready" class="rush-panel" hidden>
+          <div class="room-badge">ROOM <strong id="readyRoomCode">------</strong></div>
+          <h2>Players</h2>
+          <div id="readyPlayers" class="players-grid"></div>
+          <div class="mode-title">LEVEL</div>
 
-<div id="battle" class="rush-panel" hidden>
-  <div class="stats-grid speed-rush-live-stats"><div class="stat"><span>TIME</span><strong id="time">30</strong></div><div class="stat"><span>SCORE</span><strong id="score">0</strong></div></div>
-  <div class="rush-track"><div id="progress" class="rush-progress"></div></div>
-  <div id="liveStatus" class="rush-status">Get ready…</div>
-  <div class="word-label">TYPE THIS WORD</div><div id="target" class="rush-word" aria-live="polite"></div>
-  <input id="input" class="rush-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the word here…" aria-label="Type the current Speed Rush word">
-  <div class="leaderboard"><div class="leaderboard-head"><span>LIVE LEADERBOARD</span><span id="leaderboardTime">--</span></div><div id="liveLeaderboard"></div></div>
-</div>
+          <div class="mode-title">ROUND</div><strong id="readyDuration" class="duration-value">60 seconds</strong>
+          <button id="readyBtn" class="primary-btn" type="button">I'm Ready</button>
+          <p id="readyStatus" class="rush-status">Both players must be ready.</p>
+        </div>
 
-<div id="result" class="rush-panel result-panel" hidden>
-  <div class="result-kicker">SPEED RUSH COMPLETE</div><h2 id="resultTitle">Round Complete</h2><p id="resultSubtitle" class="rush-status"></p>
-  <div class="result-grid"><div><span>YOUR WPM</span><strong id="finalWpm">0</strong></div><div><span>ACCURACY</span><strong id="finalAccuracy">100%</strong></div><div><span>YOUR SCORE</span><strong id="finalScore">0</strong></div><div><span>TOP OPPONENT</span><strong id="finalOpponentWpm">0</strong></div></div><div class="leaderboard result-board"><div class="leaderboard-head"><span>FINAL RANKING</span><span>2–10 PLAYERS</span></div><div id="resultLeaderboard"></div></div>
-  <div class="result-actions"><button id="rematchBtn" class="primary-btn" type="button">Rematch</button><button id="exitBtn" class="secondary-btn" type="button">Exit</button></div>
-</div>
-</section>
+        <div id="battle" class="rush-panel" hidden>
+          <div class="stats-grid speed-rush-live-stats">
+            <div class="stat"><span>TIME</span><strong id="time">30</strong></div>
+            <div class="stat"><span>SCORE</span><strong id="score">0</strong></div>
+          </div>
+          <div class="rush-track">
+            <div id="progress" class="rush-progress"></div>
+          </div>
+          <div id="liveStatus" class="rush-status">Get ready…</div>
+          <div class="word-label">TYPE THIS WORD</div>
+          <div id="target" class="rush-word" aria-live="polite"></div>
+          <input id="input" class="rush-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+            placeholder="Type the word here…" aria-label="Type the current Speed Rush word">
+          <div class="leaderboard">
+            <div class="leaderboard-head"><span>LIVE LEADERBOARD</span><span id="leaderboardTime">--</span></div>
+            <div id="liveLeaderboard"></div>
+          </div>
+        </div>
 
-<section class="rush-history"><div class="section-heading"><h2>Speed Rush</h2></div><p>Unlike Word Blitz, Speed Rush is a multiplayer word competition. Choose 2–10 players, give everyone the one word at a time, and compete for the highest WPM on the live leaderboard.</p></section>
-<section class="rush-info"><h2>How Speed Rush multiplayer works</h2><p>Create a private room for 2–10 players and share its code, or use Quick Match to find a full group. Everyone receives the same word sequence and starts together. Type one word correctly, then the next word appears immediately. Keep typing until the clock reaches zero. Players are ranked by score, with accuracy and words used as tie-breakers.</p></section>
-</main>
-</div>
-<script src="/games/speed-rush/rush.js?v=20260906-6"></script>
-</body></html>
+        <div id="result" class="rush-panel result-panel" hidden>
+          <div class="result-kicker">SPEED RUSH COMPLETE</div>
+          <h2 id="resultTitle">Round Complete</h2>
+          <p id="resultSubtitle" class="rush-status"></p>
+          <div class="result-grid">
+            <div><span>YOUR WPM</span><strong id="finalWpm">0</strong></div>
+            <div><span>ACCURACY</span><strong id="finalAccuracy">100%</strong></div>
+            <div><span>YOUR SCORE</span><strong id="finalScore">0</strong></div>
+            <div><span>TOP OPPONENT</span><strong id="finalOpponentWpm">0</strong></div>
+          </div>
+          <div class="leaderboard result-board">
+            <div class="leaderboard-head"><span>FINAL RANKING</span><span>2–10 PLAYERS</span></div>
+            <div id="resultLeaderboard"></div>
+          </div>
+          <div class="result-actions"><button id="rematchBtn" class="primary-btn" type="button">Rematch</button><button
+              id="exitBtn" class="secondary-btn" type="button">Exit</button></div>
+        </div>
+      </section>
+
+      <section class="rush-history">
+        <div class="section-heading">
+          <h2>Speed Rush</h2>
+        </div>
+        <p>Unlike Word Blitz, Speed Rush is a multiplayer word competition. Choose 2–10 players, give everyone the one
+          word at a time, and compete for the highest WPM on the live leaderboard.</p>
+      </section>
+      <section class="rush-info">
+        <h2>How Speed Rush multiplayer works</h2>
+        <p>Create a private room for 2–10 players and share its code, or use Quick Match to find a full group. Everyone
+          receives the same word sequence and starts together. Type one word correctly, then the next word appears
+          immediately. Keep typing until the clock reaches zero. Players are ranked by score, with accuracy and words
+          used as tie-breakers.</p>
+      </section>
+    </main>
+  </div>
+  <script src="/games/speed-rush/rush.js?v=20260906-7"></script>
+</body>
+
+</html>

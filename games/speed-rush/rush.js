@@ -74,7 +74,7 @@
   }
   function resetStats(){
     correctChars=0;errors=0;score=0;wordsTyped=0;attemptedWords=0;correctWords=0;currentWordIndex=0;currentWord='';localProgress={wpm:0,accuracy:0,score:0,words:0,finished:false};
-    inputEl.value='';timeEl.textContent=duration;wpmEl.textContent='0';accuracyEl.textContent='0%';scoreEl.textContent='0';progressEl.style.width='100%';
+    inputEl.value='';timeEl.textContent=duration;if(wpmEl)wpmEl.textContent='0';if(accuracyEl)accuracyEl.textContent='0%';scoreEl.textContent='0';progressEl.style.width='100%';
   }
   function metrics(now=Date.now()){
     const elapsed=Math.max(.001,(now-startAt)/1000);
@@ -87,7 +87,7 @@
     const remain=Math.max(0,endAt-now),m=metrics(now);
     localProgress={...localProgress,wpm:m.wpm,accuracy:m.accuracy,score,words:wordsTyped};
     const me=players.get(localPeerId); if(me) Object.assign(me,localProgress,{name:playerName});
-    timeEl.textContent=Math.ceil(remain/1000);leaderboardTime.textContent=Math.ceil(remain/1000)+'s';wpmEl.textContent=m.wpm;accuracyEl.textContent=m.accuracy+'%';scoreEl.textContent=score;
+    timeEl.textContent=Math.ceil(remain/1000);leaderboardTime.textContent=Math.ceil(remain/1000)+'s';if(wpmEl)wpmEl.textContent=m.wpm;if(accuracyEl)accuracyEl.textContent=m.accuracy+'%';scoreEl.textContent=score;
     progressEl.style.width=Math.max(0,remain/(duration*1000)*100)+'%';
     renderLeaderboards();
   }
@@ -396,7 +396,7 @@
   function quickMatchStart(){
     getName();isHost=false;localReady=false;finished=false;running=false;readyBtn.disabled=false;readyBtn.textContent="I'm Ready";
     const url=matchmakingUrl();if(!url){setStatus('Quick Match is not configured yet.');return}
-    quickMatch=true;cleanupPeer();show(waiting);waitingStatus.textContent=`Finding ${playerCount} players…`;setStatus(`Searching for a ${playerCount}-player Speed Rush match…`);
+    quickMatch=true;cleanupPeer();show(waiting);waitingStatus.textContent=`Finding ${playerCount} players…`;setStatus(`Searching for a ${playerCount}-player Speed Rush match…`);roomCodeEl.textContent='------';
     peer=new Peer(undefined,{debug:1});
     peer.on('connection',incoming=>{if(isHost)registerHostConnection(incoming,incoming.peer);else{try{incoming.close()}catch(_) {}}});
     peer.on('open',id=>{localPeerId=id;openMatchSocket(id)});
@@ -410,7 +410,7 @@
       let msg;try{msg=JSON.parse(event.data)}catch(_){return}
       if(msg.type==='queued'){waitingStatus.textContent=`Finding ${playerCount} players… ${msg.count||1}/${playerCount}`;return}
       if(msg.type==='match'){
-        cleanupMatchmaking();roomCode='QUICK';roomCodeEl.textContent='AUTO';playerCount=Number(msg.playerCount)||playerCount;setPlayerCount(playerCount);
+        cleanupMatchmaking();roomCode=String(msg.roomCode||msg.matchCode||'QUICK').toUpperCase();roomCodeEl.textContent=roomCode;playerCount=Number(msg.playerCount)||playerCount;setPlayerCount(playerCount);
         if(msg.role==='host'){
           isHost=true;hostPeerId=localPeerId;addPlayer(localPeerId,playerName,false);show(waiting);waitingStatus.textContent=`Match found. Connecting players… 1/${playerCount}`;
           // Guests will connect to this PeerJS id. The host remains in the
@@ -496,5 +496,5 @@
   rematchBtn.addEventListener('click',()=>{localRematch=true;rematchBtn.disabled=true;const me=players.get(localPeerId);if(me)me.rematch=true;if(isHost){broadcastRoster();if(allRematch())startRound()}else{sendTo(hostPeerId,{type:'rematch'});resultSubtitle.textContent='Waiting for everyone to choose Rematch…'}});
   exitBtn.addEventListener('click',()=>{broadcast({type:'leave'});cleanupPeer();show(lobby);setStatus('Ready for another Speed Rush.')});
 
-  setRoundDuration(DEFAULT_DURATION);setPlayerCount(DEFAULT_PLAYERS);readyYou.textContent=playerName||'Player';youNameEl.textContent=playerName||'You';show(lobby);
+  setRoundDuration(DEFAULT_DURATION);setPlayerCount(DEFAULT_PLAYERS);if(readyYou)readyYou.textContent=playerName||'Player';if(youNameEl)youNameEl.textContent=playerName||'You';show(lobby);
 })();

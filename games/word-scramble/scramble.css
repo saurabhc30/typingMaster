@@ -1,0 +1,706 @@
+.scramble-page {
+  min-width: 0;
+  overflow-x: hidden
+}
+
+.scramble-container {
+  width: min(900px, calc(100% - 24px));
+  margin: 0 auto;
+  padding: 20px 0 60px;
+  min-width: 0
+}
+
+.scramble-hero {
+  text-align: center;
+  max-width: 760px;
+  margin: 10px auto 28px
+}
+
+.scramble-hero .game-breadcrumbs {
+  justify-content: center;
+  margin-bottom: 24px
+}
+
+.scramble-hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(34px, 7vw, 54px);
+  line-height: 1.05
+}
+
+.scramble-hero p {
+  margin: 0;
+  color: #999;
+  line-height: 1.65;
+  font-size: 15px
+}
+
+.scramble-card {
+  width: 100%;
+  min-width: 0;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 20px;
+  padding: 22px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .18)
+}
+
+.scramble-topbar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px
+}
+
+.scramble-topbar>div {
+  min-width: 0;
+  background: #101010;
+  border: 1px solid #262626;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center
+}
+
+.scramble-label {
+  display: block;
+  color: #777;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 4px
+}
+
+.scramble-topbar strong {
+  display: block;
+  font-size: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.scramble-panel {
+  width: 100%;
+  min-width: 0
+}
+
+.scramble-panel h2 {
+  text-align: center;
+  margin: 8px 0 22px;
+  font-size: 24px
+}
+
+.option-group {
+  margin: 0 auto 18px;
+  max-width: 620px
+}
+
+.option-group>span {
+  display: block;
+  color: #999;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px
+}
+
+.option-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px
+}
+
+.option-btn,
+.secondary-btn,
+.history-clear {
+  min-width: 0;
+  border: 1px solid #303030;
+  background: #101010;
+  color: #ccc;
+  border-radius: 11px;
+  padding: 11px 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer
+}
+
+.option-btn.active {
+  background: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+
+.primary-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 11px;
+  background: #2196f3;
+  color: #fff;
+  padding: 13px 16px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer
+}
+
+.primary-btn:hover {
+  filter: brightness(1.08)
+}
+
+.secondary-btn {
+  width: 100%;
+  margin-top: 10px
+}
+
+.hidden {
+  display: none !important
+}
+
+.game-status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 14px;
+  min-width: 0
+}
+
+.game-status-row span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.game-status-row #difficultyBadge {
+  color: #2196f3;
+  font-weight: 800;
+  letter-spacing: 1px
+}
+
+.scrambled-wrap {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 16px;
+  padding: 22px 16px;
+  margin-bottom: 14px;
+  text-align: center
+}
+
+.small-heading {
+  display: block;
+  color: #777;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  margin-bottom: 12px
+}
+
+.word-area {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  font-size: clamp(34px, 8vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: .12em;
+  padding: 0 4px
+}
+
+.answer-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 10px;
+  width: 100%;
+  min-width: 0
+}
+
+.answer-form input {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 50px;
+  border: 1px solid #333;
+  background: #0e0e0e;
+  color: #fff;
+  border-radius: 11px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 17px;
+  outline: none
+}
+
+.answer-form input:focus {
+  border-color: #2196f3
+}
+
+.answer-form .primary-btn {
+  height: 50px
+}
+
+.feedback {
+  height: 24px;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700
+}
+
+.feedback.correct {
+  color: #6ddc8b
+}
+
+.feedback.wrong {
+  color: #ff7777
+}
+
+.live-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px
+}
+
+.live-stats span {
+  text-align: center;
+  color: #777;
+  background: #101010;
+  border-radius: 10px;
+  padding: 9px;
+  font-size: 12px
+}
+
+.live-stats b {
+  color: #ddd;
+  margin-left: 4px
+}
+
+.result-score {
+  text-align: center;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.05;
+  margin: 8px 0 20px
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px
+}
+
+.result-grid>div {
+  background: #101010;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  min-width: 0
+}
+
+.result-grid span,
+.result-grid b {
+  display: block
+}
+
+.result-grid span {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 4px
+}
+
+.result-grid b {
+  font-size: 19px;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.scramble-panel>p,
+.result-message {
+  color: #999;
+  text-align: center;
+  line-height: 1.6
+}
+
+.result-actions {
+  max-width: 520px;
+  margin: 18px auto 0
+}
+
+.scramble-history-section {
+  margin-top: 34px;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  padding: 20px
+}
+
+.history-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 15px;
+  min-width: 0
+}
+
+.history-heading h2 {
+  margin: 0 0 5px;
+  font-size: 23px
+}
+
+.history-heading p {
+  margin: 0;
+  color: #777;
+  font-size: 13px
+}
+
+.history-clear {
+  white-space: nowrap
+}
+
+.history-list {
+  display: grid;
+  gap: 8px;
+  max-height: 430px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 3px
+}
+
+.history-item {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, minmax(60px, 1fr));
+  gap: 8px;
+  align-items: center;
+  background: #101010;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 0
+}
+
+.history-item>div {
+  min-width: 0
+}
+
+.history-item .date {
+  color: #bbb;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.history-item .muted {
+  color: #777;
+  font-size: 11px
+}
+
+.history-item strong {
+  display: block;
+  font-size: 14px
+}
+
+.scramble-seo {
+  margin: 34px auto 0;
+  max-width: 780px
+}
+
+.scramble-seo h2 {
+  font-size: 22px;
+  margin: 28px 0 9px
+}
+
+.scramble-seo p {
+  color: #888;
+  line-height: 1.7;
+  font-size: 14px
+}
+
+.scramble-seo details {
+  border-top: 1px solid #292929;
+  padding: 13px 0;
+  color: #aaa
+}
+
+.scramble-seo summary {
+  cursor: pointer;
+  color: #ddd;
+  font-weight: 700
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0
+}
+
+@media(max-width:600px) {
+  .scramble-container {
+    width: min(100% - 16px, 900px);
+    padding-top: 12px
+  }
+
+  .game-page-header {
+    padding-bottom: 18px
+  }
+
+  .scramble-hero {
+    margin-bottom: 18px
+  }
+
+  .scramble-hero .game-breadcrumbs {
+    font-size: 12px;
+    margin-bottom: 16px
+  }
+
+  .scramble-hero p {
+    font-size: 13px
+  }
+
+  .scramble-card {
+    padding: 12px;
+    border-radius: 15px
+  }
+
+  .scramble-topbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin-bottom: 12px
+  }
+
+  .scramble-topbar>div {
+    padding: 9px
+  }
+
+  .scramble-topbar strong {
+    font-size: 19px
+  }
+
+  .scramble-panel h2 {
+    font-size: 20px;
+    margin: 5px 0 16px
+  }
+
+  .option-group {
+    margin-bottom: 13px
+  }
+
+  .option-row {
+    gap: 6px
+  }
+
+  .option-btn {
+    padding: 10px 6px;
+    font-size: 13px
+  }
+
+  .scrambled-wrap {
+    padding: 16px 10px;
+    border-radius: 12px
+  }
+
+  .word-area {
+    font-size: clamp(24px, 10vw, 38px);
+    letter-spacing: .08em;
+    line-height: 1.12
+  }
+
+  .answer-form {
+    grid-template-columns: 1fr;
+    gap: 8px
+  }
+
+  .answer-form input,
+  .answer-form .primary-btn {
+    height: 48px
+  }
+
+  .live-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px
+  }
+
+  .live-stats span {
+    padding: 8px 3px;
+    font-size: 10px
+  }
+
+  .live-stats b {
+    display: block;
+    margin: 2px 0 0;
+    font-size: 13px
+  }
+
+  .result-score {
+    font-size: 44px
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .history-heading {
+    align-items: flex-start;
+    flex-direction: column
+  }
+
+  .history-clear {
+    width: 100%
+  }
+
+  .history-item {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px
+  }
+
+  .history-item .date {
+    grid-column: 1/-1
+  }
+
+  .scramble-seo {
+    margin-top: 24px
+  }
+}
+
+@media(max-width:340px) {
+  .scramble-container {
+    width: calc(100% - 12px)
+  }
+
+  .scramble-card {
+    padding: 9px
+  }
+
+  .word-area {
+    font-size: 22px;
+    letter-spacing: .05em
+  }
+
+  .scramble-topbar strong {
+    font-size: 17px
+  }
+
+  .option-btn {
+    font-size: 12px
+  }
+
+  .game-page-header .site-name {
+    font-size: 15px
+  }
+}
+
+/* FINAL SETTINGS BUTTON — match the compact secondary control style used by the other games */
+.result-actions {
+  width: min(520px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.result-actions .primary-btn,
+.result-actions .secondary-btn {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  margin: 0;
+  border-radius: 11px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.result-actions .secondary-btn {
+  border: 1px solid #303030;
+  background: #101010;
+  color: #ccc;
+}
+
+.result-actions .secondary-btn:hover,
+.result-actions .secondary-btn:focus-visible {
+  border-color: #2196f3;
+  color: #fff;
+  background: #151515;
+}
+
+.result-actions .primary-btn:hover,
+.result-actions .primary-btn:focus-visible {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 600px) {
+  .result-actions {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .result-actions .primary-btn,
+  .result-actions .secondary-btn {
+    height: 46px;
+  }
+}
+
+@media (max-width: 340px) {
+
+  .result-actions .primary-btn,
+  .result-actions .secondary-btn {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+}
+
+/* Prevent a blinking text-caret from appearing inside option/settings buttons. */
+.option-btn,
+.primary-btn,
+.secondary-btn,
+.history-clear,
+button {
+  -webkit-user-select: none;
+  user-select: none;
+  caret-color: transparent;
+}
+
+.option-btn:focus,
+.primary-btn:focus,
+.secondary-btn:focus,
+.history-clear:focus {
+  outline: none;
+}
+
+.option-btn:focus-visible,
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible,
+.history-clear:focus-visible {
+  outline: 2px solid #2196f3;
+  outline-offset: 2px;
+}
+
+/* Override TypingMeter's global .active::after typing-caret rule.
+   Word Scramble uses .active on option buttons only, so no blinking caret
+   should ever be rendered inside these controls. */
+.scramble-page .option-btn.active::after,
+.scramble-page button.active::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}

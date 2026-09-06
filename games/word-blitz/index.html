@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>Word Blitz - Fast Typing Game Online | TypingMeter</title>
+  <meta name="description"
+    content="Play Word Blitz, a free fast typing game from TypingMeter. Type as many words as you can before time runs out and track your score, WPM, accuracy and best results.">
+  <link rel="canonical" href="https://typingmeter.vercel.app/games/word-blitz/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Word Blitz - Fast Typing Game Online | TypingMeter">
+  <meta property="og:description"
+    content="Type as many words as possible before the clock runs out. Play Word Blitz free on TypingMeter.">
+  <meta property="og:url" content="https://typingmeter.vercel.app/games/word-blitz/">
+  <meta property="og:site_name" content="TypingMeter">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Word Blitz | TypingMeter">
+  <meta name="twitter:description"
+    content="A fast free typing game. Type words quickly, build combos and beat your best score.">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="stylesheet" href="/games/games.css">
+  <link rel="stylesheet" href="/games/word-blitz/blitz.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"WebSite","name":"TypingMeter","url":"https://typingmeter.vercel.app/"},
+      {"@type":"VideoGame","name":"Word Blitz","url":"https://typingmeter.vercel.app/games/word-blitz/","description":"A free browser typing game where players type as many words as possible before the timer ends.","genre":"Typing game","gamePlatform":"Web Browser","isAccessibleForFree":true},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"How do I play Word Blitz?","acceptedAnswer":{"@type":"Answer","text":"Choose a time limit and difficulty, press Start Game, then type each displayed word and press Space or Enter to submit it."}},
+        {"@type":"Question","name":"How is the Word Blitz score calculated?","acceptedAnswer":{"@type":"Answer","text":"Your score rewards correctly completed words and longer combos. WPM and accuracy are calculated from your completed game activity."}},
+        {"@type":"Question","name":"Is Word Blitz free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Word Blitz is a free browser game on TypingMeter and does not require an account."}}
+      ]}
+    ]
+  }
+  </script>
+</head>
+
+<body class="games-page blitz-page">
+  <main class="game-page-container">
+    <header class="game-page-header">
+      <a class="logo" href="/" aria-label="TypingMeter Home">
+        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <span class="site-name">TypingMeter</span>
+      </a>
+      <nav class="game-breadcrumbs" aria-label="Games navigation">
+        <a href="/games/">Games</a>
+        <span aria-hidden="true">›</span>
+        <strong>Word Blitz</strong>
+      </nav>
+    </header>
+
+    <section class="game-seo-intro" aria-labelledby="game-title">
+      <span class="game-kicker">FAST TYPING GAME</span>
+      <h1 id="game-title">Word Blitz</h1>
+      <p>Type as many words as you can before the clock runs out. Build a combo, keep your accuracy high, and beat your
+        best score.</p>
+    </section>
+
+    <section class="blitz-section" aria-labelledby="blitz-title">
+      <div class="blitz-card">
+        <div class="blitz-header">
+          <div>
+            <span class="blitz-kicker">⚡ WORD CHALLENGE</span>
+            <h2 id="blitz-title">Word Blitz</h2>
+            <p>Fast words. Fast fingers. One clock.</p>
+          </div>
+          <a class="blitz-back-link" href="/games/">All Games</a>
+        </div>
+
+        <div class="blitz-lobby" id="blitzLobby">
+          <div class="blitz-option-grid">
+            <div class="blitz-option-group">
+              <span class="blitz-option-label">TIME</span>
+              <div class="blitz-choice-row" role="group" aria-label="Game time">
+                <button class="blitz-choice is-active" type="button" data-time="30">30s</button>
+                <button class="blitz-choice" type="button" data-time="60">60s</button>
+                <button class="blitz-choice" type="button" data-time="120">120s</button>
+              </div>
+            </div>
+            <div class="blitz-option-group">
+              <span class="blitz-option-label">DIFFICULTY</span>
+              <div class="blitz-choice-row" role="group" aria-label="Difficulty">
+                <button class="blitz-choice is-active" type="button" data-difficulty="easy">Easy</button>
+                <button class="blitz-choice" type="button" data-difficulty="medium">Medium</button>
+                <button class="blitz-choice" type="button" data-difficulty="hard">Hard</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="blitz-best-preview">
+            <span>PERSONAL BEST</span>
+            <strong id="lobbyBest">0</strong>
+            <small>score</small>
+          </div>
+
+          <button class="blitz-primary-btn" id="startBtn" type="button">⚡ Start Game</button>
+          <p class="blitz-note" id="lobbyNote">Type the displayed word, then press Space or Enter.</p>
+        </div>
+
+        <div class="blitz-game" id="blitzGame" hidden>
+          <div class="blitz-stats-bar">
+            <div><span>TIME</span><strong id="timeValue">30</strong></div>
+            <div><span>SCORE</span><strong id="scoreValue">0</strong></div>
+            <div><span>COMBO</span><strong id="comboValue">0</strong></div>
+            <div><span>WPM</span><strong id="wpmValue">0</strong></div>
+            <div><span>ACCURACY</span><strong id="accuracyValue">100%</strong></div>
+          </div>
+
+          <div class="blitz-timer-track" aria-hidden="true">
+            <div class="blitz-timer-fill" id="timerFill"></div>
+          </div>
+
+          <div class="blitz-word-area" id="wordArea">
+            <span class="blitz-word-label">TYPE THIS WORD</span>
+            <div class="blitz-word" id="currentWord" aria-live="polite">ready</div>
+            <div class="blitz-word-meta"><span id="wordNumber">Word 1</span><span id="difficultyLabel">Easy</span></div>
+          </div>
+
+          <label class="blitz-input-wrap" for="wordInput">
+            <span class="sr-only">Type the displayed word</span>
+            <input id="wordInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off"
+              spellcheck="false" maxlength="32" placeholder="Type the word and press Space"
+              aria-describedby="inputHint">
+          </label>
+          <p class="blitz-input-hint" id="inputHint">Press <kbd>Space</kbd> or <kbd>Enter</kbd> to submit. Paste is
+            disabled.</p>
+
+          <div class="blitz-actions">
+            <button class="blitz-secondary-btn" id="quitBtn" type="button">Quit Game</button>
+          </div>
+        </div>
+
+        <div class="blitz-result" id="blitzResult" hidden>
+          <div class="blitz-result-icon" id="resultIcon">🏆</div>
+          <span class="blitz-kicker">GAME COMPLETE</span>
+          <h3 id="resultTitle">Great Run!</h3>
+          <p id="resultSubtitle">You finished the blitz.</p>
+
+          <div class="blitz-result-stats">
+            <div><span>Score</span><strong id="resultScore">0</strong></div>
+            <div><span>WPM</span><strong id="resultWpm">0</strong></div>
+            <div><span>Accuracy</span><strong id="resultAccuracy">0%</strong></div>
+            <div><span>Words</span><strong id="resultWords">0</strong></div>
+            <div><span>Best Combo</span><strong id="resultCombo">0</strong></div>
+            <div><span>Time</span><strong id="resultTime">30s</strong></div>
+          </div>
+
+          <div class="blitz-best-result" id="newBest" hidden>🏆 New personal best!</div>
+
+          <div class="blitz-result-actions">
+            <button class="blitz-primary-btn" id="playAgainBtn" type="button">⚡ Play Again</button>
+            <button class="blitz-secondary-btn" id="changeSettingsBtn" type="button">Change Settings</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blitz-history-section" aria-labelledby="history-title">
+      <div class="blitz-history-header">
+        <div>
+          <span class="blitz-kicker">YOUR RESULTS</span>
+          <h2 id="history-title">Word Blitz History</h2>
+          <p>Your completed games are saved automatically on this device.</p>
+        </div>
+        <div class="blitz-history-actions">
+          <span id="historyCount" class="blitz-history-count">No games</span>
+          <button id="clearHistoryBtn" class="blitz-clear-btn" type="button">Clear History</button>
+        </div>
+      </div>
+      <div class="blitz-history" id="historyList" aria-live="polite"></div>
+    </section>
+
+    <section class="game-howto" aria-labelledby="how-to-play">
+      <h2 id="how-to-play">How to Play Word Blitz</h2>
+      <ol>
+        <li>Choose a time limit and difficulty.</li>
+        <li>Press <strong>Start Game</strong> and focus on the input box.</li>
+        <li>Type the word shown on screen and press <strong>Space</strong> or <strong>Enter</strong>.</li>
+        <li>Correct words increase your score and combo. Keep your accuracy high.</li>
+        <li>When the timer reaches zero, your final score, WPM and accuracy are shown.</li>
+      </ol>
+      <p class="game-note"><strong>Scoring:</strong> correct words earn points based on word length and combo. Wrong
+        submissions break the combo, so speed and accuracy both matter.</p>
+    </section>
+
+    <section class="blitz-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Word Blitz FAQ</h2>
+      <details>
+        <summary>How is WPM calculated?</summary>
+        <p>Word Blitz uses the standard five-character word equivalent. Completed correct characters are converted to
+          words and divided by elapsed minutes.</p>
+      </details>
+      <details>
+        <summary>Does a wrong word count toward my score?</summary>
+        <p>No. Wrong submissions do not add score and reset your current combo.</p>
+      </details>
+      <details>
+        <summary>Can I paste words?</summary>
+        <p>No. Clipboard paste and drop actions are blocked during gameplay to keep scores comparable.</p>
+      </details>
+      <details>
+        <summary>Is my history stored online?</summary>
+        <p>No. Word Blitz history is stored in your browser on this device using local storage. It is not an online
+          leaderboard.</p>
+      </details>
+    </section>
+  </main>
+
+  <script src="/games/word-blitz/blitz.js?v=20260906-1"></script>
+</body>
+
+</html>

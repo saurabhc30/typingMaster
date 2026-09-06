@@ -1,0 +1,998 @@
+.games-container,
+.game-page-container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 70px;
+}
+
+.site-name {
+  font: 700 20px/1 Sora, Arial, sans-serif;
+  letter-spacing: -0.4px;
+  color: #f0f0f0;
+  white-space: nowrap;
+}
+
+.games-header,
+.game-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 0 30px;
+}
+
+/* ===== PAGE-LEVEL MOBILE OVERFLOW SAFETY ===== */
+html {
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================= TYPING RACE - PHASE 1 ================= */
+.typing-race-section {
+  max-width: 900px;
+  margin: 34px auto 20px;
+  padding: 0 20px;
+}
+
+.race-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.22);
+}
+
+.race-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.race-kicker {
+  color: #2196f3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.race-header h2 {
+  margin: 5px 0 7px;
+  font-size: 26px;
+}
+
+.race-header p,
+.race-note,
+.race-waiting p,
+.race-ready p {
+  color: #8e8e8e;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.race-close {
+  border: 1px solid #333;
+  background: transparent;
+  color: #aaa;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.race-lobby {
+  display: grid;
+  gap: 14px;
+}
+
+.race-primary-btn,
+.race-secondary-btn {
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.race-primary-btn {
+  border: 1px solid #2196f3;
+  background: #2196f3;
+  color: #fff;
+}
+
+.race-primary-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.race-secondary-btn {
+  border: 1px solid #333;
+  background: #1d1d1d;
+  color: #ddd;
+}
+
+.race-secondary-btn:hover {
+  border-color: #2196f3;
+}
+
+.race-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+  font-size: 11px;
+}
+
+.race-divider::before,
+.race-divider::after {
+  content: "";
+  height: 1px;
+  background: #282828;
+  flex: 1;
+}
+
+.race-join-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.race-join-row input {
+  min-width: 0;
+  background: #0f0f0f;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.race-join-row input:focus {
+  border-color: #2196f3;
+}
+
+.race-waiting,
+.race-ready,
+.race-result {
+  text-align: center;
+}
+
+.race-status-pill {
+  display: inline-block;
+  border: 1px solid #333;
+  background: #101010;
+  color: #aaa;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+.race-code-box {
+  max-width: 420px;
+  margin: 0 auto 15px;
+  border: 1px dashed #3a3a3a;
+  border-radius: 14px;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.race-code-box span {
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.race-code-box strong {
+  font-size: 30px;
+  letter-spacing: 6px;
+}
+
+.race-code-box button {
+  margin: 4px auto 0;
+  border: 0;
+  background: transparent;
+  color: #2196f3;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.race-ready {
+  display: grid;
+  gap: 18px;
+}
+
+.race-players-mini {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 14px;
+}
+
+.race-players-mini > div:not(.race-vs-mini) {
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  gap: 5px;
+}
+
+.race-players-mini span {
+  color: #777;
+  font-size: 11px;
+}
+
+.race-vs-mini {
+  color: #2196f3;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.race-ready-actions,
+.race-result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.race-battle {
+  position: relative;
+}
+
+.race-countdown {
+  min-height: 54px;
+  text-align: center;
+  font-size: 42px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #2196f3;
+  margin-bottom: 16px;
+}
+
+.race-player-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 15px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.race-player-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.race-player-label {
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.race-player-info strong {
+  font-size: 13px;
+}
+
+.race-player-progress {
+  display: grid;
+  grid-template-columns: 1fr 48px;
+  gap: 10px;
+  align-items: center;
+}
+
+.race-progress-track {
+  height: 11px;
+  border-radius: 999px;
+  background: #252525;
+  overflow: hidden;
+}
+
+.race-progress-fill {
+  width: 0;
+  height: 100%;
+  background: #2196f3;
+  border-radius: inherit;
+  transition: width .08s linear;
+}
+
+.race-progress-fill.opponent {
+  background: #9b59b6;
+}
+
+.race-player-progress > span {
+  color: #aaa;
+  font-size: 11px;
+  text-align: right;
+}
+
+.race-live-status {
+  text-align: center;
+  color: #8e8e8e;
+  font-size: 12px;
+  margin: 18px 0 14px;
+}
+
+.race-typing-text {
+  background: #0d0d0d;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 18px;
+  min-height: 110px;
+  color: #777;
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: left;
+  user-select: none;
+  margin-bottom: 12px;
+}
+
+.race-typing-text .race-char-correct { color: #4caf50; }
+.race-typing-text .race-char-wrong {
+  color: #ff4d4d;
+  text-decoration: underline;
+}
+.race-typing-text .race-char-current {
+  color: #fff;
+  background: rgba(33,150,243,.14);
+  border-radius: 3px;
+}
+
+.race-input {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  background: #101010;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 14px;
+  font: 500 16px/1.6 Sora, Arial, sans-serif;
+  outline: none;
+}
+
+.race-input:focus {
+  border-color: #2196f3;
+}
+
+.race-result-icon {
+  font-size: 48px;
+  margin-bottom: 6px;
+}
+
+.race-result h3 {
+  font-size: 30px;
+  margin-bottom: 7px;
+}
+
+.race-result > p {
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.race-result-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.race-result-stats > div {
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  padding: 14px 8px;
+}
+
+.race-result-stats span {
+  display: block;
+  color: #777;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.race-result-stats strong {
+  font-size: 19px;
+}
+
+@media (max-width: 600px) {
+  .typing-race-section {
+    padding: 0 15px;
+    margin-top: 25px;
+  }
+
+  .race-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .race-header h2 {
+    font-size: 22px;
+  }
+
+  .race-join-row {
+    grid-template-columns: 1fr;
+  }
+
+  .race-players-mini {
+    grid-template-columns: 1fr;
+  }
+
+  .race-vs-mini {
+    order: 2;
+  }
+
+  .race-players-mini > div:not(.race-vs-mini) {
+    width: 100%;
+  }
+
+  .race-player-row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .race-player-info {
+    justify-content: space-between;
+  }
+
+  .race-typing-text {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .race-result-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .race-countdown {
+    font-size: 36px;
+  }
+}
+
+
+.race-launcher {
+  border: 1px solid #2196f3;
+  background: rgba(33,150,243,.08);
+  color: #8fc7ff;
+  font: 600 13px Sora, Arial, sans-serif;
+  padding: 6px 9px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.race-launcher:hover {
+  background: rgba(33,150,243,.15);
+  border-color: #42a5ff;
+}
+
+
+/* =========================================================
+   TYPINGMETER GAMES PAGES
+   Dedicated styling; does not modify the typing-test UI.
+   ========================================================= */
+
+.games-page {
+  min-height: 100vh;
+  background: #0f0f0f;
+  color: #fff;
+  font-family: "Sora", Arial, sans-serif;
+}
+
+.games-container,
+.game-page-container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 70px;
+}
+
+.games-header,
+.game-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 0 30px;
+}
+
+.games-header .logo,
+.game-page-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+
+.games-home-link,
+.game-breadcrumbs a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.games-home-link:hover,
+.game-breadcrumbs a:hover {
+  color: #fff;
+}
+
+.game-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #777;
+  font-size: 14px;
+}
+
+.games-hero,
+.game-seo-intro {
+  max-width: 780px;
+  margin: 20px auto 40px;
+  text-align: center;
+}
+
+.game-kicker {
+  display: inline-block;
+  color: #2196f3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.games-hero h1,
+.game-seo-intro h1 {
+  margin: 0 0 12px;
+  font-size: clamp(34px, 6vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.games-hero p,
+.game-seo-intro p {
+  margin: 0 auto;
+  max-width: 720px;
+  color: #999;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.game-card {
+  min-height: 315px;
+  display: flex;
+  flex-direction: column;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  padding: 23px;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.game-card-live:hover {
+  transform: translateY(-4px);
+  border-color: #2196f3;
+  background: #171717;
+}
+
+.game-card-icon {
+  font-size: 42px;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.game-card-status {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #2196f3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.game-card h2 {
+  margin: 0 0 9px;
+  font-size: 23px;
+}
+
+.game-card p {
+  margin: 0 0 13px;
+  color: #999;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.game-card ul {
+  margin: 0 0 18px;
+  padding-left: 19px;
+  color: #777;
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.game-play-btn,
+.game-disabled-btn {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 15px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.game-play-btn {
+  background: #fff;
+  color: #111;
+}
+
+.game-play-btn:hover {
+  background: #e8e8e8;
+}
+
+.game-disabled-btn {
+  background: #1b1b1b;
+  color: #666;
+  border: 1px solid #252525;
+  pointer-events: none;
+}
+
+.games-seo-copy,
+.game-howto {
+  max-width: 850px;
+  margin: 42px auto 0;
+  padding: 26px;
+  background: #121212;
+  border: 1px solid #242424;
+  border-radius: 16px;
+}
+
+.games-seo-copy h2,
+.game-howto h2 {
+  margin: 0 0 13px;
+  font-size: 22px;
+}
+
+.games-seo-copy p,
+.game-howto li,
+.game-note {
+  color: #999;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.game-howto ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.game-note {
+  margin: 20px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #242424;
+}
+
+@media (max-width: 850px) {
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .games-container,
+  .game-page-container {
+    width: min(100% - 22px, 1100px);
+    padding-top: 15px;
+  }
+
+  .games-header,
+  .game-page-header {
+    padding-bottom: 22px;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .games-hero,
+  .game-seo-intro {
+    margin-top: 10px;
+    margin-bottom: 28px;
+  }
+
+  .games-hero h1,
+  .game-seo-intro h1 {
+    font-size: 36px;
+  }
+
+  .games-hero p,
+  .game-seo-intro p {
+    font-size: 14px;
+  }
+
+  .game-card {
+    min-height: 0;
+  }
+
+  .game-breadcrumbs {
+    font-size: 12px;
+  }
+}
+
+
+/* Player name + clear winner result */
+.race-name-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.race-name-field span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted, #666);
+}
+.race-name-field input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border, #ddd);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  outline: none;
+  background: var(--input-bg, #fff);
+}
+.race-name-field input:focus {
+  border-color: currentColor;
+}
+.race-result-players {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 18px 0;
+}
+.race-result-players > div:not(.race-result-vs) {
+  border: 1px solid var(--border, #ddd);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 5px;
+}
+.race-result-players span {
+  font-size: 12px;
+  opacity: .7;
+}
+.race-result-players strong {
+  font-size: 14px;
+}
+.race-result-vs {
+  font-weight: 800;
+  opacity: .65;
+}
+@media (max-width: 560px) {
+  .race-result-players {
+    grid-template-columns: 1fr;
+  }
+  .race-result-vs {
+    text-align: center;
+  }
+}
+
+.race-passage-meta {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: .7;
+  text-align: right;
+}
+
+.race-accuracy-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: .75;
+  text-align: center;
+}
+
+.race-wpm-rule {
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: .6;
+  text-align: center;
+}
+
+
+/* ================= PHASE 2 / PRODUCTION POLISH ================= */
+.quick-match-status { margin: -5px 0 2px; text-align: center; }
+.race-battle-top { display:flex; align-items:center; justify-content:center; gap:18px; min-height:58px; }
+.race-timer { padding:8px 12px; border:1px solid #333; border-radius:999px; background:#101010; color:#ddd; font-weight:800; font-size:13px; }
+.race-timer.warning { border-color:#f59e0b; color:#fbbf24; animation: race-pulse .8s infinite alternate; }
+@keyframes race-pulse { from { transform:scale(1); } to { transform:scale(1.04); } }
+.race-win-animation { animation: race-win .65s ease; }
+.race-loss-animation { animation: race-loss .5s ease; }
+.race-neutral-animation { animation: race-neutral .5s ease; }
+@keyframes race-win { 0% { box-shadow:0 14px 40px rgba(0,0,0,.22); } 45% { box-shadow:0 0 0 8px rgba(33,150,243,.14), 0 20px 55px rgba(0,0,0,.3); transform:translateY(-2px); } 100% { box-shadow:0 14px 40px rgba(0,0,0,.22); transform:none; } }
+@keyframes race-loss { 0%,100% { transform:none; } 35% { transform:translateX(-5px); } 70% { transform:translateX(5px); } }
+@keyframes race-neutral { 50% { transform:scale(1.01); } }
+.race-history-section, .game-faq { max-width:900px; margin:28px auto; padding:0 20px; }
+.race-history-header { display:flex; justify-content:space-between; align-items:flex-end; gap:18px; margin-bottom:14px; }
+.race-history-kicker { display:block; color:#777; font-size:10px; font-weight:800; letter-spacing:1.5px; margin-bottom:4px; }
+.race-history-section h2, .game-faq h2 { margin:0; }
+.race-history-header p { margin:5px 0 0; color:#888; font-size:12px; }
+.race-history-actions { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.race-history-count { color:#8e8e8e; font-size:12px; white-space:nowrap; }
+.race-history-clear { border:1px solid #333; background:#101010; color:#aaa; border-radius:8px; padding:8px 11px; font-size:11px; font-weight:700; cursor:pointer; }
+.race-history-clear:hover { color:#fff; border-color:#555; }
+.race-history { display:grid; gap:8px; max-height:440px; overflow-y:auto; overscroll-behavior:contain; padding:2px 6px 2px 2px; scrollbar-gutter:stable; }
+.race-history::-webkit-scrollbar { width:8px; }
+.race-history::-webkit-scrollbar-track { background:#101010; border-radius:999px; }
+.race-history::-webkit-scrollbar-thumb { background:#333; border-radius:999px; }
+.race-history-item { display:flex; justify-content:space-between; gap:20px; align-items:center; padding:12px 14px; border:1px solid #292929; background:#151515; border-radius:12px; }
+.race-history-main, .race-history-stats { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.race-history-stats { text-align:right; }
+.race-history-item span, .race-history-item small, .race-history-empty { color:#8e8e8e; font-size:12px; }
+.race-history-item small { font-size:10px; color:#666; }
+.race-history-empty { padding:20px; text-align:center; border:1px dashed #292929; border-radius:12px; margin:0; }
+.game-faq details { border:1px solid #292929; background:#151515; border-radius:12px; padding:13px 15px; margin:9px 0; }
+.game-faq summary { cursor:pointer; font-weight:700; }
+.game-faq details p { color:#9a9a9a; line-height:1.7; margin:10px 0 0; }
+@media (max-width:650px) {
+  .race-card { padding:18px; }
+  .race-join-row { grid-template-columns:1fr; }
+  .race-player-row { grid-template-columns:1fr; gap:8px; }
+  .race-history-header { align-items:flex-start; flex-direction:column; }
+  .race-history-actions { width:100%; justify-content:space-between; }
+  .race-history-item { align-items:flex-start; gap:12px; }
+  .race-history-stats { text-align:right; }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE HARDENING
+   Prevents inputs, player names and game content from
+   creating horizontal page scrolling on small screens.
+   ========================================================= */
+.typing-race-section,
+.race-card,
+.race-lobby,
+.race-waiting,
+.race-ready,
+.race-battle,
+.race-result,
+.race-name-field,
+.race-join-row,
+.race-player-row,
+.race-result-players,
+.race-history-item {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.race-card {
+  width: 100%;
+}
+
+.race-header > *,
+.race-players-mini > *,
+.race-player-row > *,
+.race-result-players > *,
+.race-history-item > * {
+  min-width: 0;
+}
+
+.race-name-field input,
+.race-join-row input,
+.race-input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.race-player-info strong,
+.race-result-players strong,
+.race-history-main strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.race-player-info strong {
+  white-space: nowrap;
+}
+
+.race-typing-text {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 650px) {
+  .typing-race-section {
+    width: 100%;
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .race-card {
+    padding: 16px;
+  }
+
+  .race-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .race-header > div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .race-close {
+    flex: 0 0 36px;
+  }
+
+  .race-name-field input {
+    font-size: 16px;
+  }
+
+  .race-join-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .race-join-row .race-secondary-btn {
+    width: 100%;
+  }
+
+  .race-player-info {
+    min-width: 0;
+  }
+
+  .race-player-info strong {
+    max-width: 65%;
+  }
+
+  .race-result-players {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .race-result-players > div:not(.race-result-vs) {
+    min-width: 0;
+  }
+
+  .race-history-item {
+    flex-wrap: wrap;
+  }
+
+  .race-history-main,
+  .race-history-stats {
+    width: 100%;
+    text-align: left;
+  }
+}

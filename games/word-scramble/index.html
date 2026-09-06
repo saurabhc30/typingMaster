@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <title>Word Scramble Game Online - Free Typing Game | TypingMeter</title>
+    <meta name="description"
+        content="Play Word Scramble online for free. Unscramble words, type the answer, build combos and improve your typing speed and accuracy.">
+    <link rel="canonical" href="https://typingmeter.vercel.app/games/word-scramble/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Word Scramble Game Online | TypingMeter">
+    <meta property="og:description" content="Unscramble words and type the answer before time runs out.">
+    <meta property="og:url" content="https://typingmeter.vercel.app/games/word-scramble/">
+    <meta property="og:site_name" content="TypingMeter">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Word Scramble Game | TypingMeter">
+    <meta name="twitter:description" content="Free online word scramble typing game.">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/games/games.css">
+    <link rel="stylesheet" href="/games/word-scramble/scramble.css?v=20260906-3?v=20260906-2">
+    <script
+        type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Word Scramble","url":"https://typingmeter.vercel.app/games/word-scramble/","description":"A free online word scramble typing game from TypingMeter.","genre":["Puzzle","Typing"],"gamePlatform":["Web Browser","Mobile Web Browser"],"applicationCategory":"Game"}</script>
+</head>
+
+<body class="games-page scramble-page">
+    <main class="scramble-container">
+        <header class="game-page-header"><a class="logo" href="/" aria-label="TypingMeter Home"><img
+                    src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo"><span
+                    class="site-name">TypingMeter</span></a><a class="games-home-link" href="/games/">All Games</a>
+        </header>
+        <section class="scramble-hero">
+            <div class="game-breadcrumbs"><a href="/">Typing Test</a><span>›</span><a
+                    href="/games/">Games</a><span>›</span><span>Word Scramble</span></div><span
+                class="game-kicker">UNSCRAMBLE • TYPE • SCORE</span>
+            <h1>Word Scramble</h1>
+            <p>Unscramble the letters, type the correct word and build the biggest combo before time runs out.</p>
+        </section>
+        <section class="scramble-card" aria-label="Word Scramble game">
+            <div class="scramble-topbar">
+                <div><span class="scramble-label">TIME</span><strong id="timeValue">60s</strong></div>
+                <div><span class="scramble-label">SCORE</span><strong id="scoreValue">0</strong></div>
+                <div><span class="scramble-label">COMBO</span><strong id="comboValue">0</strong></div>
+                <div><span class="scramble-label">BEST</span><strong id="bestValue">0</strong></div>
+            </div>
+            <div id="setupPanel" class="scramble-panel">
+                <h2>Choose your challenge</h2>
+                <div class="option-group"><span>Difficulty</span>
+                    <div class="option-row" role="group" aria-label="Difficulty"><button class="option-btn active"
+                            data-difficulty="easy">Easy</button><button class="option-btn"
+                            data-difficulty="medium">Medium</button><button class="option-btn"
+                            data-difficulty="hard">Hard</button></div>
+                </div>
+                <div class="option-group"><span>Time</span>
+                    <div class="option-row" role="group" aria-label="Game time"><button class="option-btn"
+                            data-time="30">30s</button><button class="option-btn active"
+                            data-time="60">60s</button><button class="option-btn" data-time="120">120s</button></div>
+                </div><button id="startBtn" class="primary-btn">Start Word Scramble</button>
+            </div>
+            <div id="gamePanel" class="scramble-panel hidden" aria-live="polite">
+                <div class="game-status-row"><span id="difficultyBadge">EASY</span><span id="progressText">Word 1</span>
+                </div>
+                <div class="scrambled-wrap"><span class="small-heading">UNSCRAMBLE THIS WORD</span>
+                    <div id="wordArea" class="word-area" aria-label="Scrambled word">typing</div>
+                </div>
+                <form id="answerForm" class="answer-form" autocomplete="off"><label class="sr-only"
+                        for="answerInput">Type the unscrambled word</label><input id="answerInput" type="text"
+                        inputmode="text" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="24"
+                        placeholder="Type the answer…" aria-describedby="feedbackText"><button class="primary-btn"
+                        type="submit">Submit</button></form>
+                <div id="feedbackText" class="feedback" role="status"></div>
+                <div class="live-stats"><span>Accuracy <b id="accuracyValue">100%</b></span><span>WPM <b
+                            id="wpmValue">0</b></span><span>Words <b id="wordsValue">0</b></span></div><button
+                    id="quitBtn" class="secondary-btn" type="button">Quit Game</button>
+            </div>
+            <div id="resultPanel" class="scramble-panel hidden"><span class="game-kicker">ROUND COMPLETE</span>
+                <h2 id="resultTitle">Great job!</h2>
+                <div class="result-score" id="resultScore">0</div>
+                <div class="result-grid">
+                    <div><span>Words</span><b id="resultWords">0</b></div>
+                    <div><span>Accuracy</span><b id="resultAccuracy">0%</b></div>
+                    <div><span>WPM</span><b id="resultWpm">0</b></div>
+                    <div><span>Best Combo</span><b id="resultCombo">0</b></div>
+                </div>
+                <p id="resultMessage"></p>
+                <div class="result-actions"><button id="againBtn" class="primary-btn">Play Again</button><button
+                        id="settingsBtn" class="secondary-btn">Change Settings</button></div>
+            </div>
+        </section>
+        <section class="scramble-history-section">
+            <div class="history-heading">
+                <div><span class="game-kicker">YOUR RESULTS</span>
+                    <h2>Word Scramble History</h2>
+                    <p>Saved automatically on this device.</p>
+                </div><button id="clearHistoryBtn" class="history-clear" type="button">Clear History</button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+        </section>
+        <section class="scramble-seo">
+            <h2>How to play Word Scramble</h2>
+            <p>Choose a difficulty and timer, then rearrange the scrambled letters in your head and type the correct
+                word. Correct answers increase your score and combo. Keep typing accurately to improve your WPM and beat
+                your personal best.</p>
+            <h2>Word Scramble FAQ</h2>
+            <details>
+                <summary>Is Word Scramble free?</summary>
+                <p>Yes. TypingMeter Word Scramble is free to play in a web browser.</p>
+            </details>
+            <details>
+                <summary>Does it work on phones?</summary>
+                <p>Yes. The game is designed to fit small mobile screens without horizontal scrolling.</p>
+            </details>
+        </section>
+    </main>
+    <script src="/games/word-scramble/scramble.js?v=20260906-1"></script>
+</body>
+
+</html>

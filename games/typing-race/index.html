@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>Typing Race Online - Multiplayer Typing Game | TypingMeter</title>
+  <meta name="description"
+    content="Play a free online typing race with a friend. Create or join a room, type the same passage, and race to finish first with live WPM and accuracy.">
+  <link rel="canonical" href="https://typingmeter.vercel.app/games/typing-race/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Typing Race Online - Multiplayer Typing Game | TypingMeter">
+  <meta property="og:description"
+    content="Race a friend in a free multiplayer typing game. Create a room, share the code, and type to the finish line.">
+  <meta property="og:url" content="https://typingmeter.vercel.app/games/typing-race/">
+  <meta property="og:site_name" content="TypingMeter">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Typing Race Online | TypingMeter">
+  <meta name="twitter:description" content="Free multiplayer typing race game with live progress, WPM and accuracy.">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="stylesheet" href="/games/typing-race/race.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "name":"TypingMeter",
+        "url":"https://typingmeter.vercel.app/"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How does Quick Match work?","acceptedAnswer":{"@type":"Answer","text":"Quick Match pairs you with another player who is looking for a race, then the browsers connect directly for the game."}},
+          {"@type":"Question","name":"Can I race a friend?","acceptedAnswer":{"@type":"Answer","text":"Yes. Create a Private Race, share the six-character room code, and both players click I'm Ready."}},
+          {"@type":"Question","name":"Do both players type the same passage?","acceptedAnswer":{"@type":"Answer","text":"Yes. The host selects one passage and sends it to the opponent so both players use identical text."}}
+        ]
+      },
+      {
+        "@type":"VideoGame",
+        "name":"Typing Race",
+        "url":"https://typingmeter.vercel.app/games/typing-race/",
+        "description":"A free multiplayer typing race game where two players type the same passage and race to finish first.",
+        "genre":"Typing game",
+        "gamePlatform":"Web Browser",
+        "isAccessibleForFree":true
+      }
+    ]
+  }
+  </script>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+</head>
+
+<body class="games-page">
+  <main class="game-page-container">
+    <header class="game-page-header">
+      <a class="logo" href="/" aria-label="TypingMeter Home">
+        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <span class="site-name">TypingMeter</span>
+      </a>
+      <nav class="game-breadcrumbs" aria-label="Games navigation">
+        <a href="/games/">Games</a>
+        <span aria-hidden="true">›</span>
+        <strong>Typing Race</strong>
+      </nav>
+    </header>
+
+    <section class="game-seo-intro" aria-labelledby="game-title">
+      <span class="game-kicker">MULTIPLAYER TYPING GAME</span>
+      <h1 id="game-title">Typing Race Online</h1>
+      <p>Race another player by typing the same passage. Create a room, share the code, get ready, and be the first to
+        reach 100%.</p>
+    </section>
+
+    <!-- ================= TYPING RACE (PHASE 1) ================= -->
+    <section class="typing-race-section" id="typingRaceSection" aria-labelledby="typingRaceTitle">
+      <div class="race-card">
+        <div class="race-header">
+          <div>
+            <span class="race-kicker">MULTIPLAYER</span>
+            <h2 id="typingRaceTitle">⚔️ Typing Race</h2>
+            <p>Race a friend on the same typing passage. No account or database required.</p>
+          </div>
+          <button class="race-close" id="raceCloseBtn" type="button" aria-label="Close Typing Race">×</button>
+        </div>
+
+        <div class="race-lobby" id="raceLobby">
+          <label class="race-name-field" for="racePlayerName">
+            <span>Your Player Name</span>
+            <input id="racePlayerName" type="text" maxlength="20" autocomplete="nickname" placeholder="Enter your name"
+              aria-label="Your player name">
+          </label>
+          <button class="race-primary-btn" id="quickMatchBtn" type="button">⚡ Quick Match</button>
+          <p class="race-note quick-match-status" id="quickMatchStatus">Find a random player automatically. No room code
+            needed.</p>
+          <button class="race-secondary-btn" id="createRaceBtn" type="button">🏎️ Create Private Race</button>
+          <div class="race-divider"><span>OR JOIN WITH CODE</span></div>
+          <div class="race-join-row">
+            <input id="raceCodeInput" type="text" maxlength="8" autocomplete="off" placeholder="Enter room code"
+              aria-label="Race room code">
+            <button class="race-secondary-btn" id="joinRaceBtn" type="button">Join Race</button>
+          </div>
+          <p class="race-note" id="raceLobbyNote">Share the room code with your friend after creating a race.</p>
+        </div>
+
+        <div class="race-waiting" id="raceWaiting" hidden>
+          <div class="race-status-pill" id="raceConnectionStatus">Waiting for opponent…</div>
+          <div class="race-code-box">
+            <span>ROOM CODE</span>
+            <strong id="raceRoomCode">------</strong>
+            <button id="copyRaceCodeBtn" type="button">Copy</button>
+          </div>
+          <p>Send this code to your friend. Keep this tab open.</p>
+          <button class="race-secondary-btn" id="quickMatchCancelBtn" type="button" hidden>Cancel Search</button>
+          <button class="race-secondary-btn" id="cancelRaceBtn" type="button">Cancel</button>
+        </div>
+
+        <div class="race-ready" id="raceReady" hidden>
+          <div class="race-players-mini">
+            <div><span>You</span><strong id="raceYourName">Player 1</strong></div>
+            <div class="race-vs-mini">VS</div>
+            <div><span>Opponent</span><strong id="raceOpponentName">Player 2</strong></div>
+          </div>
+          <div class="race-ready-actions">
+            <button class="race-primary-btn" id="raceReadyBtn" type="button">I'm Ready</button>
+            <button class="race-secondary-btn" id="raceLeaveBtn" type="button">Leave</button>
+          </div>
+          <p class="race-note" id="raceReadyNote">Both players must be ready before the race starts.</p>
+        </div>
+
+        <div class="race-battle" id="raceBattle" hidden>
+          <div class="race-battle-top">
+            <div class="race-countdown" id="raceCountdown">3</div>
+            <div class="race-timer" id="raceTimer">⏱ 120s</div>
+          </div>
+
+          <div class="race-player-row">
+            <div class="race-player-info">
+              <span class="race-player-label" id="raceYouLabel">YOU</span>
+              <strong id="raceYouWpm">0 WPM</strong>
+            </div>
+            <div class="race-player-progress">
+              <div class="race-progress-track">
+                <div class="race-progress-fill" id="raceYouProgress"></div>
+              </div>
+              <span id="raceYouPercent">0%</span>
+            </div>
+          </div>
+
+          <div class="race-player-row">
+            <div class="race-player-info">
+              <span class="race-player-label" id="raceOpponentLabel">OPPONENT</span>
+              <strong id="raceOpponentWpm">Waiting</strong>
+            </div>
+            <div class="race-player-progress">
+              <div class="race-progress-track">
+                <div class="race-progress-fill opponent" id="raceOpponentProgress"></div>
+              </div>
+              <span id="raceOpponentPercent">0%</span>
+            </div>
+          </div>
+
+          <div class="race-live-status" id="raceLiveStatus">Get ready…</div>
+          <div class="race-typing-text" id="raceTypingText"></div>
+          <textarea id="raceInput" class="race-input" rows="4" spellcheck="false" autocomplete="off"
+            autocapitalize="off" autocorrect="off" placeholder="Start typing when GO appears…" disabled></textarea>
+          <div class="race-accuracy-hint" id="raceAccuracyHint">Correct all mistakes before you can finish.</div>
+          <div class="race-wpm-rule">WPM pauses at your first mistake until you correct it.</div>
+        </div>
+
+        <div class="race-result" id="raceResult" hidden>
+          <div class="race-result-icon" id="raceResultIcon">🏆</div>
+          <h3 id="raceResultTitle">You Win!</h3>
+          <p id="raceResultSubtitle">Great race.</p>
+          <div class="race-result-players">
+            <div><span id="raceResultPlayerYou">You</span><strong id="raceResultPlayerYouStatus">—</strong></div>
+            <div class="race-result-vs">VS</div>
+            <div><span id="raceResultPlayerOpponent">Opponent</span><strong
+                id="raceResultPlayerOpponentStatus">—</strong></div>
+          </div>
+          <div class="race-result-stats">
+            <div><span>Your WPM</span><strong id="raceResultYourWpm">0</strong></div>
+            <div><span>Accuracy</span><strong id="raceResultYourAccuracy">0%</strong></div>
+            <div><span>Opponent WPM</span><strong id="raceResultOpponentWpm">0</strong></div>
+            <div><span>Race Time</span><strong id="raceResultTime">0.00s</strong></div>
+          </div>
+          <div class="race-result-actions">
+            <button class="race-primary-btn" id="raceRematchBtn" type="button">🔄 Rematch</button>
+            <button class="race-secondary-btn" id="raceResultCloseBtn" type="button">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="game-howto" aria-labelledby="how-to-play">
+      <h2 id="how-to-play">How to Play Typing Race</h2>
+      <ol>
+        <li>Choose <strong>Quick Match</strong> to find a random player, or choose <strong>Create Private Race</strong>
+          for a friend.</li>
+        <li>For a private race, share the six-character room code with your opponent.</li>
+        <li>Both players click <strong>I'm Ready</strong>.</li>
+        <li>When the countdown reaches <strong>GO!</strong>, type the passage.</li>
+        <li>The first player to finish the passage wins immediately.</li>
+      </ol>
+      <p class="game-note">No TypingMeter account or database is required for the race. Private races use a
+        browser-to-browser connection. Quick Match uses a small matchmaking service only to pair waiting players; race
+        progress remains browser-to-browser.</p>
+    </section>
+    <section class="race-history-section" aria-labelledby="race-history-title">
+      <div class="race-history-header">
+        <div>
+          <span class="race-history-kicker">YOUR RESULTS</span>
+          <h2 id="race-history-title">Recent Typing Races</h2>
+          <p>Saved automatically on this device. Your latest races stay available after refresh.</p>
+        </div>
+        <div class="race-history-actions">
+          <span id="raceHistoryCount" class="race-history-count">No races</span>
+          <button id="raceHistoryClear" class="race-history-clear" type="button">Clear History</button>
+        </div>
+      </div>
+      <div id="raceHistory" class="race-history" aria-live="polite"></div>
+    </section>
+
+    <section class="game-faq" aria-labelledby="race-faq-title">
+      <h2 id="race-faq-title">Typing Race FAQ</h2>
+      <details>
+        <summary>How does Quick Match work?</summary>
+        <p>Quick Match places you in a matchmaking queue and pairs you with another player who is looking for a race.
+          After a match is found, the browsers connect directly for the race.</p>
+      </details>
+      <details>
+        <summary>Can I race a friend?</summary>
+        <p>Yes. Create a Private Race, copy the six-character room code, and send it to your friend. Both players then
+          click I'm Ready.</p>
+      </details>
+      <details>
+        <summary>Do both players type the same passage?</summary>
+        <p>Yes. The host selects one passage and sends it to the opponent so both players race on identical text.</p>
+      </details>
+      <details>
+        <summary>What happens if I make a mistake?</summary>
+        <p>Your progress and WPM are frozen at the first wrong character until you correct the mistake. You must finish
+          the entire passage exactly with 100% accuracy to win.</p>
+      </details>
+      <details>
+        <summary>Is the Typing Race free?</summary>
+        <p>Yes. The game is designed as a free browser-based typing race and does not require a TypingMeter account.</p>
+      </details>
+    </section>
+  </main>
+  <script src="/passages.js"></script>
+  <script src="/games/typing-race/matchmaking-config.js?v=20260905-1"></script>
+  <script src="/games/typing-race/race.js?v=20260906-4"></script>
+</body>
+
+</html>

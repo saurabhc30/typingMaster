@@ -1,0 +1,651 @@
+html {
+    box-sizing: border-box;
+    overflow-x: hidden
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit
+}
+
+body {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: #0b0f14;
+    color: #f5f7fa;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
+}
+
+.rush-header {
+    min-height: 64px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border-bottom: 1px solid #202832;
+    background: #0d1218
+}
+
+.brand {
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none
+}
+
+.back-link {
+    color: #aeb9c6;
+    text-decoration: none
+}
+
+.rush-page {
+    width: min(960px, 100%);
+    margin: 0 auto;
+    padding: 34px 18px 60px
+}
+
+.rush-hero {
+    text-align: center;
+    margin-bottom: 22px
+}
+
+.game-kicker,
+.result-kicker {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: #2196f3
+}
+
+.rush-hero h1 {
+    font-size: clamp(36px, 7vw, 62px);
+    margin: 8px 0
+}
+
+.rush-hero p {
+    color: #aeb9c6;
+    margin: 0 auto;
+    max-width: 680px
+}
+
+.rush-card,
+.rush-history,
+.rush-info {
+    background: #11171e;
+    border: 1px solid #222c36;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .22)
+}
+
+.rush-history,
+.rush-info {
+    margin-top: 18px
+}
+
+.rush-panel h2 {
+    margin: 0 0 16px
+}
+
+.field-label,
+.mode-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: #8391a0;
+    margin: 18px 0 8px
+}
+
+.rush-input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 52px;
+    border: 1px solid #303b47;
+    border-radius: 10px;
+    background: #0a0f14;
+    color: #fff;
+    padding: 0 15px;
+    font-size: 17px;
+    outline: none
+}
+
+.rush-input:focus {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, .14)
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px
+}
+
+.option-btn,
+.primary-btn,
+.secondary-btn,
+.copy-btn {
+    min-height: 48px;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 15px
+}
+
+.option-btn {
+    background: #0d1319;
+    border: 1px solid #303b47;
+    color: #b9c4cf
+}
+
+.option-btn.active {
+    background: #2196f3;
+    border-color: #2196f3;
+    color: #fff
+}
+
+.rush-actions,
+.result-actions,
+.join-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px
+}
+
+.rush-actions>* {
+    flex: 1
+}
+
+.primary-btn {
+    border: 1px solid #2196f3;
+    background: #2196f3;
+    color: #fff;
+    padding: 0 18px
+}
+
+.secondary-btn {
+    border: 1px solid #303b47;
+    background: #0d1319;
+    color: #d5dce4;
+    padding: 0 18px
+}
+
+.secondary-btn:hover,
+.secondary-btn:focus {
+    border-color: #2196f3;
+    color: #fff
+}
+
+.join-row .rush-input {
+    flex: 1
+}
+
+.join-row .secondary-btn {
+    min-width: 140px
+}
+
+.rush-status {
+    text-align: center;
+    color: #9ba8b5;
+    min-height: 22px
+}
+
+.room-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #8795a4;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .1em
+}
+
+.room-badge strong {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: .16em
+}
+
+.copy-btn {
+    min-height: 36px;
+    padding: 0 12px;
+    background: #0d1319;
+    border: 1px solid #303b47;
+    color: #d5dce4
+}
+
+.players {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 18px 0
+}
+
+.players>div {
+    padding: 16px;
+    border: 1px solid #29343f;
+    border-radius: 12px;
+    background: #0c1218
+}
+
+.players span {
+    display: block;
+    font-size: 11px;
+    color: #7f8c99;
+    text-transform: uppercase;
+    letter-spacing: .1em
+}
+
+.players strong {
+    display: block;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.duration-value {
+    display: block;
+    text-align: center;
+    margin-bottom: 18px
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px
+}
+
+.stat {
+    padding: 13px;
+    border: 1px solid #28333e;
+    border-radius: 12px;
+    background: #0c1218;
+    text-align: center
+}
+
+.stat span,
+.result-grid span {
+    display: block;
+    color: #7f8c99;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em
+}
+
+.stat strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 25px
+}
+
+.rush-track {
+    height: 6px;
+    background: #202a34;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 16px 0
+}
+
+.rush-progress {
+    height: 100%;
+    width: 100%;
+    background: #2196f3;
+    transform-origin: left
+}
+
+.passage-text {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    max-height: 260px;
+    overflow: auto;
+    padding: 18px;
+    border: 1px solid #29343f;
+    border-radius: 12px;
+    background: #090e13;
+    color: #cdd6df;
+    font-size: 20px;
+    line-height: 1.7;
+    word-break: break-word;
+    white-space: pre-wrap;
+    margin-bottom: 14px
+}
+
+.rush-input:disabled {
+    opacity: .55
+}
+
+.leaderboard {
+    margin-top: 16px;
+    border: 1px solid #29343f;
+    border-radius: 12px;
+    overflow: hidden
+}
+
+.leaderboard-head,
+.leader-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 15px
+}
+
+.leaderboard-head {
+    background: #0c1218;
+    color: #7f8c99;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em
+}
+
+.leader-row {
+    border-top: 1px solid #29343f
+}
+
+.leader-row em {
+    font-style: normal;
+    font-size: 9px;
+    color: #2196f3;
+    margin-left: 5px
+}
+
+.result-panel {
+    text-align: center
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 18px 0
+}
+
+.result-grid>div {
+    padding: 15px;
+    border: 1px solid #29343f;
+    border-radius: 12px;
+    background: #0c1218
+}
+
+.result-grid strong {
+    display: block;
+    font-size: 25px;
+    margin-top: 5px
+}
+
+.result-actions>* {
+    flex: 1
+}
+
+.rush-info h2,
+.rush-history h2 {
+    margin-top: 0
+}
+
+.rush-info p,
+.rush-history p {
+    color: #9ba8b5;
+    line-height: 1.7
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.option-btn,
+.primary-btn,
+.secondary-btn,
+.copy-btn {
+    user-select: none;
+    -webkit-user-select: none;
+    caret-color: transparent
+}
+
+.option-btn:focus,
+.primary-btn:focus,
+.secondary-btn:focus,
+.copy-btn:focus {
+    outline: none
+}
+
+.option-btn:focus-visible,
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible,
+.copy-btn:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px
+}
+
+@media(max-width:650px) {
+    .rush-page {
+        padding: 24px 12px 45px
+    }
+
+    .rush-card,
+    .rush-history,
+    .rush-info {
+        padding: 16px;
+        border-radius: 14px
+    }
+
+    .rush-actions,
+    .result-actions,
+    .join-row {
+        flex-direction: column
+    }
+
+    .join-row .secondary-btn {
+        width: 100%
+    }
+
+    .stats-grid,
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .players {
+        grid-template-columns: 1fr
+    }
+
+    .passage-text {
+        font-size: 17px;
+        line-height: 1.6;
+        max-height: 230px
+    }
+
+    .rush-header {
+        flex-wrap: wrap
+    }
+
+    .back-link {
+        font-size: 14px
+    }
+
+    .options {
+        gap: 7px
+    }
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 18px 0
+}
+
+.player-chip {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #29343f;
+    border-radius: 12px;
+    background: #0c1218;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 8px
+}
+
+.player-chip>span {
+    grid-row: span 2;
+    color: #7f8c99;
+    font-weight: 800
+}
+
+.player-chip strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.player-chip small {
+    color: #7f8c99
+}
+
+.player-chip em {
+    font-style: normal;
+    color: #2196f3;
+    font-size: 9px;
+    margin-left: 4px
+}
+
+.player-options {
+    grid-template-columns: repeat(5, minmax(0, 1fr))
+}
+
+.leaderboard>div[id="liveLeaderboard"],
+.leaderboard>div[id="resultLeaderboard"] {
+    max-height: 320px;
+    overflow: auto
+}
+
+.leader-row.me {
+    background: rgba(33, 150, 243, .08)
+}
+
+@media(max-width:650px) {
+    .players-grid {
+        grid-template-columns: 1fr
+    }
+
+    .player-options {
+        grid-template-columns: repeat(5, minmax(0, 1fr))
+    }
+
+    .player-chip {
+        padding: 10px
+    }
+
+    .leader-row {
+        padding: 11px 12px;
+        font-size: 14px
+    }
+}
+
+
+/* Word-by-word Speed Rush */
+.word-label {
+    margin: 18px 0 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    opacity: .65;
+}
+
+.rush-word {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: clamp(38px, 7vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: .01em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    padding: 18px;
+    border-radius: 16px;
+    background: #151515;
+    border: 1px solid #2b2b2b;
+}
+
+@media (max-width:600px) {
+    .rush-word {
+        min-height: 78px;
+        font-size: clamp(32px, 12vw, 52px);
+        padding: 14px
+    }
+
+    .word-label {
+        margin-top: 12px
+    }
+}
+
+
+/* Shared TypingMeter game navbar: matches Typing Race / Word Blitz / Word Scramble. */
+.speed-rush-page .game-page-header .site-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+    flex: 0 0 auto;
+}
+
+.speed-rush-page .game-page-header .site-name {
+    font: 700 20px/1 Sora, Arial, sans-serif;
+    letter-spacing: -.4px;
+    color: #f0f0f0;
+    white-space: nowrap;
+}
+
+.speed-rush-page .game-page-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    text-decoration: none;
+}
+
+@media(max-width:560px) {
+    .speed-rush-page .game-page-header .site-name {
+        font-size: 18px
+    }
+}
+
+/* Speed Rush: the typed word is always centered in the input. */
+.speed-rush-live-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+#input.rush-input {
+    text-align: center !important;
+}
+
+#input.rush-input::placeholder {
+    text-align: center;
+}
+
+#input.rush-input {
+    caret-color: #2196f3;
+}
+
+@media (max-width:650px) {
+    .speed-rush-live-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

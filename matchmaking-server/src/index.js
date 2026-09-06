@@ -9,7 +9,7 @@ const MAX_PLAYERS = 10;
 function json(payload) { return JSON.stringify(payload); }
 function safeName(name) { return String(name || "Player").replace(/\s+/g, " ").trim().slice(0, 20) || "Player"; }
 function safeCount(value) { const n = Number(value); return Number.isFinite(n) ? Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, Math.floor(n))) : MIN_PLAYERS; }
-function send(ws, payload) { try { if (ws.readyState === WebSocket.OPEN) { ws.send(json(payload)); return true; } } catch (_) {} return false; }
+function send(ws, payload) { try { if (ws.readyState === WebSocket.OPEN) { ws.send(json(payload)); return true; } } catch (_) { } return false; }
 
 export default {
   async fetch(request, env) {
@@ -60,8 +60,8 @@ export class Matchmaker extends DurableObject {
     }
   }
 
-  webSocketClose(ws) { try { ws.close(); } catch (_) {} }
-  webSocketError(ws) { try { ws.close(); } catch (_) {} }
+  webSocketClose(ws) { try { ws.close(); } catch (_) { } }
+  webSocketError(ws) { try { ws.close(); } catch (_) { } }
 
   tryMatch(playerCount) {
     const group = this.ctx.getWebSockets()
@@ -114,23 +114,23 @@ export class Matchmaker extends DurableObject {
         peerIds
       });
       if (!ok) {
-        try { socket.close(1011, "Match connection failed"); } catch (_) {}
+        try { socket.close(1011, "Match connection failed"); } catch (_) { }
       }
     });
     return true;
   }
   resetSocket(ws) { ws.serializeAttachment({ status: "connected", peerId: "", name: "Player", playerCount: MIN_PLAYERS, queuedAt: 0 }); }
-  countQueued(playerCount) { return this.ctx.getWebSockets().filter(ws => { const d=ws.deserializeAttachment(); return d?.status === "queued" && d.playerCount === playerCount; }).length; }
+  countQueued(playerCount) { return this.ctx.getWebSockets().filter(ws => { const d = ws.deserializeAttachment(); return d?.status === "queued" && d.playerCount === playerCount; }).length; }
   cleanupQueue(now) {
     for (const ws of this.ctx.getWebSockets()) {
-      const d=ws.deserializeAttachment();
-      if (!d || d.status!=="queued") continue;
-      if (!d.queuedAt || now-d.queuedAt>MAX_WAIT_MS) {
-        send(ws,{type:"error",code:"MATCH_TIMEOUT",message:"No full match found within 2 minutes. Please try Quick Match again."});
-        try { ws.close(1000,"Queue timeout"); } catch (_) {}
+      const d = ws.deserializeAttachment();
+      if (!d || d.status !== "queued") continue;
+      if (!d.queuedAt || now - d.queuedAt > MAX_WAIT_MS) {
+        send(ws, { type: "error", code: "MATCH_TIMEOUT", message: "No full match found within 2 minutes. Please try Quick Match again." });
+        try { ws.close(1000, "Queue timeout"); } catch (_) { }
       }
     }
   }
-  async ensureAlarm(){const existing=await this.ctx.storage.getAlarm();if(existing==null)await this.ctx.storage.setAlarm(Date.now()+ALARM_MS)}
-  async alarm(){const now=Date.now();this.cleanupQueue(now);if(this.ctx.getWebSockets().some(ws=>ws.deserializeAttachment()?.status==="queued"))await this.ctx.storage.setAlarm(Date.now()+ALARM_MS)}
+  async ensureAlarm() { const existing = await this.ctx.storage.getAlarm(); if (existing == null) await this.ctx.storage.setAlarm(Date.now() + ALARM_MS) }
+  async alarm() { const now = Date.now(); this.cleanupQueue(now); if (this.ctx.getWebSockets().some(ws => ws.deserializeAttachment()?.status === "queued")) await this.ctx.storage.setAlarm(Date.now() + ALARM_MS) }
 }

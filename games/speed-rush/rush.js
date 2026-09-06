@@ -160,27 +160,116 @@
     renderPlayerList();renderLeaderboards();
   }
 
-  function setupHostConnection(c,peerIdHint=''){
-    const pid=peerIdHint||c.peer;
-    if(!pid)return;
-    if(connections.size>=playerCount-1){try{c.close()}catch(_){}return}
-    connections.set(pid,c);
-    c.on('open',()=>{
-      // Register the connection immediately. The guest's hello can arrive a
-      // little later, so never depend on hello timing to count the player.
+  function registerHostConnection(c, peerIdHint='') {
+    const pid = String(peerIdHint || c?.peer || '').trim();
+    if (!pid) return false;
+    if (connections.has(pid)) return true;
+    if (connections.size >= playerCount - 1) {
+      try { c.close(); } catch (_) {}
+      return false;
+    }
+
+    connections.set(pid, c);
+    let initialized = false;
+    const initialize = () => {
+      if (initialized) return;
+      initialized = true;
+
       addPlayer(pid, 'Player', false);
-      sendTo(pid,{type:'hello',hostPeerId:localPeerId,playerCount,duration,name:playerName});
-      sendTo(pid,rosterPayload());
-      readyRoomCode.textContent=roomCode||'QUICK';
+      readyRoomCode.textContent = roomCode || 'QUICK';
       show(ready);
-      waitingStatus.textContent=`${players.size}/${playerCount} players connected.`;
+      waitingStatus.textContent = `${players.size}/${playerCount} players connected.`;
+
+      // Send the host handshake first. The guest uses this packet to learn the
+      // real PeerJS host id and only then enables the Ready screen.
+      try {
+        if (c.open) {
+          c.send({ type:'hello', hostPeerId:localPeerId, playerCount, duration, name:playerName });
+          c.send(rosterPayload());
+        }
+      } catch (_) {}
+
       broadcastRoster();
-      if(allReady()) startRound();
+      if (allReady()) startRound();
+    };
+
+    c.on('open', initialize);
+    c.on('data', msg => handleHostMessage(pid, msg));
+    c.on('close', () => {
+      connections.delete(pid);
+      players.delete(pid);
+      if (!finished && !running) {
+        readyStatus.textContent = `A player left. ${players.size}/${playerCount} connected.`;
+        if (players.size < playerCount) readyBtn.disabled = false;
+        broadcastRoster();
+      }
     });
-    c.on('data',msg=>handleHostMessage(pid,msg));
-    c.on('close',()=>{connections.delete(pid);players.delete(pid);if(!finished){readyStatus.textContent=`A player left. ${players.size}/${playerCount} connected.`;broadcastRoster()} });
-    c.on('error',()=>{});
+    c.on('error', () => {
+      // PeerJS can report an error before open. Remove only this connection;
+      // the remaining players must stay connected.
+      if (!initialized) {
+        connections.delete(pid);
+        players.delete(pid);
+        if (!running && !finished) {
+          waitingStatus.textContent = `Connection failed. ${players.size}/${playerCount} players connected.`;
+          readyBtn.disabled = false;
+          broadcastRoster();
+        }
+      }
+    });
+
+    // PeerJS may hand us an already-open DataConnection. In that case the
+    // 'open' event can be missed if listeners are attached late.
+    if (c.open) initialize();
+    return true;
   }
+
+  function connectGuestToHost(targetPeerId, label='host') {
+    const target = String(targetPeerId || '').trim();
+    if (!target || !peer) return;
+
+    const existing = connections.get(target);
+    if (existing?.open) {
+      sendTo(target, {type:'hello', name:playerName});
+      return;
+    }
+
+    let c;
+    try { c = peer.connect(target, {reliable:true}); }
+    catch (_) {
+      setStatus(`Could not connect to ${label}. Please try again.`);
+      return;
+    }
+
+    connections.set(target, c);
+    let opened = false;
+    c.on('open', () => {
+      opened = true;
+      waitingStatus.textContent = 'Connected to host. Waiting for players…';
+      try { c.send({type:'hello', name:playerName}); } catch (_) {}
+      clearTimeout(startWatchdog);
+      startWatchdog = setTimeout(() => {
+        if (!running && !finished && hostPeerId) sendTo(hostPeerId, {type:'start-request'});
+      }, 5000);
+    });
+    c.on('data', handleGuestMessage);
+    c.on('close', () => {
+      connections.delete(target);
+      if (!running && !finished) setStatus('Host disconnected. Please try again.');
+    });
+    c.on('error', () => {
+      if (!opened && !running && !finished) {
+        setStatus(`Could not connect to ${label}. Please try again.`);
+      }
+    });
+
+    if (c.open) {
+      opened = true;
+      waitingStatus.textContent = 'Connected to host. Waiting for players…';
+      try { c.send({type:'hello', name:playerName}); } catch (_) {}
+    }
+  }
+
   function handleHostMessage(pid,msg){if(!msg||typeof msg!=='object')return;
     if(msg.type==='hello'){
       addPlayer(pid,msg.name,false);
@@ -190,14 +279,10 @@
       return;
     }
     if(msg.type==='ready'){
-      // A client may retry its Ready packet because of connection timing.
-      // Once a round has been created, NEVER turn Ready back into Waiting or
-      // start a second round from a late duplicate Ready packet.
       if(currentRoundPacket || running || finished){
         if(currentRoundPacket) sendTo(pid,currentRoundPacket);
         return;
       }
-
       let p=players.get(pid);
       if(!p){ addPlayer(pid,msg.name||'Player',true); p=players.get(pid); }
       if(p) p.ready=true;
@@ -210,34 +295,63 @@
     if(msg.type==='rematch'){const p=players.get(pid);if(p)p.rematch=true;broadcastRoster();if(allRematch())startRound();return}
     if(msg.type==='leave'){try{connections.get(pid)?.close()}catch(_){}connections.delete(pid);players.delete(pid);broadcastRoster()}
   }
+
   function handleGuestMessage(msg){if(!msg||typeof msg!=='object')return;
     if(msg.type==='hello'){
-      hostPeerId=msg.hostPeerId;
-      // Private-room guests initially store the connection by room code.
-      // Re-key it to the actual host PeerJS id so Ready/start packets always
-      // reach the host.
-      if(hostPeerId && connections.has(roomCode.toLowerCase())){
-        const hostConn=connections.get(roomCode.toLowerCase());
-        connections.delete(roomCode.toLowerCase());
+      hostPeerId=String(msg.hostPeerId||hostPeerId||'').trim();
+      // Private-room guests initially store the connection under the room
+      // code. Quick Match already uses the real host PeerJS id. Re-key either
+      // case so every later packet has one stable destination.
+      const roomKey=roomCode.toLowerCase();
+      if(hostPeerId && connections.has(roomKey)){
+        const hostConn=connections.get(roomKey);
+        connections.delete(roomKey);
         connections.set(hostPeerId,hostConn);
       }
-      playerCount=Number(msg.playerCount)||2;duration=Number(msg.duration)||duration;addPlayer(localPeerId,playerName,localReady);setRoundDuration(duration);setPlayerCount(playerCount);readyRoomCode.textContent=roomCode||'QUICK';show(ready);sendTo(hostPeerId,{type:'hello',name:playerName});clearTimeout(startWatchdog);startWatchdog=setTimeout(()=>{if(!running&&!finished&&hostPeerId)sendTo(hostPeerId,{type:'start-request'})},5000);return}
-    if(msg.type==='roster'){players.clear();for(const p of msg.players||[])players.set(p.peerId,{...p,name:safeName(p.name)});renderPlayerList();renderLeaderboards();return}
-    if(msg.type==='start'){if(msg.roundId&&currentRoundId===msg.roundId&&(running||!battle.hidden))return;currentRoundPacket=msg;prepareRound(msg.text,msg.duration,msg.startAt,msg.roundId||'');return}
+      if(!hostPeerId && connections.size===1) hostPeerId=connections.keys().next().value;
+      if(!hostPeerId)return;
+
+      playerCount=Number(msg.playerCount)||2;
+      duration=Number(msg.duration)||duration;
+      addPlayer(localPeerId,playerName,localReady);
+      setRoundDuration(duration);
+      setPlayerCount(playerCount);
+      readyRoomCode.textContent=roomCode||'QUICK';
+      show(ready);
+      readyBtn.disabled=localReady;
+      readyBtn.textContent=localReady?'Ready ✓':"I'm Ready";
+      sendTo(hostPeerId,{type:'hello',name:playerName});
+      clearTimeout(startWatchdog);
+      startWatchdog=setTimeout(()=>{
+        if(!running&&!finished&&hostPeerId) sendTo(hostPeerId,{type:'start-request'});
+      },5000);
+      return;
+    }
+    if(msg.type==='roster'){
+      players.clear();
+      for(const p of msg.players||[]) players.set(p.peerId,{...p,name:safeName(p.name)});
+      // Always preserve the local player even if a roster arrives before the
+      // host has processed the guest's hello.
+      if(localPeerId&&!players.has(localPeerId)) addPlayer(localPeerId,playerName,localReady);
+      renderPlayerList();renderLeaderboards();
+      return;
+    }
+    if(msg.type==='start'){
+      if(msg.roundId&&currentRoundId===msg.roundId&&(running||!battle.hidden))return;
+      currentRoundPacket=msg;prepareRound(msg.text,msg.duration,msg.startAt,msg.roundId||'');return;
+    }
     if(msg.type==='progress'){const p=players.get(msg.peerId);if(p)Object.assign(p,{wpm:Number(msg.wpm)||0,accuracy:Number(msg.accuracy)||0,score:Number(msg.score)||0,finished:!!msg.finished,words:Number(msg.words)||0,name:safeName(msg.name||p.name)});renderLeaderboards();if(msg.finished)maybeShowResults();return}
   }
+
   function allReady(){return players.size===playerCount&&[...players.values()].every(p=>p.ready)}
   function allRematch(){return players.size===playerCount&&[...players.values()].every(p=>p.rematch)}
   function startRound(){
     if(!isHost || players.size!==playerCount || !allReady()) return;
-    // Keep the Ready state during the start countdown. Resetting p.ready here
-    // made the first player's UI jump back to "Waiting" while the second
-    // player's Ready retry could trigger another startRound().
     for(const p of players.values()){
-      p.rematch=false; p.finished=false;
-      p.wpm=0; p.accuracy=0; p.score=0; p.words=0;
+      p.rematch=false;p.finished=false;p.wpm=0;p.accuracy=0;p.score=0;p.words=0;
     }
     readyStatus.textContent='Everyone is ready — starting…';
+    readyBtn.disabled=true;
     const text=chooseWords();
     const start=Date.now()+4000;
     const roundId=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random());
@@ -251,79 +365,67 @@
   function maybeShowResults(){if(!running)return;if([...players.values()].filter(p=>p.finished).length>=players.size){running=false;renderResult();show(result)}}
 
   function createPrivate(){
-    getName();quickMatch=false;cleanupPeer();isHost=true;localReady=false;finished=false;running=false;roomCode=randomCode();setPlayerCount(playerCount);show(waiting);waitingStatus.textContent=`Waiting for players… 1/${playerCount}`;setStatus(`Private room created for ${playerCount} players.`);
-    peer=new Peer(roomCode.toLowerCase(),{debug:1});
-    peer.on('connection',incoming=>{setupHostConnection(incoming,incoming.peer)});
+    getName();quickMatch=false;cleanupPeer();isHost=true;localReady=false;finished=false;running=false;readyBtn.disabled=false;readyBtn.textContent="I'm Ready";roomCode=randomCode();setPlayerCount(playerCount);show(waiting);waitingStatus.textContent=`Waiting for players… 1/${playerCount}`;setStatus(`Private room created for ${playerCount} players.`);
+    const requestedId=roomCode.toLowerCase();
+    peer=new Peer(requestedId,{debug:1});
+    peer.on('connection',incoming=>registerHostConnection(incoming,incoming.peer));
     peer.on('open',id=>{localPeerId=id;roomCode=id.toUpperCase();roomCodeEl.textContent=roomCode;addPlayer(localPeerId,playerName,false);readyRoomCode.textContent=roomCode;waitingStatus.textContent=`Share this code. 1/${playerCount} players connected.`});
-    peer.on('error',err=>{if(err.type==='unavailable-id'){roomCode=randomCode();try{peer.destroy()}catch(_){}createPrivate();return}setStatus('Could not create room. Please try again.')});
+    peer.on('error',err=>{if(err.type==='unavailable-id'){try{peer.destroy()}catch(_){}roomCode=randomCode();setTimeout(createPrivate,50);return}setStatus(`Could not create room${err?.type?` (${err.type})`:''}. Please try again.`)});
   }
-  function joinPrivate(){
-    getName();isHost=false;localReady=false;finished=false;running=false;const code=String(roomInput.value||'').trim().toLowerCase();if(!/^[a-z0-9]{6}$/.test(code)){setStatus('Enter a valid 6-character room code.');return}quickMatch=false;cleanupPeer();roomCode=code.toUpperCase();show(waiting);waitingStatus.textContent='Connecting to room…';setStatus('Joining Speed Rush room…');
-    peer=new Peer(undefined,{debug:1});peer.on('open',id=>{localPeerId=id;const c=peer.connect(code,{reliable:true});connections.set(code,c);c.on('open',()=>{sendTo(code,{type:'hello',name:playerName});waitingStatus.textContent='Connected. Waiting for the host…'});c.on('data',handleGuestMessage);c.on('close',()=>setStatus('Host disconnected. Please try again.'));c.on('error',()=>setStatus('Room connection failed.'))});peer.on('error',()=>setStatus('Could not join that room. Check the code and try again.'));
-  }
-  function quickMatchStart(){
-    getName();isHost=false;localReady=false;finished=false;running=false;const url=matchmakingUrl();if(!url){setStatus('Quick Match is not configured yet.');return}quickMatch=true;cleanupPeer();show(waiting);waitingStatus.textContent=`Finding ${playerCount} players…`;setStatus(`Searching for a ${playerCount}-player Speed Rush match…`);
-    peer=new Peer(undefined,{debug:1});
-    peer.on('connection',incoming=>{
-      if(isHost) setupHostConnection(incoming,incoming.peer);
-      else { try{incoming.close()}catch(_){} }
-    });
-    peer.on('open',id=>{localPeerId=id;openMatchSocket(id)});
-    peer.on('error',()=>setStatus('Could not start Quick Match. Please try again.'));
-  }
-  function openMatchSocket(peerId){try{matchmakingSocket=new WebSocket(urlForSocket(matchmakingUrl()))}catch(_){setStatus('Could not connect to Quick Match.');return}
-    matchmakingSocket.addEventListener('open',()=>{
-      matchmakingSocket.send(JSON.stringify({type:'queue',peerId,name:playerName,playerCount}));
-      waitingStatus.textContent=`Finding ${playerCount} players… 1/${playerCount}`;
-    });
-    matchmakingSocket.addEventListener('message',event=>{let msg;try{msg=JSON.parse(event.data)}catch(_){return}
-      if(msg.type==='queued'){waitingStatus.textContent=`Finding ${playerCount} players… ${msg.count||1}/${playerCount}`}
-      if(msg.type==='match'){
-        cleanupMatchmaking();
-        roomCode='QUICK';
-        roomCodeEl.textContent='AUTO';
-        playerCount=Number(msg.playerCount)||playerCount;
-        setPlayerCount(playerCount);
 
+  function joinPrivate(){
+    getName();isHost=false;localReady=false;finished=false;running=false;readyBtn.disabled=false;readyBtn.textContent="I'm Ready";
+    const code=String(roomInput.value||'').trim().toLowerCase();
+    if(!/^[a-z0-9]{6}$/.test(code)){setStatus('Enter a valid 6-character room code.');return}
+    quickMatch=false;cleanupPeer();roomCode=code.toUpperCase();show(waiting);waitingStatus.textContent='Connecting to room…';setStatus('Joining Speed Rush room…');
+    peer=new Peer(undefined,{debug:1});
+    peer.on('open',id=>{
+      localPeerId=id;
+      let c;
+      try{c=peer.connect(code,{reliable:true})}catch(_){setStatus('Room connection failed.');return}
+      connections.set(code,c);
+      c.on('open',()=>{waitingStatus.textContent='Connected. Waiting for the host…';try{c.send({type:'hello',name:playerName})}catch(_){} });
+      c.on('data',handleGuestMessage);
+      c.on('close',()=>{if(!running&&!finished)setStatus('Host disconnected. Please try again.')});
+      c.on('error',()=>{if(!running&&!finished)setStatus('Room connection failed. Check the code and try again.')});
+      if(c.open){try{c.send({type:'hello',name:playerName})}catch(_) {}}
+    });
+    peer.on('error',err=>setStatus(err?.type==='peer-unavailable'?'Room not found. Check the room code.':'Could not join that room. Check the code and try again.'));
+  }
+
+  function quickMatchStart(){
+    getName();isHost=false;localReady=false;finished=false;running=false;readyBtn.disabled=false;readyBtn.textContent="I'm Ready";
+    const url=matchmakingUrl();if(!url){setStatus('Quick Match is not configured yet.');return}
+    quickMatch=true;cleanupPeer();show(waiting);waitingStatus.textContent=`Finding ${playerCount} players…`;setStatus(`Searching for a ${playerCount}-player Speed Rush match…`);
+    peer=new Peer(undefined,{debug:1});
+    peer.on('connection',incoming=>{if(isHost)registerHostConnection(incoming,incoming.peer);else{try{incoming.close()}catch(_) {}}});
+    peer.on('open',id=>{localPeerId=id;openMatchSocket(id)});
+    peer.on('error',err=>setStatus(`Could not start Quick Match${err?.type?` (${err.type})`:''}. Please try again.`));
+  }
+
+  function openMatchSocket(peerId){
+    try{matchmakingSocket=new WebSocket(urlForSocket(matchmakingUrl()))}catch(_){setStatus('Could not connect to Quick Match.');return}
+    matchmakingSocket.addEventListener('open',()=>{matchmakingSocket.send(JSON.stringify({type:'queue',peerId,name:playerName,playerCount}));waitingStatus.textContent=`Finding ${playerCount} players… 1/${playerCount}`});
+    matchmakingSocket.addEventListener('message',event=>{
+      let msg;try{msg=JSON.parse(event.data)}catch(_){return}
+      if(msg.type==='queued'){waitingStatus.textContent=`Finding ${playerCount} players… ${msg.count||1}/${playerCount}`;return}
+      if(msg.type==='match'){
+        cleanupMatchmaking();roomCode='QUICK';roomCodeEl.textContent='AUTO';playerCount=Number(msg.playerCount)||playerCount;setPlayerCount(playerCount);
         if(msg.role==='host'){
-          isHost=true;
-          hostPeerId=localPeerId;
-          addPlayer(localPeerId,playerName,false);
-          show(waiting);
-          waitingStatus.textContent=`Match found. Waiting for players… 1/${playerCount}`;
+          isHost=true;hostPeerId=localPeerId;addPlayer(localPeerId,playerName,false);show(waiting);waitingStatus.textContent=`Match found. Connecting players… 1/${playerCount}`;
+          // Guests will connect to this PeerJS id. The host remains in the
+          // waiting state until every expected DataConnection is open.
         }else{
-          isHost=false;
-          hostPeerId=String(msg.hostPeerId||'');
-          if(!hostPeerId){
-            setStatus('Match found, but the host connection is unavailable. Please try Quick Match again.');
-            waitingStatus.textContent='Host connection information was missing.';
-            try{peer.destroy()}catch(_){}
-            return;
-          }
-          show(waiting);
-          waitingStatus.textContent='Match found. Connecting to host…';
-          const c=peer.connect(hostPeerId,{reliable:true});
-          connections.set(hostPeerId,c);
-          c.on('open',()=>{
-            waitingStatus.textContent='Connected to host. Waiting for players…';
-            sendTo(hostPeerId,{type:'hello',name:playerName});clearTimeout(startWatchdog);startWatchdog=setTimeout(()=>{if(!running&&!finished&&hostPeerId)sendTo(hostPeerId,{type:'start-request'})},5000);
-          });
-          c.on('data',handleGuestMessage);
-          c.on('close',()=>setStatus('Host disconnected. Please try again.'));
-          c.on('error',()=>setStatus('Could not connect to host. Please try Quick Match again.'));
+          isHost=false;hostPeerId=String(msg.hostPeerId||'').trim();
+          if(!hostPeerId){setStatus('Match found, but the host connection was unavailable. Please try Quick Match again.');waitingStatus.textContent='Host connection information was missing.';try{peer.destroy()}catch(_){}return}
+          show(waiting);waitingStatus.textContent='Match found. Connecting to host…';connectGuestToHost(hostPeerId,'host');
         }
+        return;
       }
       if(msg.type==='error'){waitingStatus.textContent=msg.message||'Quick Match failed.'}
     });
-    matchmakingSocket.addEventListener('error',()=>{
-      waitingStatus.textContent='Quick Match connection failed. Please try again.';
-      setStatus('Quick Match server connection failed.');
-    });
-    matchmakingSocket.addEventListener('close',()=>{
-      if(quickMatch && !hostPeerId && !running && !finished){
-        if(waitingStatus.textContent.startsWith('Finding')) waitingStatus.textContent='Quick Match disconnected. Please try again.';
-      }
-    });
+    matchmakingSocket.addEventListener('error',()=>{waitingStatus.textContent='Quick Match connection failed. Please try again.';setStatus('Quick Match server connection failed.')});
+    matchmakingSocket.addEventListener('close',()=>{if(quickMatch&&!hostPeerId&&!running&&!finished&&waitingStatus.textContent.startsWith('Finding'))waitingStatus.textContent='Quick Match disconnected. Please try again.'});
   }
 
   window.speedRushDifficulty = 'easy';

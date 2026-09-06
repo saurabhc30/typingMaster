@@ -59,11 +59,18 @@
   function chooseWords(){
     const level = window.speedRushDifficulty || 'easy';
     const source = SPEED_RUSH_WORDS[level] || SPEED_RUSH_WORDS.easy;
-    // Deterministic: never shuffle or randomly choose a source. Every round
-    // of the same level starts with exactly the same word #1, #2, #3...
-    // and all players receive this exact array from the host.
+
+    // Create a NEW sequence for every round. The host creates it once and
+    // sends the exact same array to every player, so players stay synchronized
+    // while consecutive rounds do not repeat the same order.
+    const pool = [...source];
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
     const out = [];
-    for (let i = 0; i < 180; i++) out.push(source[i % source.length]);
+    for (let i = 0; i < 180; i++) out.push(pool[i % pool.length]);
     return out;
   }
   function setCurrentWord(){
@@ -222,6 +229,35 @@
     // 'open' event can be missed if listeners are attached late.
     if (c.open) initialize();
     return true;
+  }
+
+  function acceptGuestConnection(c) {
+    if (!c) return;
+    const target=String(c.peer||'').trim();
+    if (!target) { try{c.close()}catch(_){}; return; }
+    if (connections.has(target)) return;
+
+    hostPeerId=target;
+    connections.set(target,c);
+    let opened=false;
+    c.on('open',()=>{
+      opened=true;
+      waitingStatus.textContent='Connected to host. Waiting for players…';
+      try{c.send({type:'hello',name:playerName})}catch(_){}
+    });
+    c.on('data',handleGuestMessage);
+    c.on('close',()=>{
+      connections.delete(target);
+      if(!running&&!finished)setStatus('Host disconnected. Please try again.');
+    });
+    c.on('error',()=>{
+      if(!opened&&!running&&!finished)setStatus('Host connection failed. Please try Quick Match again.');
+    });
+    if(c.open){
+      opened=true;
+      waitingStatus.textContent='Connected to host. Waiting for players…';
+      try{c.send({type:'hello',name:playerName})}catch(_){}
+    }
   }
 
   function connectGuestToHost(targetPeerId, label='host') {
@@ -398,7 +434,10 @@
     const url=matchmakingUrl();if(!url){setStatus('Quick Match is not configured yet.');return}
     quickMatch=true;cleanupPeer();show(waiting);waitingStatus.textContent=`Finding ${playerCount} players…`;setStatus(`Searching for a ${playerCount}-player Speed Rush match…`);roomCodeEl.textContent='------';
     peer=new Peer(undefined,{debug:1});
-    peer.on('connection',incoming=>{if(isHost)registerHostConnection(incoming,incoming.peer);else{try{incoming.close()}catch(_) {}}});
+    peer.on('connection',incoming=>{
+      if(isHost) registerHostConnection(incoming,incoming.peer);
+      else acceptGuestConnection(incoming);
+    });
     peer.on('open',id=>{localPeerId=id;openMatchSocket(id)});
     peer.on('error',err=>setStatus(`Could not start Quick Match${err?.type?` (${err.type})`:''}. Please try again.`));
   }
@@ -412,13 +451,38 @@
       if(msg.type==='match'){
         cleanupMatchmaking();roomCode=String(msg.roomCode||msg.matchCode||'QUICK').toUpperCase();roomCodeEl.textContent=roomCode;playerCount=Number(msg.playerCount)||playerCount;setPlayerCount(playerCount);
         if(msg.role==='host'){
-          isHost=true;hostPeerId=localPeerId;addPlayer(localPeerId,playerName,false);show(waiting);waitingStatus.textContent=`Match found. Connecting players… 1/${playerCount}`;
-          // Guests will connect to this PeerJS id. The host remains in the
-          // waiting state until every expected DataConnection is open.
+          isHost=true;
+          hostPeerId=localPeerId;
+          addPlayer(localPeerId,playerName,false);
+          show(waiting);
+          waitingStatus.textContent=`Match found. Connecting players… 1/${playerCount}`;
+
+          // Quick Match is now host-initiated. The matchmaking server gives
+          // the host every PeerJS id, so the host can connect directly to each
+          // guest instead of waiting for guests to initiate the connection.
+          const ids=Array.isArray(msg.peerIds)?msg.peerIds.map(String).filter(Boolean):[];
+          ids.filter(id=>id!==localPeerId).forEach((id,idx)=>{
+            setTimeout(()=>{
+              if(!isHost || !peer || connections.has(id)) return;
+              try {
+                const c=peer.connect(id,{reliable:true});
+                registerHostConnection(c,id);
+              } catch(_) {}
+            },idx*250);
+          });
         }else{
-          isHost=false;hostPeerId=String(msg.hostPeerId||'').trim();
-          if(!hostPeerId){setStatus('Match found, but the host connection was unavailable. Please try Quick Match again.');waitingStatus.textContent='Host connection information was missing.';try{peer.destroy()}catch(_){}return}
-          show(waiting);waitingStatus.textContent='Match found. Connecting to host…';connectGuestToHost(hostPeerId,'host');
+          isHost=false;
+          hostPeerId=String(msg.hostPeerId||'').trim();
+          if(!hostPeerId){
+            setStatus('Match found, but the host connection was unavailable. Please try Quick Match again.');
+            waitingStatus.textContent='Host connection information was missing.';
+            try{peer.destroy()}catch(_){}
+            return;
+          }
+          show(waiting);
+          // The host initiates the PeerJS connection. Guests simply wait for
+          // the incoming connection and then receive the hello/roster packet.
+          waitingStatus.textContent='Match found. Waiting for host connection…';
         }
         return;
       }

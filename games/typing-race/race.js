@@ -556,22 +556,72 @@
   }
 
   function setupConnection(c) {
-    conn = c;
-    conn.on("open", () => {
+    if (!c) return;
+
+    const connection = c;
+
+    // Replace any previous connection.
+    if (conn && conn !== connection) {
+      try {
+        conn.close();
+      } catch (_) { }
+    }
+
+    conn = connection;
+
+    connection.on("open", () => {
+
+      console.log(
+        "Typing Race PeerJS connection OPEN",
+        {
+          peer: connection.peer,
+          isHost
+        }
+      );
+
       suppressDisconnect = false;
       connected = true;
+
       if (isHost) {
+
         setStatus("Opponent connected");
+
         showPanel("ready");
-        conn.send({ type: "race-config", text: raceText, hostName: playerName });
+
+        if (readyBtn) {
+          readyBtn.disabled = false;
+          readyBtn.textContent = "I'm Ready";
+        }
+
+        readyNote.textContent =
+          "You are connected. Both players must be ready.";
+
+        connection.send({
+          type: "race-config",
+          text: raceText,
+          hostName: playerName
+        });
+
       } else {
-        send({ type: "player-info", name: playerName });
+
+        send({
+          type: "player-info",
+          name: playerName
+        });
+
         showPanel("ready");
-        readyNote.textContent = "You are connected. Both players must be ready.";
+
+        if (readyBtn) {
+          readyBtn.disabled = false;
+          readyBtn.textContent = "I'm Ready";
+        }
+
+        readyNote.textContent =
+          "You are connected. Both players must be ready.";
       }
     });
 
-    conn.on("data", message => {
+    connection.on("data", message => {
       if (!message || typeof message !== "object") return;
 
       if (message.type === "race-config") {
@@ -668,7 +718,8 @@
       }
     });
 
-    conn.on("close", () => {
+    connection.on("close", () => {
+      if (conn !== connection) return;
       connected = false;
       if (suppressDisconnect) return;
       if (!raceFinished) {
@@ -678,7 +729,8 @@
       }
     });
 
-    conn.on("error", err => {
+    connection.on("error", err => {
+      if (conn !== connection) return;
       console.error("Typing Race data connection error:", err);
       if (suppressDisconnect) return;
       liveStatus.textContent = "Connection error. Please start a new race.";
@@ -688,100 +740,498 @@
 
   function startQuickMatch() {
     getPlayerName();
+
     const url = getMatchmakingUrl();
+
     if (!url || /YOUR-MATCHMAKING-SERVER/i.test(url)) {
-      setQuickMatchStatus("Quick Match needs the matchmaking server URL in matchmaking-config.js.");
-      return;
-    }
-    if (typeof Peer === "undefined") {
-      setQuickMatchStatus("Multiplayer library could not load. Please refresh and try again.");
+      setQuickMatchStatus(
+        "Quick Match needs the matchmaking server URL in matchmaking-config.js."
+      );
       return;
     }
 
+    if (typeof Peer === "undefined") {
+      setQuickMatchStatus(
+        "Multiplayer library could not load. Please refresh and try again."
+      );
+      return;
+    }
+
+    // =========================================================
+    // FULL RESET FOR A NEW QUICK MATCH
+    // =========================================================
+    suppressDisconnect = false;
+    quickMatchOpponentPeerId = "";
+    matchmakingQueued = false;
+
+    closeMatchmakingSocket();
     destroyConnection();
     resetRaceState();
+
     quickMatch = true;
-    if (quickMatchCancelBtn) quickMatchCancelBtn.hidden = false;
     isHost = false;
     roomCode = "QUICK";
+
+    if (quickMatchCancelBtn) {
+      quickMatchCancelBtn.hidden = false;
+    }
+
     showPanel("waiting");
-    roomCodeEl.textContent = "AUTO";
+
+    if (roomCodeEl) {
+      roomCodeEl.textContent = "AUTO";
+    }
+
     setStatus("Finding a random opponent…");
     setQuickMatchStatus("Finding a random opponent…");
 
-    peer = new Peer(undefined, { debug: 2 });
+    // Create a completely NEW PeerJS identity.
+    peer = new Peer(undefined, {
+      debug: 2
+    });
 
-    // Quick Match: only the player assigned the host role waits for
-    // the incoming PeerJS connection. The guest is the only side that
-    // calls peer.connect(). This prevents duplicate WebRTC connections.
+    // =========================================================
+    // HOST RECEIVES GUEST CONNECTION
+    // =========================================================
     peer.on("connection", incoming => {
+
+      console.log(
+        "Quick Match: incoming PeerJS connection",
+        incoming?.peer
+      );
+
       if (!quickMatch || !isHost) {
-        try { incoming.close(); } catch (_) { }
+        try {
+          incoming.close();
+        } catch (_) { }
+
         return;
       }
-      if (conn && conn.open) {
-        try { incoming.close(); } catch (_) { }
-        return;
+
+      // Ignore an old connection.
+      if (conn && conn !== incoming) {
+        try {
+          conn.close();
+        } catch (_) { }
+
+        conn = null;
       }
+
       setupConnection(incoming);
     });
 
+    // =========================================================
+    // PEER DISCONNECTED
+    // =========================================================
     peer.on("disconnected", () => {
-      if (quickMatch) setQuickMatchStatus("PeerJS disconnected. Trying to reconnect…");
+
+      console.warn("Quick Match: PeerJS disconnected");
+
+      if (!quickMatch) return;
+
+      try {
+        peer.reconnect();
+      } catch (err) {
+        console.error(
+          "Quick Match: PeerJS reconnect failed",
+          err
+        );
+      }
     });
 
+    // =========================================================
+    // PEER OPEN
+    // =========================================================
     peer.on("open", peerId => {
+
+      console.log(
+        "Quick Match: new PeerJS ID:",
+        peerId
+      );
+
+      if (!quickMatch) return;
+
+      // Safety: never reuse an old matchmaking socket.
+      closeMatchmakingSocket();
+
+      let socket;
+
       try {
-        matchmakingSocket = new WebSocket(url);
-      } catch (_) {
-        setStatus("Could not connect to matchmaking server.");
+        socket = new WebSocket(url);
+      } catch (err) {
+
+        console.error(
+          "Quick Match WebSocket creation failed:",
+          err
+        );
+
+        setStatus(
+          "Could not connect to matchmaking server."
+        );
+
+        setQuickMatchStatus(
+          "Could not connect to matchmaking server."
+        );
+
         return;
       }
-      matchmakingSocket.addEventListener("open", () => {
+
+      matchmakingSocket = socket;
+
+      socket.addEventListener("open", () => {
+
+        if (!quickMatch) {
+          try {
+            socket.close();
+          } catch (_) { }
+
+          return;
+        }
+
         matchmakingQueued = true;
-        matchmakingSocket.send(JSON.stringify({ type: "queue", peerId, name: playerName }));
-        setStatus("Finding a random opponent…");
+        quickMatchOpponentPeerId = "";
+
+        console.log(
+          "Quick Match: joining queue",
+          peerId
+        );
+
+        socket.send(JSON.stringify({
+          type: "queue",
+          peerId: String(peerId),
+          name: playerName,
+          playerCount: 2
+        }));
+
+        setStatus(
+          "Finding a random opponent…"
+        );
+
+        setQuickMatchStatus(
+          "Waiting for another player to choose Quick Match…"
+        );
       });
-      matchmakingSocket.addEventListener("message", event => {
+
+      socket.addEventListener("message", event => {
+
         let message;
-        try { message = JSON.parse(event.data); } catch (_) { return; }
+
+        try {
+          message = JSON.parse(event.data);
+        } catch (_) {
+          return;
+        }
+
+        console.log(
+          "Quick Match server message:",
+          message
+        );
+
+        // =====================================================
+        // QUEUED
+        // =====================================================
         if (message.type === "queued") {
+
           matchmakingQueued = true;
-          setStatus("Waiting for a random player…");
-          setQuickMatchStatus("Waiting for another player to choose Quick Match…");
+
+          setStatus(
+            "Waiting for a random player…"
+          );
+
+          setQuickMatchStatus(
+            "Waiting for another player to choose Quick Match…"
+          );
+
+          return;
         }
+
+        // =====================================================
+        // MATCH FOUND
+        // =====================================================
         if (message.type === "match") {
+
           matchmakingQueued = false;
-          quickMatchOpponentPeerId = String(message.opponentPeerId || "");
-          isHost = message.role === "host";
-          setOpponentName(message.opponentName || "Opponent");
-          roomCode = "QUICK";
-          setStatus("Opponent found!");
-          setQuickMatchStatus("Opponent found! Connecting…");
-          closeMatchmakingSocket();
-          if (isHost) {
-            // Host waits for the guest's incoming PeerJS connection.
-            setStatus("Opponent found! Waiting for connection…");
-            setQuickMatchStatus("Opponent found! Waiting for the connection…");
+
+          const myPeerId = String(peer?.id || "");
+
+          const peerIds = Array.isArray(message.peerIds)
+            ? message.peerIds.map(String)
+            : [];
+
+          console.log(
+            "Quick Match match received:",
+            {
+              role: message.role,
+              myPeerId,
+              hostPeerId: message.hostPeerId,
+              peerIds
+            }
+          );
+
+          // Determine opponent PeerJS ID.
+          if (message.role === "host") {
+
+            isHost = true;
+
+            quickMatchOpponentPeerId =
+              peerIds.find(id => id !== myPeerId) || "";
+
           } else {
-            // Guest initiates the PeerJS data connection to the host.
-            setStatus("Opponent found! Connecting…");
-            const outgoing = peer.connect(quickMatchOpponentPeerId, { reliable: true });
-            setupConnection(outgoing);
+
+            isHost = false;
+
+            quickMatchOpponentPeerId =
+              String(message.hostPeerId || "");
           }
+
+          roomCode = "QUICK";
+
+          setOpponentName(
+            message.opponentName ||
+            message.name ||
+            "Opponent"
+          );
+
+          setStatus(
+            "Opponent found!"
+          );
+
+          setQuickMatchStatus(
+            "Opponent found! Connecting…"
+          );
+
+          // Matchmaking is finished.
+          try {
+            socket.close();
+          } catch (_) { }
+
+          if (matchmakingSocket === socket) {
+            matchmakingSocket = null;
+          }
+
+          // ===================================================
+          // INVALID PEER ID
+          // ===================================================
+          if (!quickMatchOpponentPeerId) {
+
+            console.error(
+              "Quick Match: missing opponent PeerJS ID",
+              message
+            );
+
+            setStatus(
+              "Opponent found, but connection information is missing."
+            );
+
+            setQuickMatchStatus(
+              "Connection information missing. Please try Quick Match again."
+            );
+
+            return;
+          }
+
+          // ===================================================
+          // HOST
+          // ===================================================
+          if (isHost) {
+
+            console.log(
+              "Quick Match HOST waiting for:",
+              quickMatchOpponentPeerId
+            );
+
+            setStatus(
+              "Opponent found! Waiting for connection…"
+            );
+
+            setQuickMatchStatus(
+              "Opponent found! Waiting for the connection…"
+            );
+
+            /*
+             * IMPORTANT:
+             * Host DOES NOT call peer.connect().
+             * Host waits for the guest's incoming connection.
+             */
+            return;
+          }
+
+          // ===================================================
+          // GUEST
+          // ===================================================
+          console.log(
+            "Quick Match GUEST connecting to:",
+            quickMatchOpponentPeerId
+          );
+
+          setStatus(
+            "Opponent found! Connecting…"
+          );
+
+          setQuickMatchStatus(
+            "Connecting to host…"
+          );
+
+          let outgoing;
+
+          try {
+
+            outgoing = peer.connect(
+              quickMatchOpponentPeerId,
+              {
+                reliable: true,
+                serialization: "json"
+              }
+            );
+
+          } catch (err) {
+
+            console.error(
+              "Quick Match peer.connect failed:",
+              err
+            );
+
+            setStatus(
+              "Could not connect to host."
+            );
+
+            setQuickMatchStatus(
+              "Could not connect to host. Please try Quick Match again."
+            );
+
+            return;
+          }
+
+          setupConnection(outgoing);
+
+          // ===================================================
+          // CONNECTION TIMEOUT
+          // ===================================================
+          setTimeout(() => {
+
+            if (
+              quickMatch &&
+              !connected &&
+              conn === outgoing
+            ) {
+
+              console.warn(
+                "Quick Match: connection timeout"
+              );
+
+              try {
+                outgoing.close();
+              } catch (_) { }
+
+              setStatus(
+                "Connection timed out."
+              );
+
+              setQuickMatchStatus(
+                "Connection timed out. Please try Quick Match again."
+              );
+
+              if (readyBtn) {
+                readyBtn.disabled = false;
+                readyBtn.textContent = "I'm Ready";
+              }
+            }
+
+          }, 15000);
+
+          return;
         }
-        if (message.type === "error") setStatus(message.message || "Matchmaking error.");
+
+        // =====================================================
+        // SERVER ERROR
+        // =====================================================
+        if (message.type === "error") {
+
+          console.error(
+            "Quick Match server error:",
+            message
+          );
+
+          setStatus(
+            message.message ||
+            "Matchmaking error."
+          );
+
+          setQuickMatchStatus(
+            message.message ||
+            "Matchmaking error."
+          );
+        }
       });
-      matchmakingSocket.addEventListener("close", () => {
-        if (matchmakingQueued) setStatus("Matchmaking connection closed. Try Quick Match again.");
+
+      socket.addEventListener("close", () => {
+
+        console.log(
+          "Quick Match matchmaking socket closed"
+        );
+
+        if (
+          quickMatch &&
+          matchmakingQueued
+        ) {
+
+          setStatus(
+            "Matchmaking connection closed. Try Quick Match again."
+          );
+        }
       });
-      matchmakingSocket.addEventListener("error", () => {
-        if (matchmakingQueued) setStatus("Could not reach matchmaking server.");
+
+      socket.addEventListener("error", error => {
+
+        console.error(
+          "Quick Match matchmaking WebSocket error:",
+          error
+        );
+
+        if (!quickMatch) return;
+
+        setStatus(
+          "Could not reach matchmaking server."
+        );
+
+        setQuickMatchStatus(
+          "Could not reach matchmaking server."
+        );
       });
     });
+
+    // =========================================================
+    // PEER ERROR
+    // =========================================================
     peer.on("error", err => {
-      console.error("Quick Match Peer error:", err);
-      setStatus("Could not start Quick Match. Please try again.");
+
+      console.error(
+        "Quick Match PeerJS error:",
+        err
+      );
+
+      if (!quickMatch) return;
+
+      if (err?.type === "peer-unavailable") {
+
+        setStatus(
+          "Host is no longer available."
+        );
+
+        setQuickMatchStatus(
+          "Host disconnected. Please start Quick Match again."
+        );
+
+      } else {
+
+        setStatus(
+          "Could not start Quick Match. Please try again."
+        );
+
+        setQuickMatchStatus(
+          "Could not establish the connection. Please try again."
+        );
+      }
     });
   }
 
@@ -1043,12 +1493,41 @@
   }
 
   function leaveRace() {
+    // Stop the current race completely.
     suppressDisconnect = true;
-    send({ type: "leave" });
+
+    quickMatch = false;
+    matchmakingQueued = false;
+    quickMatchOpponentPeerId = "";
+
+    try {
+      if (conn?.open) {
+        conn.send({ type: "leave" });
+      }
+    } catch (_) { }
+
+    closeMatchmakingSocket();
+
     destroyConnection();
+
     resetRaceState();
+
+    isHost = false;
+    roomCode = "";
+
+    if (quickMatchCancelBtn) {
+      quickMatchCancelBtn.hidden = true;
+    }
+
+    if (codeInput) {
+      codeInput.value = "";
+    }
+
     showPanel("lobby");
-    if (codeInput) codeInput.value = "";
+
+    setStatus("");
+
+    setQuickMatchStatus("");
   }
 
   quickMatchBtn?.addEventListener("click", startQuickMatch);

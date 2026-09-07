@@ -524,8 +524,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("result-visible");
     if (typingBox) typingBox.style.display = "none";
     const restart = document.querySelector(".restart-wrapper");
-    if (restart) restart.style.display = "none";
-    if (resultScreen) resultScreen.style.display = "block";
+    if (restart) restart.style.visibility = "hidden";
+    if (resultScreen) resultScreen.style.visibility = "hidden";
   }
 
   function resetTest() {

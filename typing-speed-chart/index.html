@@ -8,19 +8,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large">
 
   <title>Typing Speed Chart - WPM Levels Explained | TypingMeter</title>
-  <meta name="description" content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
+  <meta name="description"
+    content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
   <link rel="canonical" href="https://typingmeter.vercel.app/typing-speed-chart/">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Typing Speed Chart - WPM Levels Explained | TypingMeter">
-  <meta property="og:description" content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
+  <meta property="og:description"
+    content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
   <meta property="og:url" content="https://typingmeter.vercel.app/typing-speed-chart/">
   <meta property="og:site_name" content="TypingMeter">
   <meta property="og:image" content="https://typingmeter.vercel.app/assets/images/logo-small.svg">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Typing Speed Chart - WPM Levels Explained | TypingMeter">
-  <meta name="twitter:description" content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
+  <meta name="twitter:description"
+    content="Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.">
 
   <meta name="theme-color" content="#111111">
   <link rel="icon" type="image/x-icon" href="/icon.ico">
@@ -53,7 +56,8 @@
   }
   </script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -69,7 +73,8 @@
       </a>
 
       <div class="best">
-        <img src="/assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal best:</span>
+        <img src="/assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal
+          best:</span>
         <strong id="personalBest">35 WPM</strong>
       </div>
 
@@ -77,7 +82,8 @@
     <section class="seo-landing" aria-labelledby="landing-title">
       <div class="landing-header">
         <h1 id="landing-title">Typing Speed Chart</h1>
-        <p class="landing-lead">Use WPM as a practical way to track typing progress while considering accuracy and consistency.</p>
+        <p class="landing-lead">Use WPM as a practical way to track typing progress while considering accuracy and
+          consistency.</p>
         <nav class="landing-links" aria-label="Related typing tests">
           <a href="../">Main Typing Test</a>
           <a href="/1-minute-typing-test/">1 Minute</a>
@@ -87,7 +93,7 @@
         </nav>
       </div>
     </section>
-<div class="control-bar hide-during-typing">
+    <div class="control-bar hide-during-typing">
 
       <div class="control-group difficulty-group" aria-label="Difficulty">
         <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Easy</button>
@@ -142,329 +148,430 @@
       <span id="liveWords" class="live-status-item">0 words</span>
     </div>
 
-  <!-- Typing Area -->
-  <div class="typing-box">
-    <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
-      <span class="focus-cursor">➤</span>
-      <span>Click here or press any key to focus</span>
-    </button>
-    <div class="text-area blur" id="text" tabindex="0"></div>
-  </div>
-
-  <div class="restart-wrapper">
-    <button class="restart-btn-main" id="restartMainBtn">
-      Restart Test ↻
-    </button>
-    <button class="history-toggle" id="historyToggle" type="button">History</button>
-
-    <div class="local-history" id="localHistory">
-      <div class="local-history-header">
-        <span>Recent tests</span>
-        <button class="local-history-clear" id="clearHistory" type="button">Clear</button>
-      </div>
-      <ul class="local-history-list" id="historyList"></ul>
+    <!-- Typing Area -->
+    <div class="typing-box">
+      <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
+        <span class="focus-cursor">➤</span>
+        <span>Click here or press any key to focus</span>
+      </button>
+      <div class="text-area blur" id="text" tabindex="0"></div>
     </div>
-  </div>
+
+    <div class="restart-wrapper">
+      <button class="restart-btn-main" id="restartMainBtn">
+        Restart Test ↻
+      </button>
+      <button class="history-toggle" id="historyToggle" type="button">History</button>
+
+      <div class="local-history" id="localHistory">
+        <div class="local-history-header">
+          <span>Recent tests</span>
+          <button class="local-history-clear" id="clearHistory" type="button">Clear</button>
+        </div>
+        <ul class="local-history-list" id="historyList"></ul>
+      </div>
+    </div>
 
 
-  <!-- Result Screen -->
-  <div class="result-screen" id="resultScreen">
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
 
-    <div class="result-graph-wrap">
-      <div class="result-graph-header">
+      <div class="result-graph-wrap">
+        <div class="result-graph-header">
+          <div>
+            <div class="result-graph-title">WPM Progress</div>
+            <div class="result-graph-subtitle">Your speed during the test</div>
+          </div>
+          <div class="top-speed-indicator">
+            <span class="top-speed-dot"></span>
+            <span>Top speed: <strong id="topSpeed">0 WPM</strong></span>
+          </div>
+        </div>
+        <canvas id="wpmGraph" width="760" height="210" aria-label="WPM progress graph"></canvas>
+      </div>
+
+      <div class="result-stats">
+
+        <div class="result-card">
+          <span>WPM</span>
+          <h2 id="resWpm">0</h2>
+        </div>
+
+        <div class="result-card">
+          <span>Accuracy</span>
+          <h2 id="resAcc">0%</h2>
+        </div>
+
+        <div class="result-card">
+          <span>Characters</span>
+          <h2 id="resChar">0</h2>
+        </div>
+
+        <div class="result-card advanced-result">
+          <span>Raw WPM</span>
+          <h2 id="resRawWpm">0</h2>
+        </div>
+
+        <div class="result-card advanced-result">
+          <span>Errors</span>
+          <h2 id="resErrors">0</h2>
+        </div>
+
+        <div class="result-card advanced-result">
+          <span>Consistency</span>
+          <h2 id="resConsistency">0%</h2>
+        </div>
+
+      </div>
+
+      <button class="retry-btn" id="retryBtn">
+        Beat This Score ↻
+      </button>
+
+    </div>
+
+    <section class="games-promo" aria-labelledby="games-promo-title">
+      <div class="games-promo-head">
         <div>
-          <div class="result-graph-title">WPM Progress</div>
-          <div class="result-graph-subtitle">Your speed during the test</div>
+          <span class="games-promo-kicker">PLAY &amp; COMPETE</span>
+          <h2 id="games-promo-title">Typing Games</h2>
+          <p>
+            Ready for more than a typing test?
+            Challenge other players with TypingMeter's multiplayer typing games.
+          </p>
         </div>
-        <div class="top-speed-indicator">
-          <span class="top-speed-dot"></span>
-          <span>Top speed: <strong id="topSpeed">0 WPM</strong></span>
+
+        <a class="games-promo-all" href="/games/">
+          Explore Games →
+        </a>
+      </div>
+
+      <div class="games-promo-grid">
+
+        <a class="game-promo-card" href="/games/typing-race/">
+          <span class="game-promo-icon">🏁</span>
+          <span class="game-promo-info">
+            <strong>Typing Race</strong>
+            <small>Race another player</small>
+          </span>
+          <span class="game-promo-arrow">→</span>
+        </a>
+
+        <a class="game-promo-card" href="/games/typing-war/">
+          <span class="game-promo-icon">⚔️</span>
+          <span class="game-promo-info">
+            <strong>Typing War</strong>
+            <small>Battle in real time</small>
+          </span>
+          <span class="game-promo-arrow">→</span>
+        </a>
+
+        <a class="game-promo-card" href="/games/speed-rush/">
+          <span class="game-promo-icon">⚡</span>
+          <span class="game-promo-info">
+            <strong>Speed Rush</strong>
+            <small>Race with more players</small>
+          </span>
+          <span class="game-promo-arrow">→</span>
+        </a>
+
+        <a class="game-promo-card" href="/games/accuracy-master/">
+          <span class="game-promo-icon">🎯</span>
+          <span class="game-promo-info">
+            <strong>Accuracy Master</strong>
+            <small>Accuracy-focused battle</small>
+          </span>
+          <span class="game-promo-arrow">→</span>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="landing-info" aria-labelledby="page-info-title">
+      <h2 id="page-info-title">Typing Speed Chart</h2>
+      <p>Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.</p>
+      <h3>How to use this typing test</h3>
+      <p>Choose your preferred difficulty and test settings, click the typing area or press a key to focus, and type the
+        displayed text. Your result includes WPM, accuracy, characters, raw WPM, errors and consistency.</p>
+      <h3>Why practice with TypingMeter?</h3>
+      <p>TypingMeter keeps the test focused while giving you useful feedback after each session. Your local history and
+        personal best can help you compare repeated practice sessions on the same device.</p>
+      <section class="article-extra">
+        <h2>Simple WPM levels</h2>
+        <table class="wpm-table">
+          <tr>
+            <th>WPM</th>
+            <th>Practice level</th>
+          </tr>
+          <tr>
+            <td>Under 30</td>
+            <td>Beginner practice</td>
+          </tr>
+          <tr>
+            <td>30–50</td>
+            <td>Developing speed</td>
+          </tr>
+          <tr>
+            <td>50–70</td>
+            <td>Solid everyday speed</td>
+          </tr>
+          <tr>
+            <td>70–100</td>
+            <td>Fast typing practice</td>
+          </tr>
+          <tr>
+            <td>100+</td>
+            <td>Very fast typing</td>
+          </tr>
+        </table>
+        <p>These labels are practical guideposts rather than universal standards.</p>
+      </section>
+      <h2>Related Typing Tests</h2>
+      <div class="seo-link-grid">
+        <a href="/typing-test/">Typing Test</a><a href="/typing-speed-test/">Typing Speed Test</a><a
+          href="/30-second-typing-test/">30 Second Test</a><a href="/1-minute-typing-test/">1 Minute Test</a><a
+          href="/2-minute-typing-test/">2 Minute Test</a><a href="/5-minute-typing-test/">5 Minute Test</a><a
+          href="/10-minute-typing-test/">10 Minute Test</a><a href="/wpm-test/">WPM Test</a><a
+          href="/typing-practice/">Typing Practice</a>
+      </div>
+      <h2>Frequently Asked Questions</h2>
+      <div class="seo-faq">
+        <details>
+          <summary>Is this typing test free?</summary>
+          <p>Yes. TypingMeter provides free online typing tests and practice features.</p>
+        </details>
+        <details>
+          <summary>Does TypingMeter measure accuracy?</summary>
+          <p>Yes. The result screen reports typing accuracy along with WPM and other statistics.</p>
+        </details>
+        <details>
+          <summary>Can I practice different difficulty levels?</summary>
+          <p>Yes. The app includes Easy, Medium and Hard passage difficulty settings.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Footer: information links on the left, controls/settings on the right -->
+
+    <!-- One-page information sections. These stay in index.html. -->
+    <section class="info-panel" id="aboutPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">ABOUT</span>
+            <h2>About TypingMeter</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <p>TypingMeter is a free online typing practice tool designed to make speed and accuracy testing simple and
+          distraction-free.</p>
+        <h3>What TypingMeter provides</h3>
+        <ul>
+          <li>Timed typing tests with different lengths.</li>
+          <li>Word-count and passage practice.</li>
+          <li>WPM, accuracy, errors, and consistency results.</li>
+          <li>Local test history and personal-best tracking on your device.</li>
+        </ul>
+        <p>Our goal is to help students, professionals, writers, developers, and everyday users practice typing and
+          measure their progress.</p>
+      </div>
+    </section>
+
+    <section class="info-panel" id="wpmPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">TYPING GUIDE</span>
+            <h2>What Is WPM?</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <p>WPM means <strong>words per minute</strong>. It is a common way to describe typing speed.</p>
+        <h3>How WPM is calculated</h3>
+        <p>A common typing-test convention treats five typed characters, including spaces, as one word.</p>
+        <p><strong>WPM = typed characters ÷ 5 ÷ minutes</strong></p>
+        <h3>Why accuracy matters</h3>
+        <p>Speed alone does not tell the whole story. A useful typing result also considers mistakes and accuracy.</p>
+        <h3>How to improve your WPM</h3>
+        <ol>
+          <li>Practice regularly.</li>
+          <li>Focus on accuracy before maximum speed.</li>
+          <li>Learn consistent finger positioning.</li>
+          <li>Keep a steady typing rhythm.</li>
+          <li>Track progress over multiple tests.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="info-panel" id="tipsPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">PRACTICE</span>
+            <h2>Typing Tips</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <h3>1. Prioritize accuracy</h3>
+        <p>Typing fewer errors at a steady pace is generally more useful than typing very quickly with frequent
+          corrections.</p>
+        <h3>2. Practice touch typing</h3>
+        <p>Learn where keys are located and use consistent finger positions to reduce unnecessary hand movement.</p>
+        <h3>3. Keep a steady rhythm</h3>
+        <p>A consistent pace can help you avoid repeated pauses and sudden bursts of speed.</p>
+        <h3>4. Review your mistakes</h3>
+        <p>Notice which letters, combinations, or words cause repeated errors and give those areas extra practice.</p>
+        <h3>5. Practice consistently</h3>
+        <p>Short, regular sessions are easier to maintain than occasional long sessions. Use different passages so your
+          practice remains varied.</p>
+      </div>
+    </section>
+
+    <section class="info-panel" id="contactPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">CONTACT</span>
+            <h2>Contact TypingMeter</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <p>For questions, feedback, bug reports, accessibility issues, or suggestions about TypingMeter, contact us
+          using
+          the email address below.</p>
+        <p class="contact-email"><a href="mailto:sourabhc.0102@gmail.com">sourabhc.0102@gmail.com</a></p>
+        <p>Please do not send passwords, payment information, bank details, or other sensitive information by email.</p>
+      </div>
+    </section>
+
+    <section class="info-panel" id="termsPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">TERMS</span>
+            <h2>Terms of Use</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <p><strong>Last updated: September 3, 2026</strong></p>
+        <h3>Using TypingMeter</h3>
+        <p>You may use TypingMeter for lawful personal, educational, and professional typing practice. Do not misuse the
+          website, interfere with its operation, attempt unauthorized access, or use automated activity that harms the
+          service.</p>
+        <h3>Typing results</h3>
+        <p>WPM, accuracy, errors, and related results are provided for practice and informational purposes. Results can
+          vary with the text, device, keyboard, browser, and other conditions.</p>
+        <h3>Third-party services</h3>
+        <p>The website may use third-party services such as hosting, advertising, analytics, or external links. Those
+          services may have their own terms and policies.</p>
+        <h3>Availability</h3>
+        <p>TypingMeter may be updated, changed, temporarily unavailable, or discontinued as needed for maintenance,
+          security, or improvements.</p>
+      </div>
+    </section>
+
+    <section class="info-panel" id="privacyPanel" aria-hidden="true">
+      <div class="info-panel-card">
+        <div class="info-panel-head">
+          <div><span class="info-kicker">PRIVACY</span>
+            <h2>Privacy Policy</h2>
+          </div><button type="button" class="info-close" data-info-close>×</button>
+        </div>
+        <p><strong>Last updated: September 3, 2026</strong></p>
+        <p>TypingMeter is designed to minimize the information it collects. Typing preferences, test history, and
+          personal-best information may be stored locally in your browser to provide site features.</p>
+        <h3>Information and financial data</h3>
+        <p>TypingMeter does not request bank account numbers, payment-card details, UPI IDs, or other financial
+          information for the typing-test features.</p>
+        <h3>Cookies and advertising</h3>
+        <p>TypingMeter may use cookies or similar technologies through advertising and measurement services. Third-party
+          advertising vendors, including Google, may use cookies to serve or measure ads according to their own policies
+          and applicable settings.</p>
+        <p>For information about Google's advertising controls, visit <a href="https://adssettings.google.com/"
+            target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</p>
+        <h3>Local storage</h3>
+        <p>Some settings, test history, and personal-best data can be stored in your browser's local storage. Clearing
+          site data can remove locally stored information.</p>
+        <h3>Security</h3>
+        <p>Reasonable measures are used to protect the website and its services, but no internet system can guarantee
+          complete security.</p>
+        <h3>Changes to this policy</h3>
+        <p>This policy may be updated when site features, services, or legal requirements change.</p>
+      </div>
+    </section>
+
+    <!-- Settings / Statistics / Shortcuts panels -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+      <div class="modal-card custom-modal-card">
+        <div class="modal-head">
+          <h2>Custom Test</h2><button class="modal-close" data-close="customModal" type="button">×</button>
+        </div>
+        <p class="custom-modal-sub" id="customModalSub">Choose your own test length.</p>
+        <div class="custom-test-options">
+          <div class="custom-option time-custom-option">
+            <label for="customTimeInput">Time</label>
+            <div class="custom-input-row"><input id="customTimeInput" type="number" min="5" max="3600" value="45"
+                inputmode="numeric"><span>seconds</span><button id="applyCustomTime" type="button">Use Time</button>
+            </div>
+          </div>
+          <div class="custom-option words-custom-option">
+            <label for="customWordsInput">Words</label>
+            <div class="custom-input-row"><input id="customWordsInput" type="number" min="1" max="1000" value="25"
+                inputmode="numeric"><span>words</span><button id="applyCustomWords" type="button">Use Words</button>
+            </div>
+          </div>
         </div>
       </div>
-      <canvas id="wpmGraph" width="760" height="210" aria-label="WPM progress graph"></canvas>
     </div>
 
-    <div class="result-stats">
-
-      <div class="result-card">
-        <span>WPM</span>
-        <h2 id="resWpm">0</h2>
-      </div>
-
-      <div class="result-card">
-        <span>Accuracy</span>
-        <h2 id="resAcc">0%</h2>
-      </div>
-
-      <div class="result-card">
-        <span>Characters</span>
-        <h2 id="resChar">0</h2>
-      </div>
-
-      <div class="result-card advanced-result">
-        <span>Raw WPM</span>
-        <h2 id="resRawWpm">0</h2>
-      </div>
-
-      <div class="result-card advanced-result">
-        <span>Errors</span>
-        <h2 id="resErrors">0</h2>
-      </div>
-
-      <div class="result-card advanced-result">
-        <span>Consistency</span>
-        <h2 id="resConsistency">0%</h2>
-      </div>
-
-    </div>
-
-    <button class="retry-btn" id="retryBtn">
-      Beat This Score ↻
-    </button>
-
-  </div>
-
-
-
-
-  <section class="landing-info" aria-labelledby="page-info-title">
-    <h2 id="page-info-title">Typing Speed Chart</h2>
-    <p>Explore a simple typing speed chart in WPM and learn how to interpret typing speed and accuracy results.</p>
-    <h3>How to use this typing test</h3>
-    <p>Choose your preferred difficulty and test settings, click the typing area or press a key to focus, and type the displayed text. Your result includes WPM, accuracy, characters, raw WPM, errors and consistency.</p>
-    <h3>Why practice with TypingMeter?</h3>
-    <p>TypingMeter keeps the test focused while giving you useful feedback after each session. Your local history and personal best can help you compare repeated practice sessions on the same device.</p>
-    <section class="article-extra"><h2>Simple WPM levels</h2><table class="wpm-table"><tr><th>WPM</th><th>Practice level</th></tr><tr><td>Under 30</td><td>Beginner practice</td></tr><tr><td>30–50</td><td>Developing speed</td></tr><tr><td>50–70</td><td>Solid everyday speed</td></tr><tr><td>70–100</td><td>Fast typing practice</td></tr><tr><td>100+</td><td>Very fast typing</td></tr></table><p>These labels are practical guideposts rather than universal standards.</p></section>
-    <h2>Related Typing Tests</h2>
-    <div class="seo-link-grid">
-      <a href="/typing-test/">Typing Test</a><a href="/typing-speed-test/">Typing Speed Test</a><a href="/30-second-typing-test/">30 Second Test</a><a href="/1-minute-typing-test/">1 Minute Test</a><a href="/2-minute-typing-test/">2 Minute Test</a><a href="/5-minute-typing-test/">5 Minute Test</a><a href="/10-minute-typing-test/">10 Minute Test</a><a href="/wpm-test/">WPM Test</a><a href="/typing-practice/">Typing Practice</a>
-    </div>
-    <h2>Frequently Asked Questions</h2>
-    <div class="seo-faq">
-      <details><summary>Is this typing test free?</summary><p>Yes. TypingMeter provides free online typing tests and practice features.</p></details>
-      <details><summary>Does TypingMeter measure accuracy?</summary><p>Yes. The result screen reports typing accuracy along with WPM and other statistics.</p></details>
-      <details><summary>Can I practice different difficulty levels?</summary><p>Yes. The app includes Easy, Medium and Hard passage difficulty settings.</p></details>
-    </div>
-  </section>
-
-  <!-- Footer: information links on the left, controls/settings on the right -->
-
-  <!-- One-page information sections. These stay in index.html. -->
-  <section class="info-panel" id="aboutPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">ABOUT</span>
-          <h2>About TypingMeter</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <p>TypingMeter is a free online typing practice tool designed to make speed and accuracy testing simple and
-        distraction-free.</p>
-      <h3>What TypingMeter provides</h3>
-      <ul>
-        <li>Timed typing tests with different lengths.</li>
-        <li>Word-count and passage practice.</li>
-        <li>WPM, accuracy, errors, and consistency results.</li>
-        <li>Local test history and personal-best tracking on your device.</li>
-      </ul>
-      <p>Our goal is to help students, professionals, writers, developers, and everyday users practice typing and
-        measure their progress.</p>
-    </div>
-  </section>
-
-  <section class="info-panel" id="wpmPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">TYPING GUIDE</span>
-          <h2>What Is WPM?</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <p>WPM means <strong>words per minute</strong>. It is a common way to describe typing speed.</p>
-      <h3>How WPM is calculated</h3>
-      <p>A common typing-test convention treats five typed characters, including spaces, as one word.</p>
-      <p><strong>WPM = typed characters ÷ 5 ÷ minutes</strong></p>
-      <h3>Why accuracy matters</h3>
-      <p>Speed alone does not tell the whole story. A useful typing result also considers mistakes and accuracy.</p>
-      <h3>How to improve your WPM</h3>
-      <ol>
-        <li>Practice regularly.</li>
-        <li>Focus on accuracy before maximum speed.</li>
-        <li>Learn consistent finger positioning.</li>
-        <li>Keep a steady typing rhythm.</li>
-        <li>Track progress over multiple tests.</li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="info-panel" id="tipsPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">PRACTICE</span>
-          <h2>Typing Tips</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <h3>1. Prioritize accuracy</h3>
-      <p>Typing fewer errors at a steady pace is generally more useful than typing very quickly with frequent
-        corrections.</p>
-      <h3>2. Practice touch typing</h3>
-      <p>Learn where keys are located and use consistent finger positions to reduce unnecessary hand movement.</p>
-      <h3>3. Keep a steady rhythm</h3>
-      <p>A consistent pace can help you avoid repeated pauses and sudden bursts of speed.</p>
-      <h3>4. Review your mistakes</h3>
-      <p>Notice which letters, combinations, or words cause repeated errors and give those areas extra practice.</p>
-      <h3>5. Practice consistently</h3>
-      <p>Short, regular sessions are easier to maintain than occasional long sessions. Use different passages so your
-        practice remains varied.</p>
-    </div>
-  </section>
-
-  <section class="info-panel" id="contactPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">CONTACT</span>
-          <h2>Contact TypingMeter</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <p>For questions, feedback, bug reports, accessibility issues, or suggestions about TypingMeter, contact us using
-        the email address below.</p>
-      <p class="contact-email"><a href="mailto:YOUR-EMAIL@example.com">YOUR-EMAIL@example.com</a></p>
-      <p>Please do not send passwords, payment information, bank details, or other sensitive information by email.</p>
-    </div>
-  </section>
-
-  <section class="info-panel" id="termsPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">TERMS</span>
-          <h2>Terms of Use</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <p><strong>Last updated: September 3, 2026</strong></p>
-      <h3>Using TypingMeter</h3>
-      <p>You may use TypingMeter for lawful personal, educational, and professional typing practice. Do not misuse the
-        website, interfere with its operation, attempt unauthorized access, or use automated activity that harms the
-        service.</p>
-      <h3>Typing results</h3>
-      <p>WPM, accuracy, errors, and related results are provided for practice and informational purposes. Results can
-        vary with the text, device, keyboard, browser, and other conditions.</p>
-      <h3>Third-party services</h3>
-      <p>The website may use third-party services such as hosting, advertising, analytics, or external links. Those
-        services may have their own terms and policies.</p>
-      <h3>Availability</h3>
-      <p>TypingMeter may be updated, changed, temporarily unavailable, or discontinued as needed for maintenance,
-        security, or improvements.</p>
-    </div>
-  </section>
-
-  <section class="info-panel" id="privacyPanel" aria-hidden="true">
-    <div class="info-panel-card">
-      <div class="info-panel-head">
-        <div><span class="info-kicker">PRIVACY</span>
-          <h2>Privacy Policy</h2>
-        </div><button type="button" class="info-close" data-info-close>×</button>
-      </div>
-      <p><strong>Last updated: September 3, 2026</strong></p>
-      <p>TypingMeter is designed to minimize the information it collects. Typing preferences, test history, and
-        personal-best information may be stored locally in your browser to provide site features.</p>
-      <h3>Information and financial data</h3>
-      <p>TypingMeter does not request bank account numbers, payment-card details, UPI IDs, or other financial
-        information for the typing-test features.</p>
-      <h3>Cookies and advertising</h3>
-      <p>TypingMeter may use cookies or similar technologies through advertising and measurement services. Third-party
-        advertising vendors, including Google, may use cookies to serve or measure ads according to their own policies
-        and applicable settings.</p>
-      <p>For information about Google's advertising controls, visit <a href="https://adssettings.google.com/"
-          target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</p>
-      <h3>Local storage</h3>
-      <p>Some settings, test history, and personal-best data can be stored in your browser's local storage. Clearing
-        site data can remove locally stored information.</p>
-      <h3>Security</h3>
-      <p>Reasonable measures are used to protect the website and its services, but no internet system can guarantee
-        complete security.</p>
-      <h3>Changes to this policy</h3>
-      <p>This policy may be updated when site features, services, or legal requirements change.</p>
-    </div>
-  </section>
-
-  <!-- Settings / Statistics / Shortcuts panels -->
-  <div class="app-modal" id="customModal" aria-hidden="true">
-    <div class="modal-card custom-modal-card">
-      <div class="modal-head">
-        <h2>Custom Test</h2><button class="modal-close" data-close="customModal" type="button">×</button>
-      </div>
-      <p class="custom-modal-sub" id="customModalSub">Choose your own test length.</p>
-      <div class="custom-test-options">
-        <div class="custom-option time-custom-option">
-          <label for="customTimeInput">Time</label>
-          <div class="custom-input-row"><input id="customTimeInput" type="number" min="5" max="3600" value="45"
-              inputmode="numeric"><span>seconds</span><button id="applyCustomTime" type="button">Use Time</button></div>
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2>Settings</h2><button class="modal-close" data-close="settingsModal">×</button>
         </div>
-        <div class="custom-option words-custom-option">
-          <label for="customWordsInput">Words</label>
-          <div class="custom-input-row"><input id="customWordsInput" type="number" min="1" max="1000" value="25"
-              inputmode="numeric"><span>words</span><button id="applyCustomWords" type="button">Use Words</button></div>
+        <div class="settings-grid">
+          <label>Theme<select id="themeSelect">
+              <option value="dark">Dark</option>
+              <option value="midnight">Midnight Blue</option>
+              <option value="light">Light</option>
+            </select></label>
+          <label>Caret<select id="caretSelect">
+              <option value="line">Line</option>
+              <option value="block">Block</option>
+              <option value="underline">Underline</option>
+            </select></label>
+          <label>Font Size<input id="fontSizeRange" type="range" min="20" max="36" value="28"></label>
+        </div>
+        <p class="settings-hint">Settings are saved automatically on this device.</p>
+      </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+      <div class="modal-card stats-dashboard">
+        <div class="modal-head">
+          <h2>Statistics</h2><button class="modal-close" data-close="statsModal">×</button>
+        </div>
+        <div class="dashboard-grid">
+          <div><span>Tests</span><strong id="dashTests">0</strong></div>
+          <div><span>Best WPM</span><strong id="dashBest">0</strong></div>
+          <div><span>Average WPM</span><strong id="dashAvg">0</strong></div>
+          <div><span>Average Accuracy</span><strong id="dashAcc">0%</strong></div>
+          <div><span>Total Characters</span><strong id="dashChars">0</strong></div>
+          <div><span>Total Errors</span><strong id="dashErrors">0</strong></div>
+        </div>
+        <div class="dashboard-chart"><canvas id="statsGraph" width="760" height="190"></canvas></div>
+      </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2>Keyboard Shortcuts</h2><button class="modal-close" data-close="shortcutsModal">×</button>
+        </div>
+        <div class="shortcut-list">
+          <div><kbd>Tab</kbd><span>Keep focus on the typing area</span></div>
+          <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Restart test</span></div>
+          <div><kbd>Esc</kbd><span>Close an open panel</span></div>
+          <div><kbd>/</kbd><span>Open shortcuts</span></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="app-modal" id="settingsModal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2>Settings</h2><button class="modal-close" data-close="settingsModal">×</button>
-      </div>
-      <div class="settings-grid">
-        <label>Theme<select id="themeSelect">
-            <option value="dark">Dark</option>
-            <option value="midnight">Midnight Blue</option>
-            <option value="light">Light</option>
-          </select></label>
-        <label>Caret<select id="caretSelect">
-            <option value="line">Line</option>
-            <option value="block">Block</option>
-            <option value="underline">Underline</option>
-          </select></label>
-        <label>Font Size<input id="fontSizeRange" type="range" min="20" max="36" value="28"></label>
-      </div>
-      <p class="settings-hint">Settings are saved automatically on this device.</p>
-    </div>
-  </div>
-
-  <div class="app-modal" id="statsModal" aria-hidden="true">
-    <div class="modal-card stats-dashboard">
-      <div class="modal-head">
-        <h2>Statistics</h2><button class="modal-close" data-close="statsModal">×</button>
-      </div>
-      <div class="dashboard-grid">
-        <div><span>Tests</span><strong id="dashTests">0</strong></div>
-        <div><span>Best WPM</span><strong id="dashBest">0</strong></div>
-        <div><span>Average WPM</span><strong id="dashAvg">0</strong></div>
-        <div><span>Average Accuracy</span><strong id="dashAcc">0%</strong></div>
-        <div><span>Total Characters</span><strong id="dashChars">0</strong></div>
-        <div><span>Total Errors</span><strong id="dashErrors">0</strong></div>
-      </div>
-      <div class="dashboard-chart"><canvas id="statsGraph" width="760" height="190"></canvas></div>
-    </div>
-  </div>
-
-  <div class="app-modal" id="shortcutsModal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2>Keyboard Shortcuts</h2><button class="modal-close" data-close="shortcutsModal">×</button>
-      </div>
-      <div class="shortcut-list">
-        <div><kbd>Tab</kbd><span>Keep focus on the typing area</span></div>
-        <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Restart test</span></div>
-        <div><kbd>Esc</kbd><span>Close an open panel</span></div>
-        <div><kbd>/</kbd><span>Open shortcuts</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="command-hint" id="commandHint">Press <kbd>/</kbd> for shortcuts</div>
+    <div class="command-hint" id="commandHint">Press <kbd>/</kbd> for shortcuts</div>
 
   </div>
   <script src="/passages.js"></script>
-  <script>window.TypingMeterSEOConfig={};</script>
+  <script>window.TypingMeterSEOConfig = {};</script>
   <script src="/script.js"></script>
 
   <footer class="site-footer" aria-label="TypingMeter footer">

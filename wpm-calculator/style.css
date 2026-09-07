@@ -84,6 +84,7 @@ body {
   height: 15px;
 }
 
+
 /* ================= STATS BAR ================= */
 
 .stats {
@@ -2751,7 +2752,7 @@ body {
 }
 
 /* IMPORTANT: do not use margin:auto or flex-grow on the top container. */
-body > .container {
+body>.container {
   width: 100%;
   max-width: 1200px;
   flex: 0 0 auto !important;
@@ -2759,15 +2760,15 @@ body > .container {
 }
 
 /* These elements must remain normal-flow blocks. */
-body > .typing-box,
-body > .restart-wrapper,
-body > .result-screen {
+body>.typing-box,
+body>.restart-wrapper,
+body>.result-screen {
   flex: 0 0 auto;
 }
 
 /* Footer is the final normal-flow element and only consumes leftover
    viewport space when the page content is shorter than the viewport. */
-body > .site-footer {
+body>.site-footer {
   flex: 0 0 auto !important;
   position: static !important;
   inset: auto !important;
@@ -2778,7 +2779,7 @@ body > .site-footer {
 }
 
 /* Never let focus mode alter the vertical position of the top UI. */
-body.typing-active > .container {
+body.typing-active>.container {
   flex: 0 0 auto !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -2807,7 +2808,7 @@ body.result-visible .restart-wrapper {
 }
 
 @media (max-width: 600px) {
-  body > .container {
+  body>.container {
     width: 100%;
   }
 }
@@ -2819,11 +2820,13 @@ body.result-visible .restart-wrapper {
   margin: 18px auto 14px;
   text-align: center;
 }
+
 .seo-hero h1 {
   margin: 0 0 8px;
   font-size: clamp(24px, 4vw, 34px);
   line-height: 1.2;
 }
+
 .seo-hero p {
   max-width: 760px;
   margin: 0 auto 14px;
@@ -2831,13 +2834,17 @@ body.result-visible .restart-wrapper {
   line-height: 1.65;
   font-size: 14px;
 }
-.seo-quick-links, .seo-link-grid {
+
+.seo-quick-links,
+.seo-link-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
 }
-.seo-quick-links a, .seo-link-grid a {
+
+.seo-quick-links a,
+.seo-link-grid a {
   color: #8fbfff;
   text-decoration: none;
   font-size: 13px;
@@ -2845,7 +2852,12 @@ body.result-visible .restart-wrapper {
   border: 1px solid #252525;
   border-radius: 7px;
 }
-.seo-quick-links a:hover, .seo-link-grid a:hover { border-color: #2196f3; }
+
+.seo-quick-links a:hover,
+.seo-link-grid a:hover {
+  border-color: #2196f3;
+}
+
 .seo-content {
   width: min(100% - 40px, 980px);
   margin: 54px auto 10px;
@@ -2854,44 +2866,214 @@ body.result-visible .restart-wrapper {
   color: #aaa;
   line-height: 1.7;
 }
-.seo-content h2 { color: #eee; font-size: 22px; margin: 0 0 10px; }
-.seo-content h2:not(:first-child) { margin-top: 30px; }
-.seo-content h3 { color: #ddd; font-size: 16px; margin: 0 0 7px; }
-.seo-content p { margin: 0 0 12px; font-size: 14px; }
-.seo-content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.seo-content-grid article { min-width: 0; }
-.seo-faq details { border-top: 1px solid #242424; padding: 12px 0; }
-.seo-faq details:last-child { border-bottom: 1px solid #242424; }
-.seo-faq summary { cursor: pointer; color: #ddd; font-weight: 600; }
-.seo-faq p { margin-top: 8px; }
+
+.seo-content h2 {
+  color: #eee;
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+
+.seo-content h2:not(:first-child) {
+  margin-top: 30px;
+}
+
+.seo-content h3 {
+  color: #ddd;
+  font-size: 16px;
+  margin: 0 0 7px;
+}
+
+.seo-content p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.seo-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.seo-content-grid article {
+  min-width: 0;
+}
+
+.seo-faq details {
+  border-top: 1px solid #242424;
+  padding: 12px 0;
+}
+
+.seo-faq details:last-child {
+  border-bottom: 1px solid #242424;
+}
+
+.seo-faq summary {
+  cursor: pointer;
+  color: #ddd;
+  font-weight: 600;
+}
+
+.seo-faq p {
+  margin-top: 8px;
+}
+
 @media (max-width: 700px) {
-  .seo-content-grid { grid-template-columns: 1fr; }
-  .seo-content { width: min(100% - 28px, 980px); }
+  .seo-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-content {
+    width: min(100% - 28px, 980px);
+  }
 }
 
 
-.seo-landing { width:min(100% - 32px, 980px); margin:18px auto 0; }
-.seo-landing .landing-header { text-align:center; margin-bottom:18px; }
-.seo-landing h1 { font-size:clamp(25px,4vw,36px); margin:0 0 9px; color:#eee; }
-.seo-landing .landing-lead { max-width:760px; margin:0 auto; color:#999; line-height:1.7; font-size:14px; }
-.seo-landing .landing-links { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:15px 0 22px; }
-.seo-landing .landing-links a { color:#8fbfff; text-decoration:none; font-size:13px; padding:6px 9px; border:1px solid #252525; border-radius:7px; }
-.seo-landing .landing-links a:hover { border-color:#2196f3; }
-.landing-info { margin:28px 0 45px; border-top:1px solid #202020; padding-top:25px; }
-.landing-info h2 { color:#eee; font-size:21px; margin:0 0 9px; }
-.landing-info h3 { color:#ddd; font-size:16px; margin:22px 0 6px; }
-.landing-info p, .landing-info li { color:#aaa; font-size:14px; line-height:1.75; }
-.landing-info ul, .landing-info ol { padding-left:22px; }
-.tool-extra, .article-extra { margin:28px 0 0; padding-top:24px; border-top:1px solid #202020; }
-.calc-box { display:grid; grid-template-columns:1fr 1fr auto; gap:10px; align-items:end; }
-.calc-box label { display:flex; flex-direction:column; gap:6px; color:#aaa; font-size:13px; }
-.calc-box input { background:#151515; color:#eee; border:1px solid #292929; border-radius:7px; padding:10px; }
-.calc-box button { border:1px solid #2196f3; background:transparent; color:#8fc2ff; padding:10px 14px; border-radius:7px; cursor:pointer; }
-.calc-box p { grid-column:1/-1; color:#aaa; }
-.wpm-table { width:100%; border-collapse:collapse; margin:12px 0; }
-.wpm-table th,.wpm-table td { border:1px solid #292929; padding:10px; text-align:left; color:#aaa; }
-.wpm-table th { color:#ddd; }
-@media(max-width:650px){ .calc-box{grid-template-columns:1fr;} .calc-box p{grid-column:auto;} }
+.seo-landing {
+  width: min(100% - 32px, 980px);
+  margin: 18px auto 0;
+}
+
+.seo-landing .landing-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.seo-landing h1 {
+  font-size: clamp(25px, 4vw, 36px);
+  margin: 0 0 9px;
+  color: #eee;
+}
+
+.seo-landing .landing-lead {
+  max-width: 760px;
+  margin: 0 auto;
+  color: #999;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.seo-landing .landing-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0 22px;
+}
+
+.seo-landing .landing-links a {
+  color: #8fbfff;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 9px;
+  border: 1px solid #252525;
+  border-radius: 7px;
+}
+
+.seo-landing .landing-links a:hover {
+  border-color: #2196f3;
+}
+
+.landing-info {
+  margin: 28px 0 45px;
+  border-top: 1px solid #202020;
+  padding-top: 25px;
+}
+
+.landing-info h2 {
+  color: #eee;
+  font-size: 21px;
+  margin: 0 0 9px;
+}
+
+.landing-info h3 {
+  color: #ddd;
+  font-size: 16px;
+  margin: 22px 0 6px;
+}
+
+.landing-info p,
+.landing-info li {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.landing-info ul,
+.landing-info ol {
+  padding-left: 22px;
+}
+
+.tool-extra,
+.article-extra {
+  margin: 28px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid #202020;
+}
+
+.calc-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.calc-box label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.calc-box input {
+  background: #151515;
+  color: #eee;
+  border: 1px solid #292929;
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.calc-box button {
+  border: 1px solid #2196f3;
+  background: transparent;
+  color: #8fc2ff;
+  padding: 10px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.calc-box p {
+  grid-column: 1/-1;
+  color: #aaa;
+}
+
+.wpm-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.wpm-table th,
+.wpm-table td {
+  border: 1px solid #292929;
+  padding: 10px;
+  text-align: left;
+  color: #aaa;
+}
+
+.wpm-table th {
+  color: #ddd;
+}
+
+@media(max-width:650px) {
+  .calc-box {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-box p {
+    grid-column: auto;
+  }
+}
 
 
 /* =========================================================
@@ -3006,5 +3188,162 @@ body.result-visible .restart-wrapper {
 
   .landing-info h3 {
     margin-top: 26px !important;
+  }
+}
+
+/* ================= MULTIPLAYER GAMES PROMOTION ================= */
+
+.games-promo {
+  width: min(100% - 40px, 980px);
+  margin: 34px auto 0;
+  padding: 22px 0 4px;
+  border-top: 1px solid #202020;
+}
+
+.games-promo-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.games-promo-kicker {
+  display: block;
+  margin-bottom: 5px;
+  color: #2196f3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.games-promo h2 {
+  margin: 0 0 6px;
+  color: #eee;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.games-promo-head p {
+  max-width: 650px;
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.games-promo-all {
+  flex: 0 0 auto;
+  color: #8fbfff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.games-promo-all:hover {
+  color: #fff;
+}
+
+.games-promo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.game-promo-card {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 12px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color .2s ease,
+    transform .2s ease,
+    background .2s ease;
+}
+
+.game-promo-card:hover {
+  border-color: #333;
+  background: #151515;
+  transform: translateY(-2px);
+}
+
+.game-promo-icon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #181818;
+  font-size: 15px;
+}
+
+.game-promo-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.game-promo-info strong {
+  overflow: hidden;
+  color: #ddd;
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-promo-info small {
+  overflow: hidden;
+  color: #666;
+  font-size: 10px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-promo-arrow {
+  margin-left: auto;
+  color: #555;
+  font-size: 13px;
+  transition:
+    transform .2s ease,
+    color .2s ease;
+}
+
+.game-promo-card:hover .game-promo-arrow {
+  color: #8fbfff;
+  transform: translateX(2px);
+}
+
+@media (max-width: 900px) {
+  .games-promo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .games-promo {
+    width: min(100% - 28px, 980px);
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+
+  .games-promo-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .games-promo-head p {
+    font-size: 12px;
   }
 }

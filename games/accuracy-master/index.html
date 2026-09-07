@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Accuracy Master | TypingMeter</title>
+  <meta name="description" content="Play Accuracy Master, a 1v1 multiplayer typing game where accuracy matters most.">
+  <link rel="canonical" href="https://typingmeter.vercel.app/games/accuracy-master/">  
+  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="stylesheet" href="accuracy.css">
+</head>
+
+<body>
+  <main class="page">
+    <header class="game-page-header"><a class="logo" href="/"><img src="/assets/images/logo-small.svg" class="site-logo"
+          alt="TypingMeter logo"><span class="site-name">TypingMeter</span></a>
+      <nav class="game-breadcrumbs"><a href="/games/">Games</a><span>›</span><strong>Accuracy Master</strong></nav>
+    </header>
+    <section id="lobby" class="screen active">
+      <div class="hero">
+        <div class="badge">🎯 PRECISION • 1V1 • REAL TIME</div>
+        <h1>Accuracy Master</h1>
+        <p>The typing battle where precision matters more than raw speed.</p>
+      </div>
+      <div class="card lobby-card"><label>Your Name</label><input id="playerName" maxlength="20"
+          placeholder="Enter your name">
+        <div class="match-grid"><button id="quickBtn" class="primary">Quick Match</button><button id="createBtn">Create
+            Private Room</button></div>
+        <div class="join-row"><input id="roomCode" maxlength="6" placeholder="Room code"><button id="joinBtn">Join
+            Room</button></div>
+        <div id="lobbyMessage" class="message"></div>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <h2>How to Play</h2>
+          <p>1. Enter your name and choose Quick Match or a Private Room.<br>2. When your opponent connects, both
+            players press <b>I'm Ready</b>.<br>3. Both players receive the <b>exact same paragraph</b> and type directly
+            in the passage.<br>4. Every wrong character costs <b>5 HP</b>; correct characters turn green and the
+            expected character for a mistake turns red.<br>5. If you stop typing for <b>5 seconds</b>, an inactivity
+            penalty starts. After that, every <b>6 seconds</b> without typing costs <b>5 HP, then 10 HP, then 15 HP</b>,
+            increasing by 5 HP each cycle. Typing any character resets this penalty cycle.<br>6. Completing the passage
+            does not cause an instant win. The first finisher starts a 5-second finish window. The final performance
+            score decides the winner.</p>
+        </article>
+        <article class="info-card">
+          <h2>Scoring</h2>
+          <p><b>Final score = Accuracy 45% + Progress 30% + WPM 15% + HP 10%.</b> WPM is capped at 120 for scoring.
+            Finishing first only starts the 5-second finish window; it does not automatically win the round. If both
+            players have the same score, the result is a draw.</p>
+        </article>
+        <article class="info-card">
+          <h2>Important Rules</h2>
+          <p><b>Type directly in the passage.</b> Backspace and Delete do nothing and never cause HP damage. Paste,
+            drag/drop, and text corrections are disabled. Every newly typed wrong character costs <b>5 HP</b>, and lost
+            HP never comes back. <b>Inactivity rule:</b> after 5 seconds without typing, HP is reduced every 6 seconds
+            by <b>5 HP, then 10 HP, then 15 HP</b>, increasing by 5 HP each cycle. Typing any character immediately
+            resets the inactivity cycle. <b>Finishing first starts a 5-second finish window; final score decides the
+              winner.</b></p>
+        </article>
+      </div>
+      <section class="how-section">
+        <div class="section-kicker">HOW IT WORKS</div>
+        <h2>Master Accuracy in 5 Steps</h2>
+        <div class="steps-grid">
+          <article><span>1</span>
+            <h3>Find a Match</h3>
+            <p>Use Quick Match to automatically find another player.</p>
+          </article>
+          <article><span>2</span>
+            <h3>Get Ready</h3>
+            <p>Both players confirm they are ready before the round starts.</p>
+          </article>
+          <article><span>3</span>
+            <h3>Type Carefully</h3>
+            <p>Type the displayed passage exactly as shown.</p>
+          </article>
+          <article><span>4</span>
+            <h3>Protect Accuracy</h3>
+            <p>Every wrong key costs 5 HP, so controlled typing matters.</p>
+          </article>
+          <article><span>5</span>
+            <h3>Win the Round</h3>
+            <p>Finish the passage or survive the timer, then your final performance score is compared with your
+              opponent's.</p>
+          </article>
+        </div>
+      </section>
+      <section class="faq-section">
+        <div class="section-kicker">FAQ</div>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <details>
+            <summary>How is the winner decided?</summary>
+            <p>Completing the passage first starts a 5-second finish window; it does not automatically decide the match.
+              After the window, or when both players finish, the final score is compared: 45% accuracy, 30% progress,
+              15% WPM, and 10% remaining HP. If one player reaches 0 HP, that player loses immediately. If an opponent
+              disconnects or leaves, the remaining player wins.</p>
+          </details>
+          <details>
+            <summary>Do both players get the same text?</summary>
+            <p>Yes. The host selects one paragraph and sends that exact paragraph to both players. Both players type
+              against identical text.</p>
+          </details>
+          <details>
+            <summary>How long is each round?</summary>
+            <p>Each round gets a time limit based on the length of the selected passage. Finishing the passage early
+              starts a 5-second finish window so the opponent can finish too.</p>
+          </details>
+          <details>
+            <summary>What happens when I make a mistake?</summary>
+            <p>The expected character in the passage turns red, the error count increases, and 5 HP is removed. The
+              wrong character itself is never inserted into the passage.</p>
+          </details>
+          <details>
+            <summary>Can I play with a friend?</summary>
+            <p>Yes. Create a Private Room and share the room code with your friend.</p>
+          </details>
+          <details>
+            <summary>Can I rematch?</summary>
+            <p>Yes. After the result screen, both players can choose Rematch and confirm readiness for another round.
+            </p>
+          </details>
+          <details>
+            <summary>What happens if my opponent leaves?</summary>
+            <p>If your opponent disconnects or leaves during the match, you are awarded the victory.</p>
+          </details>
+          <details>
+            <summary>Can I use Backspace?</summary>
+            <p>No. Backspace and Delete are completely disabled. Clicking them does not remove a character and does not
+              reduce HP. You must continue from the current typing position.</p>
+          </details>
+          <details>
+            <summary>Is WPM more important than accuracy?</summary>
+            <p>No. Accuracy is 45% of the final score. Progress is 30%, WPM is 15%, and remaining HP is 10%.</p>
+          </details>
+        </div>
+      </section>
+    </section>
+    <section id="waiting" class="screen">
+      <div class="card center-card">
+        <div class="spinner"></div>
+        <h2 id="waitingTitle">Finding opponent...</h2>
+        <p id="waitingText">Please wait.</p>
+        <div id="roomCodeDisplay" class="room-code"></div><button id="cancelBtn" class="danger">Leave</button>
+      </div>
+    </section>
+    <section id="ready" class="screen">
+      <div class="card center-card">
+        <div class="versus">
+          <div><strong id="meReadyName">You</strong><span id="meReadyStatus">NOT READY</span></div><b>VS</b>
+          <div><strong id="opReadyName">Opponent</strong><span id="opReadyStatus">NOT READY</span></div>
+        </div>
+        <h2>Get Ready</h2>
+        <p id="readyStatus">Both players must press the button.</p><button id="readyBtn" class="primary big">I'm
+          Ready</button><button id="readyLeaveBtn" class="danger">Leave Match</button>
+      </div>
+    </section>
+    <section id="battle" class="screen">
+      <div class="battle-top">
+        <div class="player-stat">
+          <div class="player-line"><span id="meName">You</span><span class="connection-status online">ONLINE</span>
+          </div><strong class="hp-value">HP <span id="meHp">100</span></strong>
+          <div class="hp-track"><i id="meHpBar"></i></div>
+        </div>
+        <div class="timer" id="timer">30</div>
+        <div class="player-stat opponent">
+          <div class="player-line"><span id="opName">Opponent</span><span id="opConnectionStatus"
+              class="connection-status online">ONLINE</span></div><strong class="hp-value">HP <span
+              id="opHp">100</span></strong>
+          <div class="hp-track"><i id="opHpBar"></i></div>
+        </div>
+      </div>
+      <div class="card battle-card">
+        <div class="battle-label">TYPE DIRECTLY IN THE PASSAGE</div>
+        <p class="typing-instruction">Both players receive the <b>exact same paragraph</b>. Click anywhere in the
+          passage and type directly into it. <b>Backspace and Delete are disabled.</b> Every wrong key costs <b>5
+            HP</b>. If you do not type for <b>5 seconds</b>, inactivity damage starts: <b>-5 HP, then -10 HP, then -15
+            HP</b> every 6 seconds. Typing any character resets the cycle.</p>
+        <div id="prompt" class="prompt" contenteditable="false" role="textbox" spellcheck="false"
+          aria-label="Type directly in the passage"></div><textarea id="typingInput" class="typing-input" tabindex="-1"
+          aria-hidden="true" disabled></textarea>
+        <div class="progress"><span id="progressBar"></span></div>
+        <div class="live-stats player-live-stats">
+          <div class="live-stat-card you-live">
+            <div class="live-stat-title">YOU</div>
+            <div class="live-stat-row"><span>Typed <b id="meTyped">0</b></span><span>Correct <b
+                  id="meCorrect">0</b></span><span>Wrong <b id="meErrors">0</b></span><span>WPM <b
+                  id="meWpm">0</b></span></div>
+          </div>
+          <div class="live-stat-card opponent-live">
+            <div class="live-stat-title">OPPONENT</div>
+            <div class="live-stat-row"><span>Typed <b id="opTyped">0</b></span><span>Correct <b
+                  id="opCorrect">0</b></span><span>Wrong <b id="opErrors">0</b></span><span>WPM <b
+                  id="opWpm">0</b></span></div>
+          </div>
+        </div>
+        <div id="battleMessage" class="battle-message">Type carefully.</div><button id="battleLeaveBtn"
+          class="danger">Leave Match</button>
+      </div>
+    </section>
+    <section id="result" class="screen">
+      <div class="card result-card result-card-wide">
+        <div id="resultIcon" class="result-icon">🎯</div>
+        <h2 id="resultTitle">Result</h2>
+        <p id="resultText"></p>
+        <div class="result-summary">
+          <div class="result-player result-me">
+            <div class="result-player-name" id="resultMeName">YOU</div><strong id="resultScore">0</strong><span>FINAL
+              SCORE</span>
+          </div>
+          <div class="result-vs">VS</div>
+          <div class="result-player result-op">
+            <div class="result-player-name" id="resultOpName">OPPONENT</div><strong
+              id="opResultScore">0</strong><span>FINAL SCORE</span>
+          </div>
+        </div>
+        <div class="calculation-title">RESULT CALCULATION</div>
+        <div class="chart-legend"><span><i class="legend-you"></i> YOU</span><span><i class="legend-op"></i>
+            OPPONENT</span></div>
+        <div class="score-chart">
+          <div class="chart-row">
+            <div class="chart-side">
+              <div class="chart-title">ACCURACY <b id="meChartAccuracy">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="meBarAccuracy"></i></div><strong id="meCalcAccuracy">0.0 / 45</strong>
+              </div>
+            </div>
+            <div class="chart-side opponent-side">
+              <div class="chart-title">ACCURACY <b id="opChartAccuracy">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="opBarAccuracy"></i></div><strong id="opCalcAccuracy">0.0 / 45</strong>
+              </div>
+            </div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-side">
+              <div class="chart-title">PROGRESS <b id="meChartProgress">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="meBarProgress"></i></div><strong id="meCalcProgress">0.0 / 30</strong>
+              </div>
+            </div>
+            <div class="chart-side opponent-side">
+              <div class="chart-title">PROGRESS <b id="opChartProgress">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="opBarProgress"></i></div><strong id="opCalcProgress">0.0 / 30</strong>
+              </div>
+            </div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-side">
+              <div class="chart-title">WPM <b id="meChartWpm">0</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="meBarWpm"></i></div><strong id="meCalcWpm">0.0 / 15</strong>
+              </div>
+            </div>
+            <div class="chart-side opponent-side">
+              <div class="chart-title">WPM <b id="opChartWpm">0</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="opBarWpm"></i></div><strong id="opCalcWpm">0.0 / 15</strong>
+              </div>
+            </div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-side">
+              <div class="chart-title">REMAINING HP <b id="meChartHp">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="meBarHp"></i></div><strong id="meCalcHp">0.0 / 10</strong>
+              </div>
+            </div>
+            <div class="chart-side opponent-side">
+              <div class="chart-title">REMAINING HP <b id="opChartHp">0%</b></div>
+              <div class="chart-player-line">
+                <div class="bar-track"><i id="opBarHp"></i></div><strong id="opCalcHp">0.0 / 10</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box"><b>Formula</b><br>Accuracy × 0.45 + Progress × 0.30 + WPM Score × 0.15 + HP ×
+          0.10<br><small>WPM Score = WPM ÷ 120 × 100, capped at 100.</small>
+          <div class="arithmetic-lines">
+            <div><b id="meArithmetic">YOU: 0 + 0 + 0 + 0 = 0</b></div>
+            <div><b id="opArithmetic">OPPONENT: 0 + 0 + 0 + 0 = 0</b></div>
+          </div>
+        </div>
+        <div class="result-details">
+          <div>
+            <h3 id="resultMeHeading">YOU</h3>
+            <p>Typed <b id="resultTyped">0</b> · Correct <b id="resultCorrect">0</b> · Wrong <b id="resultErrors">0</b>
+              · Accuracy <b id="resultAccuracy">0%</b> · WPM <b id="resultWpm">0</b> · Progress <b
+                id="resultProgress">0%</b> · HP <b id="resultHp">100</b></p>
+          </div>
+          <div>
+            <h3 id="resultOpHeading">OPPONENT</h3>
+            <p>Typed <b id="opResultTyped">0</b> · Correct <b id="opResultCorrect">0</b> · Wrong <b
+                id="opResultErrors">0</b> · Accuracy <b id="opResultAccuracy">0%</b> · WPM <b id="opResultWpm">0</b> ·
+              Progress <b id="opResultProgress">0%</b> · HP <b id="opResultHp">100</b></p>
+          </div>
+        </div>
+        <div class="result-actions"><button id="rematchBtn" class="primary">Rematch</button><button id="homeBtn">Back to
+            Lobby</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="matchmaking-config.js"></script>
+  <script src="passage.js"></script>
+  <script src="accuracy.js?v=20260907-fair-match-v1"></script>
+</body>
+
+</html>

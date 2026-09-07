@@ -1,0 +1,1 @@
+(function () { const P = "wss://typingmeter-matchmaking.saurabhc-0102.workers.dev/"; const h = location.hostname; window.TYPINGMETER_MATCHMAKING_URL = (h === "localhost" || h === "127.0.0.1" || h === "0.0.0.0") ? "ws://localhost:8787" : P; })();

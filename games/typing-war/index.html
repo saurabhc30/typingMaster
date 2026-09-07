@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Typing War — 1v1 Multiplayer Typing Battle | TypingMeter</title>
+  <meta name="description"
+    content="Play Typing War, a fast 1v1 multiplayer typing battle on TypingMeter. Type shared words, build combos, deal damage and defeat your opponent.">
+  <link rel="canonical" href="https://typingmeter.vercel.app/games/typing-war/">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="stylesheet" href="war.css">
+</head>
+
+<body>
+  <main class="app">
+    <header class="game-page-header">
+      <a class="logo" href="/" aria-label="TypingMeter Home">
+        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <span class="site-name">TypingMeter</span>
+      </a>
+      <nav class="game-breadcrumbs" aria-label="Games navigation">
+        <a href="/games/">Games</a>
+        <span aria-hidden="true">›</span>
+        <strong>Typing War</strong>
+      </nav>
+    </header>
+
+    <section id="lobby" class="screen active">
+      <div class="hero">
+        <div class="badge">⚔️ 1V1 TYPING BATTLE</div>
+        <h1>Typing War</h1>
+        <p>Type faster and more accurately to damage your opponent.</p>
+      </div>
+
+      <div class="card lobby-card">
+        <label for="playerName">Your name</label>
+        <input id="playerName" maxlength="20" placeholder="Enter your name" autocomplete="nickname">
+
+        <div class="lobby-grid">
+          <button id="quickBtn" class="primary">⚔️ Quick Match</button>
+          <button id="createBtn" class="secondary">Create Private Room</button>
+        </div>
+
+        <div class="join-row">
+          <input id="roomInput" maxlength="6" placeholder="ROOM CODE" autocomplete="off">
+          <button id="joinBtn" class="secondary">Join Room</button>
+        </div>
+
+        <p id="lobbyStatus" class="status"></p>
+      </div>
+
+      <section class="game-info" aria-labelledby="how-to-play-title">
+        <div class="info-card">
+          <h2 id="how-to-play-title">How to Play Typing War</h2>
+          <p>Typing War is a real-time 1v1 typing battle. Both players receive the same word and race to complete it.
+            Every successful word gives the player an attack against the opponent.</p>
+          <div class="steps">
+            <div class="step"><span>1</span>
+              <div><strong>Enter your name</strong>
+                <p>Choose a name and start a Quick Match or create a private room.</p>
+              </div>
+            </div>
+            <div class="step"><span>2</span>
+              <div><strong>Get ready</strong>
+                <p>After your opponent joins, both players press <b>I'm Ready</b> to begin.</p>
+              </div>
+            </div>
+            <div class="step"><span>3</span>
+              <div><strong>Type the shared word</strong>
+                <p>The current word is synchronized for both players. If either player finishes it, the next word
+                  changes for both.</p>
+              </div>
+            </div>
+            <div class="step"><span>4</span>
+              <div><strong>Build your combo</strong>
+                <p>Type correctly and quickly to keep your combo and deal more damage.</p>
+              </div>
+            </div>
+            <div class="step"><span>5</span>
+              <div><strong>Defeat your opponent</strong>
+                <p>Reduce your opponent's HP to 0 before they defeat you. The battle also has a 60-second time limit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card tips-card">
+          <h2>Typing War Tips</h2>
+          <ul>
+            <li>Accuracy matters — avoid unnecessary mistakes.</li>
+            <li>Stay focused because the shared word can change as soon as your opponent finishes.</li>
+            <li>Keep your combo going to maximize your attacks.</li>
+            <li>Use Quick Match for an automatic opponent or Private Room to play with a friend.</li>
+          </ul>
+        </div>
+
+        <div class="info-card faq-card">
+          <h2>Frequently Asked Questions</h2>
+          <details>
+            <summary>Is Typing War multiplayer?</summary>
+            <p>Yes. Typing War is designed as a real-time 1v1 multiplayer typing game.</p>
+          </details>
+          <details>
+            <summary>Do both players get the same word?</summary>
+            <p>Yes. The current word is shared between both players. When one player completes it, the next word is
+              synchronized for both players.</p>
+          </details>
+          <details>
+            <summary>Who deals damage?</summary>
+            <p>The player who successfully completes the current word deals the attack damage. The other player's
+              unfinished input is reset to the new shared word.</p>
+          </details>
+          <details>
+            <summary>How do I play with a friend?</summary>
+            <p>Use <b>Create Private Room</b>, share the room code with your friend, and have them use <b>Join Room</b>.
+            </p>
+          </details>
+          <details>
+            <summary>What happens when a player reaches 0 HP?</summary>
+            <p>The player whose HP reaches 0 is defeated and the opponent is declared the winner.</p>
+          </details>
+          <details>
+            <summary>Can I play a rematch?</summary>
+            <p>Yes. After a battle, both players can choose <b>Rematch</b>. Both players must become ready before the
+              next round starts.</p>
+          </details>
+        </div>
+      </section>
+    </section>
+
+    <section id="waiting" class="screen">
+      <div class="card center">
+        <div class="spinner"></div>
+        <h2 id="waitingTitle">Finding opponent…</h2>
+        <p id="waitingStatus">Please wait.</p>
+        <div class="room-code-wrap">
+          <span>ROOM</span>
+          <strong id="roomCode">AUTO</strong>
+        </div>
+        <button id="cancelBtn" class="danger">Leave</button>
+      </div>
+    </section>
+
+    <section id="ready" class="screen">
+      <div class="card center">
+        <div class="vs">⚔️ VS ⚔️</div>
+        <h2><span id="meReadyName">You</span> vs <span id="opReadyName">Opponent</span></h2>
+        <p id="readyStatus">Connected. Both players must be ready.</p>
+        <button id="readyBtn" class="primary ready-button">I'm Ready</button>
+        <button id="readyLeaveBtn" class="link-button">Leave Match</button>
+      </div>
+    </section>
+
+    <section id="battle" class="screen">
+      <div class="battle-head">
+        <div class="fighter you">
+          <div class="fighter-name" id="meName">You</div>
+          <div class="hp"><span id="meHpBar"></span></div>
+          <div class="fighter-meta"><b id="meHp">100</b> HP · <span id="meWpm">0</span> WPM</div>
+        </div>
+        <div class="timer" id="timer">60</div>
+        <div class="fighter opponent">
+          <div class="fighter-name" id="opName">Opponent</div>
+          <div class="hp"><span id="opHpBar"></span></div>
+          <div class="fighter-meta"><b id="opHp">100</b> HP · <span id="opWpm">0</span> WPM</div>
+        </div>
+      </div>
+
+      <div class="battle-card">
+        <div class="combat-line">
+          <span id="combo">Combo ×0</span>
+          <span id="damage">Damage 0</span>
+        </div>
+        <div id="prompt" class="prompt"></div>
+        <input id="typingInput" class="typing-input" autocomplete="off" autocapitalize="off" autocorrect="off"
+          spellcheck="false" placeholder="Type here…">
+        <div class="progress"><span id="progressBar"></span></div>
+        <div class="battle-message" id="battleMessage">Type the text exactly.</div>
+        <button id="battleLeaveBtn" class="battle-leave" type="button">Leave Match</button>
+      </div>
+    </section>
+
+    <section id="result" class="screen">
+      <div class="card center result-card">
+        <div id="resultIcon" class="result-icon">⚔️</div>
+        <h1 id="resultTitle">Victory!</h1>
+        <p id="resultText"></p>
+        <div class="result-stats">
+          <div><strong id="resultWpm">0</strong><span>WPM</span></div>
+          <div><strong id="resultAccuracy">100%</strong><span>Accuracy</span></div>
+          <div><strong id="resultDamage">0</strong><span>Damage</span></div>
+        </div>
+        <div class="result-actions">
+          <button id="rematchBtn" class="primary">⚔️ Rematch</button>
+          <button id="homeBtn" class="secondary">Back to Lobby</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="matchmaking-config.js"></script>
+  <script src="war.js"></script>
+</body>
+
+</html>

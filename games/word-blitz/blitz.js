@@ -10,14 +10,14 @@
 
   const WORDS = {
     easy: [
-      "apple","bread","chair","cloud","dance","dream","earth","field","flower","friend","green","happy","house","light","music","night","ocean","paper","plant","quick","river","school","smile","star","stone","table","water","world","young","yellow",
-      "animal","answer","basket","better","button","camera","circle","family","forest","garden","golden","market","morning","orange","people","purple","summer","travel","window","winter","wonder","simple","little","letter","number","planet","pencil","rabbit","rocket"
+      "apple", "bread", "chair", "cloud", "dance", "dream", "earth", "field", "flower", "friend", "green", "happy", "house", "light", "music", "night", "ocean", "paper", "plant", "quick", "river", "school", "smile", "star", "stone", "table", "water", "world", "young", "yellow",
+      "animal", "answer", "basket", "better", "button", "camera", "circle", "family", "forest", "garden", "golden", "market", "morning", "orange", "people", "purple", "summer", "travel", "window", "winter", "wonder", "simple", "little", "letter", "number", "planet", "pencil", "rabbit", "rocket"
     ],
     medium: [
-      "ability","balance","battery","between","brother","capture","careful","central","chapter","collect","comfort","company","country","culture","decide","develop","discover","evening","example","exercise","future","general","history","imagine","journey","kitchen","language","message","natural","picture","popular","problem","promise","protect","quality","reason","remember","science","special","station","success","support","teacher","together","traffic","weather","without","writer","control","perfect","practice","improve","creative","library","computer","digital","energy"
+      "ability", "balance", "battery", "between", "brother", "capture", "careful", "central", "chapter", "collect", "comfort", "company", "country", "culture", "decide", "develop", "discover", "evening", "example", "exercise", "future", "general", "history", "imagine", "journey", "kitchen", "language", "message", "natural", "picture", "popular", "problem", "promise", "protect", "quality", "reason", "remember", "science", "special", "station", "success", "support", "teacher", "together", "traffic", "weather", "without", "writer", "control", "perfect", "practice", "improve", "creative", "library", "computer", "digital", "energy"
     ],
     hard: [
-      "absolutely","achievement","adventure","alternative","architecture","atmosphere","celebration","communication","concentration","consequence","consideration","consistent","conversation","cooperation","determination","environment","extraordinary","independent","information","inspiration","intelligence","interesting","maintenance","opportunity","organization","performance","perspective","possibility","preparation","professional","relationship","responsibility","significant","simultaneously","technology","understanding","university","vocabulary","confidence","coordination","competition","development","experience","imagination","motivation","productivity","recognition","requirement","successful","transformation","transportation","unforgettable","vulnerable","achievement","characteristic"
+      "absolutely", "achievement", "adventure", "alternative", "architecture", "atmosphere", "celebration", "communication", "concentration", "consequence", "consideration", "consistent", "conversation", "cooperation", "determination", "environment", "extraordinary", "independent", "information", "inspiration", "intelligence", "interesting", "maintenance", "opportunity", "organization", "performance", "perspective", "possibility", "preparation", "professional", "relationship", "responsibility", "significant", "simultaneously", "technology", "understanding", "university", "vocabulary", "confidence", "coordination", "competition", "development", "experience", "imagination", "motivation", "productivity", "recognition", "requirement", "successful", "transformation", "transportation", "unforgettable", "vulnerable", "achievement", "characteristic"
     ]
   };
 
@@ -100,7 +100,7 @@
   }
 
   function saveSettings() {
-    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (_) {}
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (_) { }
   }
 
   function getBestScore() {
@@ -111,7 +111,7 @@
   }
 
   function setBestScore(score) {
-    try { localStorage.setItem(BEST_KEY, String(Math.max(0, Math.floor(score)))); } catch (_) {}
+    try { localStorage.setItem(BEST_KEY, String(Math.max(0, Math.floor(score)))); } catch (_) { }
   }
 
   function safeHistoryRead() {
@@ -134,7 +134,7 @@
     const items = safeHistoryRead();
     items.unshift(record);
     const payload = { version: HISTORY_VERSION, items: items.slice(0, MAX_HISTORY) };
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch (_) { }
     renderHistory();
   }
 
@@ -187,7 +187,7 @@
   function clearHistory() {
     if (!safeHistoryRead().length) return;
     if (!window.confirm("Clear all Word Blitz history saved on this device?")) return;
-    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    try { localStorage.removeItem(STORAGE_KEY); } catch (_) { }
     renderHistory();
   }
 
@@ -214,6 +214,22 @@
     els.difficultyLabel.textContent = game.difficulty.charAt(0).toUpperCase() + game.difficulty.slice(1);
     els.input.value = "";
     els.input.maxLength = MAX_INPUT_LENGTH;
+  }
+
+  function scrollToGameSection() {
+    const target = els.game;
+    if (!target) return;
+    window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  function scrollToResultSection() {
+    const target = els.result;
+    if (!target) return;
+    window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   function startGame() {
@@ -375,6 +391,9 @@
       words: game.correctWords,
       combo: game.bestCombo
     });
+
+    // Automatically bring the result into view when the run ends.
+    scrollToResultSection();
   }
 
   function stopTimers() {

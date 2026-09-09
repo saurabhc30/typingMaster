@@ -912,3 +912,9 @@ kbd {
     line-height: 1.05;
   }
 }
+
+/* Auto-scroll targets: keep them clear of the site header. */
+#blitzGame,
+#blitzResult {
+  scroll-margin-top: 24px;
+}

@@ -2230,7 +2230,7 @@ body.typing-active .restart-wrapper {
 }
 
 body.typing-active .restart-wrapper {
-  display: none !important;
+  visibility: hidden !important;
 }
 
 body:not(.typing-active) .restart-wrapper {

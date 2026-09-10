@@ -2123,7 +2123,7 @@ body.typing-active.typing-controls-visible .hide-during-typing {
 
 /* Keep restart/history and command hint out of the focused typing view. */
 body.typing-active .restart-wrapper {
-  display: none !important;
+  visibility: hidden !important;
 }
 
 body.typing-active .command-hint {

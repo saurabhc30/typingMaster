@@ -3002,6 +3002,10 @@ body.result-visible .restart-wrapper {
   padding-left: 22px;
 }
 
+.landing-info a{
+  color: #58bee1;
+}
+
 .tool-extra,
 .article-extra {
   margin: 28px 0 0;

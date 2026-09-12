@@ -1,8 +1,13 @@
 {
   "redirects": [
     {
-      "source": "/games/:path*",
-      "destination": "/typing-games/:path*",
+      "source": "/games",
+      "destination": "/typing-games",
+      "permanent": true
+    },
+    {
+      "source": "/games/(.*)",
+      "destination": "/typing-games/$1",
       "permanent": true
     }
   ]

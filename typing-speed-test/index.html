@@ -5,52 +5,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="lX9mcpQ0s9Lps51OWkrMIE5mLBasewKU-46R5cLPQU4">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
-  <title>Typing Speed Test - Check WPM & Accuracy | TypingMeter</title>
+  <!-- Optimized Title & Meta Description incorporating high-impression queries -->
+  <title>Free Typing Speed Test - Check WPM & Accuracy | TypingMeter</title>
   <meta name="description"
-    content="Test your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors and consistency with a free typing speed test.">
+    content="Take a free typing speed test online with TypingMeter. Check typing speed, WPM, accuracy, errors, and consistency with our professional typing test online.">
   <link rel="canonical" href="https://typingmeter.vercel.app/typing-speed-test/">
 
+  <!-- OpenGraph Metadata -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Typing Speed Test Online - Free WPM Test | TypingMeter">
+  <meta property="og:title" content="Free Typing Speed Test Online - Check WPM | TypingMeter">
   <meta property="og:description"
-    content="Test your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors and consistency with a free typing speed test.">
+    content="Check your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors, and consistency with our free words per minute test.">
   <meta property="og:url" content="https://typingmeter.vercel.app/typing-speed-test/">
   <meta property="og:site_name" content="TypingMeter">
   <meta property="og:image" content="https://typingmeter.vercel.app/assets/images/logo-small.svg">
 
+  <!-- Twitter Metadata -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Typing Speed Test Online - Free WPM Test | TypingMeter">
+  <meta name="twitter:title" content="Free Typing Speed Test Online - Check WPM | TypingMeter">
   <meta name="twitter:description"
-    content="Test your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors and consistency with a free typing speed test.">
+    content="Check your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors, and consistency with a free speed typing test.">
 
   <meta name="theme-color" content="#111111">
   <link rel="icon" type="image/x-icon" href="/icon.ico">
   <link rel="stylesheet" href="/typing-speed-test/style.css">
 
+  <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@graph":[
+    "@context": "https://schema.org",
+    "@graph": [
       {
-        "@type":"WebSite",
-        "@id":"https://typingmeter.vercel.app/typing-speed-test/#website",
-        "url":"https://typingmeter.vercel.app/typing-speed-test/",
-        "name":"TypingMeter",
-        "description":"Free online typing speed test and typing practice.",
-        "inLanguage":"en"
+        "@type": "WebSite",
+        "@id": "https://typingmeter.vercel.app/typing-speed-test/#website",
+        "url": "https://typingmeter.vercel.app/typing-speed-test/",
+        "name": "TypingMeter",
+        "description": "Free online typing speed test and typing practice tool.",
+        "inLanguage": "en"
       },
       {
-        "@type":"WebApplication",
-        "@id":"https://typingmeter.vercel.app/typing-speed-test/#app",
-        "name":"Free Typing Speed Test",
-        "url":"https://typingmeter.vercel.app/typing-speed-test/",
-        "applicationCategory":"EducationalApplication",
-        "operatingSystem":"Web Browser",
-        "browserRequirements":"Requires JavaScript",
-        "isAccessibleForFree":true,
-        "description":"Free online typing speed test for measuring WPM, accuracy, raw speed, errors and consistency."
+        "@type": "WebApplication",
+        "@id": "https://typingmeter.vercel.app/typing-speed-test/#app",
+        "name": "Free Typing Speed Test",
+        "url": "https://typingmeter.vercel.app/typing-speed-test/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "description": "Professional typing test online for measuring words per minute, accuracy, raw speed, errors, and consistency."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://typingmeter.vercel.app/typing-speed-test/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this typing speed test free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. TypingMeter provides a completely free typing speed test online with no registration required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is words per minute (WPM) calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WPM is calculated by taking total typed characters, dividing by 5 (standard word length), and dividing by the elapsed time in minutes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I check my typing speed and accuracy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply choose your test mode, click the typing box, and start typing. TypingMeter instantly calculates WPM, accuracy, raw speed, and errors."
+            }
+          }
+        ]
       }
     ]
   }
@@ -65,25 +99,25 @@
   <div class="container">
 
     <!-- Header -->
-    <div class="header">
-
+    <header class="header">
       <a class="logo" href="../" aria-label="TypingMeter Home">
-        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo" width="32" height="32">
         <span class="site-name">TypingMeter</span>
       </a>
 
       <div class="best">
-        <img src="/assets/images/icon-personal-best.svg" class="best-icon"> <span class="best-line">Personal
-          best:</span>
+        <img src="/assets/images/icon-personal-best.svg" class="best-icon" alt="" width="18" height="18">
+        <span class="best-line">Personal best:</span>
         <strong id="personalBest">35 WPM</strong>
       </div>
+    </header>
 
-    </div>
+    <!-- SEO Landing Header -->
     <section class="seo-landing" aria-labelledby="landing-title">
       <div class="landing-header">
         <h1 id="landing-title">Free Typing Speed Test</h1>
-        <p class="landing-lead">Measure your typing speed in WPM and track accuracy, errors, raw speed and consistency.
-        </p>
+        <p class="landing-lead">Check typing speed online in WPM. Measure accuracy, errors, raw speed, and consistency
+          with our free words per minute test.</p>
         <nav class="landing-links" aria-label="Related typing tests">
           <a href="../">Main Typing Test</a>
           <a href="/1-minute-typing-test/">1 Minute</a>
@@ -93,6 +127,8 @@
         </nav>
       </div>
     </section>
+
+    <!-- Control Bar -->
     <div class="control-bar hide-during-typing">
 
       <div class="control-group difficulty-group" aria-label="Difficulty">
@@ -132,6 +168,7 @@
 
     </div>
 
+    <!-- Hidden Controls -->
     <input type="checkbox" id="punctuationToggle" hidden>
     <input type="checkbox" id="numbersToggle" hidden>
     <input type="checkbox" id="soundToggle" checked hidden>
@@ -143,22 +180,24 @@
     </select>
     <button id="passageBtn" hidden type="button">Passage</button>
 
+    <!-- Minimal Status Overlay -->
     <div class="minimal-status" id="minimalStatus" aria-live="polite">
       <span id="liveTime" class="live-status-item">0:30</span> &nbsp; | &nbsp;
       <span id="liveWords" class="live-status-item">0 words</span>
     </div>
 
     <!-- Typing Area -->
-    <div class="typing-box">
+    <main class="typing-box">
       <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
         <span class="focus-cursor">➤</span>
         <span>Click here or press any key to focus</span>
       </button>
-      <div class="text-area blur" id="text" tabindex="0"></div>
-    </div>
+      <div class="text-area blur" id="text" tabindex="0" aria-label="Typing test area" role="textbox"
+        aria-multiline="true"></div>
+    </main>
 
     <div class="restart-wrapper">
-      <button class="restart-btn-main" id="restartMainBtn">
+      <button class="restart-btn-main" id="restartMainBtn" type="button">
         Restart Test ↻
       </button>
       <button class="history-toggle" id="historyToggle" type="button">History</button>
@@ -172,9 +211,8 @@
       </div>
     </div>
 
-
     <!-- Result Screen -->
-    <div class="result-screen" id="resultScreen">
+    <section class="result-screen" id="resultScreen" aria-label="Test Results">
 
       <div class="result-graph-wrap">
         <div class="result-graph-header">
@@ -191,7 +229,6 @@
       </div>
 
       <div class="result-stats">
-
         <div class="result-card">
           <span>WPM</span>
           <h2 id="resWpm">0</h2>
@@ -221,23 +258,22 @@
           <span>Consistency</span>
           <h2 id="resConsistency">0%</h2>
         </div>
-
       </div>
 
-      <button class="retry-btn" id="retryBtn">
+      <button class="retry-btn" id="retryBtn" type="button">
         Beat This Score ↻
       </button>
 
-    </div>
+    </section>
 
+    <!-- Typing Games Section -->
     <section class="games-promo" aria-labelledby="games-promo-title">
       <div class="games-promo-head">
         <div>
           <span class="games-promo-kicker">PLAY &amp; COMPETE</span>
           <h2 id="games-promo-title">Typing Games</h2>
           <p>
-            Ready for more than a typing test?
-            Challenge other players with TypingMeter's multiplayer typing games.
+            Ready for more than a typing test? Challenge other players with TypingMeter's multiplayer typing games.
           </p>
         </div>
 
@@ -247,7 +283,6 @@
       </div>
 
       <div class="games-promo-grid">
-
         <a class="game-promo-card" href="/typing-games/typing-race/">
           <span class="game-promo-icon">🏁</span>
           <span class="game-promo-info">
@@ -283,51 +318,60 @@
           </span>
           <span class="game-promo-arrow">→</span>
         </a>
-
       </div>
     </section>
 
-
-
+    <!-- SEO Content Section with High-Impression Query Targets -->
     <section class="landing-info" aria-labelledby="page-info-title">
-      <h2 id="page-info-title">Free Typing Speed Test</h2>
-      <p>Test your typing speed online with TypingMeter. Measure WPM, accuracy, raw WPM, errors and consistency with a
-        free typing speed test.</p>
-      <h3>How to use this typing test</h3>
-      <p>Choose your preferred difficulty and test settings, click the typing area or press a key to focus, and type the
-        displayed text. Your result includes WPM, accuracy, characters, raw WPM, errors and consistency.</p>
-      <h3>Why practice with TypingMeter?</h3>
-      <p>TypingMeter keeps the test focused while giving you useful feedback after each session. Your local history and
-        personal best can help you compare repeated practice sessions on the same device.</p>
+      <h2 id="page-info-title">Professional Typing Test Online</h2>
+      <p>Take a <strong>free typing speed test</strong> to measure your speed typing test performance online with
+        TypingMeter. Accurately calculate WPM, raw WPM, accuracy, character count, and typing consistency in real time.
+      </p>
+
+      <h3>How to Check Typing Speed with TypingMeter</h3>
+      <p>Select your desired duration (such as 30-second, 1-minute, or 5-minute tests) or word count mode, click the
+        active typing field, and start typing. Our <strong>words per minute test</strong> provides instantaneous
+        feedback to help you track improvements over time.</p>
+
+      <h3>Why Use a Good Typing Speed Test?</h3>
+      <p>Whether preparing for professional certifications or improving daily productivity, utilizing a reliable
+        <strong>typing test speed</strong> tracker ensures you balance raw pace with minimal errors. TypingMeter stores
+        test histories locally so you can easily benchmark performance improvements.
+      </p>
 
       <h2>Related Typing Tests</h2>
-      <div class="seo-link-grid">
-        <a href="/typing-test/">Typing Test</a><a href="/typing-speed-test/">Typing Speed Test</a><a
-          href="/30-second-typing-test/">30 Second Test</a><a href="/1-minute-typing-test/">1 Minute Test</a><a
-          href="/2-minute-typing-test/">2 Minute Test</a><a href="/5-minute-typing-test/">5 Minute Test</a><a
-          href="/10-minute-typing-test/">10 Minute Test</a><a href="/wpm-test/">WPM Test</a><a
-          href="/typing-practice/">Typing Practice</a>
-      </div>
+      <nav class="seo-link-grid" aria-label="Direct navigation to test modes">
+        <a href="/typing-test/">Typing Test</a>
+        <a href="/typing-speed-test/">Typing Speed Test</a>
+        <a href="/30-second-typing-test/">30 Second Test</a>
+        <a href="/1-minute-typing-test/">1 Minute Test</a>
+        <a href="/2-minute-typing-test/">2 Minute Test</a>
+        <a href="/5-minute-typing-test/">5 Minute Test</a>
+        <a href="/10-minute-typing-test/">10 Minute Test</a>
+        <a href="/wpm-test/">WPM Test</a>
+        <a href="/typing-practice/">Typing Practice</a>
+      </nav>
+
       <h2>Frequently Asked Questions</h2>
       <div class="seo-faq">
         <details>
-          <summary>Is this typing test free?</summary>
-          <p>Yes. TypingMeter provides free online typing tests and practice features.</p>
+          <summary>Is this typing speed test free?</summary>
+          <p>Yes. TypingMeter offers a 100% free online typing speed test with comprehensive performance statistics.</p>
         </details>
         <details>
-          <summary>Does TypingMeter measure accuracy?</summary>
-          <p>Yes. The result screen reports typing accuracy along with WPM and other statistics.</p>
+          <summary>How can I check typing speed accurately?</summary>
+          <p>Our online typing test accurately calculates WPM by measuring raw keystrokes per minute against errors and
+            penalizing inaccurate entries.</p>
         </details>
         <details>
-          <summary>Can I practice different difficulty levels?</summary>
-          <p>Yes. The app includes Easy, Medium and Hard passage difficulty settings.</p>
+          <summary>Can I practice with different passage difficulties?</summary>
+          <p>Yes. You can switch between Easy, Medium, and Hard difficulty modes to customize your speed typing test.
+          </p>
         </details>
       </div>
     </section>
 
-    <!-- Footer: information links on the left, controls/settings on the right -->
-
-    <!-- One-page information sections. These stay in index.html. -->
+    <!-- Modals & Information Panels -->
     <section class="info-panel" id="aboutPanel" aria-hidden="true">
       <div class="info-panel-card">
         <div class="info-panel-head">
@@ -403,8 +447,7 @@
           </div><button type="button" class="info-close" data-info-close>×</button>
         </div>
         <p>For questions, feedback, bug reports, accessibility issues, or suggestions about TypingMeter, contact us
-          using
-          the email address below.</p>
+          using the email address below.</p>
         <p class="contact-email"><a href="mailto:sourabhc.0102@gmail.com">sourabhc.0102@gmail.com</a></p>
         <p>Please do not send passwords, payment information, bank details, or other sensitive information by email.</p>
       </div>
@@ -464,24 +507,29 @@
       </div>
     </section>
 
-    <!-- Settings / Statistics / Shortcuts panels -->
+    <!-- Interactive Modals -->
     <div class="app-modal" id="customModal" aria-hidden="true">
       <div class="modal-card custom-modal-card">
         <div class="modal-head">
-          <h2>Custom Test</h2><button class="modal-close" data-close="customModal" type="button">×</button>
+          <h2>Custom Test</h2>
+          <button class="modal-close" data-close="customModal" type="button" aria-label="Close modal">×</button>
         </div>
         <p class="custom-modal-sub" id="customModalSub">Choose your own test length.</p>
         <div class="custom-test-options">
           <div class="custom-option time-custom-option">
             <label for="customTimeInput">Time</label>
-            <div class="custom-input-row"><input id="customTimeInput" type="number" min="5" max="3600" value="45"
-                inputmode="numeric"><span>seconds</span><button id="applyCustomTime" type="button">Use Time</button>
+            <div class="custom-input-row">
+              <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+              <span>seconds</span>
+              <button id="applyCustomTime" type="button">Use Time</button>
             </div>
           </div>
           <div class="custom-option words-custom-option">
             <label for="customWordsInput">Words</label>
-            <div class="custom-input-row"><input id="customWordsInput" type="number" min="1" max="1000" value="25"
-                inputmode="numeric"><span>words</span><button id="applyCustomWords" type="button">Use Words</button>
+            <div class="custom-input-row">
+              <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+              <span>words</span>
+              <button id="applyCustomWords" type="button">Use Words</button>
             </div>
           </div>
         </div>
@@ -491,20 +539,27 @@
     <div class="app-modal" id="settingsModal" aria-hidden="true">
       <div class="modal-card">
         <div class="modal-head">
-          <h2>Settings</h2><button class="modal-close" data-close="settingsModal">×</button>
+          <h2>Settings</h2>
+          <button class="modal-close" data-close="settingsModal" type="button" aria-label="Close modal">×</button>
         </div>
         <div class="settings-grid">
-          <label>Theme<select id="themeSelect">
+          <label for="themeSelect">Theme
+            <select id="themeSelect">
               <option value="dark">Dark</option>
               <option value="midnight">Midnight Blue</option>
               <option value="light">Light</option>
-            </select></label>
-          <label>Caret<select id="caretSelect">
+            </select>
+          </label>
+          <label for="caretSelect">Caret
+            <select id="caretSelect">
               <option value="line">Line</option>
               <option value="block">Block</option>
               <option value="underline">Underline</option>
-            </select></label>
-          <label>Font Size<input id="fontSizeRange" type="range" min="20" max="36" value="28"></label>
+            </select>
+          </label>
+          <label for="fontSizeRange">Font Size
+            <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+          </label>
         </div>
         <p class="settings-hint">Settings are saved automatically on this device.</p>
       </div>
@@ -513,7 +568,8 @@
     <div class="app-modal" id="statsModal" aria-hidden="true">
       <div class="modal-card stats-dashboard">
         <div class="modal-head">
-          <h2>Statistics</h2><button class="modal-close" data-close="statsModal">×</button>
+          <h2>Statistics</h2>
+          <button class="modal-close" data-close="statsModal" type="button" aria-label="Close modal">×</button>
         </div>
         <div class="dashboard-grid">
           <div><span>Tests</span><strong id="dashTests">0</strong></div>
@@ -530,7 +586,8 @@
     <div class="app-modal" id="shortcutsModal" aria-hidden="true">
       <div class="modal-card">
         <div class="modal-head">
-          <h2>Keyboard Shortcuts</h2><button class="modal-close" data-close="shortcutsModal">×</button>
+          <h2>Keyboard Shortcuts</h2>
+          <button class="modal-close" data-close="shortcutsModal" type="button" aria-label="Close modal">×</button>
         </div>
         <div class="shortcut-list">
           <div><kbd>Tab</kbd><span>Keep focus on the typing area</span></div>
@@ -544,10 +601,12 @@
     <div class="command-hint" id="commandHint">Press <kbd>/</kbd> for shortcuts</div>
 
   </div>
+
   <script src="/passages.js"></script>
   <script>window.TypingMeterSEOConfig = { "mode": "timed", "time": 60 };</script>
   <script src="/script.js"></script>
 
+  <!-- Footer -->
   <footer class="site-footer" aria-label="TypingMeter footer">
     <div class="footer-info-links" aria-label="Information pages">
       <button type="button" class="info-footer-link" data-info-open="aboutPanel">About</button>

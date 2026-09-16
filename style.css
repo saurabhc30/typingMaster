@@ -3682,3 +3682,265 @@ body.result-visible .restart-wrapper {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   TypingMeter — Original CSS Mobile Refinement
+   Targeted changes only; existing desktop UI is preserved.
+   ========================================================= */
+
+:root {
+  --theme-active: #2563eb;
+  --theme-active-hover: #1d4ed8;
+}
+
+/* Theme-colored active controls */
+button.active,
+button.selected,
+.control-btn.active,
+.option-btn.active,
+.mode-btn.active,
+.time-btn.active,
+.word-btn.active,
+.difficulty-btn.active,
+.test-option.active,
+.setting-btn.active,
+.theme-btn.active {
+  background: var(--theme-active);
+  border-color: var(--theme-active);
+  color: #fff;
+}
+
+button.active:hover,
+button.selected:hover,
+.control-btn.active:hover,
+.option-btn.active:hover,
+.mode-btn.active:hover,
+.time-btn.active:hover,
+.word-btn.active:hover,
+.difficulty-btn.active:hover,
+.test-option.active:hover,
+.setting-btn.active:hover,
+.theme-btn.active:hover {
+  background: var(--theme-active-hover);
+  border-color: var(--theme-active-hover);
+  color: #fff;
+}
+
+/* Use the existing theme color variables when they exist */
+[data-theme="green"] {
+  --theme-active: #16a34a;
+  --theme-active-hover: #15803d;
+}
+
+[data-theme="purple"] {
+  --theme-active: #7c3aed;
+  --theme-active-hover: #6d28d9;
+}
+
+[data-theme="orange"] {
+  --theme-active: #ea580c;
+  --theme-active-hover: #c2410c;
+}
+
+[data-theme="red"] {
+  --theme-active: #dc2626;
+  --theme-active-hover: #b91c1c;
+}
+
+/* ---------- Mobile only ---------- */
+@media (max-width: 700px) {
+
+  /* Prevent the original desktop spacing from creating horizontal overflow */
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container,
+  main,
+  .main-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Keep the original header style, just make it compact */
+  header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Controls: allow natural wrapping instead of squeezing buttons */
+  .controls,
+  .control-panel,
+  .test-controls,
+  .settings-controls {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  /* Existing button groups remain visually consistent */
+  .control-group,
+  .button-group,
+  .difficulty-controls,
+  .time-controls,
+  .word-controls {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Touch-friendly controls */
+  .controls button,
+  .control-group button,
+  .button-group button,
+  .difficulty-controls button,
+  .time-controls button,
+  .word-controls button,
+  .control-btn,
+  .option-btn,
+  .mode-btn,
+  .time-btn,
+  .word-btn,
+  .difficulty-btn {
+    min-height: 42px;
+    box-sizing: border-box;
+  }
+
+  /* Do not let long labels force the page wider */
+  button {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  /* Typing area */
+  .typing-box,
+  .text-area {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .text-area {
+    overflow: hidden;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* Results */
+  .result-screen,
+  .results,
+  .result-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Footer links should wrap cleanly */
+  footer {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  footer a,
+  footer button {
+    min-height: 40px;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Make the main control area easier to tap */
+  .controls,
+  .control-panel,
+  .test-controls {
+    gap: 7px;
+  }
+
+  .controls button,
+  .control-group button,
+  .button-group button,
+  .difficulty-controls button,
+  .time-controls button,
+  .word-controls button,
+  .control-btn,
+  .option-btn,
+  .mode-btn,
+  .time-btn,
+  .word-btn,
+  .difficulty-btn {
+    min-height: 44px;
+    padding: 9px 10px;
+    font-size: 14px;
+  }
+
+  /* Avoid oversized typing text on narrow displays */
+  .typing-box {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .text-area {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* Result cards can use the full phone width */
+  .result-card,
+  .stat-card {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  footer {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 380px) {
+
+  .controls button,
+  .control-group button,
+  .button-group button,
+  .difficulty-controls button,
+  .time-controls button,
+  .word-controls button,
+  .control-btn,
+  .option-btn,
+  .mode-btn,
+  .time-btn,
+  .word-btn,
+  .difficulty-btn {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 13px;
+  }
+
+  .text-area {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+}
+
+/* Keyboard focus remains visible for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--theme-active);
+  outline-offset: 2px;
+}

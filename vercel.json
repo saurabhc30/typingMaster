@@ -1,14 +1,13 @@
 {
   "redirects": [
-    {
-      "source": "/games",
-      "destination": "/typing-games",
-      "permanent": true
-    },
-    {
-      "source": "/games/(.*)",
-      "destination": "/typing-games/$1",
-      "permanent": true
-    }
+    { "source": "/typing-speed-test", "destination": "/", "permanent": true },
+    { "source": "/30-second-typing-test", "destination": "/1-minute-typing-test", "permanent": true },
+    { "source": "/2-minute-typing-test", "destination": "/1-minute-typing-test", "permanent": true },
+    { "source": "/10-minute-typing-test", "destination": "/1-minute-typing-test", "permanent": true },
+    { "source": "/typing-speed-test-for-students", "destination": "/1-minute-typing-test", "permanent": true },
+    { "source": "/typing-test-for-beginners", "destination": "/how-to-increase-typing-speed", "permanent": true },
+    { "source": "/typing-test-with-punctuation", "destination": "/typing-practice", "permanent": true },
+    { "source": "/typing-speed-test-with-accuracy", "destination": "/typing-practice", "permanent": true },
+    { "source": "/games", "destination": "/typing-games", "permanent": true }
   ]
 }

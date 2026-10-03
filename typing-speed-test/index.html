@@ -101,12 +101,12 @@
     <!-- Header -->
     <header class="header">
       <a class="logo" href="../" aria-label="TypingMeter Home">
-        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo" width="32" height="32">
+        <img src="/logo-small.svg" class="site-logo" alt="TypingMeter logo" width="32" height="32">
         <span class="site-name">TypingMeter</span>
       </a>
 
       <div class="best">
-        <img src="/assets/images/icon-personal-best.svg" class="best-icon" alt="" width="18" height="18">
+        <img src="/icon-personal-best.svg" class="best-icon" alt="" width="18" height="18">
         <span class="best-line">Personal best:</span>
         <strong id="personalBest">35 WPM</strong>
       </div>
@@ -608,32 +608,29 @@
 
   <!-- Footer -->
   <footer class="site-footer" aria-label="TypingMeter footer">
-    <div class="footer-info-links" aria-label="Information pages">
-      <button type="button" class="info-footer-link" data-info-open="aboutPanel">About</button>
-      <button type="button" class="info-footer-link" data-info-open="wpmPanel">WPM Guide</button>
-      <button type="button" class="info-footer-link" data-info-open="tipsPanel">Typing Tips</button>
-      <button type="button" class="info-footer-link" data-info-open="contactPanel">Contact</button>
-      <button type="button" class="info-footer-link" data-info-open="termsPanel">Terms</button>
-      <button type="button" class="info-footer-link" data-info-open="privacyPanel">Privacy</button>
-    </div>
+        <div class="footer-info-links" aria-label="Information pages">
+            <a href="/about" class="info-footer-link">About</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Terms</a>
+            <a href="/privacy" class="info-footer-link">Privacy</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+        </div>
 
-    <div class="footer-settings-area" aria-label="Site controls">
-      <label class="footer-theme" title="Theme">
-        <span class="footer-label">Theme</span>
-        <select id="footerThemeSelect" aria-label="Theme">
-          <option value="dark">Dark</option>
-          <option value="midnight">Midnight Blue</option>
-          <option value="light">Light</option>
-        </select>
-      </label>
-      <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
-      <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
-      <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
-        <span>Shortcuts</span></button>
-    </div>
+        <div class="footer-settings-area" aria-label="Site controls">
+            <label class="footer-theme" title="Theme">
+                <span class="footer-label">Theme</span>
+                <select id="footerThemeSelect" aria-label="Theme">
+                    <option value="dark">Dark</option>
+                    <option value="midnight">Midnight Blue</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨ <span>Shortcuts</span></button>
+        </div>
 
-    <div class="footer-copy">© 2026 TypingMeter. Free online typing practice.</div>
-  </footer>
+        <div class="footer-copy">© 2026 TypingMeter. Free online typing practice.</div>
+    </footer>
 </body>
 
 </html>

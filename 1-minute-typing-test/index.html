@@ -6,34 +6,386 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="lX9mcpQ0s9Lps51OWkrMIE5mLBasewKU-46R5cLPQU4">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="TypingMeter">
+  <meta name="author" content="TypingMeter Team">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <!-- Optimized Title & Description targeting High-Intent Searches -->
-  <title>1 Minute Typing Test (Free & Instant) – Check Your WPM Online</title>
+  <!-- Blog Page SEO Title & Meta -->
+  <title>1 Minute Typing Test: Free Online WPM & Accuracy Speed Check</title>
   <meta name="description"
-    content="Take a free 1 minute typing test online. Measure your WPM, accuracy, and character speed with our 60 second typing test. No sign-up required. Start instantly!">
+    content="Take our free 1-minute typing test to benchmark your WPM speed and accuracy. Instant results, real-time analytics, and typing speed guides.">
   <link rel="canonical" href="https://typingmeter.vercel.app/1-minute-typing-test/">
 
   <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="1 Minute Typing Test (Free) – Check Your WPM & Accuracy">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="1 Minute Typing Speed Test Guide & Practice">
   <meta property="og:description"
-    content="Test your typing speed (WPM) and accuracy in 60 seconds with real-time analytics, sound feedback, and performance graphs.">
+    content="Take a quick 60-second typing test and explore strategies to boost your WPM score.">
   <meta property="og:url" content="https://typingmeter.vercel.app/1-minute-typing-test/">
   <meta property="og:site_name" content="TypingMeter">
   <meta property="og:image" content="https://typingmeter.vercel.app/assets/images/logo-small.svg">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="1 Minute Typing Test – 60 Second WPM Speed Test">
-  <meta name="twitter:description"
-    content="Take a free 1-minute typing test online. Measure your WPM, accuracy, and character speed instantly.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1 Minute Typing Test - Check Your WPM">
+  <meta name="twitter:description" content="Test your 60-second WPM score instantly on TypingMeter.">
 
   <meta name="theme-color" content="#111111">
   <link rel="icon" type="image/x-icon" href="/icon.ico">
-  <link rel="stylesheet" href="/1-minute-typing-test/style.css">
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- Enhanced Schema.org JSON-LD -->
+  <style>
+    /* ==========================================================================
+   1. HIGHLIGHTED NAVIGATION CTA
+   ========================================================================== */
+
+    .nav-practice-btn {
+      background-color: #2196f3;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.5rem 1.125rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .nav-practice-btn:hover {
+      background-color: #1e88e5;
+      transform: translateY(-1px);
+    }
+
+    /* Pulsing effect to catch the user's eye instantly */
+    .pulse-glow {
+      box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.6);
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(33, 150, 243, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+      }
+    }
+
+    /* ==========================================================================
+   2. HERO PRACTICE CARD (PRIMARY CTA FOR PRACTICING USERS)
+   ========================================================================== */
+
+    .hero-practice-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 2px solid #2196f3;
+      border-radius: 16px;
+      padding: 2.25rem 1.5rem;
+      margin: 1.25rem 0 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-card-badge {
+      display: inline-block;
+      background-color: rgba(33, 150, 243, 0.15);
+      color: #64b5f6;
+      border: 1px solid rgba(33, 150, 243, 0.35);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      margin-bottom: 0.875rem;
+    }
+
+    .hero-card-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.2;
+    }
+
+    .hero-card-subtitle {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.5;
+    }
+
+    /* Main Action Link / Button */
+    .hero-start-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #2196f3;
+      color: #ffffff;
+      padding: 1.125rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 6px 16px rgba(33, 150, 243, 0.25);
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hero-start-btn:hover {
+      background-color: #1976d2;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(33, 150, 243, 0.4);
+    }
+
+    .btn-icon {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .btn-text strong {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-text small {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+
+    .btn-arrow {
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    /* Quick Jump Text Strip */
+    .quick-jump-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #141414;
+      border: 1px solid #262626;
+      padding: 0.625rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #888888;
+      margin-bottom: 2.25rem;
+    }
+
+    .quick-jump-bar a {
+      color: #2196f3;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .quick-jump-bar a:hover {
+      color: #64b5f6;
+    }
+
+    /* ==========================================================================
+   3. IN-CONTENT ARTICLE CTA & BODY LAYOUT
+   ========================================================================== */
+
+    .blog-article {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0.5rem 0;
+    }
+
+    .blog-body {
+      line-height: 1.8;
+      color: #cccccd;
+      font-size: 1rem;
+    }
+
+    .blog-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2196f3;
+      font-size: 0.825rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .meta-dot {
+      color: #555555;
+    }
+
+    .blog-title {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .in-content-cta {
+      background-color: #181818;
+      border-left: 4px solid #2196f3;
+      padding: 1rem 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .in-content-cta p {
+      margin: 0 !important;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .in-content-btn {
+      background-color: #2196f3;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.825rem;
+      white-space: nowrap;
+    }
+
+    .in-content-btn:hover {
+      background-color: #1976d2;
+    }
+
+    .blog-quote {
+      background-color: #181818;
+      border-left: 4px solid #2196f3;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+      color: #dddddd;
+    }
+
+    .seo-speed-table {
+      display: flex;
+      flex-direction: column;
+      background-color: #121212;
+      border: 1px solid #222222;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1.25rem 0;
+    }
+
+    .seo-speed-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1.125rem;
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    .seo-speed-row:last-child {
+      border-bottom: none;
+    }
+
+    .seo-speed-head {
+      background-color: #1a1a1a;
+      color: #2196f3;
+    }
+
+    .seo-numbered-list {
+      margin: 1.25rem 0 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .seo-faq details {
+      background-color: #141414;
+      border: 1px solid #222222;
+      border-radius: 8px;
+      padding: 0.875rem 1.125rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .seo-faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .seo-faq details[open] summary {
+      margin-bottom: 0.625rem;
+      color: #2196f3;
+    }
+
+    /* ==========================================================================
+   4. STICKY MOBILE FLOATING BUTTON
+   ========================================================================== */
+
+    .mobile-floating-cta {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero-card-title {
+        font-size: 1.5rem;
+      }
+
+      .hero-start-btn {
+        padding: 0.875rem 1.125rem;
+      }
+
+      .btn-text strong {
+        font-size: 0.95rem;
+      }
+
+      .in-content-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      /* Fixed sticky CTA for mobile users scrolling through long text */
+      .mobile-floating-cta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 1.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #2196f3;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        z-index: 999;
+        width: 85%;
+        max-width: 320px;
+      }
+
+      .mobile-floating-cta:active {
+        transform: translateX(-50%) scale(0.98);
+      }
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,76 +395,37 @@
         "@id": "https://typingmeter.vercel.app/#website",
         "url": "https://typingmeter.vercel.app/",
         "name": "TypingMeter",
-        "description": "Free online typing speed tests, WPM tests, and typing practice.",
+        "description": "Free online typing speed tests, WPM guides, and practice tools.",
         "inLanguage": "en"
       },
       {
-        "@type": "WebPage",
-        "@id": "https://typingmeter.vercel.app/1-minute-typing-test/#webpage",
+        "@type": "BlogPosting",
+        "@id": "https://typingmeter.vercel.app/1-minute-typing-test/#blogpost",
         "url": "https://typingmeter.vercel.app/1-minute-typing-test/",
-        "name": "1 Minute Typing Test (Free & Instant) – Check Your WPM Online",
-        "description": "A free 60-second typing test for measuring WPM, typing accuracy, raw WPM, and consistency.",
+        "headline": "1 Minute Typing Test: How to Measure and Improve Your WPM",
+        "description": "A detailed guide and benchmark on taking 60-second typing speed tests.",
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-10-03",
         "isPartOf": { "@id": "https://typingmeter.vercel.app/#website" },
+        "author": {
+          "@type": "Organization",
+          "name": "TypingMeter Team"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "TypingMeter",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://typingmeter.vercel.app/assets/images/logo-small.svg"
+          }
+        },
         "inLanguage": "en"
-      },
-      {
-        "@type": "WebApplication",
-        "@id": "https://typingmeter.vercel.app/1-minute-typing-test/#app",
-        "name": "1 Minute Typing Speed Test",
-        "url": "https://typingmeter.vercel.app/1-minute-typing-test/",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web Browser",
-        "browserRequirements": "Requires JavaScript",
-        "isAccessibleForFree": "http://schema.org/True",
-        "description": "Free online 1-minute typing speed test measuring WPM, accuracy, raw WPM, errors, and consistency.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://typingmeter.vercel.app/" },
           { "@type": "ListItem", "position": 2, "name": "1 Minute Typing Test", "item": "https://typingmeter.vercel.app/1-minute-typing-test/" }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is a 1 minute typing test?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A 1 minute typing test is a 60 second WPM test that measures how quickly and accurately you can type in one minute."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How is WPM calculated in a 60 second typing test?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "WPM is calculated by taking total typed characters, dividing by 5 (standard word length), and adjusting for time. Formula: (Typed Characters ÷ 5) ÷ 1 Minute."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is this 1 minute typing test free?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, TypingMeter offers a 100% free online 1-minute typing test without requiring an account or sign-up."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is a good score on a 1-minute typing test?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "An average typing speed is between 35 to 45 WPM. Scores above 60 WPM are considered fast, while 80+ WPM is expert level."
-            }
-          }
         ]
       }
     ]
@@ -127,604 +440,147 @@
 
   <div class="container">
 
-    <!-- Header -->
+    <!-- Global Header -->
     <header class="header">
       <a class="logo" href="/" aria-label="TypingMeter Home">
-        <img src="/assets/images/logo-small.svg" class="site-logo" alt="TypingMeter logo">
+        <img src="/logo-small.svg" class="site-logo" alt="TypingMeter logo">
         <span class="site-name">TypingMeter</span>
       </a>
 
+      <!-- Highlighted Nav Action Button -->
       <div class="best">
-        <img src="/assets/images/icon-personal-best.svg" class="best-icon" alt="Personal best icon">
-        <span class="best-line">Personal best:</span>
-        <strong id="personalBest">35 WPM</strong>
+        <a href="/" class="nav-practice-btn pulse-glow">⚡ Take Test Now</a>
       </div>
     </header>
 
-    <!-- Target Keyword High-Impact Hero -->
-    <section class="seo-landing" aria-labelledby="landing-title">
-      <div class="landing-header">
-        <h1 id="landing-title">1 Minute Typing Test – 60 Second WPM Speed Check</h1>
-        <p class="landing-lead">Test typing speed in 1 minute with our fast, free 60-second typing test. Measure your
-          exact WPM, character accuracy, and typing consistency instantly.</p>
-        <nav class="landing-links" aria-label="Related typing tests">
-          <a href="/">Main Typing Test</a>
-          <a href="/typing-speed-test/">Typing Speed Test</a>
-          <a href="/30-second-typing-test/">30 Seconds</a>
-          <a href="/2-minute-typing-test/">2 Minutes</a>
-          <a href="/5-minute-typing-test/">5 Minutes</a>
-          <a href="/typing-speed-test-with-accuracy/">Accuracy Test</a>
-        </nav>
-      </div>
-    </section>
+    <!-- Main Content Container -->
+    <article class="blog-article">
 
-    <!-- Control Bar -->
-    <div class="control-bar hide-during-typing">
+      <!-- HERO HIGHLIGHT BANNER FOR PRACTICING USERS -->
+      <section class="hero-practice-card" aria-label="Quick Start Test">
+        <div class="hero-card-badge">LIVE PRACTICE TOOL AVAILABLE</div>
+        <h1 class="hero-card-title">1 Minute Typing Speed Test</h1>
+        <p class="hero-card-subtitle">Ready to test your speed right now? Skip the article and launch the interactive
+          typing practice tool instantly.</p>
 
-      <div class="control-group difficulty-group" aria-label="Difficulty">
-        <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Easy</button>
-        <button class="control-btn diff-btn" data-diff="medium" type="button">Medium</button>
-        <button class="control-btn diff-btn" data-diff="hard" type="button">Hard</button>
-      </div>
+        <a href="/" class="hero-start-btn">
+          <span class="btn-icon">⌨️</span>
+          <span class="btn-text">
+            <strong>START 1-MINUTE TYPING TEST</strong>
+            <small>Free • No signup needed • Real-time WPM</small>
+          </span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </section>
 
-      <div class="control-group mode-group" aria-label="Mode">
-        <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷ <span>Time</span></button>
-        <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Words</span></button>
-        <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Passage</span></button>
+      <!-- Secondary Quick Redirect Bar -->
+      <div class="quick-jump-bar">
+        <span>Looking to practice immediately?</span>
+        <a href="/">Go directly to typing tool &raquo;</a>
       </div>
 
-      <div class="control-group length-group" id="timedLengths" aria-label="Time length">
-        <button class="length-btn" data-time="15" type="button">15</button>
-        <button class="length-btn" data-time="30" type="button">30</button>
-        <button class="length-btn is-active" data-time="60" type="button">60</button>
-        <button class="length-btn" data-time="120" type="button">120</button>
-        <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">Custom</button>
-      </div>
-
-      <div class="control-group length-group" id="wordLengths" aria-label="Word length" hidden>
-        <button class="length-btn" data-words="10" type="button">10</button>
-        <button class="length-btn is-active" data-words="25" type="button">25</button>
-        <button class="length-btn" data-words="50" type="button">50</button>
-        <button class="length-btn" data-words="100" type="button">100</button>
-        <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Custom</button>
-      </div>
-
-      <div class="control-group feature-group" aria-label="Typing options">
-        <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
-          title="Punctuation">@</button>
-        <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false" title="Numbers">#</button>
-        <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true" title="Sound">♪</button>
-      </div>
-
-    </div>
-
-    <input type="checkbox" id="punctuationToggle" hidden>
-    <input type="checkbox" id="numbersToggle" hidden>
-    <input type="checkbox" id="soundToggle" checked hidden>
-    <select id="timeSelect" hidden aria-hidden="true">
-      <option value="15">15</option>
-      <option value="30">30</option>
-      <option value="60" selected>60</option>
-      <option value="120">120</option>
-    </select>
-    <button id="passageBtn" hidden type="button">Passage</button>
-
-    <div class="minimal-status" id="minimalStatus" aria-live="polite">
-      <span id="liveTime" class="live-status-item">1:00</span> &nbsp; | &nbsp;
-      <span id="liveWords" class="live-status-item">0 words</span>
-    </div>
-
-    <!-- Typing Box Area -->
-    <main class="typing-box">
-      <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
-        <span class="focus-cursor">➤</span>
-        <span>Click here or press any key to start typing</span>
-      </button>
-      <div class="text-area blur" id="text" tabindex="0"></div>
-    </main>
-
-    <div class="restart-wrapper">
-      <button class="restart-btn-main" id="restartMainBtn">
-        Restart Test ↻
-      </button>
-      <button class="history-toggle" id="historyToggle" type="button">History</button>
-
-      <div class="local-history" id="localHistory">
-        <div class="local-history-header">
-          <span>Recent tests</span>
-          <button class="local-history-clear" id="clearHistory" type="button">Clear</button>
-        </div>
-        <ul class="local-history-list" id="historyList"></ul>
-      </div>
-    </div>
-
-    <!-- Result Screen -->
-    <div class="result-screen" id="resultScreen">
-      <div class="result-graph-wrap">
-        <div class="result-graph-header">
-          <div>
-            <div class="result-graph-title">WPM Progress</div>
-            <div class="result-graph-subtitle">Your speed during the test</div>
+      <!-- SEO ARTICLE BODY (CONCEALED / BELOW THE FOLD FOR USER INTENT) -->
+      <section class="blog-body">
+        <header class="blog-header">
+          <div class="blog-meta">
+            <span class="blog-category">Guide & Analytics</span>
+            <span class="meta-dot">•</span>
+            <time datetime="2026-10-03">October 3, 2026</time>
           </div>
-          <div class="top-speed-indicator">
-            <span class="top-speed-dot"></span>
-            <span>Top speed: <strong id="topSpeed">0 WPM</strong></span>
+          <h2 class="blog-title">Mastering the 1-Minute Typing Test: Boost Your WPM & Accuracy</h2>
+        </header>
+
+        <h2>Why the 1-Minute Test is the Gold Standard for Typists</h2>
+        <p>Whether preparing for job assessments, optimizing your workflow, or competing online, short-burst speed tests
+          provide immediate actionable insights. Unlike longer tests, a 60-second test isolates your maximum speed
+          potential without inducing hand fatigue.</p>
+
+        <h2>How WPM is Scientifically Calculated</h2>
+        <p>In standard typist evaluations, one standard word equals <strong>5 characters</strong> (including spaces and
+          punctuation). Your raw score tracks overall keypress speed, while your net score penalizes errors to reflect
+          real-world writing quality.</p>
+
+        <blockquote class="blog-quote">
+          <p><strong>Standard Formula:</strong> Net WPM = [(Total Typed Characters ÷ 5) - Uncorrected Errors] ÷ 1 Minute
+          </p>
+        </blockquote>
+
+        <!-- In-Content High-Visibility CTA -->
+        <div class="in-content-cta">
+          <p><strong>Want to check your current score?</strong></p>
+          <a href="/" class="in-content-btn">Launch Practice Tool ⚡</a>
+        </div>
+
+        <h2>Speed Benchmarks: Where Do You Stand?</h2>
+        <div class="seo-speed-table" role="table" aria-label="Typing speed ranges for 1 minute test">
+          <div class="seo-speed-row seo-speed-head" role="row">
+            <strong>WPM Range</strong>
+            <strong>Skill Level</strong>
           </div>
-        </div>
-        <canvas id="wpmGraph" width="760" height="210" aria-label="WPM progress graph"></canvas>
-      </div>
-
-      <div class="result-stats">
-        <div class="result-card">
-          <span>WPM</span>
-          <h2 id="resWpm">0</h2>
-        </div>
-        <div class="result-card">
-          <span>Accuracy</span>
-          <h2 id="resAcc">0%</h2>
-        </div>
-        <div class="result-card">
-          <span>Characters</span>
-          <h2 id="resChar">0</h2>
-        </div>
-        <div class="result-card advanced-result">
-          <span>Raw WPM</span>
-          <h2 id="resRawWpm">0</h2>
-        </div>
-        <div class="result-card advanced-result">
-          <span>Errors</span>
-          <h2 id="resErrors">0</h2>
-        </div>
-        <div class="result-card advanced-result">
-          <span>Consistency</span>
-          <h2 id="resConsistency">0%</h2>
-        </div>
-      </div>
-
-      <button class="retry-btn" id="retryBtn">
-        Beat This Score ↻
-      </button>
-    </div>
-
-    <!-- Games Promo -->
-    <section class="games-promo" aria-labelledby="games-promo-title">
-      <div class="games-promo-head">
-        <div>
-          <span class="games-promo-kicker">PLAY &amp; COMPETE</span>
-          <h2 id="games-promo-title">Typing Games</h2>
-          <p>
-            Ready for more than a typing test?
-            Challenge other players with TypingMeter's multiplayer typing games.
-          </p>
+          <div class="seo-speed-row" role="row"><span>Under 30 WPM</span><span>Beginner: Focus on finger placement &
+              touch typing.</span></div>
+          <div class="seo-speed-row" role="row"><span>30–49 WPM</span><span>Average: Standard daily office &
+              communication speed.</span></div>
+          <div class="seo-speed-row" role="row"><span>50–69 WPM</span><span>Above Average: Solid productivity for
+              developers & writers.</span></div>
+          <div class="seo-speed-row" role="row"><span>70–89 WPM</span><span>Fast: High performance for transcription &
+              executive work.</span></div>
+          <div class="seo-speed-row" role="row"><span>90+ WPM</span><span>Expert: Top 1% typing velocity and master
+              consistency.</span></div>
         </div>
 
-        <a class="games-promo-all" href="/typing-games/">
-          Explore Games →
-        </a>
-      </div>
-
-      <div class="games-promo-grid">
-        <a class="game-promo-card" href="/typing-games/typing-race/">
-          <span class="game-promo-icon">🏁</span>
-          <span class="game-promo-info">
-            <strong>Typing Race</strong>
-            <small>Race another player</small>
-          </span>
-          <span class="game-promo-arrow">→</span>
-        </a>
-        <a class="game-promo-card" href="/typing-games/typing-war/">
-          <span class="game-promo-icon">⚔️</span>
-          <span class="game-promo-info">
-            <strong>Typing War</strong>
-            <small>Battle in real time</small>
-          </span>
-          <span class="game-promo-arrow">→</span>
-        </a>
-        <a class="game-promo-card" href="/typing-games/speed-rush/">
-          <span class="game-promo-icon">⚡</span>
-          <span class="game-promo-info">
-            <strong>Speed Rush</strong>
-            <small>Race with more players</small>
-          </span>
-          <span class="game-promo-arrow">→</span>
-        </a>
-        <a class="game-promo-card" href="/typing-games/accuracy-master/">
-          <span class="game-promo-icon">🎯</span>
-          <span class="game-promo-info">
-            <strong>Accuracy Master</strong>
-            <small>Accuracy-focused battle</small>
-          </span>
-          <span class="game-promo-arrow">→</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Optimized Long-form SEO Content Section -->
-    <section class="landing-info" aria-labelledby="page-info-title">
-      <h2 id="page-info-title">Free 1 Minute Typing Test Online</h2>
-      <p>A <strong>1 minute typing test</strong> is the fastest and most practical way to test typing speed in 1 minute
-        and evaluate your baseline accuracy. TypingMeter provides a fast, real-time <strong>60 second typing
-          test</strong> that tracks net words per minute (WPM), raw speed, error rate, and character consistency.</p>
-
-      <h2>How to Take a 60 Second Typing Test</h2>
-      <p>To begin your 1 minute typing test, start typing the displayed passage as soon as you press any key. The
-        countdown timer runs for exactly 60 seconds. As you type, TypingMeter calculates real-time metrics including
-        correct characters, incorrect keypresses, and net WPM. Taking a regular <strong>1 min WPM test</strong> allows
-        you to build muscle memory and increase your typing speed over time.</p>
-
-      <h2>Why Use a 1 Minute Typing Speed Test?</h2>
-      <div class="seo-content-grid">
-        <article>
-          <h3>Quick WPM Benchmark</h3>
-          <p>A 60 second typing test offers an instant assessment without requiring lengthy practice sessions.</p>
-        </article>
-        <article>
-          <h3>Speed & Precision Balance</h3>
-          <p>Focusing on a single minute helps you minimize typos while maintaining a smooth typing rhythm.</p>
-        </article>
-        <article>
-          <h3>Track Progress Easily</h3>
-          <p>Taking a daily 1-minute test lets you monitor performance trends and see gradual improvements in accuracy.
-          </p>
-        </article>
-      </div>
-
-      <h2>How WPM is Calculated in a 1 Min WPM Test</h2>
-      <p>In standard typing speed calculations, one "word" equals 5 characters (including spaces and punctuation). When
-        taking a <strong>typing words per minute test</strong>, your raw score is determined by dividing total typed
-        characters by 5. Net WPM subtracts uncorrected errors to ensure speed is not gained at the cost of accuracy.</p>
-      <p><strong>Standard Formula:</strong> <code>WPM = (Typed Characters ÷ 5) ÷ 1 Minute</code></p>
-
-      <h2>1 Minute Typing Speed Benchmarks</h2>
-      <div class="seo-speed-table" role="table" aria-label="Typing speed ranges for 1 minute test">
-        <div class="seo-speed-row seo-speed-head" role="row"><strong>WPM Range</strong><strong>Performance
-            Level</strong></div>
-        <div class="seo-speed-row" role="row"><span>Under 30 WPM</span><span>Beginner: Focus on finger placement and
-            accuracy.</span></div>
-        <div class="seo-speed-row" role="row"><span>30–49 WPM</span><span>Average: Typical everyday typing speed.</span>
-        </div>
-        <div class="seo-speed-row" role="row"><span>50–69 WPM</span><span>Above Average: Solid speed for professional
-            tasks.</span></div>
-        <div class="seo-speed-row" role="row"><span>70–89 WPM</span><span>Fast: High performance for specialized
-            jobs.</span></div>
-        <div class="seo-speed-row" role="row"><span>90+ WPM</span><span>Expert: Top-tier typing speed and high
-            precision.</span></div>
-      </div>
-
-      <h2>Tips to Boost Your 60 Second Typing Score</h2>
-      <ol class="seo-numbered-list">
-        <li><strong>Focus on Accuracy First:</strong> Making fewer errors saves time spent on backspacing during a short
-          test. Check precision with our <a href="/typing-speed-test-with-accuracy/">typing accuracy test</a>.</li>
-        <li><strong>Maintain Touch-Typing Position:</strong> Keep your fingers aligned with the home row keys (`ASDF`
-          and `JKL;`).</li>
-        <li><strong>Type with Steady Rhythm:</strong> Avoid rushing through easy words and slowing down on hard ones;
-          maintain a consistent cadence.</li>
-        <li><strong>Practice Short Bursts Regularly:</strong> Repeated 1-minute practice runs build muscle memory faster
-          than long, infrequent sessions.</li>
-      </ol>
-
-      <h2>Related Typing Tests & Resources</h2>
-      <div class="seo-link-grid">
-        <a href="/typing-speed-test/">Typing Speed Test</a>
-        <a href="/free-wpm-test/">Free WPM Test</a>
-        <a href="/typing-speed-test-with-accuracy/">Typing Accuracy Test</a>
-        <a href="/30-second-typing-test/">30 Second Typing Test</a>
-        <a href="/typing-practice/">Typing Practice</a>
-        <a href="/what-is-wpm/">What Is WPM?</a>
-        <a href="/5-minute-typing-test/">5 Minute Typing Test</a>
-        <a href="/10-minute-typing-test/">10 Minute Typing Test</a>
-      </div>
-
-      <h2>Frequently Asked Questions</h2>
-      <div class="seo-faq">
-        <details>
-          <summary>What is a 1 minute typing test?</summary>
-          <p>A 1 minute typing test is a 60-second speed test designed to measure how many words per minute (WPM) you
-            can type accurately in one minute.</p>
-        </details>
-        <details>
-          <summary>How can I test typing speed in 1 minute?</summary>
-          <p>Simply click inside the typing box on this page and start typing. The test automatically starts on your
-            first keypress and stops after 60 seconds.</p>
-        </details>
-        <details>
-          <summary>Is this 60 second typing test completely free?</summary>
-          <p>Yes, TypingMeter offers a 100% free online 1-minute test with no account creation or sign-up needed.</p>
-        </details>
-        <details>
-          <summary>What is a good score on a 1 min WPM test?</summary>
-          <p>An average score ranges between 35 and 45 WPM. Scores above 60 WPM are fast, while speeds over 80 WPM put
-            you in the top tier of typists.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- Information Panels -->
-    <section class="info-panel" id="aboutPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">ABOUT</span>
-            <h2>About TypingMeter</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
-        </div>
-        <p>TypingMeter is a free online typing practice tool designed to make speed and accuracy testing simple and
-          distraction-free.</p>
-        <h3>What TypingMeter provides</h3>
-        <ul>
-          <li>Timed typing tests with different lengths.</li>
-          <li>Word-count and passage practice.</li>
-          <li>WPM, accuracy, errors, and consistency results.</li>
-          <li>Local test history and personal-best tracking on your device.</li>
-        </ul>
-        <p>Our goal is to help students, professionals, writers, developers, and everyday users practice typing and
-          measure their progress.</p>
-      </div>
-    </section>
-
-    <section class="info-panel" id="wpmPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">TYPING GUIDE</span>
-            <h2>What Is WPM?</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
-        </div>
-        <p>WPM means <strong>words per minute</strong>. It is a common way to describe typing speed.</p>
-        <h3>How WPM is calculated</h3>
-        <p>A common typing-test convention treats five typed characters, including spaces, as one word.</p>
-        <p><strong>WPM = typed characters ÷ 5 ÷ minutes</strong></p>
-        <h3>Why accuracy matters</h3>
-        <p>Speed alone does not tell the whole story. A useful typing result also considers mistakes and accuracy.</p>
-        <h3>How to improve your WPM</h3>
-        <ol>
-          <li>Practice regularly.</li>
-          <li>Focus on accuracy before maximum speed.</li>
-          <li>Learn consistent finger positioning.</li>
-          <li>Keep a steady typing rhythm.</li>
-          <li>Track progress over multiple tests.</li>
+        <h2>4 Actionable Strategies to Boost Your Score</h2>
+        <ol class="seo-numbered-list">
+          <li><strong>Master Home-Row Anchoring:</strong> Rest your fingers on <code>ASDF</code> and <code>JKL;</code>.
+            Returning to base position prevents visual reliance on the keyboard.</li>
+          <li><strong>Prioritize Rhythm Over Raw Burst:</strong> Rapid bursts followed by sudden pauses lead to frequent
+            errors. Maintain a steady drumbeat-like typing cadence.</li>
+          <li><strong>Minimize Backspacing:</strong> A single backspace consumes 2 to 3 keypress actions. Speed flows
+            directly from raw accuracy.</li>
+          <li><strong>Practice Short Daily Bursts:</strong> Five 1-minute tests daily yield superior muscle memory gains
+            compared to one long weekend practice session.</li>
         </ol>
-      </div>
-    </section>
 
-    <section class="info-panel" id="tipsPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">PRACTICE</span>
-            <h2>Typing Tips</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
+        <h2>Frequently Asked Questions</h2>
+        <div class="seo-faq">
+          <details>
+            <summary>What is a good score on a 1-minute typing test?</summary>
+            <p>An average typing speed is between 35 and 45 WPM. Anything over 60 WPM is considered fast, while 80+ WPM
+              is expert level.</p>
+          </details>
+          <details>
+            <summary>Is this typing test free to use?</summary>
+            <p>Yes, TypingMeter offers 100% free typing speed checks on our homepage with no registration required.</p>
+          </details>
+          <details>
+            <summary>How can I improve my typing speed quickly?</summary>
+            <p>Focus on maintaining 95%+ accuracy before trying to increase your physical hand movement speed.</p>
+          </details>
         </div>
-        <h3>1. Prioritize accuracy</h3>
-        <p>Typing fewer errors at a steady pace is generally more useful than typing very quickly with frequent
-          corrections.</p>
-        <h3>2. Practice touch typing</h3>
-        <p>Learn where keys are located and use consistent finger positions to reduce unnecessary hand movement.</p>
-        <h3>3. Keep a steady rhythm</h3>
-        <p>A consistent pace can help you avoid repeated pauses and sudden bursts of speed.</p>
-        <h3>4. Review your mistakes</h3>
-        <p>Notice which letters, combinations, or words cause repeated errors and give those areas extra practice.</p>
-        <h3>5. Practice consistently</h3>
-        <p>Short, regular sessions are easier to maintain than occasional long sessions. Use different passages so your
-          practice remains varied.</p>
-      </div>
-    </section>
 
-    <section class="info-panel" id="contactPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">CONTACT</span>
-            <h2>Contact TypingMeter</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
-        </div>
-        <p>For questions, feedback, bug reports, accessibility issues, or suggestions about TypingMeter, contact us
-          using the email address below.</p>
-        <p class="contact-email"><a href="mailto:sourabhc.0102@gmail.com">sourabhc.0102@gmail.com</a></p>
-        <p>Please do not send passwords, payment information, bank details, or other sensitive information by email.</p>
-      </div>
-    </section>
+      </section>
 
-    <section class="info-panel" id="termsPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">TERMS</span>
-            <h2>Terms of Use</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
-        </div>
-        <p><strong>Last updated: September 3, 2026</strong></p>
-        <h3>Using TypingMeter</h3>
-        <p>You may use TypingMeter for lawful personal, educational, and professional typing practice. Do not misuse the
-          website, interfere with its operation, attempt unauthorized access, or use automated activity that harms the
-          service.</p>
-        <h3>Typing results</h3>
-        <p>WPM, accuracy, errors, and related results are provided for practice and informational purposes. Results can
-          vary with the text, device, keyboard, browser, and other conditions.</p>
-        <h3>Third-party services</h3>
-        <p>The website may use third-party services such as hosting, advertising, analytics, or external links. Those
-          services may have their own terms and policies.</p>
-        <h3>Availability</h3>
-        <p>TypingMeter may be updated, changed, temporarily unavailable, or discontinued as needed for maintenance,
-          security, or improvements.</p>
-      </div>
-    </section>
+    </article>
 
-    <section class="info-panel" id="privacyPanel" aria-hidden="true">
-      <div class="info-panel-card">
-        <div class="info-panel-head">
-          <div><span class="info-kicker">PRIVACY</span>
-            <h2>Privacy Policy</h2>
-          </div><button type="button" class="info-close" data-info-close>×</button>
-        </div>
-        <p><strong>Last updated: September 3, 2026</strong></p>
-        <p>TypingMeter is designed to minimize the information it collects. Typing preferences, test history, and
-          personal-best information may be stored locally in your browser to provide site features.</p>
-        <h3>Information and financial data</h3>
-        <p>TypingMeter does not request bank account numbers, payment-card details, UPI IDs, or other financial
-          information for the typing-test features.</p>
-        <h3>Cookies and advertising</h3>
-        <p>TypingMeter may use cookies or similar technologies through advertising and measurement services. Third-party
-          advertising vendors, including Google, may use cookies to serve or measure ads according to their own policies
-          and applicable settings.</p>
-        <p>For information about Google's advertising controls, visit <a href="https://adssettings.google.com/"
-            target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</p>
-        <h3>Local storage</h3>
-        <p>Some settings, test history, and personal-best data can be stored in your browser's local storage. Clearing
-          site data can remove locally stored information.</p>
-        <h3>Security</h3>
-        <p>Reasonable measures are used to protect the website and its services, but no internet system can guarantee
-          complete security.</p>
-        <h3>Changes to this policy</h3>
-        <p>This policy may be updated when site features, services, or legal requirements change.</p>
-      </div>
-    </section>
-
-    <!-- Modal Dialogs -->
-    <div class="app-modal" id="customModal" aria-hidden="true">
-      <div class="modal-card custom-modal-card">
-        <div class="modal-head">
-          <h2>Custom Test</h2><button class="modal-close" data-close="customModal" type="button">×</button>
-        </div>
-        <p class="custom-modal-sub" id="customModalSub">Choose your own test length.</p>
-        <div class="custom-test-options">
-          <div class="custom-option time-custom-option">
-            <label for="customTimeInput">Time</label>
-            <div class="custom-input-row">
-              <input id="customTimeInput" type="number" min="5" max="3600" value="45"
-                inputmode="numeric"><span>seconds</span>
-              <button id="applyCustomTime" type="button">Use Time</button>
-            </div>
-          </div>
-          <div class="custom-option words-custom-option">
-            <label for="customWordsInput">Words</label>
-            <div class="custom-input-row">
-              <input id="customWordsInput" type="number" min="1" max="1000" value="25"
-                inputmode="numeric"><span>words</span>
-              <button id="applyCustomWords" type="button">Use Words</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="app-modal" id="settingsModal" aria-hidden="true">
-      <div class="modal-card">
-        <div class="modal-head">
-          <h2>Settings</h2><button class="modal-close" data-close="settingsModal" type="button">×</button>
-        </div>
-        <div class="settings-grid">
-          <label>Theme
-            <select id="themeSelect">
-              <option value="dark">Dark</option>
-              <option value="midnight">Midnight Blue</option>
-              <option value="light">Light</option>
-            </select>
-          </label>
-          <label>Caret
-            <select id="caretSelect">
-              <option value="line">Line</option>
-              <option value="block">Block</option>
-              <option value="underline">Underline</option>
-            </select>
-          </label>
-          <label>Font Size<input id="fontSizeRange" type="range" min="20" max="36" value="28"></label>
-        </div>
-        <p class="settings-hint">Settings are saved automatically on this device.</p>
-      </div>
-    </div>
-
-    <div class="app-modal" id="statsModal" aria-hidden="true">
-      <div class="modal-card stats-dashboard">
-        <div class="modal-head">
-          <h2>Statistics</h2><button class="modal-close" data-close="statsModal" type="button">×</button>
-        </div>
-        <div class="dashboard-grid">
-          <div><span>Tests</span><strong id="dashTests">0</strong></div>
-          <div><span>Best WPM</span><strong id="dashBest">0</strong></div>
-          <div><span>Average WPM</span><strong id="dashAvg">0</strong></div>
-          <div><span>Average Accuracy</span><strong id="dashAcc">0%</strong></div>
-          <div><span>Total Characters</span><strong id="dashChars">0</strong></div>
-          <div><span>Total Errors</span><strong id="dashErrors">0</strong></div>
-        </div>
-        <div class="dashboard-chart"><canvas id="statsGraph" width="760" height="190"></canvas></div>
-      </div>
-    </div>
-
-    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
-      <div class="modal-card">
-        <div class="modal-head">
-          <h2>Keyboard Shortcuts</h2><button class="modal-close" data-close="shortcutsModal" type="button">×</button>
-        </div>
-        <div class="shortcut-list">
-          <div><kbd>Tab</kbd><span>Keep focus on the typing area</span></div>
-          <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Restart test</span></div>
-          <div><kbd>Esc</kbd><span>Close an open panel</span></div>
-          <div><kbd>/</kbd><span>Open shortcuts</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="command-hint" id="commandHint">Press <kbd>/</kbd> for shortcuts</div>
+    <!-- Floating Quick-Action Button for Mobile Users -->
+    <a href="/" class="mobile-floating-cta" aria-label="Start Practice Test">
+      ⚡ Take 1-Minute Test
+    </a>
 
   </div>
 
-  <script src="/passages.js"></script>
-  <script>window.TypingMeterSEOConfig = { "mode": "timed", "time": 60 };</script>
-  <script src="/script.js"></script>
-
-  <!-- Clean Footer Links with Dynamic Interception -->
+  <!-- Footer Links -->
   <footer class="site-footer" aria-label="TypingMeter footer">
     <div class="footer-info-links" aria-label="Information pages">
-      <a href="/about/" class="info-footer-link" data-info-open="aboutPanel">About</a>
-      <a href="/wpm-guide/" class="info-footer-link" data-info-open="wpmPanel">WPM Guide</a>
-      <a href="/typing-tips/" class="info-footer-link" data-info-open="tipsPanel">Typing Tips</a>
-      <a href="/contact/" class="info-footer-link" data-info-open="contactPanel">Contact</a>
-      <a href="/terms/" class="info-footer-link" data-info-open="termsPanel">Terms</a>
-      <a href="/privacy-policy/" class="info-footer-link" data-info-open="privacyPanel">Privacy</a>
-    </div>
-
-    <div class="footer-settings-area" aria-label="Site controls">
-      <label class="footer-theme" title="Theme">
-        <span class="footer-label">Theme</span>
-        <select id="footerThemeSelect" aria-label="Theme">
-          <option value="dark">Dark</option>
-          <option value="midnight">Midnight Blue</option>
-          <option value="light">Light</option>
-        </select>
-      </label>
-      <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
-      <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥ <span>Statistics</span></button>
-      <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
-        <span>Shortcuts</span></button>
+      <a href="/" class="info-footer-link">Practice Tool</a>
+      <a href="/about/" class="info-footer-link">About</a>
+      <a href="/contact/" class="info-footer-link">Contact</a>
+      <a href="/privacy/" class="info-footer-link">Privacy</a>
+      <a href="/terms/" class="info-footer-link">Terms</a>
     </div>
 
     <div class="footer-copy">© 2026 TypingMeter. Free online typing practice.</div>
   </footer>
-
-  <!-- Script block handling in-page panel toggles -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Intercept clicks on panel links to prevent 404 page navigation
-      document.querySelectorAll('.info-footer-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetId = link.getAttribute('data-info-open');
-          const targetPanel = document.getElementById(targetId);
-          if (targetPanel) {
-            targetPanel.setAttribute('aria-hidden', 'false');
-            targetPanel.classList.add('is-open');
-          }
-        });
-      });
-
-      // Handle close buttons inside panels
-      document.querySelectorAll('[data-info-close]').forEach(closeBtn => {
-        closeBtn.addEventListener('click', () => {
-          const panel = closeBtn.closest('.info-panel');
-          if (panel) {
-            panel.setAttribute('aria-hidden', 'true');
-            panel.classList.remove('is-open');
-          }
-        });
-      });
-    });
-  </script>
 
 </body>
 

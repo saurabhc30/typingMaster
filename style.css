@@ -295,7 +295,7 @@ body.typing-cursor-hidden * {
 
 .result-screen {
   display: none;
-  padding: 60px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
@@ -362,7 +362,7 @@ body.typing-cursor-hidden * {
   background: white;
   color: black;
   border: none;
-  padding: 14px 40px;
+  padding: 20px 40px;
   border-radius: 30px;
   font-size: 15px;
   cursor: pointer;
@@ -429,7 +429,7 @@ body.typing-cursor-hidden * {
 /* Restart under paragraph */
 .restart-wrapper {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 60px;
 }
 
 .restart-btn-main {

@@ -1,16 +1,16 @@
 {
   "redirects": [
-    { "source": "/30-second-typing-test", "destination": "/", "permanent": true },
-    { "source": "/10-minute-typing-test", "destination": "/", "permanent": true },
-    { "source": "/typing-test-for-beginners", "destination": "/", "permanent": true },
-    { "source": "/typing-test-with-punctuation", "destination": "/", "permanent": true },
-    { "source": "/what-is-wpm", "destination": "/", "permanent": true },
-    { "source": "/typing-speed-test-with-accuracy", "destination": "/", "permanent": true },
-    { "source": "/typing-practice", "destination": "/", "permanent": true },
-    { "source": "/wpm-calculator", "destination": "/", "permanent": true },
-    { "source": "/wpm-test", "destination": "/", "permanent": true },
-    { "source": "/typing-test", "destination": "/", "permanent": true },
-    { "source": "/how-to-increase-typing-speed", "destination": "/", "permanent": true },
-    { "source": "/games", "destination": "/typing-games", "permanent": true }
+    { "source": "/30-second-typing-test/", "destination": "/", "permanent": true },
+    { "source": "/10-minute-typing-test/", "destination": "/", "permanent": true },
+    { "source": "/typing-test-for-beginners/", "destination": "/", "permanent": true },
+    { "source": "/typing-test-with-punctuation/", "destination": "/", "permanent": true },
+    { "source": "/what-is-wpm/", "destination": "/", "permanent": true },
+    { "source": "/typing-speed-test-with-accuracy/", "destination": "/", "permanent": true },
+    { "source": "/typing-practice/", "destination": "/", "permanent": true },
+    { "source": "/wpm-calculator/", "destination": "/", "permanent": true },
+    { "source": "/wpm-test/", "destination": "/", "permanent": true },
+    { "source": "/typing-test/", "destination": "/", "permanent": true },
+    { "source": "/how-to-increase-typing-speed/", "destination": "/", "permanent": true },
+    { "source": "/games/", "destination": "/typing-games/", "permanent": true }
   ]
 }

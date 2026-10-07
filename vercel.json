@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "https://typingwebsite.com/",
+      "permanent": true
+    },
+    {
       "source": "/30-second-typing-test",
       "destination": "https://typingwebsite.com/",
       "permanent": true

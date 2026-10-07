@@ -30,12 +30,7 @@
   <url><loc>https://typingwebsite.com/typing-games/typing-war/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://typingwebsite.com/typing-games/word-blitz/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://typingwebsite.com/typing-games/word-scramble/</loc><lastmod>2026-09-09</lastmod></url>
-  <url>
-    <loc>https://vercel.app</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
+  
   <!-- 2. Target Keyword Variant: 1 Minute Typing Test -->
   <url>
     <loc>https://typingwebsite.com#1min</loc>

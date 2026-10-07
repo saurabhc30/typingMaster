@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://typingmeter.vercel.app/sitemap.xml
+Sitemap: https://typingwebsite.com/sitemap.xml

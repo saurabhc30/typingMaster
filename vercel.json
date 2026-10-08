@@ -1,52 +1,17 @@
 {
   "redirects": [
     {
-      "source": "/30-second-typing-test",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/10-minute-typing-test",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/typing-test-for-beginners",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/typing-test-with-punctuation",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/what-is-wpm",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/typing-practice",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/wpm-calculator",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/wpm-test",
-      "destination": "https://typingwebsite.com/",
-      "statusCode": 301
-    },
-    {
-      "source": "/typing-test",
+      "source": "/",
       "destination": "https://typingwebsite.com/",
       "statusCode": 301
     },
     {
       "source": "/games",
+      "destination": "https://typingwebsite.com/typing-games/",
+      "statusCode": 301
+    },
+    {
+      "source": "/games/",
       "destination": "https://typingwebsite.com/typing-games/",
       "statusCode": 301
     },

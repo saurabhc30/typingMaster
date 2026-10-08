@@ -3,112 +3,108 @@
     {
       "source": "/",
       "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/30-second-typing-test",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "source": "/typing-speed-test/",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
     },
     {
-      "source": "/30-second-typing-test/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "source": "/typing-speed-test/:path*",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
     },
     {
-      "source": "/10-minute-typing-test",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "source": "/1-minute-typing-test/",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
     },
     {
-      "source": "/10-minute-typing-test/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "source": "/1-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
     },
     {
-      "source": "/typing-test-for-beginners",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
+      "source": "/2-minute-typing-test/",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
     },
     {
-      "source": "/typing-test-for-beginners/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-test-with-punctuation",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-test-with-punctuation/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/what-is-wpm",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/what-is-wpm/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-practice",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-practice/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/wpm-calculator",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/wpm-calculator/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/wpm-test",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/wpm-test/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-test",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/typing-test/",
-      "destination": "https://typingwebsite.com/",
-      "permanent": true
-    },
-    {
-      "source": "/games",
-      "destination": "https://typingwebsite.com/typing-games/",
-      "permanent": true
+      "source": "/2-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
     },
     {
       "source": "/games/",
       "destination": "https://typingwebsite.com/typing-games/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/games/:path*",
+      "destination": "https://typingwebsite.com/typing-games/",
+      "statusCode": 301
     },
     {
       "source": "/:path*",
       "destination": "https://typingwebsite.com/:path*",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/",
+      "destination": "https://typingwebsite.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/typing-speed-test/",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/typing-speed-test/:path*",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/1-minute-typing-test/",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/1-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/2-minute-typing-test/",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/2-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/games/",
+      "destination": "https://typingwebsite.com/typing-games/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/games/:path*",
+      "destination": "https://typingwebsite.com/typing-games/",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/:path*",
+      "destination": "https://typingwebsite.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "https://typingmeter.vercel.app/average-typing-speed/",
+      "destination": "https://typingwebsite.com/average-typing-speed/",
+      "statusCode": 301
     }
+
   ]
 }

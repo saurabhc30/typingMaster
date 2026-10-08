@@ -6,12 +6,42 @@
       "statusCode": 301
     },
     {
+      "source": "/typing-speed-test",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "/typing-speed-test/:path*",
+      "destination": "https://typingwebsite.com/typing-speed-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "/1-minute-typing-test",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "/1-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/1-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2-minute-typing-test",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2-minute-typing-test/:path*",
+      "destination": "https://typingwebsite.com/2-minute-typing-test/",
+      "statusCode": 301
+    },
+    {
       "source": "/games",
       "destination": "https://typingwebsite.com/typing-games/",
       "statusCode": 301
     },
     {
-      "source": "/games/",
+      "source": "/games/:path*",
       "destination": "https://typingwebsite.com/typing-games/",
       "statusCode": 301
     },

@@ -6,7 +6,11 @@
       "statusCode": 301
     },
     {
+<<<<<<< HEAD
       "source": "/typing-speed-test/",
+=======
+      "source": "/typing-speed-test",
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
       "destination": "https://typingwebsite.com/typing-speed-test/",
       "statusCode": 301
     },
@@ -16,7 +20,11 @@
       "statusCode": 301
     },
     {
+<<<<<<< HEAD
       "source": "/1-minute-typing-test/",
+=======
+      "source": "/1-minute-typing-test",
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
       "destination": "https://typingwebsite.com/1-minute-typing-test/",
       "statusCode": 301
     },
@@ -26,7 +34,11 @@
       "statusCode": 301
     },
     {
+<<<<<<< HEAD
       "source": "/2-minute-typing-test/",
+=======
+      "source": "/2-minute-typing-test",
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
       "destination": "https://typingwebsite.com/2-minute-typing-test/",
       "statusCode": 301
     },
@@ -34,21 +46,33 @@
       "source": "/2-minute-typing-test/:path*",
       "destination": "https://typingwebsite.com/2-minute-typing-test/",
       "statusCode": 301
+<<<<<<< HEAD
+=======
     },
     {
-      "source": "/games/",
+      "source": "/games",
       "destination": "https://typingwebsite.com/typing-games/",
       "statusCode": 301
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
     },
     {
       "source": "/games/:path*",
       "destination": "https://typingwebsite.com/typing-games/",
       "statusCode": 301
+<<<<<<< HEAD
+    },
+    {
+      "source": "/games/:path*",
+      "destination": "https://typingwebsite.com/typing-games/",
+      "statusCode": 301
+=======
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
     },
     {
       "source": "/:path*",
       "destination": "https://typingwebsite.com/:path*",
       "statusCode": 301
+<<<<<<< HEAD
     },
     {
       "source": "https://typingmeter.vercel.app/",
@@ -104,6 +128,8 @@
       "source": "https://typingmeter.vercel.app/average-typing-speed/",
       "destination": "https://typingwebsite.com/average-typing-speed/",
       "statusCode": 301
+=======
+>>>>>>> 35cca10e567ec8117417db5e3a84e058f7697225
     }
 
   ]

@@ -121,6 +121,12 @@
                 <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Custom</button>
             </div>
 
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="Pace Car Mode">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false"
+                    title="Pace Car: Race against a ghost cursor set to your personal best WPM">🏁 Pace Car</button>
+            </div>
+
             <div class="control-group feature-group" aria-label="Typing options">
                 <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
                     title="Punctuation">@</button>
@@ -129,6 +135,10 @@
                 <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true"
                     title="Sound">♪</button>
             </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮Typing Game</a>
+            </button>
 
         </div>
 
@@ -161,7 +171,7 @@
             advertising.</p>
     </div>
 
-    
+
 
 
     <!-- Typing Area -->
@@ -188,58 +198,69 @@
         </div>
     </div>
 
+
+
     <!-- Result Screen -->
     <div class="result-screen" id="resultScreen">
-        <div class="result-graph-wrap">
-            <div class="result-graph-header">
-                <div>
-                    <div class="result-graph-title">WPM Progress</div>
-                    <div class="result-graph-subtitle">Your speed during the test</div>
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">wpm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
                 </div>
-                <div class="top-speed-indicator">
-                    <span class="top-speed-dot"></span>
-                    <span>Top speed: <strong id="topSpeed">0 WPM</strong></span>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">acc</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
                 </div>
             </div>
-            <canvas id="wpmGraph" width="760" height="210" aria-label="WPM progress graph"></canvas>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
         </div>
 
-        <div class="result-stats">
-            <div class="result-card">
-                <span>WPM</span>
-                <h2 id="resWpm">0</h2>
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">test type</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
             </div>
-
-            <div class="result-card">
-                <span>Accuracy</span>
-                <h2 id="resAcc">0%</h2>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">raw</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
             </div>
-
-            <div class="result-card">
-                <span>Characters</span>
-                <h2 id="resChar">0</h2>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">characters</span>
+                <span class="mt-sub-value" id="resChar">0</span>
             </div>
-
-            <div class="result-card advanced-result">
-                <span>Raw WPM</span>
-                <h2 id="resRawWpm">0</h2>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">consistency</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
             </div>
-
-            <div class="result-card advanced-result">
-                <span>Errors</span>
-                <h2 id="resErrors">0</h2>
-            </div>
-
-            <div class="result-card advanced-result">
-                <span>Consistency</span>
-                <h2 id="resConsistency">0%</h2>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">errors</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
             </div>
         </div>
 
-        <button class="retry-btn" id="retryBtn">
-            Beat This Score ↻
-        </button>
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="Next test / Retry">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
     </div>
+
 
     <!-- Modals -->
     <div class="app-modal" id="customModal" aria-hidden="true">
@@ -267,6 +288,45 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>What is Pace Car Mode?</h3>
+                </div>
+            </div>
+            <p>Pace Car introduces a secondary ghost cursor to help you maintain consistent speed and race against your
+                personal best.</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">The quick brown</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">fox jumps over...</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>Gold Cursor:</strong> Your Target Pace (PB Speed)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>Blue Cursor:</strong> Your Live Typing Position
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>How to Use:</strong> Start typing. Try to keep your active blue cursor right next to or
+                        ahead of the gold ghost cursor to crush your target WPM!</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">Got it, Let's Race! 🚀</button>
         </div>
     </div>
 
@@ -334,6 +394,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
     <script src="passages.js"></script>
     <script src="script.js"></script>
 
@@ -368,6 +429,7 @@
 
         <div class="footer-copy">© 2026 TypingMeter. Free online typing practice.</div>
     </footer>
+
 
     <!-- ======================================================================= -->
     <!-- START OF ADDED BACKGROUND SEO OVERRIDE ROUTER -->

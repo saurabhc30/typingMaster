@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resRawWpm = document.getElementById("resRawWpm");
   const resErrors = document.getElementById("resErrors");
   const resConsistency = document.getElementById("resConsistency");
+  const resTestType = document.getElementById("resTestType"); // <-- Added this missing DOM binding
   const personalBestEl = document.getElementById("personalBest");
   const wpmGraph = document.getElementById("wpmGraph");
   const topSpeedEl = document.getElementById("topSpeed");
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const punctuationBtn = document.getElementById("punctuationBtn");
   const numbersBtn = document.getElementById("numbersBtn");
   const soundBtn = document.getElementById("soundBtn");
+  const paceCarBtn = document.getElementById("paceCarBtn");
   const customTimeBtn = document.getElementById("customTimeBtn");
   const customWordsBtn = document.getElementById("customWordsBtn");
   const applyCustomTime = document.getElementById("applyCustomTime");
@@ -73,9 +75,20 @@ document.addEventListener("DOMContentLoaded", function () {
   let finishTimeout = null;
   let sampleTimer = null;
   let testStartMs = 0;
+
   let wpmSamples = [];
+  let rawSamples = [];
+  let errorSamples = [];
+  let lastRenderedPoints = [];
   let mouseHidden = false;
   let controlsHideTimer = null;
+
+  let graphResizeObserver = null;
+  let graphEventsAttached = false;
+
+  let paceCarEnabled = false;
+  let paceCarIndex = 0;
+  let paceCarTimer = null;
 
   function getPersonalBest() {
     const stored = Number(localStorage.getItem(PB_KEY));
@@ -169,11 +182,245 @@ document.addEventListener("DOMContentLoaded", function () {
     return words.filter(Boolean).join(" ");
   }
 
+  const pressureModeButton = document.getElementById("pressureModeBtn");
+  const pressureStats = document.getElementById("pressureStats");
+
+  const pressureMode = {
+    enabled: false,
+    targetWpm: 45,
+    level: 1,
+    streak: 0,
+    bestStreak: 0,
+    maxErrors: 5,
+    errors: 0
+  };
+
+  function resetPressureState() {
+    pressureMode.errors = 0;
+    updatePressureStatsDisplay();
+  }
+
+  function updatePressureStatsDisplay() {
+    if (!pressureStats) return;
+    pressureStats.hidden = !pressureMode.enabled;
+    if (!pressureMode.enabled) return;
+
+    const target = document.getElementById("pressureTargetWpm");
+    const level = document.getElementById("pressureLevel");
+    const streak = document.getElementById("pressureStreak");
+    const bestStreak = document.getElementById("pressureBestStreak");
+
+    if (target) target.textContent = pressureMode.targetWpm;
+    if (level) level.textContent = pressureMode.level;
+    if (streak) streak.textContent = pressureMode.streak;
+    if (bestStreak) bestStreak.textContent = pressureMode.bestStreak;
+  }
+
+  if (pressureModeButton) {
+    pressureModeButton.addEventListener("click", () => {
+      pressureMode.enabled = !pressureMode.enabled;
+      pressureModeButton.classList.toggle("active", pressureMode.enabled);
+      pressureModeButton.setAttribute("aria-pressed", String(pressureMode.enabled));
+
+      if (pressureMode.enabled) {
+        pressureMode.targetWpm = Math.max(30, getPersonalBest());
+        pressureMode.level = 1;
+        pressureMode.streak = 0;
+        pressureMode.bestStreak = 0;
+      }
+      resetTest();
+    });
+  }
+
+  function checkPressureModeRules(liveWpm, errors) {
+    if (!pressureMode.enabled || !started || finished) return;
+
+    const elapsed = getElapsedSeconds();
+
+    if (errors > pressureMode.maxErrors) {
+      triggerPressureFailure("Too many errors!");
+      return;
+    }
+
+    if (elapsed > 5 && liveWpm < pressureMode.targetWpm - 10) {
+      triggerPressureFailure("Speed dropped below target!");
+    }
+  }
+
+  function triggerPressureFailure(reason) {
+    pressureMode.streak = 0;
+    typingBox?.classList.add("pressure-fail-shake");
+    setTimeout(() => typingBox?.classList.remove("pressure-fail-shake"), 500);
+    finishTest("pressure_failed");
+  }
+
+  const ADAPTIVE_HISTORY_KEY = "typingwebsite_adaptive_recent_v1";
+  const ADAPTIVE_HISTORY_LIMIT = 12;
+
+  function getAdaptiveWeakKeys() {
+    try {
+      const saved = JSON.parse(
+        localStorage.getItem("typingwebsite_weak_keys_v1") || "{}"
+      );
+      const keys = saved.keys || {};
+      return Object.entries(keys)
+        .filter(([key, stat]) => {
+          return (
+            typeof key === "string" &&
+            key.length === 1 &&
+            stat &&
+            stat.attempts >= 5 &&
+            stat.errors > 0
+          );
+        })
+        .map(([key, stat]) => ({
+          key,
+          rate: stat.errors / stat.attempts
+        }))
+        .sort((a, b) => b.rate - a.rate)
+        .slice(0, 6);
+    } catch {
+      return [];
+    }
+  }
+
+  function getAdaptiveRecent() {
+    try {
+      const saved = JSON.parse(
+        localStorage.getItem(ADAPTIVE_HISTORY_KEY) || "[]"
+      );
+      return Array.isArray(saved) ? saved : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function isAdaptiveTextTooSimilar(candidate, recent) {
+    const normalize = text =>
+      String(text || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .split(/\s+/)
+        .filter(Boolean);
+
+    const stopWords = new Set([
+      "the", "a", "an", "and", "or", "but", "to", "of",
+      "in", "on", "at", "for", "with", "is", "are",
+      "was", "were", "we", "he", "she", "they", "it",
+      "this", "that", "as", "by", "from", "after", "before"
+    ]);
+
+    const words = normalize(candidate);
+    const meaningful = words.filter(word => !stopWords.has(word));
+    const opening = meaningful.slice(0, 4).join(" ");
+
+    for (const item of recent) {
+      const previousText = typeof item === "string" ? item : item?.text;
+      if (!previousText) continue;
+
+      const previousWords = normalize(previousText);
+      const previousMeaningful = previousWords.filter(word => !stopWords.has(word));
+      const previousOpening = previousMeaningful.slice(0, 4).join(" ");
+
+      if (opening && opening === previousOpening) return true;
+
+      const a = new Set(meaningful);
+      const b = new Set(previousMeaningful);
+      if (!a.size || !b.size) continue;
+
+      let common = 0;
+      for (const word of a) {
+        if (b.has(word)) common++;
+      }
+      const similarity = common / (a.size + b.size - common);
+      if (similarity >= 0.45) return true;
+    }
+    return false;
+  }
+
+  function rememberAdaptivePassage(text) {
+    try {
+      const recent = getAdaptiveRecent();
+      const normalized = text.toLowerCase().replace(/\s+/g, " ").trim();
+      const updated = [
+        normalized,
+        ...recent.filter(item => item !== normalized)
+      ].slice(0, ADAPTIVE_HISTORY_LIMIT);
+
+      localStorage.setItem(ADAPTIVE_HISTORY_KEY, JSON.stringify(updated));
+    } catch { }
+  }
+
+  function scoreAdaptiveText(text, weakKeys) {
+    if (!weakKeys.length) return 0;
+    const normalized = text.toLowerCase();
+    let score = 0;
+    for (const item of weakKeys) {
+      const key = item.key.toLowerCase();
+      let count = 0;
+      for (const char of normalized) {
+        if (char === key) count++;
+      }
+      score += Math.min(count, 8) * Math.min(item.rate, 0.6);
+    }
+    return score;
+  }
+
   function getBasePassage() {
-    if (typeof passages === "undefined") return "The quick brown fox jumps over the lazy dog.";
-    const list = passages[difficulty];
-    if (!list || !list.length) return "The quick brown fox jumps over the lazy dog.";
-    return list[Math.floor(Math.random() * list.length)];
+    const fallback = "The quick brown fox jumps over the lazy dog.";
+    const originalList = typeof passages !== "undefined" && Array.isArray(passages[difficulty]) ? passages[difficulty] : [];
+    const adaptiveList = window.adaptivePassages && Array.isArray(window.adaptivePassages[difficulty]) ? window.adaptivePassages[difficulty] : [];
+
+    const candidates = [...new Set([...originalList, ...adaptiveList].filter(text => typeof text === "string" && text.trim()))];
+    if (!candidates.length) return fallback;
+
+    const recent = getAdaptiveRecent();
+    const weakKeys = getAdaptiveWeakKeys();
+    const normalizePassage = text => text.toLowerCase().replace(/\s+/g, " ").trim();
+
+    let fresh = candidates.filter(text => {
+      const normalized = normalizePassage(text);
+      return !recent.includes(normalized) && !isAdaptiveTextTooSimilar(text, recent);
+    });
+
+    if (!fresh.length) fresh = candidates.filter(text => !recent.includes(normalizePassage(text)));
+    if (!fresh.length) fresh = candidates;
+
+    if (!weakKeys.length) {
+      const selected = fresh[Math.floor(Math.random() * fresh.length)];
+      rememberAdaptivePassage(selected);
+      return selected;
+    }
+
+    const scored = fresh.map(text => ({ text, score: scoreAdaptiveText(text, weakKeys) }));
+    const maxScore = Math.max(...scored.map(item => item.score));
+
+    let thresholdRatio = 0.65;
+    let generalMixChance = 0.35;
+    let progress = null;
+
+    try {
+      if (typeof getProgressSummary === "function") progress = getProgressSummary();
+    } catch { }
+
+    if (progress && progress.tests >= 5) {
+      if (progress.averageAccuracy < 85) {
+        thresholdRatio = 0.45;
+        generalMixChance = 0.55;
+      } else if (progress.tests >= 10 && progress.averageAccuracy >= 97 && progress.trend >= 0) {
+        thresholdRatio = 0.75;
+        generalMixChance = 0.20;
+      }
+    }
+
+    const threshold = maxScore * thresholdRatio;
+    let pool = scored.filter(item => item.score >= threshold);
+
+    if (Math.random() < generalMixChance || !pool.length) pool = scored;
+
+    const selected = pool[Math.floor(Math.random() * pool.length)].text;
+    rememberAdaptivePassage(selected);
+    return selected;
   }
 
   function loadText() {
@@ -249,6 +496,33 @@ document.addEventListener("DOMContentLoaded", function () {
     if (chars[charIndex]) chars[charIndex].classList.add("active");
   }
 
+  function updatePaceCarCaret(chars) {
+    chars.forEach(c => c.classList.remove("active-ghost"));
+    if (paceCarEnabled && chars[paceCarIndex]) {
+      chars[paceCarIndex].classList.add("active-ghost");
+    }
+  }
+
+  function startPaceCar() {
+    if (!paceCarEnabled) return;
+    paceCarIndex = 0;
+    const targetWpm = Math.max(40, getPersonalBest());
+    const charsPerMinute = targetWpm * 5;
+    const intervalMs = (60 / charsPerMinute) * 1000;
+
+    clearInterval(paceCarTimer);
+    paceCarTimer = setInterval(() => {
+      if (!started || finished) return;
+      const chars = textBox.querySelectorAll("span");
+      if (paceCarIndex < chars.length - 1) {
+        paceCarIndex++;
+        updatePaceCarCaret(chars);
+      } else {
+        clearInterval(paceCarTimer);
+      }
+    }, intervalMs);
+  }
+
   function scrollActiveCharIntoView(isBackspace = false) {
     if (!typingBox || isBackspace) return;
     const active = textBox.querySelectorAll("span")[charIndex];
@@ -288,15 +562,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startSampling() {
     clearInterval(sampleTimer);
+
     wpmSamples = [];
+    rawSamples = [];
+    errorSamples = [];
+
+    let previousCorrect = correct;
+    let previousTyped = totalTyped;
+    let previousSecond = 0;
+
     sampleTimer = setInterval(() => {
       if (!started || finished) return;
-      const seconds = getElapsedSeconds();
-      if (seconds <= 0) return;
-      const minutes = seconds / 60;
-      const liveWpm = Math.round((correct / 5) / minutes);
-      wpmSamples.push(liveWpm);
-    }, 1000);
+
+      const elapsed = getElapsedSeconds();
+      const second = Math.floor(elapsed);
+
+      if (second <= previousSecond || second <= 0) return;
+
+      const secondsPassed = second - previousSecond;
+      const correctDelta = Math.max(0, correct - previousCorrect);
+      const typedDelta = Math.max(0, totalTyped - previousTyped);
+
+      const intervalWpm = Math.round((correctDelta / 5) * (60 / secondsPassed));
+      const intervalRawWpm = Math.round((typedDelta / 5) * (60 / secondsPassed));
+
+      for (let i = 0; i < secondsPassed; i++) {
+        wpmSamples.push(intervalWpm);
+        rawSamples.push(intervalRawWpm);
+        errorSamples.push(Math.max(0, totalTyped - correct));
+      }
+
+      previousCorrect = correct;
+      previousTyped = totalTyped;
+      previousSecond = second;
+
+      drawGraph(wpmSamples, rawSamples, errorSamples);
+    }, 200);
   }
 
   function getElapsedSeconds() {
@@ -355,11 +656,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const rawWpm = Math.round((totalTyped / 5) / minutes) || 0;
     const errors = Math.max(0, totalTyped - correct);
     const accuracy = totalTyped ? Math.round((correct / totalTyped) * 100) : 100;
+
     if (wpmEl) wpmEl.innerText = liveWpm;
     if (rawWpmEl) rawWpmEl.innerText = rawWpm;
     if (errorsEl) errorsEl.innerText = errors;
     if (accEl) accEl.innerText = accuracy + "%";
+
     updateLiveWordsDisplay();
+    checkPressureModeRules(liveWpm, errors);
   }
 
   function getConsistency(samples) {
@@ -371,137 +675,207 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.max(0, Math.min(100, Math.round(100 - (sd / avg) * 100)));
   }
 
-  function drawGraph(samples) {
+  function drawGraph(wpmValues, rawValues, errors) {
     if (!wpmGraph) return;
 
-    const values = (Array.isArray(samples) ? samples : [])
-      .map(Number)
-      .filter(Number.isFinite)
-      .map(v => Math.max(0, Math.round(v)));
-
+    const wrapper = wpmGraph.parentElement;
     const ctx = wpmGraph.getContext("2d");
-    const dpr = window.devicePixelRatio || 1;
-    const cssW = wpmGraph.clientWidth || 760;
-    const cssH = 210;
+    if (!ctx || !wrapper) return;
 
-    wpmGraph.width = cssW * dpr;
-    wpmGraph.height = cssH * dpr;
+    const wpmArr = Array.isArray(wpmValues)
+      ? wpmValues.map(Number).map(v => Number.isFinite(v) ? Math.max(0, v) : 0)
+      : [];
+
+    const rawArr = Array.isArray(rawValues)
+      ? rawValues.map(Number).map(v => Number.isFinite(v) ? Math.max(0, v) : 0)
+      : [];
+
+    const errorArr = Array.isArray(errors) ? errors : [];
+    const count = Math.max(wpmArr.length, rawArr.length);
+
+    while (wpmArr.length < count) wpmArr.push(0);
+    while (rawArr.length < count) rawArr.push(wpmArr[rawArr.length] || 0);
+
+    const cssW = Math.max(1, wrapper.clientWidth || 800);
+    const cssH = Math.max(150, wrapper.clientHeight || 220);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const pixelW = Math.round(cssW * dpr);
+    const pixelH = Math.round(cssH * dpr);
+
+    if (wpmGraph.width !== pixelW) wpmGraph.width = pixelW;
+    if (wpmGraph.height !== pixelH) wpmGraph.height = pixelH;
+
+    wpmGraph.style.width = "100%";
+    wpmGraph.style.height = "100%";
+
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cssW, cssH);
 
-    const pad = { top: 18, right: 18, bottom: 28, left: 42 };
+    const pad = { top: 22, right: 16, bottom: 30, left: 38 };
     const plotW = Math.max(1, cssW - pad.left - pad.right);
     const plotH = Math.max(1, cssH - pad.top - pad.bottom);
 
-    const topSpeed = values.length ? Math.max(...values) : 0;
-    const axisMax = Math.max(20, Math.ceil(topSpeed / 10) * 10);
+    const maxSpeed = Math.max(20, ...wpmArr, ...rawArr);
+    const axisMax = Math.ceil(maxSpeed / 20) * 20;
 
-    // Horizontal grid + WPM scale indicators.
-    ctx.font = "11px Sora, Arial, sans-serif";
+    const maxTime = Math.max(1, count);
+    const xAt = i => pad.left + (count <= 1 ? plotW / 2 : (i / (maxTime - 1)) * plotW);
+    const yAt = value => pad.top + plotH - (Math.min(value, axisMax) / axisMax) * plotH;
+
+    ctx.font = "11px 'Roboto Mono', monospace";
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#252525";
-    ctx.fillStyle = "#666";
 
     for (let i = 0; i <= 4; i++) {
       const ratio = i / 4;
       const y = pad.top + plotH * ratio;
       const value = Math.round(axisMax * (1 - ratio));
+
       ctx.beginPath();
+      ctx.strokeStyle = "rgba(255,255,255,0.07)";
       ctx.moveTo(pad.left, y);
       ctx.lineTo(cssW - pad.right, y);
       ctx.stroke();
+
+      ctx.fillStyle = "#777a80";
       ctx.fillText(String(value), pad.left - 8, y);
     }
 
-    if (!values.length) return;
+    if (count === 0) {
+      lastRenderedPoints = [];
+      hideGraphTooltip();
+      return;
+    }
 
-    const points = values.map((v, i) => {
-      const x = values.length === 1
-        ? pad.left + plotW / 2
-        : pad.left + (i / (values.length - 1)) * plotW;
-      const y = pad.top + plotH - (v / axisMax) * plotH;
-      return { x, y, value: v };
+    const wpmPoints = wpmArr.map((v, i) => ({
+      x: xAt(i), y: yAt(v), wpm: v, raw: rawArr[i], second: i + 1, errors: Number(errorArr[i]) || 0
+    }));
+    const rawPoints = rawArr.map((v, i) => ({ x: xAt(i), y: yAt(v) }));
+    lastRenderedPoints = wpmPoints;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(pad.left, pad.top, plotW, plotH);
+    ctx.clip();
+
+    function drawLine(points, color, lineWidth) {
+      if (!points.length) return;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        if (i === 0) {
+          ctx.moveTo(p.x, p.y);
+        } else {
+          const prev = points[i - 1];
+          const midX = (prev.x + p.x) / 2;
+          const midY = (prev.y + p.y) / 2;
+          ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+          if (i === points.length - 1) ctx.lineTo(p.x, p.y);
+        }
+      });
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.stroke();
+    }
+
+    drawLine(rawPoints, "#7c7c9a", 2);
+    drawLine(wpmPoints, "#e2b714", 2.5);
+
+    errorArr.forEach((errCount, i) => {
+      const prevErr = i > 0 ? Number(errorArr[i - 1]) || 0 : 0;
+      if (errCount > prevErr && wpmPoints[i]) {
+        const p = wpmPoints[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff5555";
+        ctx.fill();
+      }
     });
 
-    // Area under the speed curve.
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, pad.top + plotH);
-    points.forEach(point => ctx.lineTo(point.x, point.y));
-    ctx.lineTo(points[points.length - 1].x, pad.top + plotH);
-    ctx.closePath();
-    ctx.fillStyle = "rgba(33,150,243,0.08)";
-    ctx.fill();
+    ctx.restore();
+  }
 
-    // WPM line.
-    ctx.beginPath();
-    points.forEach((point, i) => {
-      if (i === 0) ctx.moveTo(point.x, point.y);
-      else ctx.lineTo(point.x, point.y);
+  function setupGraphTooltip() {
+    if (!wpmGraph || graphEventsAttached) return;
+    graphEventsAttached = true;
+
+    wpmGraph.addEventListener("pointermove", event => {
+      const tooltip = document.getElementById("graphTooltip");
+      const wrapper = wpmGraph.parentElement;
+      if (!tooltip || !wrapper || !lastRenderedPoints.length) return;
+
+      const rect = wpmGraph.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+
+      let closest = null;
+      let minDistance = Infinity;
+
+      for (const point of lastRenderedPoints) {
+        const distance = Math.hypot(point.x - mouseX, point.y - mouseY);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closest = point;
+        }
+      }
+
+      if (!closest || minDistance > 40) {
+        hideGraphTooltip();
+        return;
+      }
+
+      tooltip.replaceChildren();
+      const addLine = (text, color, bold = false) => {
+        const line = document.createElement("div");
+        line.textContent = text;
+        line.style.color = color;
+        if (bold) line.style.fontWeight = "700";
+        tooltip.appendChild(line);
+      };
+
+      addLine(`Second ${closest.second}`, "#d1d0c5");
+      addLine(`WPM: ${closest.wpm}`, "#e2b714", true);
+      addLine(`Raw: ${closest.raw}`, "#a2a2c0");
+      addLine(`Errors: ${closest.errors}`, "#ff7777");
+
+      tooltip.style.display = "block";
+      const left = Math.max(4, Math.min(closest.x + 12, wrapper.clientWidth - tooltip.offsetWidth - 4));
+      const top = Math.max(4, Math.min(closest.y - tooltip.offsetHeight / 2, wrapper.clientHeight - tooltip.offsetHeight - 4));
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
     });
-    ctx.strokeStyle = "#2196f3";
-    ctx.lineWidth = 3;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    ctx.stroke();
 
-    // Highlight the highest-speed point so the top speed is immediately visible.
-    const maxIndex = values.indexOf(topSpeed);
-    const peak = points[maxIndex];
+    wpmGraph.addEventListener("pointerleave", hideGraphTooltip);
+  }
 
-    ctx.beginPath();
-    ctx.arc(peak.x, peak.y, 6, 0, Math.PI * 2);
-    ctx.fillStyle = "#0f0f0f";
-    ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#2196f3";
-    ctx.stroke();
-
-    // Peak label / indicator.
-    const label = `${topSpeed} WPM`;
-    ctx.font = "700 11px Sora, Arial, sans-serif";
-    const labelW = ctx.measureText(label).width + 14;
-    const labelH = 24;
-    let labelX = peak.x - labelW / 2;
-    let labelY = peak.y - 34;
-    labelX = Math.max(pad.left, Math.min(labelX, cssW - pad.right - labelW));
-    labelY = Math.max(2, labelY);
-
-    ctx.fillStyle = "#1a1a1a";
-    ctx.beginPath();
-    ctx.roundRect(labelX, labelY, labelW, labelH, 6);
-    ctx.fill();
-    ctx.strokeStyle = "#333";
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.fillStyle = "#fff";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(label, labelX + labelW / 2, labelY + labelH / 2);
-
-    if (topSpeedEl) topSpeedEl.innerText = `${topSpeed} WPM`;
+  function hideGraphTooltip() {
+    const tooltip = document.getElementById("graphTooltip");
+    if (tooltip) tooltip.style.display = "none";
   }
 
   function finishTest(reason = "manual") {
     if (finished) return;
     finished = true;
     started = false;
+
     clearInterval(timer);
     clearInterval(sampleTimer);
-    clearTimeout(finishTimeout);
 
     let elapsed = getElapsedSeconds();
     if (mode === "timed" && reason === "time") elapsed = selectedTime;
-    if (mode !== "timed" && elapsed <= 0) elapsed = elapsedSeconds || 1;
     elapsed = Math.max(elapsed, 1 / 60);
+
     const minutes = elapsed / 60;
     const wpm = Math.round((correct / 5) / minutes) || 0;
     const rawWpm = Math.round((totalTyped / 5) / minutes) || 0;
     const accuracy = totalTyped ? Math.round((correct / totalTyped) * 100) : 0;
     const errors = Math.max(0, totalTyped - correct);
     const consistency = getConsistency(wpmSamples);
-    const isNewBest = updatePersonalBest(wpm);
+
+    updatePersonalBest(wpm);
 
     if (resWpm) resWpm.innerText = wpm;
     if (resRawWpm) resRawWpm.innerText = rawWpm;
@@ -509,16 +883,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (resChar) resChar.innerText = totalTyped;
     if (resErrors) resErrors.innerText = errors;
     if (resConsistency) resConsistency.innerText = consistency + "%";
-    const graphSamples = wpmSamples.length ? wpmSamples : [wpm];
-    const topSpeed = Math.max(wpm, ...graphSamples.map(Number));
-    if (topSpeedEl) topSpeedEl.innerText = `${topSpeed} WPM`;
-    drawGraph(graphSamples);
 
-    saveHistory({
-      wpm, rawWpm, accuracy, errors, consistency, characters: totalTyped,
-      mode: mode === "passage" ? "Passage" : mode === "words" ? `Words ${wordLimit}` : `Timed ${selectedTime}s`,
-      date: new Date().toLocaleDateString()
-    });
+    // Dynamically update test type display on result screen based on current mode & length
+    if (resTestType) {
+      if (mode === "timed") {
+        resTestType.innerText = `timed ${selectedTime}`;
+      } else if (mode === "words") {
+        resTestType.innerText = `words ${wordLimit}`;
+      } else {
+        resTestType.innerText = `passage`;
+      }
+    }
 
     disableFocusMode();
     document.body.classList.add("result-visible");
@@ -526,11 +901,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const restart = document.querySelector(".restart-wrapper");
     if (restart) restart.style.display = "none";
     if (resultScreen) resultScreen.style.display = "block";
+
+    if (!wpmSamples.length) {
+      wpmSamples = [wpm];
+      rawSamples = [rawWpm];
+      errorSamples = [errors];
+    }
+
+    setupGraphTooltip();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        drawGraph(wpmSamples, rawSamples, errorSamples);
+      });
+    });
+
+    saveHistory({
+      wpm,
+      rawWpm,
+      accuracy,
+      errors,
+      consistency,
+      characters: totalTyped,
+      mode: mode === "timed" ? `timed ${selectedTime}` : mode === "words" ? `words ${wordLimit}` : "passage",
+      date: new Date().toLocaleDateString()
+    });
   }
 
   function resetTest() {
     clearInterval(timer);
     clearInterval(sampleTimer);
+    clearInterval(paceCarTimer);
     clearTimeout(finishTimeout);
     finished = false;
     started = false;
@@ -541,17 +941,25 @@ document.addEventListener("DOMContentLoaded", function () {
     timeLeft = selectedTime;
     testStartMs = 0;
     wpmSamples = [];
+    rawSamples = [];
+    errorSamples = [];
+    paceCarIndex = 0;
+
+    resetPressureState();
+
     if (topSpeedEl) topSpeedEl.innerText = "0 WPM";
     if (wpmEl) wpmEl.innerText = "0";
     if (rawWpmEl) rawWpmEl.innerText = "0";
     if (errorsEl) errorsEl.innerText = "0";
     if (accEl) accEl.innerText = "100%";
     updateTimeDisplay(mode === "timed" ? selectedTime : 0);
+
     if (resultScreen) resultScreen.style.display = "none";
     document.body.classList.remove("result-visible");
     if (typingBox) { typingBox.style.display = "block"; typingBox.scrollTop = 0; }
     const restart = document.querySelector(".restart-wrapper");
     if (restart) restart.style.display = "block";
+
     showMouseCursor();
     syncModeUI();
     loadText();
@@ -560,11 +968,6 @@ document.addEventListener("DOMContentLoaded", function () {
     textBox.blur();
     textBox.classList.add("blur");
     focusOverlay?.classList.remove("hidden");
-  }
-
-  /* ================= CLEAN MODE BAR ================= */
-  function setActiveButtons(selector, active) {
-    document.querySelectorAll(selector).forEach(btn => btn.classList.toggle("is-active", btn === active));
   }
 
   function setMode(modeName) {
@@ -646,6 +1049,10 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.classList.toggle("is-on", on);
       btn.setAttribute("aria-pressed", String(on));
     });
+    if (paceCarBtn) {
+      paceCarBtn.classList.toggle("is-on", paceCarEnabled);
+      paceCarBtn.setAttribute("aria-pressed", String(paceCarEnabled));
+    }
   }
 
   [[punctuationBtn, punctuationToggle], [numbersBtn, numbersToggle], [soundBtn, soundToggle]].forEach(([btn, input]) => {
@@ -655,6 +1062,14 @@ document.addEventListener("DOMContentLoaded", function () {
       input.dispatchEvent(new Event("change", { bubbles: true }));
       syncFeatureButtons();
     });
+  });
+
+  paceCarBtn?.addEventListener("click", () => {
+    paceCarEnabled = !paceCarEnabled;
+    syncFeatureButtons();
+    document.body.classList.toggle("pace-car-active", paceCarEnabled);
+    if (paceCarEnabled) openPaceGuideModal();
+    resetTest();
   });
 
   function syncModeUI() {
@@ -678,9 +1093,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (passageBtn) passageBtn.classList.toggle("is-active", mode === "passage");
     syncFeatureButtons();
     updateLiveModeDisplay();
+    updatePressureStatsDisplay();
   }
 
-  /* ================= SETTINGS / STATS / SHORTCUTS ================= */
   const settingsBtn = document.getElementById("settingsBtn");
   const statsBtn = document.getElementById("statsBtn");
   const shortcutsBtn = document.getElementById("shortcutsBtn");
@@ -722,7 +1137,6 @@ document.addEventListener("DOMContentLoaded", function () {
     closeInfoPanels();
   }
 
-  /* ================= FOOTER INFORMATION PANELS ================= */
   const infoPanels = document.querySelectorAll(".info-panel");
   const infoOpenButtons = document.querySelectorAll("[data-info-open]");
   const infoCloseButtons = document.querySelectorAll("[data-info-close]");
@@ -778,6 +1192,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     localStorage.setItem(EXTRA_SETTINGS_KEY, JSON.stringify({ theme, caret, fontSize: fontSizeRange?.value || 28 }));
   }
+
   function loadUISettings() {
     try {
       const x = JSON.parse(localStorage.getItem(EXTRA_SETTINGS_KEY) || "{}");
@@ -820,10 +1235,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   settingsBtn?.addEventListener("click", () => openModal("settingsModal"));
-  statsBtn?.addEventListener("click", () => { updateDashboard(); openModal("statsModal") });
+  statsBtn?.addEventListener("click", () => { updateDashboard(); openModal("statsModal"); });
   shortcutsBtn?.addEventListener("click", () => openModal("shortcutsModal"));
   document.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", () => closeModal(b.dataset.close)));
-  document.querySelectorAll(".app-modal").forEach(m => m.addEventListener("click", e => { if (e.target === m) closeModal(m.id) }));
+  document.querySelectorAll(".app-modal").forEach(m => m.addEventListener("click", e => { if (e.target === m) closeModal(m.id); }));
   [themeSelect, caretSelect, fontSizeRange].forEach(e => e?.addEventListener("input", applyUISettings));
   [themeSelect, caretSelect].forEach(e => e?.addEventListener("change", applyUISettings));
   footerThemeSelect?.addEventListener("change", () => {
@@ -835,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "/" && document.activeElement !== textBox && !e.ctrlKey && !e.metaKey) { e.preventDefault(); openModal("shortcutsModal"); }
     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); resetTest(); }
   });
-  window.addEventListener("resize", () => { if (document.getElementById("statsModal")?.classList.contains("show")) drawStatsGraph() });
+  window.addEventListener("resize", () => { if (document.getElementById("statsModal")?.classList.contains("show")) drawStatsGraph(); });
   if (commandHint) setTimeout(() => commandHint.remove(), 5000);
 
   function applySEOPageConfig() {
@@ -868,7 +1283,6 @@ document.addEventListener("DOMContentLoaded", function () {
   typingBox?.addEventListener("wheel", e => e.preventDefault(), { passive: false });
   typingBox?.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
-  // Before a test starts, any ordinary key focuses the typing area.
   document.addEventListener("keydown", e => {
     if (started || finished) return;
     if (document.querySelector(".app-modal.show")) return;
@@ -891,6 +1305,7 @@ document.addEventListener("DOMContentLoaded", function () {
       hideMouseCursor();
       if (mode === "timed") startCountdown(); else startCountUp();
       startSampling();
+      if (paceCarEnabled) startPaceCar();
     }
 
     const chars = textBox.querySelectorAll("span");
@@ -910,11 +1325,41 @@ document.addEventListener("DOMContentLoaded", function () {
     totalTyped++;
     if (soundToggle?.checked) { const clone = keySound.cloneNode(); clone.volume = keySound.volume; clone.play().catch(() => { }); }
 
-    if (e.key === chars[charIndex].innerText) {
+    const expectedChar = chars[charIndex].innerText;
+    const actualChar = e.key;
+
+    if (actualChar === expectedChar) {
       chars[charIndex].classList.add("correct");
       correct++;
     } else {
       chars[charIndex].classList.add("incorrect");
+    }
+
+    if (
+      window.WeakKeyTrainer &&
+      typeof window.WeakKeyTrainer.record === "function" &&
+      expectedChar.length === 1 &&
+      actualChar.length === 1 &&
+      expectedChar.trim() !== "" &&
+      actualChar.trim() !== ""
+    ) {
+      window.WeakKeyTrainer.record(
+        expectedChar,
+        actualChar,
+        actualChar === expectedChar
+      );
+    }
+
+    if (
+      window.WeakKeyTrainer &&
+      /^[a-z]$/i.test(expectedChar) &&
+      /^[a-z]$/i.test(actualChar)
+    ) {
+      window.WeakKeyTrainer.record(
+        expectedChar.toLowerCase(),
+        actualChar.toLowerCase(),
+        actualChar.toLowerCase() === expectedChar.toLowerCase()
+      );
     }
 
     chars[charIndex].classList.remove("active");
@@ -940,19 +1385,16 @@ document.addEventListener("DOMContentLoaded", function () {
   [punctuationToggle, numbersToggle, soundToggle].forEach(el => el?.addEventListener("change", () => {
     saveSettings();
 
-    // Changing a checkbox must NOT restart/refresh the current test.
-    // Punctuation/Numbers are applied to the next test; Sound applies immediately.
-    if (el === soundToggle) {
-      return;
-    }
+    if (el === soundToggle) return;
 
     if (!started) {
-      // Before typing starts, update the visible passage without resetting the page.
       loadText();
       charIndex = 0;
       correct = 0;
       totalTyped = 0;
       wpmSamples = [];
+      rawSamples = [];
+      errorSamples = [];
       if (wpmEl) wpmEl.innerText = "0";
       if (rawWpmEl) rawWpmEl.innerText = "0";
       if (errorsEl) errorsEl.innerText = "0";
@@ -962,7 +1404,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }));
 
-  window.addEventListener("resize", () => { if (resultScreen?.style.display !== "none") drawGraph(wpmSamples.length ? wpmSamples : [Number(resWpm?.innerText) || 0]); });
+  const paceGuideModal = document.getElementById("paceGuideModal");
+  const closePaceGuideBtn = document.getElementById("closePaceGuide");
+
+  function openPaceGuideModal() {
+    paceGuideModal?.classList.add("show");
+    paceGuideModal?.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closePaceGuideModal() {
+    paceGuideModal?.classList.remove("show");
+    paceGuideModal?.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  closePaceGuideBtn?.addEventListener("click", closePaceGuideModal);
+  paceGuideModal?.addEventListener("click", (e) => {
+    if (e.target === paceGuideModal) closePaceGuideModal();
+  });
 
   loadSettings();
   syncFeatureButtons();
@@ -971,8 +1431,6 @@ document.addEventListener("DOMContentLoaded", function () {
   resetTest();
 });
 
-
-/* Keep the result screen clean: no "Test Complete!" message. */
 document.addEventListener("DOMContentLoaded", () => {
   const hideCompletionMessage = () => {
     document.querySelectorAll("h1,h2,h3,h4,h5,h6,p,div,span").forEach(el => {
@@ -991,4 +1449,36 @@ document.addEventListener("DOMContentLoaded", () => {
   hideCompletionMessage();
   const observer = new MutationObserver(hideCompletionMessage);
   observer.observe(document.body, { childList: true, subtree: true });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Prevent test controls from submitting a form and refreshing the page.
+  const controlSelectors = [
+    "#restartBtn",
+    "#resetBtn",
+    "#finishBtn",
+    "#passageBtn",
+    "#passageBtnEasy",
+    "#passageBtnMedium",
+    "#passageBtnHard",
+    ".restart-btn",
+    ".reset-btn",
+    ".finish-btn",
+    ".passage-btn",
+    ".icon-toggle"
+  ];
+
+  document.querySelectorAll(controlSelectors.join(",")).forEach(function (button) {
+    if (button.tagName === "BUTTON") {
+      button.type = "button";
+    }
+  });
+
+  // Prevent accidental form submission when pressing Enter.
+  document.querySelectorAll("form").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
+  });
 });

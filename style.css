@@ -3508,7 +3508,7 @@ body.theme-light .site-footer .utility-btn {
 }
 
 
-/* TypingMeter brand */
+/* TypingWebsite brand */
 body.theme-midnight .site-name {
   color: #e8f1ff;
 }
@@ -4662,7 +4662,7 @@ body.result-visible .restart-wrapper {
 }
 
 /* ================= MULTIPLAYER GAMES PROMOTION ================= */
-/* New section only. Existing TypingMeter UI is unchanged. */
+/* New section only. Existing TypingWebsite UI is unchanged. */
 
 .games-promo {
   width: min(100% - 40px, 980px);
@@ -4821,7 +4821,7 @@ body.result-visible .restart-wrapper {
 }
 
 /* =========================================================
-   TypingMeter — Original CSS Mobile Refinement
+   TypingWebsite — Original CSS Mobile Refinement
    Targeted changes only; existing desktop UI is preserved.
    ========================================================= */
 

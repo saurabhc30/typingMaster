@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>Typing Lesson | TypingWebsite</title>
+    <meta name="description"
+        content="Take a free online typing speed test with TypingMeter. Measure WPM, accuracy, raw speed, errors and consistency with timed, word and passage tests.">
+    <link rel="canonical" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Typing Speed Test - Free Online WPM Test | TypingMeter">
+    <meta property="og:description"
+        content="Test your typing speed, WPM and accuracy with TypingMeter's free online typing test.">
+    <meta property="og:url" content="https://typingwebsite.com/">
+    <meta property="og:site_name" content="TypingMeter">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Typing Speed Test - Free Online WPM Test | TypingMeter">
+    <meta name="twitter:description" content="Free online typing speed test for WPM, accuracy and typing practice.">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main id="typingLessonApp" class="container tl-shell">
+        <header class="header tl-site-header">
+            <a class="logo" href="/" aria-label="TypingWebsite home"><img src="/logo-small.svg" class="site-logo"
+                    alt=""><span class="site-name">TypingWebsite</span></a>
+            <a class="tl-back" href="/">← Back to typing test</a>
+        </header>
+        <section class="tl-hero">
+            <div>
+                <p class="tl-eyebrow">YOUR PERSONAL TYPING COACH</p>
+                <h1>Build better <span class="tl-blue">typing habits.</span></h1>
+                <p class="tl-muted">Learn finger placement, practise useful patterns, and improve accuracy before
+                    chasing speed. Your progress is saved on this device.</p>
+            </div>
+            <div class="tl-summary"><span>LESSONS COMPLETED</span><strong id="tlCompleted">0</strong><small
+                    id="tlCompletionSub">Start your first lesson today</small></div>
+        </section>
+        <nav class="tl-tabs" aria-label="Lesson sections"><button class="is-active" data-view="lessons">▦ Lesson
+                path</button><button data-view="practice">⌨ Practice</button><button data-view="tools">⌘ Tools &amp;
+                weak keys</button><button data-view="goal">◎ My goal</button><button data-view="progress">◴
+                Progress</button></nav>
+        <section class="tl-view is-visible" id="tlLessons">
+            <div class="tl-section-head">
+                <div>
+                    <p class="tl-eyebrow">START HERE</p>
+                    <h2>Your learning path</h2>
+                    <p class="tl-muted">Start with the basics and move forward as your confidence grows.</p>
+                </div><select id="tlFilter" aria-label="Filter lessons">
+                    <option value="all">All levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="foundation">Foundation</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            <div class="tl-next">
+                <div class="tl-next-icon">⌨</div>
+                <div class="tl-next-copy"><span>RECOMMENDED NEXT</span>
+                    <h3 id="tlNextTitle">Home Row: A S D F</h3>
+                    <p id="tlNextDesc">Learn the home-row keys and build a comfortable starting position.</p>
+                </div><button class="tl-btn tl-primary" id="tlStartNext">Start lesson →</button>
+            </div>
+            <div class="tl-grid" id="tlGrid"></div>
+        </section>
+        <section class="tl-view" id="tlPractice">
+            <div class="tl-section-head">
+                <div>
+                    <p class="tl-eyebrow" id="tlLessonLabel">BEGINNER · LESSON 01</p>
+                    <h2 id="tlLessonTitle">Home Row: A S D F</h2>
+                    <p class="tl-muted" id="tlLessonDesc">Type each character carefully.</p>
+                </div><button class="tl-btn tl-quiet" id="tlAllLessons">← All lessons</button>
+            </div>
+            <div class="tl-practice-layout">
+                <div class="tl-practice-card">
+                    <div class="tl-metrics">
+                        <div><span>WPM</span><strong id="tlWpm">0</strong></div>
+                        <div><span>RAW WPM</span><strong id="tlRawWpm">0</strong></div>
+                        <div><span>ACCURACY</span><strong id="tlAccuracy">100%</strong></div>
+                        <div><span>ERRORS</span><strong id="tlErrors">0</strong></div>
+                        <div><span>TIME</span><strong id="tlTime">0:00</strong></div>
+                        <div><span>TARGET GAP</span><strong id="tlTargetGap">−35</strong></div>
+                        <div><span>PROGRESS</span><strong id="tlPercent">0%</strong></div>
+                    </div>
+                    <div class="tl-target-label"><span>TYPE THE TEXT BELOW</span><span id="tlTargetMeta">Accuracy first
+                            · speed second</span></div>
+                    <div class="tl-type-panel">
+                        <div class="tl-inline-stage">
+                            <div id="tlTarget" class="tl-target" aria-label="Text to type"></div><textarea id="tlInput"
+                                rows="3" spellcheck="false" autocomplete="off" autocapitalize="off"
+                                aria-label="Inline typing input" placeholder="Start typing the text above…"></textarea>
+                        </div><small>Click the text area and type inline, just like the main typing test. Use Backspace
+                            to correct mistakes.</small>
+                    </div>
+                    <div class="tl-actions"><button class="tl-btn tl-quiet" id="tlRestart">↻ Restart</button><button
+                            class="tl-btn tl-primary" id="tlFinish">Finish lesson →</button></div>
+                    <p id="tlFeedback" class="tl-feedback" role="status" aria-live="polite">Take your time. Accuracy
+                        matters more than speed.</p>
+                </div>
+                <aside class="tl-coach">
+                    <h3><span class="tl-blue">✦</span> Lesson coach</h3>
+                    <div class="tl-tip"><b>01</b>
+                        <div><strong>Keep your hands relaxed</strong>
+                            <p>A light touch helps you type for longer without tension.</p>
+                        </div>
+                    </div>
+                    <div class="tl-tip"><b>02</b>
+                        <div><strong>Look at the text, not your hands</strong>
+                            <p>Build muscle memory gradually. Slow down if you lose your place.</p>
+                        </div>
+                    </div>
+                    <div class="tl-tip"><b>03</b>
+                        <div><strong>Correct mistakes calmly</strong>
+                            <p>Accuracy and consistency matter more than a fast start.</p>
+                        </div>
+                    </div>
+                    <div class="tl-goal"><span>LESSON GOAL</span><strong id="tlGoal">At least 95% accuracy</strong>
+                        <p>Repeat lessons to build control and confidence.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <section class="tl-view" id="tlGoalCoach">
+            <div class="tl-section-head">
+                <div>
+                    <p class="tl-eyebrow">YOUR PERSONAL PLAN</p>
+                    <h2>Reach your typing goal</h2>
+                    <p class="tl-muted">For first-time typists and experienced users alike. Set a target, practise, and
+                        let your results guide the next lesson.</p>
+                </div>
+            </div>
+            <div class="tl-goal-layout">
+                <article class="tl-goal-setup tl-tool-card">
+                    <p class="tl-eyebrow">STEP 1 · SET YOUR GOAL</p>
+                    <h3>Where do you want to get?</h3>
+                    <div class="tl-goal-fields"><label for="tlCurrentGoal">Current speed (WPM)<input id="tlCurrentGoal"
+                                class="tl-tool-input" type="number" min="0" max="250" value="0"
+                                inputmode="numeric"></label><label for="tlTargetGoal">Target speed (WPM)<input
+                                id="tlTargetGoal" class="tl-tool-input" type="number" min="1" max="250" value="25"
+                                inputmode="numeric"></label><label for="tlAccuracyGoal">Accuracy goal<select
+                                id="tlAccuracyGoal" class="tl-tool-input">
+                                <option value="90">90% · Build confidence</option>
+                                <option value="95" selected>95% · Balanced</option>
+                                <option value="98">98% · Accuracy first</option>
+                            </select></label></div>
+                    <p class="tl-goal-help">New to typing? Leave current speed at 0 and start with the diagnostic
+                        lesson. If you already know your speed, enter it here.</p>
+                    <button class="tl-btn tl-primary" id="tlSaveGoal">Create my personal plan →</button>
+                </article>
+                <article class="tl-goal-dashboard">
+                    <div class="tl-goal-dash-head">
+                        <div><span class="tl-goal-kicker">YOUR TARGET</span>
+                            <h3 id="tlGoalHeadline">Start with the basics</h3>
+                            <p id="tlGoalSummary">Your first lesson will measure accuracy and help identify what to
+                                practise next.</p>
+                        </div>
+                        <div class="tl-goal-ring"><strong id="tlGoalGap">25</strong><span>WPM goal</span></div>
+                    </div>
+                    <div class="tl-goal-progress-track"><span id="tlGoalProgressBar"></span></div>
+                    <div class="tl-goal-progress-labels"><span id="tlGoalStartLabel">Current: 0 WPM</span><span
+                            id="tlGoalEndLabel">Target: 25 WPM</span></div>
+                    <div class="tl-diagnosis">
+                        <p class="tl-eyebrow">WHAT TO WORK ON NEXT</p>
+                        <div id="tlDiagnosisList" class="tl-diagnosis-list">
+                            <div class="tl-diagnosis-item"><span>01</span>
+                                <div><strong>Start with a baseline</strong>
+                                    <p>Complete one short lesson so the coach can assess your current accuracy and pace.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="tl-btn tl-primary" id="tlStartGoalLesson">Start my personalized lesson →</button>
+                </article>
+            </div>
+            <section class="tl-goal-plan" aria-labelledby="tlGoalPlanTitle">
+                <div class="tl-goal-plan-head">
+                    <div>
+                        <p class="tl-eyebrow">STEP 2 · YOUR ACTION PLAN</p>
+                        <h3 id="tlGoalPlanTitle">Tasks picked for your goal</h3>
+                        <p id="tlGoalPlanIntro">A mix of technique tasks, focused drills, and progress checks—not just
+                            another typing passage.</p>
+                    </div>
+                    <div class="tl-plan-count" id="tlGoalTaskCount">0 / 4 done</div>
+                </div>
+                <div class="tl-plan-progress"><span id="tlGoalTaskProgress"></span></div>
+                <div id="tlGoalTaskList" class="tl-goal-task-list"></div>
+            </section>
+            <div class="tl-goal-note"><strong>How personalization works</strong>
+                <p>The coach uses your recent lesson results and compatible weak-key history saved in this browser. It
+                    doesn't assume that low speed means the same problem for everyone, and it won't promise a target by
+                    a fixed date.</p>
+            </div>
+        </section>
+        <section class="tl-view" id="tlTools">
+            <div class="tl-section-head">
+                <div>
+                    <p class="tl-eyebrow">PRACTICE TOOLS</p>
+                    <h2>Tools for focused practice</h2>
+                    <p class="tl-muted">Build a drill around common words, difficult keys, or text you choose.</p>
+                </div>
+            </div>
+            <div class="tl-tools-grid">
+                <article class="tl-tool-card tl-tool-featured">
+                    <div class="tl-tool-icon">Aa</div>
+                    <p class="tl-eyebrow">FOUNDATION</p>
+                    <h3>Common Words Foundation</h3>
+                    <p>Build automatic recognition of frequent English words and smoother word-to-word transitions
+                        before pushing your speed.</p>
+                    <div class="tl-word-chips">
+                        <span>the</span><span>and</span><span>that</span><span>with</span><span>have</span><span>this</span><span>from</span><span>they</span>
+                    </div><button class="tl-btn tl-primary" id="tlCommonWords">Start common words →</button>
+                </article>
+                <article class="tl-tool-card">
+                    <div class="tl-tool-icon">◎</div>
+                    <p class="tl-eyebrow">PERSONALIZED</p>
+                    <h3>Weak-Key Trainer</h3>
+                    <p>Use saved weak-key stats from TypingWebsite when available. The drill prioritizes keys with
+                        repeated mistakes and updates the same compatible storage format.</p>
+                    <div id="tlWeakSummary" class="tl-weak-summary">Checking your typing history…</div><button
+                        class="tl-btn tl-primary" id="tlWeakDrillTools">Train weak keys →</button>
+                </article>
+                <article class="tl-tool-card">
+                    <div class="tl-tool-icon">✎</div>
+                    <p class="tl-eyebrow">CUSTOM DRILL</p>
+                    <h3>Type your own text</h3>
+                    <p>Paste a paragraph, a work message, or a set of words and practise it in the same inline typing
+                        area.</p>
+
+                    <button class="tl-btn tl-primary" id="tlCustomGoalGenerator"
+                        style="margin-bottom: 8px; width: 100%;">🎯 Generate Unique Personal Lesson →</button>
+
+                    <label class="tl-field-label" for="tlCustomText">Practice text</label><textarea id="tlCustomText"
+                        rows="4"
+                        placeholder="Paste or type your own practice text…">the best way to improve is to practise with focus every day</textarea><label
+                        class="tl-field-label" for="tlTargetWpmInput">Target speed (WPM)</label><input
+                        id="tlTargetWpmInput" class="tl-tool-input" type="number" min="1" max="250" value="35"><button
+                        class="tl-btn tl-primary" id="tlStartCustom">Start custom practice →</button>
+                </article>
+            </div>
+        </section>
+        <section class="tl-view" id="tlProgress">
+            <div class="tl-section-head">
+                <div>
+                    <p class="tl-eyebrow">YOUR PRACTICE HISTORY</p>
+                    <h2>Progress overview</h2>
+                    <p class="tl-muted">Your results stay in this browser. No account required.</p>
+                </div><button class="tl-btn tl-quiet" id="tlResetProgress">Reset progress</button>
+            </div>
+            <div class="tl-progress-stats">
+                <div><span>Lessons completed</span><strong id="tlStatCompleted">0</strong></div>
+                <div><span>Best lesson WPM</span><strong id="tlStatWpm">0</strong></div>
+                <div><span>Average accuracy</span><strong id="tlStatAccuracy">—</strong></div>
+            </div>
+            <div class="tl-history">
+                <div class="tl-history-head">
+                    <h3>Recent results</h3><span id="tlHistoryCount">0 results</span>
+                </div>
+                <div id="tlHistoryList">
+                    <p class="tl-empty">Complete a lesson and your results will appear here.</p>
+                </div>
+            </div>
+            <div class="tl-next tl-weak">
+                <div class="tl-next-icon">◎</div>
+                <div class="tl-next-copy"><span>PERSONALIZED PRACTICE</span>
+                    <h3>Practise your tricky keys</h3>
+                    <p>Build a short drill using the keys you tend to mistype.</p>
+                </div><button class="tl-btn tl-primary" id="tlWeakDrill">Build weak-key drill →</button>
+            </div>
+        </section>
+        <footer class="tl-footer"><span>TypingWebsite · Typing Lesson</span><span>Practice a little every day.</span>
+        </footer>
+    </main>
+    <div class="tl-modal-backdrop" id="tlModal" hidden>
+        <section class="tl-modal" role="dialog" aria-modal="true" aria-labelledby="tlResultTitle"><button
+                id="tlModalClose" class="tl-modal-x" aria-label="Close result">×</button>
+            <div class="tl-result-check">✓</div>
+            <p class="tl-eyebrow">LESSON RESULT</p>
+            <h2 id="tlResultTitle">Nice work!</h2>
+            <p id="tlResultMessage" class="tl-muted"></p>
+            <div class="tl-result-stats">
+                <div><span>WPM</span><strong id="tlResultWpm">0</strong></div>
+                <div><span>RAW WPM</span><strong id="tlResultRawWpm">0</strong></div>
+                <div><span>ACCURACY</span><strong id="tlResultAccuracy">100%</strong></div>
+                <div><span>ERRORS</span><strong id="tlResultErrors">0</strong></div>
+            </div>
+            <p id="tlResultTip" class="tl-result-tip"></p>
+            <div class="tl-result-actions"><button class="tl-btn tl-quiet" id="tlTryAgain">Try again</button><button
+                    class="tl-btn tl-primary" id="tlNextLesson">Next lesson →</button></div>
+        </section>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>

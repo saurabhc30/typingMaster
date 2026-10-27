@@ -62,4 +62,165 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- English homepage -->
+  <url>
+    <loc>https://typingwebsite.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Spanish -->
+  <url>
+    <loc>https://typingwebsite.com/es/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- French -->
+  <url>
+    <loc>https://typingwebsite.com/fr/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- German -->
+  <url>
+    <loc>https://typingwebsite.com/de/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Portuguese -->
+  <url>
+    <loc>https://typingwebsite.com/pt/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Italian -->
+  <url>
+    <loc>https://typingwebsite.com/it/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Dutch -->
+  <url>
+    <loc>https://typingwebsite.com/nl/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Arabic -->
+  <url>
+    <loc>https://typingwebsite.com/ar/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Hindi -->
+  <url>
+    <loc>https://typingwebsite.com/hi/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
+  <!-- Marathi -->
+  <url>
+    <loc>https://typingwebsite.com/mr/typing-test/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://typingwebsite.com/ar/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/mr/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://typingwebsite.com/hi/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/"/>
+  </url>
+
 </urlset>

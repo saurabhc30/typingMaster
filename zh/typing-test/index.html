@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-language="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>免费在线打字测试 | 打字速度与WPM测试 | TypingWebsite</title>
+    <meta name="description" content="免费的在线打字速度测试。通过15至120秒的动态练习，实时测量你的每分钟字数（WPM）、准确率、打字速度和错误率。免注册，即开即练！">
+    <link rel="canonical" href="https://typingwebsite.com/zh/typing-test/">
+    <link rel="alternate" hreflang="zh" href="https://typingwebsite.com/zh/typing-test/">
+    <link rel="alternate" hreflang="ja" href="https://typingwebsite.com/ja/typing-test/">
+    <link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/">
+    <link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/">
+    <link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="免费在线打字测试 | TypingWebsite">
+    <meta property="og:description" content="免费测试你的打字速度与准确率，支持每分钟字数（WPM）测量和多种自定义练习模式。">
+    <meta property="og:url" content="https://typingwebsite.com/zh/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="免费在线打字测试 | TypingWebsite">
+    <meta name="twitter:description" content="在线测试你的打字速度与准确率，完全免费，助你高效提升键盘打字水平。">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/zh/typing-test/",
+        "name":"TypingWebsite",
+        "description":"免费在线打字测试，用于测量打字速度（WPM）和输入准确性。",
+        "inLanguage":"zh-CN"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/zh/typing-test/#app",
+        "name":"TypingWebsite 在线打字测试",
+        "url":"https://typingwebsite.com/zh/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"免费的打字速度测试工具，测量每分钟字数（WPM）、准确率、原始速度、错误和稳定性。",
+        "inLanguage":"zh-CN"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="TypingWebsite Home">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Personal Best">
+                <span class="best-line">个人最佳:</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="难度">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">简单</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">中等</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">困难</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="模式">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>时间</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>字数</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>文章</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="持续时间">
+                <button class="length-btn" data-time="15" type="button">15</button>
+                <button class="length-btn is-active" data-time="30" type="button">30</button>
+                <button class="length-btn" data-time="60" type="button">60</button>
+                <button class="length-btn" data-time="120" type="button">120</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">自定义</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="单词数量" hidden>
+                <button class="length-btn" data-words="10" type="button">10</button>
+                <button class="length-btn is-active" data-words="25" type="button">25</button>
+                <button class="length-btn" data-words="50" type="button">50</button>
+                <button class="length-btn" data-words="100" type="button">100</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">自定义</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="节奏模式">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false" title="与你的最佳成绩节奏进行竞赛">🏁
+                    节奏</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="打字选项">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+                    title="标点符号">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false" title="数字">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true" title="声音">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 打字游戏</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Passage</button>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="练习文本语言">
+        <span class="tw-language-toolbar-label">语言</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">简体中文</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="选择输入语言" hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">输入语言</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="搜索语言..."
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="可用语言"></div>
+                <p class="tw-language-hint">选择练习文本的语言。</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 个词</span>
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="聚焦打字区域">
+            <span class="focus-cursor">➤</span>
+            <span>点击此处或按任意键开始</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            重新开始测试 ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">历史记录</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>最近测试</span>
+                <button class="local-history-clear" id="clearHistory" type="button">清空</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">wpm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">准确率</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">测试类型</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">原始速度</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">字符数</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">稳定性</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">错误数</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="下一个测试 / 重试">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>自定义测试</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">选择测试时长或字数。</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">时间</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>秒</span>
+                        <button id="applyCustomTime" type="button">应用时间</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">字数</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>个词</span>
+                        <button id="applyCustomWords" type="button">应用字数</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>什么是节奏模式？</h3>
+                </div>
+            </div>
+            <p>节奏模式引入了一个辅助的幽灵光标，可帮你保持匀速，并与你的个人最佳记录同台竞技。</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">The quick brown</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">fox jumps over...</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>金色光标：</strong> 你的目标节奏（个人最佳速度）
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>蓝色光标：</strong> 你当前的输入位置
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>如何使用：</strong> 开始打字。尽量让你的蓝色活动光标紧跟或超前于金色幽灵光标，以打破你的目标 WPM！</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">明白了，开始吧！ 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>设置</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>主题
+                    <select id="themeSelect">
+                        <option value="dark">暗黑 (Dark)</option>
+                        <option value="midnight">午夜蓝 (Midnight Blue)</option>
+                    </select>
+                </label>
+                <label>光标样式
+                    <select id="caretSelect">
+                        <option value="line">竖线 (Line)</option>
+                        <option value="block">方块 (Block)</option>
+                        <option value="underline">下划线 (Underline)</option>
+                    </select>
+                </label>
+                <label>字体大小
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">设置会自动保存在此设备上。</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>统计数据</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>总测试次数</span><strong id="dashTests">0</strong></div>
+                <div><span>最高 WPM</span><strong id="dashBest">0</strong></div>
+                <div><span>平均 WPM</span><strong id="dashAvg">0</strong></div>
+                <div><span>平均准确率</span><strong id="dashAcc">0%</strong></div>
+                <div><span>总输入字符</span><strong id="dashChars">0</strong></div>
+                <div><span>总错误数</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>键盘快捷键</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>保持焦点在输入区域</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>重新开始测试</span></div>
+                <div><kbd>Esc</kbd><span>关闭打开的面板</span></div>
+                <div><kbd>/</kbd><span>打开快捷键说明</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- This route starts in Simplified Chinese; the user can still choose another practice language. -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "zh"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector; loaded before the existing typing engine. -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <main class="es-seo-content" lang="zh-CN">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">免费练习 · 无需注册</p>
+            <h1>免费在线打字测试</h1>
+            <p class="es-lead">快速检查你的键盘打字速度，通过中文及多语言打字测试测量每分钟字数（WPM）并提升准确率。选择最适合你的难度级别与练习时长，立即开始挑战。</p>
+            <a class="es-primary-link" href="#twLanguageTrigger">开始打字速度测试</a>
+        </section>
+        <section class="es-seo-section">
+            <h2>打字速度与准确率测试</h2>
+            <p>这项在线打字速度测试可以帮助你了解自己每分钟能输入多少个词，以及在打字过程中产生了多少错误。选择合适的练习文本，按照自己的节奏输入，并在结束后查看详细数据。你可以随时重复测试，对比历史成绩并不断追踪自己的进步。
+            </p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>自定义测试时长</h3>
+                    <p>进行 15、30、60 或 120 秒的练习。短时间测试适合快速热身；长时间测试则有助于评估持续耐力与稳定性。</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>适应不同难度</h3>
+                    <p>从简单的日常词汇起步，在熟练后逐步过渡到包含标点和数字的复杂文本。请务必将“准确率”放在追求极限速度之前。</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>查看详细结果</h3>
+                    <p>在每次测试结束后，复盘你的速度、准确率、错误数和稳定性，轻松找出可以改进的薄弱环节。</p>
+                </article>
+            </div>
+        </section>
+        <section class="es-seo-section">
+            <h2>如何进行打字测试</h2>
+            <ol class="es-steps">
+                <li>在语言选择器中选择<strong>简体中文</strong>或其他所需语言。</li>
+                <li>选择难度级别以及练习模式：时间限制、字数限制或整篇文章。</li>
+                <li>点击输入区域，开始输入屏幕上显示的内容。</li>
+                <li>测试结束后，检查你的每分钟字数（WPM）和准确率百分比。</li>
+                <li>定期重复测试，在减少错误后再逐步加快打字速度。</li>
+            </ol>
+        </section>
+        <section class="es-seo-section">
+            <h2>什么是 WPM 打字速度？</h2>
+            <p>WPM（Words Per
+                Minute，每分钟字数）是衡量键盘输入速度的国际通行标准。在很多测试中，速度由测试时间内输入的字符数推算得出；具体的计算方式可能会因工具而异。准确率则反映了你输入的内容与要求文本相符的比例。只有在保持极高准确率的前提下，高速输入才具有真正的高效价值。
+            </p>
+        </section>
+        <section class="es-seo-section es-faq">
+            <h2>常见问题解答</h2>
+            <details>
+                <summary>这个打字测试是免费的吗？</summary>
+                <p>是的。你可以完全免费地在线练习，无需支付任何费用，也无需注册账号。</p>
+            </details>
+            <details>
+                <summary>如何提高我的打字速度？</summary>
+                <p>坚持定期练习，保持舒适的坐姿和手型，并将注意力首先放在准确输入每一个字符上。随着错误率下降，你的速度自然会随之提升。</p>
+            </details>
+            <details>
+                <summary>我应该选择多长时间的测试？</summary>
+                <p>建议使用 15 或 30 秒进行快速测试，或者使用 60 或 120 秒来全面评估打字的持久度。对比成绩时，请尽量选择相同的测试时长。</p>
+            </details>
+            <details>
+                <summary>速度和准确率哪个更重要？</summary>
+                <p>两者同样重要。保持稳健且少错的速度，远比盲目求快却需要频繁回退修改要高效得多。</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="TypingWebsite footer">
+        <div class="footer-info-links" aria-label="Information pages">
+            <a href="/about" class="info-footer-link">About</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Terms</a>
+            <a href="/privacy-policy" class="info-footer-link">Privacy</a>
+            <a href="/typing-lesson/" class="info-footer-link">Lesson</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">1 Minute Test</a>
+            <a href="#2min" class="info-footer-link">2 Minute Test</a>
+            <a href="#beginner" class="info-footer-link">Beginner Test</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Site controls">
+            <label class="footer-theme" title="Theme">
+                <span class="footer-label">主题</span>
+                <select id="footerThemeSelect" aria-label="Theme">
+                    <option value="dark">暗黑</option>
+                    <option value="midnight">午夜蓝</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="配置">⚙ <span>设置</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥
+                <span>统计</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
+                <span>快捷键</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. 免费在线打字练习。</div>
+    </footer>
+
+
+
+</body>
+
+</html>

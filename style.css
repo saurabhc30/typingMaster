@@ -527,6 +527,7 @@ body.result-visible .restart-wrapper {
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin: 15px 10px;
 }
 
 .mt-icon-btn {
@@ -3104,9 +3105,9 @@ body.theme-light .minimal-tools .utility-btn:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2px 0 10px;
+  margin: 15px 10px;
   color: #e8bd25;
-  font: 600 13px "Sora", Arial, sans-serif;
+  font: 600 24px "Sora", Arial, sans-serif;
   letter-spacing: .2px;
 }
 
@@ -3318,7 +3319,8 @@ body:not(.typing-active) .restart-wrapper {
 /* During typing, keep the interface completely clean: only the selected
    time/word indicator and the passage remain visible. */
 body.typing-active .control-bar,
-body.typing-active .minimal-tools {
+body.typing-active .minimal-tools,
+body.typing-active .tw-language-toolbar {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;

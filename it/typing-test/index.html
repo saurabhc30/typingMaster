@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="it-IT" data-default-language="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>Test di digitazione online gratis in italiano | TypingWebsite</title>
+    <meta name="description"
+        content="Test di digitazione gratuito in italiano: misura parole al minuto, precisione ed errori con esercizi da 15 a 120 secondi.">
+    <link rel="canonical" href="https://typingwebsite.com/it/typing-test/">
+    <link rel="alternate" hreflang="it" href="https://typingwebsite.com/it/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+    <link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/">
+    <link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/">
+    <link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Test di digitazione online gratis in italiano | TypingWebsite">
+    <meta property="og:description"
+        content="Esercitati a digitare in italiano, misura le parole al minuto e migliora la precisione con test gratuiti e personalizzabili.">
+    <meta property="og:url" content="https://typingwebsite.com/it/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Test di digitazione online gratis in italiano | TypingWebsite">
+    <meta name="twitter:description"
+        content="Esercitati a digitare in italiano e misura gratuitamente velocità e precisione.">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/it/typing-test/",
+        "name":"TypingWebsite",
+        "description":"Test di digitazione online gratuito per misurare velocità di scrittura e precisione.",
+        "inLanguage":"it-IT"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/it/typing-test/#app",
+        "name":"Test di digitazione TypingWebsite",
+        "url":"https://typingwebsite.com/it/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"Test gratuito per misurare parole al minuto, precisione, velocità lorda, errori e costanza nella digitazione in italiano.",
+        "inLanguage":"it-IT"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="Home TypingWebsite">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Miglior risultato">
+                <span class="best-line">Miglior risultato :</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="Difficoltà">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Facile</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">Medio</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">Difficile</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="Modalità">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>Tempo</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Parole</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Testo</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="Tempo">
+                <button class="length-btn" data-time="15" type="button">15</button>
+                <button class="length-btn is-active" data-time="30" type="button">30</button>
+                <button class="length-btn" data-time="60" type="button">60</button>
+                <button class="length-btn" data-time="120" type="button">120</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn"
+                    type="button">Personalizzato</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="Nombre de mots" hidden>
+                <button class="length-btn" data-words="10" type="button">10</button>
+                <button class="length-btn is-active" data-words="25" type="button">25</button>
+                <button class="length-btn" data-words="50" type="button">50</button>
+                <button class="length-btn" data-words="100" type="button">100</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn"
+                    type="button">Personalizzato</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="Modalità ritmo">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false"
+                    title="Confronta il tuo ritmo con il tuo miglior risultato">🏁 Ritmo</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="Opzioni di digitazione">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+                    title="Punteggiatura">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false" title="Numeri">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true"
+                    title="Suono">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 Giochi di digitazione</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Testo</button>
+
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="Lingua del testo di esercitazione">
+        <span class="tw-language-toolbar-label">Lingua</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">Italiano</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="Scegli la lingua di digitazione"
+                hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">Lingua de escritura</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="Cerca una lingua…"
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="Linguas disponibles">
+                </div>
+                <p class="tw-language-hint">Scegli la lingua del testo di esercitazione.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 parole</span>
+    </div>
+
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Area di digitazione">
+            <span class="focus-cursor">➤</span>
+            <span>Fai clic qui o premi un tasto per iniziare</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            Ricomincia il test ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">Cronologia</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>Test recenti</span>
+                <button class="local-history-clear" id="clearHistory" type="button">Cancella</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">ppm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">precisione</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">tipo di test</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">brute</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">caratteri</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">costanza</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">errori</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="Prossimo test / Riprova">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>Test personalizzato</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">Scegli la durata o il numero di parole.</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">Tempo</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>secondi</span>
+                        <button id="applyCustomTime" type="button">Applica durata</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">Parole</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>parole</span>
+                        <button id="applyCustomWords" type="button">Applica numero di parole</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>Che cos’è la modalità Ritmo?</h3>
+                </div>
+            </div>
+            <p>La modalità Ritmo mostra un secondo cursore per aiutarti a mantenere una velocità costante e confrontarti
+                con il tuo miglior risultato.</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">Una piccola volpe</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">saute par-dessus…</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>Cursore dorato:</strong> Il tuo ritmo obiettivo
+                        (miglior risultato)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>Cursore blu:</strong> La tua posizione attuale
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>Come si usa:</strong> Inizia a digitare. Cerca di mantenere il cursore blu accanto o
+                        davanti a quello dorato per raggiungere il tuo obiettivo di parole al minuto!</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">Ho capito, iniziamo! 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Impostazioni</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>Tema
+                    <select id="themeSelect">
+                        <option value="dark">Scuro</option>
+                        <option value="midnight">Blu notte</option>
+                    </select>
+                </label>
+                <label>Cursore
+                    <select id="caretSelect">
+                        <option value="line">Linea</option>
+                        <option value="block">Blocco</option>
+                        <option value="underline">Sottolineato</option>
+                    </select>
+                </label>
+                <label>Dimensione carattere
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">Le impostazioni vengono salvate automaticamente su questo dispositivo.</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>Statistiche</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>Test</span><strong id="dashTest">0</strong></div>
+                <div><span>Miglior PPM</span><strong id="dashBest">0</strong></div>
+                <div><span>PPM medio</span><strong id="dashAvg">0</strong></div>
+                <div><span>Precisione media</span><strong id="dashAcc">0%</strong></div>
+                <div><span>Total des caratteri</span><strong id="dashChars">0</strong></div>
+                <div><span>Total des errori</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Scorciatoie da tastiera</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>Mantieni il focus nell’area di digitazione</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Ricomincia il test</span></div>
+                <div><kbd>Esc</kbd><span>Chiudi il pannello aperto</span></div>
+                <div><kbd>/</kbd><span>Apri le scorciatoie</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- Questa pagina si apre in italiano; è possibile scegliere un’altra lingua. -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "it"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector; loaded before the existing typing engine. -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <main class="es-seo-content" lang="it-IT">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">Esercitazione gratuita · Senza registrazione</p>
+            <h1>Test di digitazione online gratuito</h1>
+            <p class="es-lead">Misura la tua velocità di digitazione in italiano, calcola le parole al minuto (PPM) e
+                migliora la precisione. Scegli il livello di difficoltà, la modalità e la durata del test.</p>
+            <a class="es-primary-link" href="#twLanguageTrigger">Inizia il test di digitazione</a>
+        </section>
+        <section class="es-seo-section">
+            <h2>Test di velocità e precisione di digitazione</h2>
+            <p>Questo test ti aiuta a misurare la velocità di scrittura e gli errori commessi. Seleziona l’italiano nel
+                menu della lingua, digita il testo mostrato e consulta i risultati al termine. Ripeti il test per
+                confrontare i punteggi e monitorare i progressi.</p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>Scegli la durata</h3>
+                    <p>Esercitati per 15, 30, 60 o 120 secondi. I test brevi sono utili per una verifica rapida; quelli
+                        più lunghi aiutano a valutare la costanza.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Adatta la difficoltà</h3>
+                    <p>Inizia con testi semplici e passa gradualmente a esercizi più impegnativi. Dai priorità alla
+                        precisione prima di cercare di aumentare la velocità.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Controlla i risultati</h3>
+                    <p>Dopo ogni prova, controlla velocità, precisione, errori e costanza per capire quali aspetti
+                        migliorare.</p>
+                </article>
+            </div>
+        </section>
+        <section class="es-seo-section">
+            <h2>Come fare un test di digitazione</h2>
+            <ol class="es-steps">
+                <li>Seleziona <strong>Italiano</strong> nel menu della lingua.</li>
+                <li>Scegli la difficoltà e una modalità: tempo, numero di parole o testo.</li>
+                <li>Fai clic nell’area di digitazione e trascrivi il testo visualizzato.</li>
+                <li>Alla fine, controlla le parole al minuto e la percentuale di precisione.</li>
+                <li>Esercitati regolarmente e riduci gli errori prima di aumentare la velocità.</li>
+            </ol>
+        </section>
+        <section class="es-seo-section">
+            <h2>Che cosa significa la velocità di digitazione in PPM?</h2>
+            <p>PPM significa parole per minuto ed è una misura comune della velocità di digitazione. Molti test stimano
+                la velocità in base ai caratteri digitati in un determinato intervallo di tempo; il metodo preciso può
+                variare da uno strumento all’altro. La precisione indica quanto la digitazione corrisponde al testo
+                richiesto. Una velocità elevata è più utile quando è accompagnata da pochi errori.</p>
+        </section>
+        <section class="es-seo-section es-faq">
+            <h2>Domande frequenti</h2>
+            <details>
+                <summary>Il test di digitazione è gratuito?</summary>
+                <p>Sì. Puoi esercitarti online gratuitamente senza pagare o creare un account.</p>
+            </details>
+            <details>
+                <summary>Come posso migliorare la velocità di digitazione?</summary>
+                <p>Esercitati con regolarità, mantieni una postura comoda e concentrati prima sulla precisione. Aumenta
+                    gradualmente la velocità quando gli errori diminuiscono.</p>
+            </details>
+            <details>
+                <summary>Quale durata dovrei scegliere?</summary>
+                <p>Scegli 15 o 30 secondi per una prova rapida, oppure 60 o 120 secondi per valutare meglio la costanza.
+                    Usa la stessa durata quando confronti i risultati.</p>
+            </details>
+            <details>
+                <summary>È più importante la velocità o la precisione?</summary>
+                <p>Entrambe sono importanti. Una velocità sostenibile con pochi errori è generalmente più utile di una
+                    digitazione rapida ma imprecisa.</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="Piè di pagina TypingWebsite">
+        <div class="footer-info-links" aria-label="Pagine informative">
+            <a href="/about" class="info-footer-link">Chi siamo</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Termini di utilizzo</a>
+            <a href="/privacy-policy" class="info-footer-link">Privacy</a>
+            <a href="/typing-lesson/" class="info-footer-link">Lezioni</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">Test di un minuto</a>
+            <a href="#2min" class="info-footer-link">Test di due minuti</a>
+            <a href="#beginner" class="info-footer-link">Test per principianti</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Comandi del sito">
+            <label class="footer-theme" title="Tema">
+                <span class="footer-label">Tema</span>
+                <select id="footerThemeSelect" aria-label="Tema">
+                    <option value="dark">Scuro</option>
+                    <option value="midnight">Blu notte</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="Impostazioni">⚙
+                <span>Impostazioni</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistiche">▥
+                <span>Statistiche</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Scorciatoie da tastiera">⌨
+                <span>Atajos</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. Esercitazione gratuita di digitazione online.</div>
+    </footer>
+
+
+
+</body>
+
+</html>

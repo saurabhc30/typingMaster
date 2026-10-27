@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja" data-default-language="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>無料タイピング練習・速度測定テスト | TypingWebsite</title>
+    <meta name="description"
+        content="無料のオンラインタイピング練習・速度測定テスト。1分あたりの単語数（WPM）、入力正確性、タイピング速度をリアルタイムで計測・改善できます。登録不要ですぐにスタート！">
+    <link rel="canonical" href="https://typingwebsite.com/ja/typing-test/">
+    <link rel="alternate" hreflang="ja" href="https://typingwebsite.com/ja/typing-test/">
+    <link rel="alternate" hreflang="pt" href="https://typingwebsite.com/pt/typing-test/">
+    <link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/">
+    <link rel="alternate" hreflang="de" href="https://typingwebsite.com/de/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="無料タイピング練習・速度測定テスト | TypingWebsite">
+    <meta property="og:description" content="日本語・英語のタイピング速度（WPM）と正確性を無料で測定。自分に合ったレベルと時間でスコアを伸ばそう。">
+    <meta property="og:url" content="https://typingwebsite.com/ja/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="無料タイピング練習・速度測定テスト | TypingWebsite">
+    <meta name="twitter:description" content="オンラインでタイピング速度と正確性を無料チェック。スコア計測と練習がこれ一つで完了！">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/ja/typing-test/",
+        "name":"TypingWebsite",
+        "description":"無料のオンラインタイピングテスト。タイピング速度(WPM)と入力正確性を即座に測定できます。",
+        "inLanguage":"ja"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/ja/typing-test/#app",
+        "name":"TypingWebsite オンラインタイピングテスト",
+        "url":"https://typingwebsite.com/ja/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"WPM（1分間のワード数）、入力精度、エラー数、スピードの一貫性を測定する無料タイピングアプリ。",
+        "inLanguage":"ja"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="TypingWebsite Home">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Personal Best">
+                <span class="best-line">自己ベスト:</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="難易度">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">初級</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">中級</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">上級</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="モード">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>時間制限</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>単語数</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>文章</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="時間設定">
+                <button class="length-btn" data-time="15" type="button">15秒</button>
+                <button class="length-btn is-active" data-time="30" type="button">30秒</button>
+                <button class="length-btn" data-time="60" type="button">60秒</button>
+                <button class="length-btn" data-time="120" type="button">120秒</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">カスタム</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="単語数設定" hidden>
+                <button class="length-btn" data-words="10" type="button">10語</button>
+                <button class="length-btn is-active" data-words="25" type="button">25語</button>
+                <button class="length-btn" data-words="50" type="button">50語</button>
+                <button class="length-btn" data-words="100" type="button">100語</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">カスタム</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="ペースモード">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false" title="自己ベストのペースと対戦する">🏁
+                    ペース</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="入力オプション">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false" title="記号">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false" title="数字">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true" title="効果音">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 タイピングゲーム</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Passage</button>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="練習テキストの言語">
+        <span class="tw-language-toolbar-label">言語</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">日本語</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="タイピング言語を選択" hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">タイピング言語</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="言語を検索..."
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="利用可能な言語"></div>
+                <p class="tw-language-hint">練習で使用するテキスト言語を選択してください。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 単語</span>
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="タイピングエリアにフォーカス">
+            <span class="focus-cursor">➤</span>
+            <span>ここをクリックするかキーを押してスタート</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            テストをやり直す ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">履歴</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>最近のテスト結果</span>
+                <button class="local-history-clear" id="clearHistory" type="button">削除</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">wpm (単語/分)</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">正確性</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">テスト種別</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">グロス速度</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">文字数</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">安定度</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">ミス数</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="次のテスト / もう一度">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>カスタムテスト</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">時間または単語数を指定してください。</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">時間</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>秒</span>
+                        <button id="applyCustomTime" type="button">時間を適用</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">単語数</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>単語</span>
+                        <button id="applyCustomWords" type="button">単語数を適用</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>ペースモードとは？</h3>
+                </div>
+            </div>
+            <p>ペースモードでは、あなたの自己ベスト（ハイスコア）の速度で動くゴーストカーソルが表示されます。一貫したスピードを維持して記録更新を目指しましょう！</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">The quick brown</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">fox jumps over...</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>ゴールドカーソル:</strong> 目標ペース (自己ベスト速度)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>ブルーカーソル:</strong> 現在の入力位置
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>使い方:</strong> タイピングを開始するとゴーストが動きます。青いカーソルを金のカーソルの先頭かすぐ隣に維持して目標WPMを突破しましょう！</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">了解、スタート！ 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>設定</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>テーマ
+                    <select id="themeSelect">
+                        <option value="dark">ダーク (Dark)</option>
+                        <option value="midnight">ミッドナイト (Midnight Blue)</option>
+                    </select>
+                </label>
+                <label>カーソル形状
+                    <select id="caretSelect">
+                        <option value="line">ライン (Line)</option>
+                        <option value="block">ブロック (Block)</option>
+                        <option value="underline">アンダーライン (Underline)</option>
+                    </select>
+                </label>
+                <label>フォントサイズ
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">設定はこのデバイスのブラウザに自動保存されます。</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>統計データ</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>テスト回数</span><strong id="dashTests">0</strong></div>
+                <div><span>最高WPM</span><strong id="dashBest">0</strong></div>
+                <div><span>平均WPM</span><strong id="dashAvg">0</strong></div>
+                <div><span>平均正確性</span><strong id="dashAcc">0%</strong></div>
+                <div><span>総入力文字数</span><strong id="dashChars">0</strong></div>
+                <div><span>総ミス数</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>ショートカットキー</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>入力エリアへのフォーカス維持</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>テストをリセット</span></div>
+                <div><kbd>Esc</kbd><span>モーダル/設定を閉じる</span></div>
+                <div><kbd>/</kbd><span>ショートカットを表示</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- Preset practice language to Japanese for this route -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "ja"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <!-- UNIQUE JAPANESE SEO CONTENT BLOCK -->
+    <main class="es-seo-content" lang="ja">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">無料オンライン練習 · 会員登録不要</p>
+            <h1>無料タイピング練習・速度測定テスト</h1>
+            <p class="es-lead">
+                キーボードのタイピング速度や打鍵数をリアルタイムで測定。1分間あたりの単語数（WPM）や入力精度を判定し、ブラインドタッチ（タッチタイピング）の向上をサポートします。好きな制限時間や難易度を選んで練習を開始しましょう。
+            </p>
+            <a class="es-primary-link" href="#twLanguageTrigger">タイピングテストを開始する</a>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>タイピング速度テストと正確性の向上</h2>
+            <p>TypingWebsiteのタイピング速度テストは、1分間でどれだけの速度でキーを入力できるか、またどのくらいミスなく打ち込めるかを正確に測定できる無料ツールです。仕事や学習におけるパソコン操作の効率を高めるため、日々のトレーニングとしてご活用いただけます。
+            </p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>柔軟な時間設定</h3>
+                    <p>15秒・30秒・60秒・120秒の中からスタイルに合わせた練習が可能です。短時間でのスピードチェックや、長時間の集中力テストに対応しています。</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>レベルに応じた難易度</h3>
+                    <p>基本的な短い単語から、記号・数字を含む実践的なテキストまで難易度を選択できます。まずはミスを減らす正確性から高めていきましょう。</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>詳細な結果グラフ分析</h3>
+                    <p>終了後はWPMスコア、正確性（%）、打鍵数、ミス傾向を可視化。自分の得意なキー・苦手なキーを把握して効率よく改善できます。</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>タイピングテストの進め方・使い方</h2>
+            <ol class="es-steps">
+                <li>言語選択メニューで<strong>「日本語（または目的の言語）」</strong>が選ばれていることを確認します。</li>
+                <li>難易度（初級・中級・上級）および練習モード（時間制限・単語数・文章）を選びます。</li>
+                <li>画面中央のタイピングエリアをクリックし、表示されたテキストをタイプし始めると自動的に計測がスタートします。</li>
+                <li>時間終了後、WPM（速度）と正確性（精度）の結果画面が表示されます。</li>
+                <li>「やり直す」ボタンを押すかCtrl+Enterキーで何度でも繰り返し練習が可能です。</li>
+            </ol>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>WPM（Words Per Minute）とは？</h2>
+            <p><strong>WPM（Words Per
+                    Minute）</strong>とは、1分間に何単語入力できたかを表す世界基準のタイピング速度の指標です（通常1単語＝5文字で換算されます）。オフィスワークにおける標準的な速度は40〜50
+                WPM程度と言われており、70〜80
+                WPM以上になると上級者レベルと見なされます。入力速度も重要ですが、ミスを直す時間を省くために<strong>95%以上の正確性</strong>を目指すことが上達の近道です。</p>
+        </section>
+
+        <section class="es-seo-section es-faq">
+            <h2>よくある質問（FAQ）</h2>
+            <details>
+                <summary>完全無料で利用できますか？</summary>
+                <p>はい、すべての機能、モード、統計分析を完全無料かつ登録不要でご利用いただけます。</p>
+            </details>
+            <details>
+                <summary>タイピング速度を早くするためのコツは？</summary>
+                <p>キーボードを見ずに打つ「タッチタイピング（ブラインドタッチ）」の位置を覚え、
+                    ホームポジション（FとJに人差し指を置く）を維持することが最も重要です。速さよりも「正しい指で正確に打つ」ことを意識してください。</p>
+            </details>
+            <details>
+                <summary>どの時間設定で練習するのがおすすめですか？</summary>
+                <p>ウォームアップや手軽なチェックには30秒、検定や実用的な持久力の測定には60秒（1分間テスト）がおすすめです。</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="TypingWebsite footer">
+        <div class="footer-info-links" aria-label="Information pages">
+            <a href="/about" class="info-footer-link">About</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Terms</a>
+            <a href="/privacy-policy" class="info-footer-link">Privacy</a>
+            <a href="/typing-lesson/" class="info-footer-link">Lesson</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">1 Minute Test</a>
+            <a href="#2min" class="info-footer-link">2 Minute Test</a>
+            <a href="#beginner" class="info-footer-link">Beginner Test</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Site controls">
+            <label class="footer-theme" title="Theme">
+                <span class="footer-label">テーマ</span>
+                <select id="footerThemeSelect" aria-label="Theme">
+                    <option value="dark">ダーク</option>
+                    <option value="midnight">ミッドナイト</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="設定">⚙ <span>設定</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="統計">▥
+                <span>統計</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="ショートカット">⌨
+                <span>ショートカット</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. 無料オンラインタイピング練習.</div>
+    </footer>
+
+
+
+</body>
+
+</html>

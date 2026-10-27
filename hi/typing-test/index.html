@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" data-default-language="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>Free Hindi Typing Test Online | Hindi Typing Speed & WPM | TypingWebsite</title>
+    <meta name="description"
+        content="Take a free Hindi typing test online. Measure your Hindi typing speed in words per minute (WPM), accuracy, and errors with professional timed exercises.">
+    <link rel="canonical" href="https://typingwebsite.com/hi/typing-test/">
+    <link rel="alternate" hreflang="hi" href="https://typingwebsite.com/hi/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Hindi Typing Test Online | TypingWebsite">
+    <meta property="og:description"
+        content="Practice typing in Hindi, measure your words per minute, and improve your accuracy with free configurable tests and real-time graphs.">
+    <meta property="og:url" content="https://typingwebsite.com/hi/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Hindi Typing Test Online | TypingWebsite">
+    <meta name="twitter:description"
+        content="Practice Hindi typing and check your writing speed, WPM, and accuracy for free.">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/hi/typing-test/",
+        "name":"TypingWebsite",
+        "description":"Free online Hindi typing test to measure writing speed, WPM, and precision.",
+        "inLanguage":"hi"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/hi/typing-test/#app",
+        "name":"Hindi Typing Test by TypingWebsite",
+        "url":"https://typingwebsite.com/hi/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"Free test to measure words per minute, accuracy, raw speed, errors, and consistency when doing hindi typing test online.",
+        "inLanguage":"hi"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="TypingWebsite Home">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Personal Best">
+                <span class="best-line">Personal Best:</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="Difficulty">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Easy</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">Medium</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">Hard</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="Mode">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>Timed</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Words</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Passage</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="Duration">
+                <button class="length-btn" data-time="15" type="button">15</button>
+                <button class="length-btn is-active" data-time="30" type="button">30</button>
+                <button class="length-btn" data-time="60" type="button">60</button>
+                <button class="length-btn" data-time="120" type="button">120</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">Custom</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="Word count" hidden>
+                <button class="length-btn" data-words="10" type="button">10</button>
+                <button class="length-btn is-active" data-words="25" type="button">25</button>
+                <button class="length-btn" data-words="50" type="button">50</button>
+                <button class="length-btn" data-words="100" type="button">100</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Custom</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="Pace mode">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false"
+                    title="Race against your personal best pace">🏁 Pace</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="Typing options">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+                    title="Punctuation">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false"
+                    title="Numbers">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true"
+                    title="Sound">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 Typing Games</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Passage</button>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="Practice text language">
+        <span class="tw-language-toolbar-label">Language</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">Hindi</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="Choose typing language" hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">Typing Language</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="Search languages..."
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="Available languages">
+                </div>
+                <p class="tw-language-hint">Choose practice text language.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 words</span>
+    </div>
+
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Focus typing area">
+            <span class="focus-cursor">➤</span>
+            <span>Click here or press any key to start</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            Restart Test ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">History</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>Recent Tests</span>
+                <button class="local-history-clear" id="clearHistory" type="button">Clear</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">wpm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">accuracy</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">test type</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">raw</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">characters</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">consistency</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">errors</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="Next test / Retry">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>Custom Test</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">Choose duration or word count.</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">Time</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>seconds</span>
+                        <button id="applyCustomTime" type="button">Apply time</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">Words</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>words</span>
+                        <button id="applyCustomWords" type="button">Apply words</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>What is Pace Mode?</h3>
+                </div>
+            </div>
+            <p>Pace Car introduces a secondary ghost cursor to help you maintain consistent speed and race against your
+                personal best.</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">The quick brown</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">fox jumps over...</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>Gold Cursor:</strong> Your Target Pace (PB Speed)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>Blue Cursor:</strong> Your Live Typing Position
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>How to Use:</strong> Start typing. Try to keep your active blue cursor right next to or
+                        ahead of the gold ghost cursor to crush your target WPM!</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">Got it, let's go! 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Settings</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>Theme
+                    <select id="themeSelect">
+                        <option value="dark">Dark</option>
+                        <option value="midnight">Midnight Blue</option>
+                    </select>
+                </label>
+                <label>Caret
+                    <select id="caretSelect">
+                        <option value="line">Line</option>
+                        <option value="block">Block</option>
+                        <option value="underline">Underline</option>
+                    </select>
+                </label>
+                <label>Font Size
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">Settings are saved automatically on this device.</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>Statistics</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>Tests</span><strong id="dashTests">0</strong></div>
+                <div><span>Best WPM</span><strong id="dashBest">0</strong></div>
+                <div><span>Average WPM</span><strong id="dashAvg">0</strong></div>
+                <div><span>Average Accuracy</span><strong id="dashAcc">0%</strong></div>
+                <div><span>Total Characters</span><strong id="dashChars">0</strong></div>
+                <div><span>Total Errors</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Keyboard Shortcuts</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>Keep focus on typing area</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Restart test</span></div>
+                <div><kbd>Esc</kbd><span>Close open panel</span></div>
+                <div><kbd>/</kbd><span>Open shortcuts</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- Preset practice language to Hindi for this route -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "hi"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <!-- ENGLISH CONTENT WITH TARGET HINDI KEYWORDS SEO BLOCK -->
+    <main class="es-seo-content" lang="hi">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">Free Hindi Typing Practice · No Registration Required</p>
+            <h1>Free Hindi Typing Test Online & Speed Checker</h1>
+            <p class="es-lead">Welcome to the best platform to perform your hindi typing test online. Measure your
+                typing speed in words per minute (WPM), check your accuracy, and improve your typing skills with
+                professional custom timed exercises.</p>
+            <a class="es-primary-link" href="#twLanguageTrigger">Start Hindi Typing Test Now</a>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>Enhance Your Typing Speed With Hindi Typing Practice</h2>
+            <p>Doing regular hindi typing practice online helps you master keyboard strokes, eliminate errors, and
+                drastically improve your productivity. Whether you are preparing for professional examinations or simply
+                want to boost your typing speed test hindi scores, our interactive platform provides instant performance
+                feedback.</p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>Flexible Test Durations</h3>
+                    <p>Choose from 15, 30, 60, or 120-second timers. Short tests are perfect for quick evaluations,
+                        while longer sessions build endurance for a complete hindi typing speed test.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Adjustable Difficulty Levels</h3>
+                    <p>Start with easy vocabulary and progress toward advanced paragraphs. Focus heavily on maintaining
+                        high accuracy before pushing for a higher speed.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Comprehensive WPM Metrics</h3>
+                    <p>Analyze your net speed, raw words per minute, consistency graphs, and character errors instantly
+                        after completing each round.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>How to Take a Hindi Typing Test Online</h2>
+            <ol class="es-steps">
+                <li>Select <strong>Hindi</strong> from the language options toolbar above the typing box.</li>
+                <li>Choose your preferred difficulty level and testing mode (Timed, Words, or Passage).</li>
+                <li>Click inside the active typing box and begin typing the displayed text to automatically launch the
+                    timer.</li>
+                <li>Review your comprehensive results breakdown, including WPM and precision percentage, upon test
+                    completion.</li>
+                <li>Repeat the exercise regularly to track your progress and maximize your typing speed.</li>
+            </ol>
+        </section>
+
+        <section class="es-seo-section">
+            <h2>Understanding WPM in Hindi Typing Speed Tests</h2>
+            <p>Words Per Minute (WPM) is the global standard used during any typing speed test hindi evaluation to
+                measure text entry efficiency. A standard word equals five keystrokes including spaces. Combining high
+                WPM counts with stellar precision ensures clean, professional typing outcomes.</p>
+        </section>
+
+        <section class="es-seo-section es-faq">
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <details>
+                <summary>Is this hindi typing test online completely free?</summary>
+                <p>Yes! Our platform is 100% free with no hidden fees, subscriptions, or required account creations.</p>
+            </details>
+            <details>
+                <summary>How can I improve my typing speed?</summary>
+                <p>Consistency is key. Focus on proper touch-typing posture, avoid looking down at your keyboard, and
+                    prioritize accuracy over speed during your initial practice phases.</p>
+            </details>
+            <details>
+                <summary>What is a good score for a typing speed test in Hindi?</summary>
+                <p>A score between 35 to 45 WPM is considered a solid average, while speeds exceeding 60 WPM represent
+                    advanced proficiency suitable for professional typing tasks.</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="TypingWebsite footer">
+        <div class="footer-info-links" aria-label="Information pages">
+            <a href="/about" class="info-footer-link">About</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Terms</a>
+            <a href="/privacy-policy" class="info-footer-link">Privacy</a>
+            <a href="/typing-lesson/" class="info-footer-link">Lesson</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">1 Minute Test</a>
+            <a href="#2min" class="info-footer-link">2 Minute Test</a>
+            <a href="#beginner" class="info-footer-link">Beginner Test</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Site controls">
+            <label class="footer-theme" title="Theme">
+                <span class="footer-label">Theme</span>
+                <select id="footerThemeSelect" aria-label="Theme">
+                    <option value="dark">Dark</option>
+                    <option value="midnight">Midnight Blue</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="Settings">⚙ <span>Settings</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistics">▥
+                <span>Statistics</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Keyboard shortcuts">⌨
+                <span>Shortcuts</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. Free online typing practice.</div>
+    </footer>
+
+
+
+</body>
+
+</html>

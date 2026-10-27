@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="nl-NL" data-default-language="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>Gratis typetest online in het Nederlands | TypingWebsite</title>
+    <meta name="description"
+        content="Gratis typetest in het Nederlands: meet je typesnelheid in woorden per minuut, nauwkeurigheid en fouten met oefeningen van 15 tot 120 seconden.">
+    <link rel="canonical" href="https://typingwebsite.com/nl/typing-test/">
+    <link rel="alternate" hreflang="nl" href="https://typingwebsite.com/nl/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+    <link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/">
+    <link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/">
+    <link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Test di digitazione online gratis in italiano | TypingWebsite">
+    <meta property="og:description"
+        content="Oefen met typen in het Nederlands, meet je woorden per minuut en verbeter je nauwkeurigheid met gratis aanpasbare tests.">
+    <meta property="og:url" content="https://typingwebsite.com/nl/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Test di digitazione online gratis in italiano | TypingWebsite">
+    <meta name="twitter:description"
+        content="Oefen gratis met typen in het Nederlands en meet je snelheid en nauwkeurigheid.">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/nl/typing-test/",
+        "name":"TypingWebsite",
+        "description":"Gratis online typetest om typesnelheid en nauwkeurigheid te meten.",
+        "inLanguage":"nl-NL"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/nl/typing-test/#app",
+        "name":"TypingWebsite typetest",
+        "url":"https://typingwebsite.com/nl/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"Gratis test om woorden per minuut, nauwkeurigheid, ruwe snelheid, fouten en consistentie bij het typen in het Nederlands te meten.",
+        "inLanguage":"nl-NL"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="Home TypingWebsite">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Beste score">
+                <span class="best-line">Beste score:</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="Moeilijkheidsgraad">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Makkelijk</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">Gemiddeld</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">Moeilijk</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="Modus">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>Tijd</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Woorden</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Tekst</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="Tijd">
+                <button class="length-btn" data-time="15" type="button">15</button>
+                <button class="length-btn is-active" data-time="30" type="button">30</button>
+                <button class="length-btn" data-time="60" type="button">60</button>
+                <button class="length-btn" data-time="120" type="button">120</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">Aangepast</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="Nombre de mots" hidden>
+                <button class="length-btn" data-words="10" type="button">10</button>
+                <button class="length-btn is-active" data-words="25" type="button">25</button>
+                <button class="length-btn" data-words="50" type="button">50</button>
+                <button class="length-btn" data-words="100" type="button">100</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Aangepast</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="Modus ritmo">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false"
+                    title="Vergelijk je tempo met je beste score">🏁 Ritmo</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="Opzioni di digitazione">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+                    title="Leestekens">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false"
+                    title="Cijfers">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true"
+                    title="Geluid">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 Typgames</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Tekst</button>
+
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="Taal van de oefentekst">
+        <span class="tw-language-toolbar-label">Taal</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">Italiano</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="Kies de typetaal" hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">Taal de escritura</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="Zoek een taal…"
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="Taals disponibles">
+                </div>
+                <p class="tw-language-hint">Kies de taal van de oefentekst.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 woorden</span>
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Typgebied">
+            <span class="focus-cursor">➤</span>
+            <span>Klik hier of druk op een toets om te beginnen</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            Test opnieuw starten ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">Geschiedenis</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>Recente tests</span>
+                <button class="local-history-clear" id="clearHistory" type="button">Wissen</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">ppm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">precisione</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">tipo di test</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">brute</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">caratteri</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">costanza</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">errori</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="Prossimo test / Riprova">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>Test personalizzato</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">Scegli la durata o il numero di parole.</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">Tijd</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>secondi</span>
+                        <button id="applyCustomTime" type="button">Applica durata</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">Woorden</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>parole</span>
+                        <button id="applyCustomWords" type="button">Applica numero di parole</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>Che cos’è la modalità Ritmo?</h3>
+                </div>
+            </div>
+            <p>La modalità Ritmo mostra un secondo cursore per aiutarti a mantenere una velocità costante e confrontarti
+                con il tuo miglior risultato.</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">Una piccola volpe</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">saute par-dessus…</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>Cursore dorato:</strong> Il tuo ritmo obiettivo
+                        (miglior risultato)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>Cursore blu:</strong> La tua posizione attuale
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>Come si usa:</strong> Inizia a digitare. Cerca di mantenere il cursore blu accanto o
+                        davanti a quello dorato per raggiungere il tuo obiettivo di parole al minuto!</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">Ho capito, iniziamo! 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Instellingen</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>Thema
+                    <select id="themeSelect">
+                        <option value="dark">Donker</option>
+                        <option value="midnight">Middernachtblauw</option>
+                    </select>
+                </label>
+                <label>Cursore
+                    <select id="caretSelect">
+                        <option value="line">Linea</option>
+                        <option value="block">Blocco</option>
+                        <option value="underline">Sottolineato</option>
+                    </select>
+                </label>
+                <label>Dimensione carattere
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">Le impostazioni vengono salvate automaticamente su questo dispositivo.</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>Statistieken</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>Test</span><strong id="dashTest">0</strong></div>
+                <div><span>Beste WPM</span><strong id="dashBest">0</strong></div>
+                <div><span>Gemiddelde WPM</span><strong id="dashAvg">0</strong></div>
+                <div><span>Nauwkeurigheid media</span><strong id="dashAcc">0%</strong></div>
+                <div><span>Total des caratteri</span><strong id="dashChars">0</strong></div>
+                <div><span>Total des errori</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Sneltoetsen</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>Houd de focus in het typgebied</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Test opnieuw starten</span></div>
+                <div><kbd>Esc</kbd><span>Sluit het geopende paneel</span></div>
+                <div><kbd>/</kbd><span>Open de sneltoetsen</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- Deze pagina opent in het Nederlands; je kunt een andere taal kiezen. -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "nl"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector; loaded before the existing typing engine. -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <main class="es-seo-content" lang="nl-NL">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">Gratis oefenen · Geen account nodig</p>
+            <h1>Gratis online typetest</h1>
+            <p class="es-lead">Meet je typesnelheid in het Nederlands, ontdek hoeveel woorden per minuut (WPM) je typt
+                en verbeter je nauwkeurigheid. Kies je moeilijkheidsgraad, oefenmodus en testduur.</p>
+            <a class="es-primary-link" href="#twLanguageTrigger">Start de typetest</a>
+        </section>
+        <section class="es-seo-section">
+            <h2>Test je typesnelheid en nauwkeurigheid</h2>
+            <p>Met deze typetest meet je hoe snel je typt en hoeveel fouten je maakt. Kies Nederlands in het taalmenu,
+                typ de weergegeven tekst en bekijk na afloop je resultaten. Herhaal de test om scores te vergelijken en
+                je voortgang te volgen.</p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>Kies de testduur</h3>
+                    <p>Oefen 15, 30, 60 of 120 seconden. Korte tests zijn handig voor een snelle meting; langere tests
+                        helpen je consistentie te beoordelen.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Pas de moeilijkheid aan</h3>
+                    <p>Begin met eenvoudige teksten en ga geleidelijk over op uitdagendere oefeningen. Geef
+                        nauwkeurigheid voorrang voordat je je snelheid probeert te verhogen.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Bekijk je resultaten</h3>
+                    <p>Controleer na elke poging je snelheid, nauwkeurigheid, fouten en consistentie om te zien waar je
+                        kunt verbeteren.</p>
+                </article>
+            </div>
+        </section>
+        <section class="es-seo-section">
+            <h2>Zo doe je een typetest</h2>
+            <ol class="es-steps">
+                <li>Kies <strong>Nederlands</strong> in het taalmenu.</li>
+                <li>Kies de moeilijkheidsgraad en een modus: tijd, aantal woorden of tekst.</li>
+                <li>Klik in het typgebied en typ de weergegeven tekst over.</li>
+                <li>Bekijk na afloop je woorden per minuut en nauwkeurigheidspercentage.</li>
+                <li>Oefen regelmatig en verminder fouten voordat je je snelheid verhoogt.</li>
+            </ol>
+        </section>
+        <section class="es-seo-section">
+            <h2>Wat betekent typesnelheid in WPM?</h2>
+            <p>WPM staat voor woorden per minuut en is een veelgebruikte maat voor typesnelheid. Veel tests schatten de
+                snelheid op basis van het aantal getypte tekens binnen een bepaalde tijd; de precieze methode verschilt
+                per hulpmiddel. Nauwkeurigheid geeft aan hoe goed je invoer overeenkomt met de gevraagde tekst. Een hoge
+                snelheid is vooral nuttig als je ook weinig fouten maakt.</p>
+        </section>
+        <section class="es-seo-section es-faq">
+            <h2>Veelgestelde vragen</h2>
+            <details>
+                <summary>Is de typetest gratis?</summary>
+                <p>Ja. Je kunt gratis online oefenen zonder te betalen of een account aan te maken.</p>
+            </details>
+            <details>
+                <summary>Hoe kan ik mijn typesnelheid verbeteren?</summary>
+                <p>Oefen regelmatig, zit comfortabel en richt je eerst op nauwkeurigheid. Verhoog je snelheid
+                    geleidelijk wanneer je minder fouten maakt.</p>
+            </details>
+            <details>
+                <summary>Welke testduur kan ik het beste kiezen?</summary>
+                <p>Kies 15 of 30 seconden voor een korte test, of 60 of 120 seconden om je consistentie beter te
+                    beoordelen. Gebruik dezelfde duur als je scores vergelijkt.</p>
+            </details>
+            <details>
+                <summary>Wat is belangrijker: snelheid of nauwkeurigheid?</summary>
+                <p>Beide zijn belangrijk. Een stabiele typesnelheid met weinig fouten is meestal nuttiger dan snel maar
+                    onnauwkeurig typen.</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="Voettekst TypingWebsite">
+        <div class="footer-info-links" aria-label="Informatiepagina’s">
+            <a href="/about" class="info-footer-link">Over ons</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Gebruiksvoorwaarden</a>
+            <a href="/privacy-policy" class="info-footer-link">Privacy</a>
+            <a href="/typing-lesson/" class="info-footer-link">Lessen</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">Test van één minuut</a>
+            <a href="#2min" class="info-footer-link">Test van twee minuten</a>
+            <a href="#beginner" class="info-footer-link">Test voor beginners</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Websitebediening">
+            <label class="footer-theme" title="Thema">
+                <span class="footer-label">Thema</span>
+                <select id="footerThemeSelect" aria-label="Thema">
+                    <option value="dark">Donker</option>
+                    <option value="midnight">Middernachtblauw</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="Instellingen">⚙
+                <span>Instellingen</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistieken">▥
+                <span>Statistieken</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Sneltoetsen">⌨
+                <span>Sneltoetsen</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. Gratis oefening di digitazione online.</div>
+    </footer>
+
+
+
+</body>
+
+</html>

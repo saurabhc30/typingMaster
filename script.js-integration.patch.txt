@@ -1,0 +1,7 @@
+No script.js patch is required for basic language selection and passage switching in this package.
+
+The language picker is positioned immediately above the typing passage, outside the control bar. multilingual-ui.js loads after passages.js and before script.js. It swaps the passage arrays to the selected language's bundled starter samples and clicks the existing restart control after a user chooses another language. English restores the original English passage arrays.
+
+Passage supply: multilingual-language-data.js currently contains only three starter samples per language. For a larger corpus, bundle legally reusable text in per-language JSON files and fetch them from your own site (with bundled fallback), rather than depending on a random external API at test time. Track source and license for each corpus.
+
+Engineering limitation: the existing typing engine processes KeyboardEvent.key one key at a time. Japanese/Chinese IME composition, Hindi combining characters, reliable grapheme-level WPM/accuracy, and Arabic right-to-left scoring/layout require dedicated input-engine work and testing. Do not claim fully accurate scoring for those scripts until this is implemented and tested.

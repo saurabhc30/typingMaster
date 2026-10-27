@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr-FR" data-default-language="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="S26vcJu4eb6u1nLBRHOf-skMz1imYUICX-EBFoSs64A" />
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <title>Test de frappe en ligne gratuit en français | TypingWebsite</title>
+    <meta name="description"
+        content="Test de frappe en français gratuit : mesurez votre vitesse en mots par minute, votre précision et vos erreurs avec des exercices de 15 à 120 secondes.">
+    <link rel="canonical" href="https://typingwebsite.com/fr/typing-test/">
+    <link rel="alternate" hreflang="fr" href="https://typingwebsite.com/fr/typing-test/">
+    <link rel="alternate" hreflang="en" href="https://typingwebsite.com/">
+    <link rel="alternate" hreflang="es" href="https://typingwebsite.com/es/typing-test/">
+    <link rel="alternate" hreflang="x-default" href="https://typingwebsite.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Test de frappe en ligne gratuit en français | TypingWebsite">
+    <meta property="og:description"
+        content="Entraînez-vous à la frappe en français, mesurez vos mots par minute et améliorez votre précision avec des tests gratuits et personnalisables.">
+    <meta property="og:url" content="https://typingwebsite.com/fr/typing-test/">
+    <meta property="og:site_name" content="TypingWebsite">
+    <meta property="og:image" content="https://typingwebsite.com/assets/images/logo-small.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Test de frappe en ligne gratuit en français | TypingWebsite">
+    <meta name="twitter:description"
+        content="Entraînez-vous à la frappe en français et mesurez gratuitement votre vitesse et votre précision.">
+
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
+    <link rel="stylesheet" href="/es/typing-test/spanish-seo.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7NSJLP6BM9');
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://typingwebsite.com/#website",
+        "url":"https://typingwebsite.com/fr/typing-test/",
+        "name":"TypingWebsite",
+        "description":"Test de frappe en ligne gratuit pour mesurer la vitesse de saisie et la précision.",
+        "inLanguage":"fr-FR"
+      },
+      {
+        "@type":"WebApplication",
+        "@id":"https://typingwebsite.com/fr/typing-test/#app",
+        "name":"Test de frappe en ligne TypingWebsite",
+        "url":"https://typingwebsite.com/fr/typing-test/",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Web Browser",
+        "browserRequirements":"Requires JavaScript",
+        "isAccessibleForFree":true,
+        "description":"Test gratuit pour mesurer les mots par minute, la précision, la vitesse brute, les erreurs et la régularité de frappe en français.",
+        "inLanguage":"fr-FR"
+      }
+    ]
+  }
+  </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5238086737098690"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <a class="logo" href="/" aria-label="Accueil TypingWebsite">
+                <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+                <span class="site-name">TypingWebsite</span>
+            </a>
+
+            <div class="best">
+                <img src="/icon-personal-best.svg" class="best-icon" alt="Meilleur score">
+                <span class="best-line">Meilleur score :</span>
+                <strong id="personalBest">35 WPM</strong>
+            </div>
+
+        </div>
+
+        <div class="control-bar hide-during-typing">
+
+            <div class="control-group difficulty-group" aria-label="Difficulté">
+                <button class="control-btn diff-btn is-active" data-diff="easy" type="button">Facile</button>
+                <button class="control-btn diff-btn" data-diff="medium" type="button">Moyen</button>
+                <button class="control-btn diff-btn" data-diff="hard" type="button">Difficile</button>
+            </div>
+
+            <div class="control-group mode-group" aria-label="Modo">
+                <button class="control-btn mode-btn is-active" data-mode="timed" type="button">◷
+                    <span>Durée</span></button>
+                <button class="control-btn mode-btn" data-mode="words" type="button">A <span>Mots</span></button>
+                <button class="control-btn mode-btn" data-mode="passage" type="button">❝ <span>Texte</span></button>
+            </div>
+
+            <div class="control-group length-group" id="timedLengths" aria-label="Durée">
+                <button class="length-btn" data-time="15" type="button">15</button>
+                <button class="length-btn is-active" data-time="30" type="button">30</button>
+                <button class="length-btn" data-time="60" type="button">60</button>
+                <button class="length-btn" data-time="120" type="button">120</button>
+                <button class="length-btn custom-length-trigger" id="customTimeBtn" type="button">Personnalisé</button>
+            </div>
+
+            <div class="control-group length-group" id="wordLengths" aria-label="Nombre de mots" hidden>
+                <button class="length-btn" data-words="10" type="button">10</button>
+                <button class="length-btn is-active" data-words="25" type="button">25</button>
+                <button class="length-btn" data-words="50" type="button">50</button>
+                <button class="length-btn" data-words="100" type="button">100</button>
+                <button class="length-btn custom-length-trigger" id="customWordsBtn" type="button">Personnalisé</button>
+            </div>
+
+            <!-- Pace Car Mode Selector Group -->
+            <div class="control-group feature-group" aria-label="Mode rythme">
+                <button class="icon-toggle" id="paceCarBtn" type="button" aria-pressed="false"
+                    title="Comparez votre rythme à votre meilleur score">🏁 Ritmo</button>
+            </div>
+
+            <div class="control-group feature-group" aria-label="Typing options">
+                <button class="icon-toggle" id="punctuationBtn" type="button" aria-pressed="false"
+                    title="Ponctuation">@</button>
+                <button class="icon-toggle" id="numbersBtn" type="button" aria-pressed="false"
+                    title="Nombres">#</button>
+                <button class="icon-toggle is-on" id="soundBtn" type="button" aria-pressed="true" title="Son">♪</button>
+            </div>
+
+            <button type="button" class="control-group feature-group mode-group" aria-pressed="false">
+                <a class="typing-game" href="/typing-games/">🎮 Jeux de frappe</a>
+            </button>
+
+        </div>
+
+        <input type="checkbox" id="punctuationToggle" hidden>
+        <input type="checkbox" id="numbersToggle" hidden>
+        <input type="checkbox" id="soundToggle" checked hidden>
+        <select id="timeSelect" hidden aria-hidden="true">
+            <option value="15">15</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+        </select>
+        <button id="passageBtn" hidden type="button">Texte</button>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- START OF ADDED CRAWLER SEMANTIC TEXT TARGET LAYER -->
+    <!-- ======================================================================= -->
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+    <div class="tw-language-toolbar" aria-label="Langue du texte d’entraînement">
+        <span class="tw-language-toolbar-label">Langue</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">Français</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="Choisir la langue de frappe"
+                hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">Langue de escritura</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search"
+                    placeholder="Rechercher une langue…" autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox" aria-label="Langues disponibles">
+                </div>
+                <p class="tw-language-hint">Choisissez la langue du texte d’entraînement.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span>&nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 mot(s)</span>
+    </div>
+
+
+    <!-- Typing Area -->
+    <div class="typing-box">
+        <button class="focus-overlay" id="focusOverlay" type="button" aria-label="Zone de saisie">
+            <span class="focus-cursor">➤</span>
+            <span>Cliquez ici ou appuyez sur une touche pour commencer</span>
+        </button>
+        <div class="text-area blur" id="text" tabindex="0"></div>
+    </div>
+
+    <div class="restart-wrapper">
+        <button class="restart-btn-main" id="restartMainBtn">
+            Recommencer le test ↻
+        </button>
+        <button class="history-toggle" id="historyToggle" type="button">Historique</button>
+
+        <div class="local-history" id="localHistory">
+            <div class="local-history-header">
+                <span>Tests récents</span>
+                <button class="local-history-clear" id="clearHistory" type="button">Effacer</button>
+            </div>
+            <ul class="local-history-list" id="historyList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="mt-result-body">
+
+            <!-- Left Hero Column: WPM & ACC -->
+            <div class="mt-left-stats">
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">ppm</div>
+                    <div class="mt-stat-value primary" id="resWpm">0</div>
+                </div>
+                <div class="mt-stat-group">
+                    <div class="mt-stat-label">précision</div>
+                    <div class="mt-stat-value" id="resAcc">0%</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Graph Canvas Container -->
+            <div class="mt-graph-area" style="position: relative;">
+                <canvas id="wpmGraph"></canvas>
+                <div id="graphTooltip" class="monkey-graph-tooltip"
+                    style="display: none; position: absolute; pointer-events: none; background: #18191b; border: 1px solid #2c2e31; padding: 6px 10px; border-radius: 6px; font-size: 11px; color: #d1d0c5; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Stats Row -->
+        <div class="mt-bottom-stats">
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">type de test</span>
+                <span class="mt-sub-value" id="resTestType">timed 30</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">brute</span>
+                <span class="mt-sub-value" id="resRawWpm">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">caractères</span>
+                <span class="mt-sub-value" id="resChar">0</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">régularité</span>
+                <span class="mt-sub-value" id="resConsistency">0%</span>
+            </div>
+            <div class="mt-sub-stat">
+                <span class="mt-sub-label">erreurs</span>
+                <span class="mt-sub-value" id="resErrors">0</span>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="mt-action-bar">
+            <button class="mt-icon-btn" id="retryBtn" title="Next test / Retry">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="app-modal" id="customModal" aria-hidden="true">
+        <div class="modal-card custom-modal-card">
+            <div class="modal-head">
+                <h2>Test personnalisé</h2>
+                <button class="modal-close" data-close="customModal" type="button">×</button>
+            </div>
+            <p class="custom-modal-sub" id="customModalSub">Choisissez la durée ou le nombre de mots.</p>
+            <div class="custom-test-options">
+                <div class="custom-option time-custom-option">
+                    <label for="customTimeInput">Durée</label>
+                    <div class="custom-input-row">
+                        <input id="customTimeInput" type="number" min="5" max="3600" value="45" inputmode="numeric">
+                        <span>secondes</span>
+                        <button id="applyCustomTime" type="button">Appliquer la durée</button>
+                    </div>
+                </div>
+                <div class="custom-option words-custom-option">
+                    <label for="customWordsInput">Mots</label>
+                    <div class="custom-input-row">
+                        <input id="customWordsInput" type="number" min="1" max="1000" value="25" inputmode="numeric">
+                        <span>palabras</span>
+                        <button id="applyCustomWords" type="button">Appliquer le nombre de mots</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pace Car Guide / Onboarding Modal -->
+    <div class="pace-guide-modal" id="paceGuideModal" aria-hidden="true">
+        <div class="pace-guide-card">
+            <div class="pace-guide-head">
+                <div class="pace-guide-icon">🏁</div>
+                <div>
+                    <h3>Qu’est-ce que le mode Rythme ?</h3>
+                </div>
+            </div>
+            <p>Pace Car introduces a secondary ghost cursor to help you maintain consistent speed and race against your
+                personal best.</p>
+
+            <!-- Visual Representation Box -->
+            <div class="pace-visual-box">
+                <div class="pace-visual-line">
+                    <span class="v-correct">Un petit renard</span>
+                    <span class="v-ghost">|</span>
+                    <span class="v-text">saute par-dessus…</span>
+                </div>
+                <div class="pace-visual-legend">
+                    <div><span class="legend-dot gold"></span> <strong>Gold Curseur:</strong> Votre rythme cible
+                        (meilleur score)
+                    </div>
+                    <div><span class="legend-dot blue"></span> <strong>Blue Curseur:</strong> Votre position actuelle
+                    </div>
+                </div>
+            </div>
+
+            <div class="pace-guide-steps">
+                <div class="pace-guide-step">
+                    <span>💡</span>
+                    <div><strong>Mode d’emploi :</strong> Start typing. Try to keep your active blue cursor right next
+                        to or
+                        ahead of the gold ghost cursor to crush your target WPM!</div>
+                </div>
+            </div>
+
+            <button class="pace-guide-action" id="closePaceGuide" type="button">Compris, c’est parti ! 🚀</button>
+        </div>
+    </div>
+
+    <div class="app-modal" id="settingsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Paramètres</h2>
+                <button class="modal-close" data-close="settingsModal" type="button">×</button>
+            </div>
+            <div class="settings-grid">
+                <label>Thème
+                    <select id="themeSelect">
+                        <option value="dark">Sombre</option>
+                        <option value="midnight">Bleu nuit</option>
+                    </select>
+                </label>
+                <label>Curseur
+                    <select id="caretSelect">
+                        <option value="line">Ligne</option>
+                        <option value="block">Bloc</option>
+                        <option value="underline">Souligné</option>
+                    </select>
+                </label>
+                <label>Taille de police
+                    <input id="fontSizeRange" type="range" min="20" max="36" value="28">
+                </label>
+            </div>
+            <p class="settings-hint">Les paramètres sont enregistrés automatiquement sur cet appareil.</p>
+        </div>
+    </div>
+
+    <div class="app-modal" id="statsModal" aria-hidden="true">
+        <div class="modal-card stats-dashboard">
+            <div class="modal-head">
+                <h2>Statistiques</h2>
+                <button class="modal-close" data-close="statsModal" type="button">×</button>
+            </div>
+            <div class="dashboard-grid">
+                <div><span>Tests</span><strong id="dashTests">0</strong></div>
+                <div><span>Meilleur MPM</span><strong id="dashBest">0</strong></div>
+                <div><span>MPM moyen</span><strong id="dashAvg">0</strong></div>
+                <div><span>Précision moyenne</span><strong id="dashAcc">0%</strong></div>
+                <div><span>Total des caractères</span><strong id="dashChars">0</strong></div>
+                <div><span>Total des erreurs</span><strong id="dashErrors">0</strong></div>
+            </div>
+            <div class="dashboard-chart">
+                <canvas id="statsGraph" width="760" height="190"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="shortcutsModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Raccourcis clavier</h2>
+                <button class="modal-close" data-close="shortcutsModal" type="button">×</button>
+            </div>
+            <div class="shortcut-list">
+                <div><kbd>Tab</kbd><span>Garder le focus dans la zone de saisie</span></div>
+                <div><kbd>Ctrl</kbd> + <kbd>Enter</kbd><span>Recommencer le test</span></div>
+                <div><kbd>Esc</kbd><span>Fermer le panneau ouvert</span></div>
+                <div><kbd>/</kbd><span>Ouvrir les raccourcis</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/weak-key-trainer.js"></script>
+    <script src="/passages.js"></script>
+    <!-- This route starts in French; the user can still choose another practice language. -->
+    <script>try { localStorage.setItem("typingwebsite_practice_language_v1", "fr"); } catch (e) { }</script>
+    <!-- Multilingual language data and selector; loaded before the existing typing engine. -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
+    <script src="/script.js"></script>
+
+
+    <main class="es-seo-content" lang="fr-FR">
+        <section class="es-seo-hero">
+            <p class="es-eyebrow">Entraînement gratuit · Sans inscription</p>
+            <h1>Test de frappe en ligne gratuit</h1>
+            <p class="es-lead">Évaluez votre vitesse de frappe en français, mesurez vos mots par minute (MPM) et
+                améliorez votre précision. Choisissez le niveau et la durée qui vous conviennent.</p>
+            <a class="es-primary-link" href="#twLanguageTrigger">Commencer le test de frappe</a>
+        </section>
+        <section class="es-seo-section">
+            <h2>Test de vitesse et de précision de frappe</h2>
+            <p>Ce test vous aide à évaluer votre vitesse de saisie et le nombre d'erreurs que vous faites. Sélectionnez
+                le français dans le sélecteur de langue, saisissez le texte affiché et consultez vos résultats à la fin.
+                Répétez le test pour comparer vos résultats et suivre vos progrès.</p>
+            <div class="es-feature-grid">
+                <article class="es-feature-card">
+                    <h3>Choisissez la durée</h3>
+                    <p>Entraînez-vous pendant 15, 30, 60 ou 120 secondes. Les tests courts permettent une vérification
+                        rapide ; les tests plus longs aident à évaluer votre régularité.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Adaptez la difficulté</h3>
+                    <p>Commencez par des phrases simples, puis passez à des textes plus complexes. Privilégiez la
+                        précision avant de chercher à écrire plus vite.</p>
+                </article>
+                <article class="es-feature-card">
+                    <h3>Consultez vos résultats</h3>
+                    <p>Après chaque essai, vérifiez votre vitesse, votre précision, vos erreurs et votre régularité pour
+                        identifier les points à améliorer.</p>
+                </article>
+            </div>
+        </section>
+        <section class="es-seo-section">
+            <h2>Comment passer un test de frappe ?</h2>
+            <ol class="es-steps">
+                <li>Sélectionnez <strong>Français</strong> dans le sélecteur de langue.</li>
+                <li>Choisissez une difficulté et un mode : durée, nombre de mots ou texte.</li>
+                <li>Cliquez dans la zone de saisie et tapez le texte affiché à l'écran.</li>
+                <li>À la fin, consultez vos mots par minute et votre pourcentage de précision.</li>
+                <li>Entraînez-vous régulièrement et réduisez les erreurs avant d'augmenter votre vitesse.</li>
+            </ol>
+        </section>
+        <section class="es-seo-section">
+            <h2>Que signifie la vitesse de frappe en MPM ?</h2>
+            <p>Les mots par minute (MPM) servent à exprimer la vitesse de frappe. De nombreux tests estiment cette
+                vitesse à partir des caractères saisis pendant une durée donnée ; la méthode exacte peut varier selon
+                l'outil. La précision indique dans quelle mesure votre saisie correspond au texte demandé. Une vitesse
+                élevée est plus utile lorsqu'elle s'accompagne d'une bonne précision.</p>
+        </section>
+        <section class="es-seo-section es-faq">
+            <h2>Questions fréquentes</h2>
+            <details>
+                <summary>Le test de frappe est-il gratuit ?</summary>
+                <p>Oui. Vous pouvez vous entraîner gratuitement en ligne, sans paiement ni création de compte.</p>
+            </details>
+            <details>
+                <summary>Comment améliorer ma vitesse de frappe ?</summary>
+                <p>Entraînez-vous régulièrement, gardez une posture confortable et privilégiez d'abord la précision.
+                    Augmentez progressivement votre vitesse lorsque vos erreurs diminuent.</p>
+            </details>
+            <details>
+                <summary>Quelle durée choisir pour le test ?</summary>
+                <p>Choisissez 15 ou 30 secondes pour un test rapide, ou 60 ou 120 secondes pour mieux évaluer votre
+                    régularité. Utilisez la même durée pour comparer vos résultats.</p>
+            </details>
+            <details>
+                <summary>La vitesse ou la précision est-elle la plus importante ?</summary>
+                <p>Les deux comptent. Une vitesse durable avec peu d'erreurs est généralement plus utile qu'une saisie
+                    rapide et imprécise.</p>
+            </details>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" aria-label="Pied de page TypingWebsite">
+        <div class="footer-info-links" aria-label="Pages d’information">
+            <a href="/about" class="info-footer-link">À propos</a>
+            <a href="/contact" class="info-footer-link">Contact</a>
+            <a href="/terms" class="info-footer-link">Conditions d’utilisation</a>
+            <a href="/privacy-policy" class="info-footer-link">Confidentialité</a>
+            <a href="/typing-lesson/" class="info-footer-link">Leçons</a>
+            <a href="/blog" class="info-footer-link">Blog</a>
+            <a href="#1min" class="info-footer-link">Test d’une minute</a>
+            <a href="#2min" class="info-footer-link">Test de deux minutes</a>
+            <a href="#beginner" class="info-footer-link">Test pour débutants</a>
+
+        </div>
+
+        <div class="footer-settings-area" aria-label="Commandes du site">
+            <label class="footer-theme" title="Thème">
+                <span class="footer-label">Thème</span>
+                <select id="footerThemeSelect" aria-label="Thème">
+                    <option value="dark">Sombre</option>
+                    <option value="midnight">Bleu nuit</option>
+                </select>
+            </label>
+            <button class="utility-btn" id="settingsBtn" type="button" title="Paramètres">⚙
+                <span>Paramètres</span></button>
+            <button class="utility-btn" id="statsBtn" type="button" title="Statistiques">▥
+                <span>Statistiques</span></button>
+            <button class="utility-btn" id="shortcutsBtn" type="button" title="Raccourcis clavier">⌨
+                <span>Atajos</span></button>
+        </div>
+
+        <div class="footer-copy">© 2026 TypingWebsite. Entraînement à la frappe en ligne gratuit.</div>
+    </footer>
+
+
+
+</body>
+
+</html>

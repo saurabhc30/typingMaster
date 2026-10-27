@@ -27,6 +27,8 @@
     <meta name="theme-color" content="#111111">
     <link rel="icon" type="image/x-icon" href="/icon.ico">
     <link rel="stylesheet" href="/style.css">
+    <!-- Multilingual feature: isolated styles; original style.css remains unchanged. -->
+    <link rel="stylesheet" href="/multilingual-ui.css">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NSJLP6BM9"></script>
@@ -152,11 +154,31 @@
         </select>
         <button id="passageBtn" hidden type="button">Passage</button>
 
-        <div class="minimal-status" id="minimalStatus" aria-live="polite">
-            <span id="liveTime" class="live-status-item">0:30</span>
-            <span id="liveWords" class="live-status-item">0 words</span>
-        </div>
+    </div>
 
+    <div class="tw-language-toolbar" aria-label="Typing passage language">
+        <span class="tw-language-toolbar-label">Language</span>
+        <div class="tw-language-wrap">
+            <button class="tw-language-trigger" id="twLanguageTrigger" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="twLanguageMenu">
+                <span class="tw-language-globe" aria-hidden="true">◎</span>
+                <span id="twCurrentLanguageLabel">English</span>
+                <span class="tw-language-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="tw-language-menu" id="twLanguageMenu" role="dialog" aria-label="Choose typing language" hidden>
+                <label class="tw-language-search-label" for="twLanguageSearch">Typing language</label>
+                <input id="twLanguageSearch" class="tw-language-search" type="search" placeholder="Search languages..."
+                    autocomplete="off">
+                <div class="tw-language-options" id="twLanguageOptions" role="listbox"
+                    aria-label="Available typing languages"></div>
+                <p class="tw-language-hint">Choose a language for the typing text.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="minimal-status" id="minimalStatus" aria-live="polite">
+        <span id="liveTime" class="live-status-item">0:30</span> &nbsp; | &nbsp;
+        <span id="liveWords" class="live-status-item">0 words</span>
     </div>
 
     <!-- ======================================================================= -->
@@ -169,6 +191,9 @@
             performance. Check your words-per-minute metrics immediately without registration loops or intrusive
             advertising.</p>
     </div>
+
+    <!-- Language picker sits directly above the passage, outside the control bar. -->
+
 
     <!-- Typing Area -->
     <div class="typing-box">
@@ -392,6 +417,9 @@
     <!-- Scripts -->
     <script src="/weak-key-trainer.js"></script>
     <script src="passages.js"></script>
+    <!-- Multilingual language data and selector; loaded before the existing typing engine. -->
+    <script src="/multilingual-language-data.js"></script>
+    <script src="/multilingual-ui.js"></script>
     <script src="script.js"></script>
 
     <!-- Footer -->

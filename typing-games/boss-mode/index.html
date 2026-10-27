@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -341,4 +342,1474 @@
   })();
   </script>
 </body>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>Boss Mode – Monster Typing Game | TypingWebsite</title>
+    <meta name="description"
+        content="Play Boss Mode, a monster typing shooter. Type monster words directly on your keyboard, shoot enemies, defeat bosses, and improve your typing speed.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+
+
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --panel: #151515;
+            --border: #292929;
+            --blue: #2196f3;
+            --green: #39d98a;
+            --red: #ff5263;
+            --text: #f5f5f5;
+            --muted: #999;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            max-width: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Sora", sans-serif;
+        }
+
+
+        .game-page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 20px 30px;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 1140px;
+        }
+
+        .game-page-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 0;
+            text-decoration: none;
+        }
+
+        .game-breadcrumbs {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 0;
+            text-align: right;
+            font-size: 13px;
+        }
+
+        @media (max-width: 560px) {
+            .game-page-header {
+                padding: 12px 16px 22px;
+                gap: 10px;
+            }
+
+            .site-name {
+                font-size: 16px;
+            }
+
+            .site-logo {
+                width: 25px;
+                height: 25px;
+            }
+
+            .game-breadcrumbs {
+                gap: 5px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .game-page-header {
+                padding-right: 12px;
+                padding-left: 12px;
+                gap: 7px;
+            }
+
+            .site-name {
+                font-size: 14px;
+            }
+
+            .game-breadcrumbs {
+                font-size: 10px;
+            }
+        }
+
+
+        button,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 10px 14px;
+            color: var(--text);
+            background: #202020;
+        }
+
+        button:hover {
+            border-color: var(--blue);
+        }
+
+        button:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+        }
+
+
+        .games-page {
+            min-height: 100vh;
+            background: #0f0f0f;
+            color: #fff;
+            font-family: "Sora", Arial, sans-serif;
+        }
+
+        .game-page-container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 24px 0 70px;
+        }
+
+        .site-logo {
+            display: block;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .site-name {
+            color: #f0f0f0;
+            font: 700 20px/1 "Sora", Arial, sans-serif;
+            letter-spacing: -0.4px;
+            white-space: nowrap;
+        }
+
+
+        .game-breadcrumbs a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .game-breadcrumbs a:hover {
+            color: #fff;
+        }
+
+        .game-breadcrumbs strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        @media (max-width: 560px) {
+            .game-page-container {
+                width: calc(100% - 22px);
+                padding-top: 15px;
+            }
+
+            .game-page-header {
+                gap: 12px;
+                padding-bottom: 22px;
+            }
+
+            .site-logo {
+                width: 26px;
+                height: 26px;
+            }
+
+            .site-name {
+                font-size: 17px;
+            }
+
+            .game-breadcrumbs {
+                gap: 5px;
+                font-size: 12px;
+            }
+        }
+
+
+        .brand span {
+            color: var(--blue);
+        }
+
+        .page {
+            width: min(100% - 28px, 900px);
+            margin: 20px auto 40px;
+        }
+
+        .breadcrumb {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .breadcrumb a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: clamp(23px, 4vw, 32px);
+            margin: 0 0 8px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0 0 18px;
+        }
+
+        .game-shell {
+            width: min(100%, 620px);
+            margin: 0 auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 7px;
+            margin-bottom: 9px;
+        }
+
+        .stat {
+            min-width: 0;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-align: center;
+            padding: 10px 3px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: clamp(15px, 3vw, 20px);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .arena-wrap {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #303c48;
+            border-radius: 12px;
+            background:
+                radial-gradient(ellipse at 50% 40%, #12202c 0%, transparent 70%),
+                linear-gradient(#101720, #0b1016);
+            isolation: isolate;
+        }
+
+        #arena {
+            position: relative;
+            width: 100%;
+            height: clamp(430px, 67vh, 620px);
+            overflow: hidden;
+            touch-action: manipulation;
+            outline: none;
+        }
+
+        #arena::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .2;
+            background-image:
+                linear-gradient(rgba(65, 135, 180, .12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(65, 135, 180, .12) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        .arena-topline {
+            position: absolute;
+            z-index: 2;
+            top: 10px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            color: #a6b5c4;
+            font-size: 10px;
+            pointer-events: none;
+        }
+
+        .monster {
+            position: absolute;
+            z-index: 3;
+            width: max-content;
+            max-width: calc(100% - 20px);
+            transform: translateX(-50%);
+            text-align: center;
+            will-change: top;
+        }
+
+        .monster-art {
+            font-size: 32px;
+            line-height: 1.15;
+            filter: drop-shadow(0 0 9px rgba(33, 150, 243, .24));
+        }
+
+        .monster.boss .monster-art {
+            font-size: 48px;
+            filter: drop-shadow(0 0 12px rgba(255, 82, 99, .6));
+        }
+
+        .monster-word {
+            display: inline-block;
+            max-width: 100%;
+            margin-top: 5px;
+            padding: 4px 7px;
+            border: 1px solid #33414f;
+            border-radius: 5px;
+            background: rgba(7, 12, 18, .94);
+            color: #f1f4f8;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .3px;
+            white-space: nowrap;
+        }
+
+        .monster-word .typed {
+            color: var(--green);
+        }
+
+        .monster-word .remaining {
+            color: #e4eaf1;
+        }
+
+        .monster.targeted .monster-word {
+            border-color: var(--blue);
+            box-shadow: 0 0 12px rgba(33, 150, 243, .35);
+        }
+
+        .monster.boss .monster-word {
+            border-color: var(--red);
+        }
+
+        .health-track {
+            width: 100%;
+            height: 4px;
+            margin-top: 5px;
+            background: #3a1b22;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--red);
+            transition: width .12s linear;
+        }
+
+        .player {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            z-index: 2;
+            filter: drop-shadow(0 0 12px rgba(33, 150, 243, .7));
+        }
+
+        .player::after {
+            content: "";
+            position: absolute;
+            width: 58px;
+            height: 15px;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            background: rgba(33, 150, 243, .17);
+            filter: blur(8px);
+            border-radius: 50%;
+        }
+
+        .bullet {
+            position: absolute;
+            z-index: 4;
+            width: 3px;
+            height: 15px;
+            background: #7dd3fc;
+            box-shadow: 0 0 10px #2196f3;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .explosion {
+            position: absolute;
+            z-index: 5;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            pointer-events: none;
+            animation: burst .32s ease-out forwards;
+        }
+
+        @keyframes burst {
+            from {
+                opacity: 1;
+                scale: .5;
+            }
+
+            to {
+                opacity: 0;
+                scale: 1.8;
+            }
+        }
+
+        .damage-flash {
+            animation: flash .18s linear 2;
+        }
+
+        @keyframes flash {
+            50% {
+                background-color: rgba(255, 45, 65, .18);
+            }
+        }
+
+        #startOverlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            text-align: center;
+            background: rgba(7, 11, 16, .84);
+            backdrop-filter: blur(4px);
+        }
+
+        #startOverlay h2 {
+            font-size: clamp(22px, 5vw, 30px);
+            margin: 0 0 9px;
+        }
+
+        #startOverlay p {
+            max-width: 330px;
+            color: #b5bec8;
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0 0 18px;
+        }
+
+        .primary {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: white;
+            font-weight: 700;
+            padding: 12px 23px;
+        }
+
+        .primary:hover {
+            background: #1685e4;
+        }
+
+        .settings {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: 10px 0;
+        }
+
+        .setting {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        select {
+            max-width: 135px;
+            background: var(--panel);
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 8px 7px;
+            font-size: 11px;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .game-actions button {
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .typing-status {
+            min-height: 44px;
+            padding: 11px 12px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            text-align: center;
+            font-size: 12px;
+            color: #aab4bf;
+            line-height: 1.6;
+        }
+
+        .typing-status strong {
+            color: var(--green);
+        }
+
+        .howto {
+            width: min(100%, 620px);
+            margin: 25px auto 0;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--panel);
+        }
+
+        .howto h2 {
+            font-size: 16px;
+            margin: 0 0 10px;
+        }
+
+        .howto ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #bbb;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .seo-copy {
+            max-width: 780px;
+            margin: 25px auto;
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .seo-copy h2 {
+            color: white;
+            font-size: 18px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            color: #888;
+            text-align: center;
+            padding: 22px 12px;
+            font-size: 11px;
+        }
+
+        footer a {
+            color: #aaa;
+        }
+
+        @media (max-width: 480px) {
+            .site-header {
+                height: 56px;
+                padding: 0 14px;
+            }
+
+            .page {
+                width: calc(100% - 20px);
+                margin-top: 15px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 13px;
+            }
+
+            .stats {
+                gap: 5px;
+            }
+
+            .stat {
+                padding: 9px 2px;
+                border-radius: 8px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            #arena {
+                height: clamp(400px, 58svh, 510px);
+            }
+
+            .monster-art {
+                font-size: 28px;
+            }
+
+            .monster.boss .monster-art {
+                font-size: 40px;
+            }
+
+            .monster-word {
+                font-size: 11px;
+                padding: 4px 5px;
+            }
+
+            .settings {
+                gap: 7px;
+            }
+
+            .game-actions button {
+                padding: 10px 6px;
+                font-size: 11px;
+            }
+
+            .howto {
+                margin-top: 18px;
+                padding: 14px;
+            }
+        }
+
+        /* No visible typing box: this input only opens mobile virtual keyboards. */
+        #mobileKeyboard {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            border: 0;
+            opacity: .01;
+            font-size: 16px;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body class="games-page">
+    <header class="game-page-header">
+        <a class="logo" href="/" aria-label="TypingWebsite Home">
+            <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+            <span class="site-name">TypingWebsite</span>
+        </a>
+
+        <nav class="game-breadcrumbs" aria-label="Games navigation">
+            <a href="/typing-games/">Games</a>
+            <span aria-hidden="true">›</span>
+            <strong>Boss Mode</strong>
+        </nav>
+    </header>
+
+    <main class="game-page-container">
+        <div class="breadcrumb"><a href="/">Home</a> / <a href="/typing-games/">Typing Games</a> / Boss Mode</div>
+        <h1>Boss Mode: Monster Typing Shooter</h1>
+        <p class="subtitle">Type monster words to lock on and shoot. Clear each wave, survive the invasion, and defeat
+            the bosses.</p>
+
+        <section class="game-shell" aria-label="Boss Mode game">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">WAVE</div>
+                    <div class="stat-value" id="wave">1</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">LIVES</div>
+                    <div class="stat-value" id="lives">♥ ♥ ♥</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">TIME</div>
+                    <div class="stat-value" id="time">60</div>
+                </div>
+            </div>
+
+            <div class="arena-wrap">
+                <div id="arena" tabindex="0" role="application"
+                    aria-label="Game arena. Type the words shown beneath monsters to shoot them.">
+                    <div class="arena-topline">
+                        <span id="arenaMode">READY</span>
+                        <span id="best">BEST: 0</span>
+                    </div>
+                    <div class="player" id="player">🚀</div>
+
+                    <div id="startOverlay">
+                        <h2 id="overlayTitle">Monster invasion!</h2>
+                        <p id="overlayText">Type the letters shown beneath a monster. Your ship automatically targets
+                            it. Finish the word to fire!</p>
+                        <button class="primary" id="startBtn">Start game</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings">
+                <label class="setting">Difficulty
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </label>
+                <label class="setting">Duration
+                    <select id="duration">
+                        <option value="30">30 sec</option>
+                        <option value="60" selected>60 sec</option>
+                        <option value="120">120 sec</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="game-actions">
+                <button id="pauseBtn" disabled>Pause</button>
+                <button id="restartBtn">Restart</button>
+            </div>
+
+            <div class="typing-status" id="typingStatus" aria-live="polite">
+                Click <strong>Start game</strong>, then type directly to play. No typing box needed.
+            </div>
+        </section>
+
+        <section class="howto">
+            <h2>How to play</h2>
+            <ol>
+                <li>Start the game and type the letters in a monster's word.</li>
+                <li>Your current word is highlighted in green as you type.</li>
+                <li>Finish a word to fire at that monster. Bosses need multiple hits.</li>
+                <li>Stop monsters reaching the bottom. Each one that escapes costs a life.</li>
+                <li>Clear waves and earn points before time runs out.</li>
+            </ol>
+        </section>
+
+        <section class="seo-copy">
+            <h2>Improve typing speed with Boss Mode</h2>
+            <p>Boss Mode turns typing practice into an arcade challenge. Read the words, type accurately, and switch
+                targets as monsters descend. The game rewards quick recognition as well as accurate typing.</p>
+            <p>For the best experience, use a physical keyboard on a computer. On a phone, tap the arena to open the
+                on-screen keyboard if your browser supports it.</p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="/">TypingWebsite</a> · Practice typing, one word at a time.
+    </footer>
+
+    <!-- Visually hidden: used only to request the mobile virtual keyboard. -->
+    <input id="mobileKeyboard" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+        aria-label="Type monster words">
+
+
+    <script>
+        (() => {
+            "use strict";
+
+            const $ = id => document.getElementById(id);
+            const arena = $("arena");
+            const overlay = $("startOverlay");
+            const keyboard = $("mobileKeyboard");
+
+            const words = [
+                "fire", "monster", "rocket", "speed", "dragon", "shadow",
+                "attack", "typing", "power", "blast", "meteor", "hunter",
+                "laser", "strike", "cosmic", "battle", "danger", "galaxy",
+                "condition", "magazine", "appear", "especialmente", "customer",
+                "everywhere", "strange", "relationship", "exitoso","independent",
+                "somewhere", "wonderful", "necessary", "marriage", "surface",
+                "operation", "certainly", "rough", "yourself", "number", "television",
+                "phantom", "thunder", "warrior", "rapid", "plasma", "defend",
+                "crystal", "storm", "comet", "energy", "legend", "venom",
+                "savage", "inferno", "guardian", "destroy", "nightmare",
+                "everything","estudiante","persona", "important", "information",
+                "oportunidad", "alrededor", "difficult", "breakfast", "expensive",
+                "presidente", "almost", "producto", "beautiful", "suficiente",
+                "moment", "address", "building", "computer", "direction",
+                "accident", "believe", "produce", "television", "inmediatamente",
+            ];
+
+            const monsterArts = ["👾", "👻", "👹", "👽", "🦇", "🐲", "🤖"];
+
+            const difficultySettings = {
+                easy: { speed: 13, spawn: 1900, max: 4 },
+                normal: { speed: 19, spawn: 1450, max: 6 },
+                hard: { speed: 27, spawn: 1050, max: 8 }
+            };
+
+            let monsters = [];
+            let bullets = [];
+            let effects = [];
+
+            let score = 0;
+            let lives = 3;
+            let wave = 1;
+            let seconds = 60;
+
+            let running = false;
+            let paused = false;
+            let ended = false;
+
+            let typed = "";
+            let targetId = null;
+            let nextId = 1;
+
+            let lastFrame = 0;
+            let spawnElapsed = 0;
+            let clockElapsed = 0;
+            let animationId = 0;
+            let lastShotAt = 0;
+
+            let audioContext = null;
+            let best = 0;
+
+            try {
+                best = Number(localStorage.getItem("typingwebsiteBossBest") || 0);
+            } catch (_) { }
+
+            $("best").textContent = "BEST: " + best;
+
+            function randomItem(items) {
+                return items[Math.floor(Math.random() * items.length)];
+            }
+
+            function escapeHTML(value) {
+                return value.replace(/[&<>"']/g, char => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[char]);
+            }
+
+            // Audio is initialized after the player presses Start.
+            function initializeAudio() {
+                try {
+                    const AudioContextClass =
+                        window.AudioContext || window.webkitAudioContext;
+
+                    if (!AudioContextClass) return;
+
+                    if (!audioContext) audioContext = new AudioContextClass();
+
+                    if (audioContext.state === "suspended") {
+                        audioContext.resume();
+                    }
+                } catch (_) { }
+            }
+
+            function playLaserSound() {
+                if (!audioContext) return;
+
+                try {
+                    const now = audioContext.currentTime;
+                    const oscillator = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+
+                    oscillator.type = "sawtooth";
+                    oscillator.frequency.setValueAtTime(850, now);
+                    oscillator.frequency.exponentialRampToValueAtTime(240, now + 0.075);
+
+                    gain.gain.setValueAtTime(0.045, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
+
+                    oscillator.connect(gain);
+                    gain.connect(audioContext.destination);
+
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.09);
+                } catch (_) { }
+            }
+
+            function playExplosionSound() {
+                if (!audioContext) return;
+
+                try {
+                    const now = audioContext.currentTime;
+                    const oscillator = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+
+                    oscillator.type = "triangle";
+                    oscillator.frequency.setValueAtTime(180, now);
+                    oscillator.frequency.exponentialRampToValueAtTime(45, now + 0.2);
+
+                    gain.gain.setValueAtTime(0.09, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+                    oscillator.connect(gain);
+                    gain.connect(audioContext.destination);
+
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.23);
+                } catch (_) { }
+            }
+
+            function renderStats() {
+                $("score").textContent = score;
+                $("wave").textContent = wave;
+                $("lives").textContent = lives > 0 ? "♥ ".repeat(lives).trim() : "0";
+                $("time").textContent = seconds;
+            }
+
+            function setStatus(message) {
+                $("typingStatus").innerHTML = message;
+            }
+
+            function clearError() {
+                arena.classList.remove("damage-flash");
+            }
+
+            function showTypingError() {
+                arena.classList.remove("damage-flash");
+                void arena.offsetWidth;
+                arena.classList.add("damage-flash");
+
+                setStatus(
+                    '<span style="color:#ff5263">Incorrect letter.</span> ' +
+                    'Your target is still locked. Try the next correct letter.'
+                );
+            }
+
+            function createMonster(isBoss = false) {
+                const width = arena.clientWidth;
+                const settings = difficultySettings[$("difficulty").value];
+
+                if (monsters.length >= settings.max) return;
+
+                const word = isBoss
+                    ? randomItem(["overlord", "destroyer", "nightmare", "apocalypse"])
+                    : randomItem(words);
+
+                const element = document.createElement("div");
+                element.className = "monster" + (isBoss ? " boss" : "");
+
+                element.innerHTML = `
+      <div class="monster-art">${isBoss ? "👾" : randomItem(monsterArts)}</div>
+      <div class="monster-word"></div>
+      ${isBoss ? `
+        <div class="health-track">
+          <div class="health-fill"></div>
+        </div>` : ""}
+    `;
+
+                arena.appendChild(element);
+
+                const monster = {
+                    id: nextId++,
+                    word,
+                    progress: 0,
+                    x: Math.max(42, Math.min(width - 42, 35 + Math.random() * (width - 70))),
+                    y: -45,
+                    speed: settings.speed * (0.8 + Math.random() * 0.4),
+                    boss: isBoss,
+                    hp: isBoss ? 3 : 1,
+                    maxHp: isBoss ? 3 : 1,
+                    element
+                };
+
+                monsters.push(monster);
+                drawMonster(monster);
+                positionMonster(monster);
+            }
+
+            function drawMonster(monster) {
+                const wordElement = monster.element.querySelector(".monster-word");
+                const prefix = monster.word.slice(0, monster.progress);
+                const remaining = monster.word.slice(monster.progress);
+
+                wordElement.innerHTML =
+                    '<span class="typed">' + escapeHTML(prefix) + '</span>' +
+                    '<span class="remaining">' + escapeHTML(remaining) + '</span>';
+
+                monster.element.classList.toggle(
+                    "targeted",
+                    monster.id === targetId
+                );
+
+                const healthElement = monster.element.querySelector(".health-fill");
+
+                if (healthElement) {
+                    healthElement.style.width =
+                        (monster.hp / monster.maxHp * 100) + "%";
+                }
+            }
+
+            function positionMonster(monster) {
+                monster.element.style.left = monster.x + "px";
+                monster.element.style.top = monster.y + "px";
+            }
+
+            function removeMonster(monster) {
+                monster.element.remove();
+                monsters = monsters.filter(item => item.id !== monster.id);
+
+                if (targetId === monster.id) {
+                    targetId = null;
+                    typed = "";
+                }
+            }
+
+            function findMonster(id) {
+                return monsters.find(monster => monster.id === id);
+            }
+
+            function chooseTarget() {
+                if (targetId !== null && findMonster(targetId)) {
+                    return findMonster(targetId);
+                }
+
+                // Choose the lowest monster, which is the most urgent threat.
+                const target = [...monsters].sort((a, b) => b.y - a.y)[0];
+
+                targetId = target ? target.id : null;
+                return target || null;
+            }
+
+            function updateTargetDisplay() {
+                monsters.forEach(drawMonster);
+            }
+
+            // One laser projectile for every correctly typed letter.
+            function fireLetterShot(monster) {
+                const now = performance.now();
+
+                // Prevent sound overload during very fast typing.
+                if (now - lastShotAt > 22) {
+                    playLaserSound();
+                    lastShotAt = now;
+                }
+
+                const width = arena.clientWidth;
+                const height = arena.clientHeight;
+
+                const bullet = document.createElement("div");
+                bullet.className = "bullet";
+                arena.appendChild(bullet);
+
+                bullets.push({
+                    element: bullet,
+                    x: width / 2,
+                    y: height - 38,
+                    startX: width / 2,
+                    startY: height - 38,
+                    endX: monster.x,
+                    endY: monster.y + 25,
+                    elapsed: 0,
+                    duration: 150
+                });
+            }
+
+            function createExplosion(x, y, symbol = "💥") {
+                const element = document.createElement("div");
+                element.className = "explosion";
+                element.textContent = symbol;
+                element.style.left = x + "px";
+                element.style.top = y + "px";
+
+                arena.appendChild(element);
+                effects.push({ element, life: 340 });
+            }
+
+            function damageMonster(monster) {
+                monster.hp--;
+                playExplosionSound();
+
+                if (monster.hp <= 0) {
+                    score += monster.boss ? 100 : 10;
+
+                    createExplosion(
+                        monster.x,
+                        monster.y + 15,
+                        monster.boss ? "💥" : "✨"
+                    );
+
+                    removeMonster(monster);
+                    renderStats();
+
+                    if (score > best) {
+                        best = score;
+                        $("best").textContent = "BEST: " + best;
+
+                        try {
+                            localStorage.setItem("typingwebsiteBossBest", String(best));
+                        } catch (_) { }
+                    }
+
+                    if (monsters.length === 0) {
+                        wave++;
+                        $("wave").textContent = wave;
+                        setStatus("Wave cleared! Prepare for wave " + wave + ".");
+                    }
+                } else {
+                    // Boss survives and can be targeted again.
+                    monster.progress = 0;
+                    typed = "";
+                    drawMonster(monster);
+
+                    setStatus(
+                        '<strong>Boss hit!</strong> ' +
+                        monster.hp + ' hit(s) remaining. Type its word again.'
+                    );
+                }
+            }
+
+            function handleCharacter(character) {
+                if (!running || paused || ended) return;
+                if (!/^[a-z]$/i.test(character)) return;
+
+                initializeAudio();
+
+                character = character.toLowerCase();
+
+                let target = targetId !== null ? findMonster(targetId) : null;
+
+                // Lock onto a monster when the first letter is entered.
+                if (!target) {
+                    target = chooseTarget();
+                }
+
+                if (!target) {
+                    setStatus("Waiting for a monster...");
+                    return;
+                }
+
+                const expected = target.word[target.progress];
+
+                if (character !== expected) {
+                    // IMPORTANT: Do not clear progress or change targets on a typo.
+                    // The next correct letter can continue the same word.
+                    showTypingError();
+                    return;
+                }
+
+                clearError();
+
+                target.progress++;
+                typed = target.word.slice(0, target.progress);
+                targetId = target.id;
+
+                drawMonster(target);
+                fireLetterShot(target);
+
+                setStatus(
+                    'Target locked: <strong>' + escapeHTML(typed) + '</strong>' +
+                    '<span style="color:#999"> / ' +
+                    escapeHTML(target.word) + '</span>'
+                );
+
+                if (target.progress === target.word.length) {
+                    // Completing the word damages or destroys the monster.
+                    damageMonster(target);
+
+                    if (running && !ended && !paused) {
+                        const nextTarget = chooseTarget();
+                        updateTargetDisplay();
+
+                        if (nextTarget) {
+                            setStatus(
+                                "Target destroyed or hit! Start typing the next monster's word."
+                            );
+                        } else {
+                            typed = "";
+                            setStatus("Nice shot! Waiting for the next monster...");
+                        }
+                    }
+                }
+            }
+
+            function handleBackspace() {
+                if (!running || paused || ended) return;
+
+                const target = findMonster(targetId);
+                if (!target || target.progress === 0) return;
+
+                target.progress--;
+                typed = target.word.slice(0, target.progress);
+
+                drawMonster(target);
+                clearError();
+
+                setStatus(
+                    typed
+                        ? 'Corrected: <strong>' + escapeHTML(typed) + '</strong>'
+                        : "Correction made. Continue typing the target word."
+                );
+            }
+
+            function spawnMonster(delta) {
+                spawnElapsed += delta;
+
+                const config = difficultySettings[$("difficulty").value];
+                const interval = Math.max(450, config.spawn - (wave - 1) * 60);
+
+                if (spawnElapsed >= interval && monsters.length < config.max) {
+                    spawnElapsed = 0;
+
+                    const bossWave = wave % 3 === 0;
+                    const bossExists = monsters.some(monster => monster.boss);
+
+                    createMonster(bossWave && !bossExists);
+                }
+            }
+
+            function update(delta) {
+                if (!running || paused || ended) return;
+
+                const height = arena.clientHeight;
+
+                for (const monster of [...monsters]) {
+                    monster.y += monster.speed * delta / 1000;
+                    positionMonster(monster);
+
+                    if (monster.y > height - 65) {
+                        removeMonster(monster);
+                        lives--;
+
+                        createExplosion(monster.x, height - 28, "💥");
+                        arena.classList.remove("damage-flash");
+                        void arena.offsetWidth;
+                        arena.classList.add("damage-flash");
+
+                        renderStats();
+
+                        if (lives <= 0) {
+                            endGame("Your ship was overwhelmed!");
+                            return;
+                        }
+                    }
+                }
+
+                for (const bullet of [...bullets]) {
+                    bullet.elapsed += delta;
+
+                    const progress = Math.min(1, bullet.elapsed / bullet.duration);
+
+                    bullet.x = bullet.startX + (bullet.endX - bullet.startX) * progress;
+                    bullet.y = bullet.startY + (bullet.endY - bullet.startY) * progress;
+
+                    bullet.element.style.left = bullet.x + "px";
+                    bullet.element.style.top = bullet.y + "px";
+
+                    if (progress >= 1) {
+                        bullet.element.remove();
+                        bullets = bullets.filter(item => item !== bullet);
+                    }
+                }
+
+                for (const effect of [...effects]) {
+                    effect.life -= delta;
+
+                    if (effect.life <= 0) {
+                        effect.element.remove();
+                        effects = effects.filter(item => item !== effect);
+                    }
+                }
+
+                spawnMonster(delta);
+
+                clockElapsed += delta;
+
+                if (clockElapsed >= 1000) {
+                    const elapsedSeconds = Math.floor(clockElapsed / 1000);
+                    clockElapsed -= elapsedSeconds * 1000;
+                    seconds -= elapsedSeconds;
+
+                    renderStats();
+
+                    if (seconds <= 0) {
+                        seconds = 0;
+                        renderStats();
+                        endGame("Time is up!");
+                    }
+                }
+            }
+
+            function loop(timestamp) {
+                if (!running || paused || ended) return;
+
+                const delta = Math.min(timestamp - (lastFrame || timestamp), 50);
+                lastFrame = timestamp;
+
+                update(delta);
+
+                if (running && !paused && !ended) {
+                    animationId = requestAnimationFrame(loop);
+                }
+            }
+
+            function clearGame() {
+                cancelAnimationFrame(animationId);
+
+                monsters.forEach(monster => monster.element.remove());
+                bullets.forEach(bullet => bullet.element.remove());
+                effects.forEach(effect => effect.element.remove());
+
+                monsters = [];
+                bullets = [];
+                effects = [];
+
+                typed = "";
+                targetId = null;
+            }
+
+            function focusGame() {
+                // The game has no visible typing field.
+                // The hidden input requests the virtual keyboard on supported phones.
+                try {
+                    keyboard.focus({ preventScroll: true });
+                } catch (_) {
+                    keyboard.focus();
+                }
+
+                arena.focus({ preventScroll: true });
+            }
+
+            function startGame() {
+                initializeAudio();
+                clearGame();
+
+                score = 0;
+                lives = 3;
+                wave = 1;
+                seconds = Number($("duration").value);
+
+                spawnElapsed = 0;
+                clockElapsed = 0;
+                lastFrame = 0;
+                lastShotAt = 0;
+
+                running = true;
+                paused = false;
+                ended = false;
+
+                renderStats();
+
+                overlay.style.display = "none";
+                $("pauseBtn").disabled = false;
+                $("pauseBtn").textContent = "Pause";
+                $("arenaMode").textContent = "WAVE 1";
+
+                createMonster(false);
+                createMonster(false);
+
+                setStatus("Type the highlighted monster's word. Every correct letter fires a laser.");
+                focusGame();
+
+                animationId = requestAnimationFrame(loop);
+            }
+
+            function togglePause() {
+                if (!running || ended) return;
+
+                paused = !paused;
+                $("pauseBtn").textContent = paused ? "Resume" : "Pause";
+                $("arenaMode").textContent = paused ? "PAUSED" : "WAVE " + wave;
+
+                if (paused) {
+                    cancelAnimationFrame(animationId);
+                    setStatus("Paused. Press Resume when you're ready.");
+                } else {
+                    lastFrame = 0;
+                    focusGame();
+                    setStatus("Game resumed. Keep typing!");
+                    animationId = requestAnimationFrame(loop);
+                }
+            }
+
+            function endGame(message) {
+                running = false;
+                paused = false;
+                ended = true;
+
+                cancelAnimationFrame(animationId);
+
+                $("pauseBtn").disabled = true;
+                $("arenaMode").textContent = "GAME OVER";
+                $("overlayTitle").textContent = message;
+                $("overlayText").textContent =
+                    "Final score: " + score + ". Start another round to beat your record.";
+                $("startBtn").textContent = "Play again";
+                overlay.style.display = "flex";
+
+                renderStats();
+                setStatus("Game over. Final score: <strong>" + score + "</strong>");
+            }
+
+            // Physical keyboard support.
+            document.addEventListener("keydown", event => {
+                if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+                if (event.key === "Escape") {
+                    if (running && !ended) togglePause();
+                    return;
+                }
+
+                if (event.key === "Backspace") {
+                    if (running && !paused && !ended) {
+                        event.preventDefault();
+                        handleBackspace();
+                    }
+                    return;
+                }
+
+                if (/^[a-z]$/i.test(event.key)) {
+                    if (running && !paused && !ended) {
+                        event.preventDefault();
+                        handleCharacter(event.key);
+                    }
+                }
+            });
+
+            // Mobile keyboard support.
+            keyboard.addEventListener("input", () => {
+                const value = keyboard.value;
+
+                for (const character of value) {
+                    if (/^[a-z]$/i.test(character)) handleCharacter(character);
+                }
+
+                keyboard.value = "";
+            });
+
+            keyboard.addEventListener("keydown", event => {
+                if (/^[a-z]$/i.test(event.key) || event.key === "Backspace") {
+                    event.preventDefault();
+                }
+            });
+
+            arena.addEventListener("pointerdown", () => {
+                if (running && !paused && !ended) focusGame();
+            });
+
+            $("startBtn").addEventListener("click", startGame);
+            $("restartBtn").addEventListener("click", startGame);
+            $("pauseBtn").addEventListener("click", togglePause);
+
+            renderStats();
+        })();
+    </script>
+
+</body>
+
+>>>>>>> f50dfb9 (added new game)
 </html>

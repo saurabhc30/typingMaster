@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>Boss Mode Typing Game - Defeat the Monster | TypingWebsite</title>
+  <meta name="description" content="Play Boss Mode, a free typing battle game. Attack a monster with difficult words, dodge its attacks, protect your HP and improve your typing accuracy.">
+  <link rel="canonical" href="https://typingwebsite.com/typing-games/boss-mode/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Boss Mode Typing Game | TypingWebsite">
+  <meta property="og:description" content="Type powerful words to attack the boss, dodge incoming attacks and survive the typing challenge.">
+  <meta property="og:url" content="https://typingwebsite.com/typing-games/boss-mode/">
+  <meta property="og:site_name" content="TypingWebsite">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Boss Mode Typing Game | TypingWebsite">
+  <meta name="twitter:description" content="A free monster typing battle. Attack with words and dodge to survive.">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="stylesheet" href="/typing-games/games.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"WebSite","name":"TypingWebsite","url":"https://typingwebsite.com/"},
+      {"@type":"VideoGame","name":"Boss Mode","url":"https://typingwebsite.com/typing-games/boss-mode/","description":"A free browser typing game where players attack a monster by typing words and dodge incoming attacks to survive.","genre":"Typing game","gamePlatform":"Web Browser","isAccessibleForFree":true},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"How do I damage the boss?","acceptedAnswer":{"@type":"Answer","text":"Type the attack word exactly. Longer and more difficult words deal more damage, and harder difficulty settings increase the challenge."}},
+        {"@type":"Question","name":"How do I dodge a boss attack?","acceptedAnswer":{"@type":"Answer","text":"When an incoming attack appears, type the dodge word before its countdown ends. A successful dodge prevents damage."}},
+        {"@type":"Question","name":"Is Boss Mode free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Boss Mode is free to play in your browser and does not require an account."}}
+      ]}
+    ]
+  }
+  </script>
+  <style>
+    .boss-section{width:100%;max-width:900px;margin:34px auto 24px}
+    .boss-card,.boss-info{background:#151515;border:1px solid #292929;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+    .boss-card{padding:clamp(16px,3vw,28px)}
+    .boss-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+    .boss-kicker{color:#2196f3;font-size:11px;font-weight:800;letter-spacing:1.4px}
+    .boss-header h2{font-size:28px;margin:6px 0}
+    .boss-header p,.boss-note{color:#999;font-size:13px;line-height:1.6}
+    .boss-back{color:#aaa;text-decoration:none;font-size:13px;white-space:nowrap}
+    .boss-back:hover{color:#fff}
+    .boss-options{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+    .boss-option-label{display:block;color:#888;font-size:10px;font-weight:800;letter-spacing:1.2px;margin-bottom:9px}
+    .boss-choice-row{display:flex;gap:7px;flex-wrap:wrap}
+    .boss-choice{border:1px solid #333;background:#1c1c1c;color:#bbb;padding:9px 12px;border-radius:9px;cursor:pointer;font:600 12px inherit}
+    .boss-choice.is-active{border-color:#2196f3;color:#2196f3;background:rgba(33,150,243,.09)}
+    .boss-start,.boss-primary{border:1px solid #2196f3;background:#2196f3;color:#fff;border-radius:10px;padding:13px 18px;font-weight:800;cursor:pointer}
+    .boss-start{width:100%;margin-top:5px}
+    .boss-start:hover,.boss-primary:hover{filter:brightness(1.1)}
+    .boss-secondary{border:1px solid #333;background:#1d1d1d;color:#ddd;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}
+    .boss-note{text-align:center;margin-top:12px}
+    .boss-arena{margin-top:16px}
+    .boss-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:16px}
+    .boss-stat{background:#101010;border:1px solid #292929;border-radius:12px;padding:12px 10px;text-align:center;min-width:0}
+    .boss-stat span{display:block;color:#777;font-size:10px;letter-spacing:.8px;font-weight:800;margin-bottom:6px}
+    .boss-stat strong{font-size:22px;font-variant-numeric:tabular-nums}
+    .boss-fighter{border:1px solid #292929;background:radial-gradient(ellipse at 50% 20%,#25202c 0,#121212 70%);border-radius:15px;padding:18px 18px 16px;text-align:center;margin-bottom:14px;overflow:hidden}
+    .boss-monster{font-size:76px;line-height:1.15;filter:drop-shadow(0 8px 12px rgba(255,50,70,.18));transition:transform .18s,filter .18s}
+    .boss-monster.hit{transform:translateX(5px) rotate(5deg) scale(.94);filter:drop-shadow(0 0 18px rgba(255,70,70,.8))}
+    .boss-monster.attack{transform:translateY(8px) scale(1.08)}
+    .boss-fighter h3{margin:6px 0 12px;font-size:18px}
+    .boss-bar-label{display:flex;justify-content:space-between;gap:10px;color:#aaa;font-size:11px;margin:12px 0 7px}
+    .boss-bar{height:11px;border-radius:999px;background:#292929;overflow:hidden}
+    .boss-bar-fill{height:100%;width:100%;border-radius:inherit;transition:width .2s ease}
+    #bossHpFill{background:linear-gradient(90deg,#e34b57,#ff7a59)}
+    #playerHpFill{background:linear-gradient(90deg,#2196f3,#43c6ac)}
+    .boss-combat{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .boss-panel{background:#121212;border:1px solid #292929;border-radius:13px;padding:16px;min-width:0}
+    .boss-panel-label{font-size:10px;font-weight:800;letter-spacing:1.2px;color:#888}
+    .boss-word{font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:.3px;overflow-wrap:anywhere;margin:14px 0 12px;color:#f1f1f1}
+    .boss-word.hard-word{color:#ffb45c}
+    .boss-input{width:100%;min-width:0;background:#0c0c0c;color:#fff;border:1px solid #383838;border-radius:10px;padding:13px 12px;font:500 15px/1.4 Sora,Arial,sans-serif;outline:none}
+    .boss-input:focus{border-color:#2196f3;box-shadow:0 0 0 3px rgba(33,150,243,.12)}
+    .boss-input:disabled{opacity:.45}
+    .boss-hint{color:#777;font-size:11px;line-height:1.5;margin-top:9px;min-height:17px}
+    .boss-dodge-panel{grid-column:1/-1;border-color:#8b343b;background:linear-gradient(135deg,rgba(146,38,49,.16),#121212 60%)}
+    .boss-dodge-panel .boss-panel-label{color:#ff727c}
+    .boss-dodge-word{color:#ff858c}
+    .boss-dodge-timer{color:#ff858c;font-size:12px;font-weight:800;float:right}
+    .boss-dodge-panel[hidden]{display:none}
+    .boss-message{min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;color:#aaa;font-size:13px;padding:10px 4px}
+    .boss-message.good{color:#5bd49b}.boss-message.bad{color:#ff777f}.boss-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    .boss-result{text-align:center;padding:18px 0 4px}
+    .boss-result[hidden],.boss-lobby[hidden],.boss-arena[hidden],.boss-result[hidden]{display:none}
+    .boss-result-icon{font-size:54px;margin-bottom:8px}
+    .boss-result h3{font-size:28px;margin-bottom:8px}
+    .boss-result p{color:#999;margin-bottom:20px}
+    .boss-result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}
+    .boss-result-grid>div{padding:15px 8px;border:1px solid #292929;background:#101010;border-radius:12px}
+    .boss-result-grid span{display:block;color:#888;font-size:11px;margin-bottom:7px}.boss-result-grid strong{font-size:22px}
+    .boss-info{max-width:900px;margin:24px auto 0;padding:24px}
+    .boss-info h2{font-size:21px;margin-bottom:12px}.boss-info p,.boss-info li{font-size:14px;line-height:1.75;color:#999}
+    .boss-info ol{padding-left:22px}.boss-info li+li{margin-top:5px}.boss-info h3{font-size:16px;margin:18px 0 7px}
+    .boss-info details{border-top:1px solid #292929;padding:13px 0}.boss-info summary{cursor:pointer;font-weight:700;font-size:14px}.boss-info details p{margin-top:8px}
+    @media(max-width:600px){.boss-section{margin-top:18px}.boss-header{flex-wrap:wrap}.boss-options{grid-template-columns:1fr;gap:13px}.boss-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.boss-combat{grid-template-columns:1fr}.boss-dodge-panel{grid-column:auto}.boss-monster{font-size:64px}.boss-info{padding:18px}.boss-result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(prefers-reduced-motion:reduce){.boss-monster,.boss-bar-fill{transition:none}}
+  </style>
+</head>
+<body class="games-page">
+  <main class="game-page-container">
+    <header class="game-page-header">
+      <a class="logo" href="/" aria-label="TypingWebsite Home">
+        <img src="/logo-small.svg" class="site-logo" alt="TypingWebsite logo">
+        <span class="site-name">TypingWebsite</span>
+      </a>
+      <nav class="game-breadcrumbs" aria-label="Games navigation">
+        <a href="/typing-games/">Games</a><span aria-hidden="true">›</span><strong>Boss Mode</strong>
+      </nav>
+    </header>
+
+    <section class="game-seo-intro" aria-labelledby="game-title">
+      <span class="game-kicker">MONSTER TYPING BATTLE</span>
+      <h1 id="game-title">Boss Mode Typing Game</h1>
+      <p>Attack the monster with powerful words, dodge its incoming attacks, and protect your health. Longer, harder words can deal more damage—but you still need accuracy to survive.</p>
+    </section>
+
+    <section class="boss-section" aria-labelledby="boss-title">
+      <div class="boss-card">
+        <div class="boss-header">
+          <div><span class="boss-kicker">👹 SOLO BOSS FIGHT</span><h2 id="boss-title">Boss Mode</h2><p>One monster. Two health bars. Keep typing to survive.</p></div>
+          <a class="boss-back" href="/typing-games/">← All Games</a>
+        </div>
+
+        <div class="boss-lobby" id="bossLobby">
+          <div class="boss-options">
+            <div><span class="boss-option-label">DIFFICULTY</span><div class="boss-choice-row" role="group" aria-label="Difficulty">
+              <button class="boss-choice is-active" data-difficulty="easy" type="button">Easy</button>
+              <button class="boss-choice" data-difficulty="normal" type="button">Normal</button>
+              <button class="boss-choice" data-difficulty="hard" type="button">Hard</button>
+              <button class="boss-choice" data-difficulty="nightmare" type="button">Nightmare</button>
+            </div></div>
+            <div><span class="boss-option-label">BATTLE LENGTH</span><div class="boss-choice-row" role="group" aria-label="Battle length">
+              <button class="boss-choice is-active" data-duration="60" type="button">60 sec</button>
+              <button class="boss-choice" data-duration="90" type="button">90 sec</button>
+              <button class="boss-choice" data-duration="120" type="button">120 sec</button>
+            </div></div>
+          </div>
+          <button class="boss-start" id="bossStartBtn" type="button">👹 Start Boss Fight</button>
+          <p class="boss-note">Type the attack word and press Enter. When the monster attacks, type the dodge word before the countdown ends.</p>
+        </div>
+
+        <div class="boss-arena" id="bossArena" hidden>
+          <div class="boss-stats">
+            <div class="boss-stat"><span>TIME LEFT</span><strong id="bossTime">60</strong></div>
+            <div class="boss-stat"><span>WPM</span><strong id="bossWpm">0</strong></div>
+            <div class="boss-stat"><span>ACCURACY</span><strong id="bossAccuracy">100%</strong></div>
+            <div class="boss-stat"><span>DAMAGE DEALT</span><strong id="bossDamage">0</strong></div>
+          </div>
+          <div class="boss-fighter">
+            <div class="boss-monster" id="bossMonster" aria-label="Monster">👹</div>
+            <h3 id="bossName">The Typing Titan</h3>
+            <div class="boss-bar-label"><span>BOSS HEALTH</span><strong id="bossHpText">100 / 100 HP</strong></div>
+            <div class="boss-bar" role="progressbar" aria-label="Boss health" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="bossHpProgress"><div class="boss-bar-fill" id="bossHpFill"></div></div>
+            <div class="boss-bar-label"><span>YOUR HEALTH</span><strong id="playerHpText">100 / 100 HP</strong></div>
+            <div class="boss-bar" role="progressbar" aria-label="Player health" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="playerHpProgress"><div class="boss-bar-fill" id="playerHpFill"></div></div>
+          </div>
+          <div class="boss-combat">
+            <div class="boss-panel" id="attackPanel">
+              <span class="boss-panel-label">⚔️ ATTACK WORD</span>
+              <div class="boss-word" id="attackWord">swift</div>
+              <input class="boss-input" id="attackInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type the word + Enter" aria-label="Type attack word">
+              <p class="boss-hint" id="attackHint">Longer, harder words deal extra damage.</p>
+            </div>
+            <div class="boss-panel" id="dodgePanel" hidden>
+              <span class="boss-panel-label">🚨 DODGE NOW <span class="boss-dodge-timer" id="dodgeTimer">5.0s</span></span>
+              <div class="boss-word boss-dodge-word" id="dodgeWord">sidestep</div>
+              <input class="boss-input" id="dodgeInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type dodge word + Enter" aria-label="Type dodge word">
+              <p class="boss-hint">Finish before the countdown reaches zero to avoid damage.</p>
+            </div>
+          </div>
+          <div class="boss-message" id="bossMessage" role="status" aria-live="polite">The monster is waiting. Make the first move!</div>
+          <div class="boss-actions"><button class="boss-secondary" id="bossQuitBtn" type="button">End Battle</button></div>
+        </div>
+
+        <div class="boss-result" id="bossResult" hidden>
+          <div class="boss-result-icon" id="bossResultIcon">🏆</div>
+          <span class="boss-kicker">BATTLE COMPLETE</span>
+          <h3 id="bossResultTitle">Boss defeated!</h3>
+          <p id="bossResultSubtitle">Your typing skills won the fight.</p>
+          <div class="boss-result-grid">
+            <div><span>WPM</span><strong id="resultWpm">0</strong></div>
+            <div><span>Accuracy</span><strong id="resultAccuracy">100%</strong></div>
+            <div><span>Damage dealt</span><strong id="resultDamage">0</strong></div>
+            <div><span>Words landed</span><strong id="resultHits">0</strong></div>
+            <div><span>Dodge success</span><strong id="resultDodges">0/0</strong></div>
+            <div><span>Personal best</span><strong id="resultBest">0</strong></div>
+          </div>
+          <div class="boss-actions"><button class="boss-primary" id="bossAgainBtn" type="button">⚔️ Fight Again</button><button class="boss-secondary" id="bossSettingsBtn" type="button">Change Settings</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="boss-info">
+      <h2>How to Play Boss Mode</h2>
+      <ol>
+        <li>Choose a difficulty and battle length, then start the fight.</li>
+        <li>Type the attack word exactly and press <strong>Enter</strong> to hit the monster.</li>
+        <li>Longer and more complex words give you a damage bonus. Nightmare mode has a tougher boss and stronger attacks.</li>
+        <li>When the monster launches an attack, a red dodge prompt appears. Type that word before its timer runs out.</li>
+        <li>If you miss the dodge, your health drops. Defeat the boss before your health or the timer reaches zero.</li>
+      </ol>
+      <h3>Tips for winning</h3>
+      <ul><li>Prioritize accuracy—one clean, difficult word can be worth more than several easy words.</li><li>When a dodge prompt appears, switch to it immediately; the attack word can wait.</li><li>Use Easy to learn the rhythm, then try Hard or Nightmare for a faster, more demanding battle.</li></ul>
+    </section>
+
+    <section class="boss-info">
+      <h2>Boss Mode FAQ</h2>
+      <details><summary>How do difficult words deal more damage?</summary><p>Each successful attack has base damage, plus a bonus for word length and difficulty. Harder words are worth more, but they may take longer to type.</p></details>
+      <details><summary>What happens if I fail to dodge?</summary><p>The monster hits you and removes health. If your health reaches zero, the battle ends.</p></details>
+      <details><summary>Does Boss Mode save my score?</summary><p>Your best damage score is saved in this browser on your device. No account is required.</p></details>
+      <details><summary>Is Boss Mode free?</summary><p>Yes. Boss Mode is free to play on TypingWebsite in a modern browser.</p></details>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="TypingWebsite footer">
+    <div class="footer-info-links" aria-label="Information pages">
+      <a href="/about" class="info-footer-link">About</a><a href="/contact" class="info-footer-link">Contact</a><a href="/terms" class="info-footer-link">Terms</a><a href="/privacy" class="info-footer-link">Privacy</a><a href="/blog" class="info-footer-link">Blog</a>
+    </div>
+    <div class="footer-copy">© 2026 TypingWebsite. Free online typing practice.</div>
+  </footer>
+
+  <script>
+  (() => {
+    "use strict";
+    const $ = id => document.getElementById(id);
+    const difficulties = {
+      easy: {label:"Easy",bossHp:180,damage:7,dodgeEvery:13,dodgeTime:6.5,monsterDamage:12,attackBonus:1.15,emoji:"👹",name:"The Cave Goblin"},
+      normal: {label:"Normal",bossHp:240,damage:10,dodgeEvery:11,dodgeTime:5.5,monsterDamage:18,attackBonus:1.35,emoji:"👺",name:"The Typing Titan"},
+      hard: {label:"Hard",bossHp:310,damage:12,dodgeEvery:9,dodgeTime:4.5,monsterDamage:24,attackBonus:1.6,emoji:"👾",name:"The Keyboard Crusher"},
+      nightmare: {label:"Nightmare",bossHp:390,damage:14,dodgeEvery:7.5,dodgeTime:3.5,monsterDamage:32,attackBonus:1.9,emoji:"🐲",name:"The Final Boss"}
+    };
+    const words = {
+      easy:["swift","focus","strike","shield","battle","power","flame","charge","defend","victory","thunder","warrior"],
+      medium:["precision","lightning","guardian","critical","counter","fortress","strength","ambush","powerful","survivor","challenge","blazing"],
+      hard:["formidable","unbreakable","devastating","counterattack","unpredictable","overwhelming","determination","thunderstrike","extraordinary","indestructible","misdirection","resilience"],
+      nightmare:["counterrevolutionary","incomprehensible","electroencephalogram","institutionalization","disproportionately","uncharacteristically","internationalization","compartmentalization","mischaracterization","unconstitutionally","hypercommunication","indistinguishability"]
+    };
+    const dodgeWords = ["sidestep","duck","evade","rollaway","backflip","dodge","retreat","leapback","quickstep","sidestep","swerve","brace"];
+    let difficulty="easy", duration=60, timeLeft=60, playerHp=100, bossHp=180, bossMaxHp=180, totalDamage=0, hits=0, dodges=0, dodgeAttempts=0, correctChars=0, typedChars=0, startedAt=0, nextAttackAt=0, dodgeDeadline=0, tickId=null, dodgeId=null, activeDodge=false, ended=true, lastDodgeWord="";
+    const BEST_KEY="tw_boss_mode_best_v1";
+    const bestScore=()=>Number(localStorage.getItem(BEST_KEY)||0);
+    function setMessage(text,type=""){const el=$("bossMessage");el.textContent=text;el.className="boss-message"+(type?" "+type:"");}
+    function chooseWord(){const pool=words[difficulty];let word=pool[Math.floor(Math.random()*pool.length)];if(word===$("attackWord").textContent&&pool.length>1)word=pool[(pool.indexOf(word)+1)%pool.length];$("attackWord").textContent=word;$("attackWord").classList.toggle("hard-word",word.length>=10);$("attackInput").value="";$("attackHint").textContent=word.length>=14?"Nightmare word: massive damage potential!":word.length>=10?"Hard word: extra damage if you land it.":"Longer words can deal more damage.";}
+    function chooseDodgeWord(){let word;do{word=dodgeWords[Math.floor(Math.random()*dodgeWords.length)];}while(word===lastDodgeWord&&dodgeWords.length>1);lastDodgeWord=word;return word;}
+    function updateBars(){
+      $("bossHpText").textContent=Math.max(0,bossHp)+" / "+bossMaxHp+" HP";
+      $("playerHpText").textContent=playerHp+" / 100 HP";
+      $("bossHpFill").style.width=(Math.max(0,bossHp)/bossMaxHp*100)+"%";
+      $("playerHpFill").style.width=playerHp+"%";
+      $("bossHpProgress").setAttribute("aria-valuemax",bossMaxHp);$("bossHpProgress").setAttribute("aria-valuenow",Math.max(0,bossHp));
+      $("playerHpProgress").setAttribute("aria-valuenow",playerHp);
+      $("bossDamage").textContent=totalDamage;
+      const elapsed=Math.max(1,(Date.now()-startedAt)/1000);
+      $("bossWpm").textContent=Math.round((correctChars/5)/(elapsed/60));
+      $("bossAccuracy").textContent=(typedChars?Math.round(correctChars/typedChars*100):100)+"%";
+    }
+    function showDodge(){
+      if(ended||activeDodge)return;
+      activeDodge=true;dodgeAttempts++;dodgeDeadline=Date.now()+difficulties[difficulty].dodgeTime*1000;
+      $("dodgeWord").textContent=chooseDodgeWord();$("dodgePanel").hidden=false;$("attackInput").disabled=true;
+      $("dodgeInput").disabled=false;$("dodgeInput").value="";$("dodgeInput").focus();
+      $("bossMonster").classList.add("attack");setMessage("Incoming attack! Type the dodge word before time runs out.","bad");
+      clearInterval(dodgeId);dodgeId=setInterval(()=>{
+        const remain=Math.max(0,(dodgeDeadline-Date.now())/1000);$("dodgeTimer").textContent=remain.toFixed(1)+"s";
+        if(remain<=0)failDodge();
+      },80);
+    }
+    function closeDodge(success){
+      activeDodge=false;clearInterval(dodgeId);$("dodgePanel").hidden=true;$("dodgeInput").value="";$("attackInput").disabled=false;
+      $("bossMonster").classList.remove("attack");
+      if(success){dodges++;setMessage("Perfect dodge! You avoided the hit.","good");}
+      $("attackInput").focus();
+    }
+    function failDodge(){
+      if(!activeDodge||ended)return;
+      activeDodge=false;clearInterval(dodgeId);playerHp=Math.max(0,playerHp-difficulties[difficulty].monsterDamage);
+      $("dodgePanel").hidden=true;$("dodgeInput").value="";$("attackInput").disabled=false;$("bossMonster").classList.remove("attack");
+      updateBars();setMessage("Hit! You lost "+difficulties[difficulty].monsterDamage+" HP. Keep fighting!","bad");
+      if(playerHp<=0)finish(false,"The monster defeated you.");else $("attackInput").focus();
+    }
+    function submitAttack(){
+      if(ended||activeDodge)return;
+      const expected=$("attackWord").textContent,input=$("attackInput").value;
+      if(input!==expected){typedChars+=input.length;correctChars+=0;setMessage("Not quite—check the word and try again.","bad");$("attackInput").select();return;}
+      typedChars+=expected.length;correctChars+=expected.length;
+      const cfg=difficulties[difficulty];
+      const lengthBonus=Math.max(0,expected.length-4)*1.6;
+      const difficultyBonus=difficulty==="nightmare"?1.9:difficulty==="hard"?1.5:difficulty==="normal"?1.2:1;
+      const damage=Math.max(1,Math.round((cfg.damage+lengthBonus)*difficultyBonus*cfg.attackBonus));
+      bossHp=Math.max(0,bossHp-damage);totalDamage+=damage;hits++;
+      $("bossMonster").classList.remove("hit");void $("bossMonster").offsetWidth;$("bossMonster").classList.add("hit");
+      updateBars();
+      if(bossHp<=0){finish(true,"You landed "+hits+" successful attacks and dealt "+totalDamage+" damage.");return;}
+      setMessage("Direct hit! "+damage+" damage dealt. "+(expected.length>=10?"Power word bonus!":""),"good");
+      chooseWord();$("attackInput").focus();
+    }
+    function finish(won,subtitle){
+      if(ended)return;ended=true;clearInterval(tickId);clearInterval(dodgeId);
+      $("bossArena").hidden=true;$("bossResult").hidden=false;
+      const elapsed=Math.max(1,(Date.now()-startedAt)/1000),wpm=Math.round((correctChars/5)/(elapsed/60)),accuracy=typedChars?Math.round(correctChars/typedChars*100):100;
+      const oldBest=bestScore(),score=totalDamage;
+      if(score>oldBest)localStorage.setItem(BEST_KEY,String(score));
+      $("bossResultIcon").textContent=won?"🏆":"💥";
+      $("bossResultTitle").textContent=won?"Boss defeated!":"Battle over";
+      $("bossResultSubtitle").textContent=subtitle||"Time ran out. Try again and beat your best.";
+      $("resultWpm").textContent=wpm;$("resultAccuracy").textContent=accuracy+"%";$("resultDamage").textContent=totalDamage;$("resultHits").textContent=hits;$("resultDodges").textContent=dodges+"/"+dodgeAttempts;$("resultBest").textContent=Math.max(oldBest,score);
+      $("bossAgainBtn").focus();
+    }
+    function startGame(){
+      clearInterval(tickId);clearInterval(dodgeId);
+      const cfg=difficulties[difficulty];timeLeft=duration;playerHp=100;bossMaxHp=cfg.bossHp;bossHp=bossMaxHp;totalDamage=0;hits=0;dodges=0;dodgeAttempts=0;correctChars=0;typedChars=0;activeDodge=false;ended=false;startedAt=Date.now();nextAttackAt=Date.now()+cfg.dodgeEvery*1000;
+      $("bossLobby").hidden=true;$("bossResult").hidden=true;$("bossArena").hidden=false;$("bossMonster").textContent=cfg.emoji;$("bossName").textContent=cfg.name;$("bossTime").textContent=timeLeft;$("attackInput").disabled=false;$("dodgeInput").disabled=false;$("dodgePanel").hidden=true;
+      chooseWord();updateBars();setMessage("The monster is waiting. Make the first move!");$("attackInput").focus();
+      tickId=setInterval(()=>{
+        if(ended)return;
+        timeLeft=Math.max(0,timeLeft-1);$("bossTime").textContent=timeLeft;
+        if(Date.now()>=nextAttackAt&&!activeDodge){showDodge();nextAttackAt=Date.now()+cfg.dodgeEvery*1000;}
+        if(timeLeft<=0){finish(bossHp<=0,"Time is up. You dealt "+totalDamage+" damage before the timer ended.");}
+      },1000);
+    }
+    document.querySelectorAll("[data-difficulty]").forEach(btn=>btn.addEventListener("click",()=>{difficulty=btn.dataset.difficulty;document.querySelectorAll("[data-difficulty]").forEach(b=>b.classList.toggle("is-active",b===btn));}));
+    document.querySelectorAll("[data-duration]").forEach(btn=>btn.addEventListener("click",()=>{duration=Number(btn.dataset.duration);document.querySelectorAll("[data-duration]").forEach(b=>b.classList.toggle("is-active",b===btn));}));
+    $("bossStartBtn").addEventListener("click",startGame);
+    $("bossAgainBtn").addEventListener("click",startGame);
+    $("bossSettingsBtn").addEventListener("click",()=>{$("bossResult").hidden=true;$("bossLobby").hidden=false;});
+    $("bossQuitBtn").addEventListener("click",()=>finish(false,"You ended the battle. Deal more damage next time."));
+    $("attackInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();submitAttack();}});
+    $("dodgeInput").addEventListener("input",()=>{
+      if(!activeDodge||ended)return;
+      const expected=$("dodgeWord").textContent,value=$("dodgeInput").value;
+      if(expected.startsWith(value))return;
+      $("dodgeInput").value="";setMessage("Watch the dodge word carefully!","bad");
+    });
+    $("dodgeInput").addEventListener("keydown",e=>{
+      if(e.key==="Enter"){e.preventDefault();if(activeDodge&&$("dodgeInput").value===$("dodgeWord").textContent){typedChars+=$("dodgeWord").textContent.length;correctChars+=$("dodgeWord").textContent.length;closeDodge(true);}}
+    });
+    $("bossSettingsBtn").addEventListener("click",()=>{$("bossResult").hidden=true;$("bossLobby").hidden=false;});
+  })();
+  </script>
+</body>
+</html>
